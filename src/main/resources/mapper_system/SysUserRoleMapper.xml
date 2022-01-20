@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeta.system.dao.SysUserRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zeta.system.model.entity.SysUserRole">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="created_by" jdbcType="BIGINT" property="createdBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="role_id" jdbcType="BIGINT" property="roleId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, create_time, created_by, user_id, role_id
+    </sql>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Sys_Role_Column_List">
+        id, create_time, created_by, update_time, updated_by,
+        name, code, describe_, deleted
+    </sql>
+
+    <!-- 用法：<include refid="Sys_Role_JOIN_Column_List"><property name="tableName" value="t1"/></include>, -->
+    <!-- 通用查询结果列 -->
+    <sql id="Sys_Role_JOIN_Column_List">
+        ${tableName}.id, ${tableName}.create_time, ${tableName}.created_by, ${tableName}.update_time, ${tableName}.updated_by,
+        ${tableName}.name, ${tableName}.code, ${tableName}.describe_, ${tableName}.deleted
+    </sql>
+
+    <!-- 根据用户id查询角色 -->
+    <select id="selectByUserId" resultType="com.zeta.system.model.entity.SysRole">
+        SELECT <include refid="Sys_Role_Column_List"/> FROM sys_role
+        WHERE id IN (
+            SELECT role_id FROM sys_user_role WHERE user_id = #{userId}
+        )
+        AND deleted = 0
+    </select>
+
+    <!-- 批量根据用户id查询角色 -->
+    <select id="selectByUserIds" resultType="com.zeta.system.model.dto.sysRole.SysRoleDTO">
+        SELECT
+            <include refid="Sys_Role_JOIN_Column_List">
+                <property name="tableName" value="b"/>
+            </include>
+            , a.user_id
+        FROM sys_user_role a
+        LEFT JOIN sys_role b ON a.role_id = b.id
+        WHERE a.user_id IN
+            <foreach collection="userIds" open="(" close=")" separator="," item="userId">
+                #{userId}
+            </foreach>
+        AND b.deleted = 0
+    </select>
+
+</mapper>

@@ -1,0 +1,196 @@
+# 端口
+server:
+  port: 8080
+
+zeta:
+  # 项目版本
+  version: 1.0.0
+  # 项目名
+  name: zeta-kotlin
+  # mybatis plus配置
+  database:
+    # 是否启用防止全表更新与删除插件 默认false
+    isBlockAttack: false
+    # 是否启用 sql性能规范插件
+    isIllegalSql: false
+    # 数据库类型
+    dbType: MYSQL
+    # 溢出总页数后是否进行处理 默认true
+    overflow: true
+    # 是否生成countSql优化掉left join
+    optimizeJoin: true
+    # id生成策略配置
+    hutoolId:
+      # 终端ID (0-31) 单机配置0 即可。 集群部署，根据情况每个实例自增即可。
+      workerId: 0
+      # 数据中心ID (0-31) 单机配置0 即可。 集群部署，根据情况每个实例自增即可。
+      dataCenterId: 0
+  # swagger 文档通用配置
+  swagger:
+    # 标题
+    title: 在线文档
+    # 描述
+    description: 项目接口文档
+    # 自定义组名 默认：default
+    group: default
+    # 版本
+    version: ${zeta.version}
+    # swagger会解析的包路径
+    base-package: com.zeta
+    # 服务URL
+    termsOfServiceUrl: http://localhost:${server.port}
+    contact:
+      # 联系人
+      name: gcc
+  # token配置
+  token:
+    # 请求头中token参数的名字 token: xxxxx
+    tokenName: token
+    # token类型 DEFAULT、STYLE、MIX、STATELESS
+    type: DEFAULT
+    # jwt签名前缀 例如填写 Bearer 实际传参 token: Bearer xxxxxx
+    prefix:
+    # jwt签名加密key 仅当type不为DEFAULT时有效
+    signerKey: zeta-kotlin
+    # token过期时间 单位：秒, -1代表永不过期
+    expireTime: 7200
+  # security配置
+  security:
+    ignore:
+      # 忽略鉴权的地址
+      ignoreUrl:
+        - /**/noToken/**
+
+
+# spring配置
+spring:
+  application:
+    name: ${zeta.name}
+  # 多环境配置
+  profiles:
+    active: '@profile.active@'
+  # mvc
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  # 数据源配置
+  datasource:
+    url: ${zeta.database.url}
+    username: ${zeta.database.username}
+    password: ${zeta.database.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    # druid配置
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 30000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: false
+      remove-abandoned: true
+      remove-abandoned-timeout: 1800
+      pool-prepared-statements: false
+      #max-pool-prepared-statement-per-connection-size: 20
+      filters: stat, wall
+      validation-query: SELECT 'x'
+      aop-patterns: com.zeta.*.*.service.*
+      stat-view-servlet:
+        url-pattern: /druid/*
+        reset-enable: true
+        login-username: ${zeta.database.druid.login-username}
+        login-password: ${zeta.database.druid.login-password}
+        enabled: ${zeta.database.druid.WebConsoleEnabled}
+  # 设置上传文件大小
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+  # redis
+  redis:
+    # Redis数据库索引（默认为0）
+    database: ${zeta.redis.database}
+    # Redis服务器地址
+    host: ${zeta.redis.ip}
+    # Redis服务器连接端口
+    port: ${zeta.redis.port}
+    # Redis服务器连接密码（默认为空）
+    password: ${zeta.redis.password}
+    # 连接超时时间
+    timeout: 10s
+    lettuce:
+      pool:
+        # 连接池最大连接数
+        max-active: 200
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+        # 连接池中的最大空闲连接
+        max-idle: 10
+        # 连接池中的最小空闲连接
+        min-idle: 0
+
+# Mybatis-plus配置 https://baomidou.com/pages/56bac0/#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F
+mybatis-plus:
+  mapper-locations: classpath*:mapper_**/**/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+  global-config:
+    :banner: false
+    db-config:
+      id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      insert-strategy: not_null
+      update-strategy: not_null
+      where-strategy: not_empty
+
+# knife4j配置 https://doc.xiaominfo.com/knife4j/documentation/enhance.html
+knife4j:
+  # 是否开启Knife4j增强模式
+  enable: true
+  # 前端Ui的个性化配置属性
+  setting:
+    # Ui默认显示语言,目前主要有两种:中文(zh-CN)、英文(en-US)
+    language: zh-CN
+    # 是否在每个Debug调试栏后显示刷新变量按钮,默认不显示
+    enableReloadCacheParameter: true
+    # 是否开启界面中对某接口的版本控制,如果开启，后端变化后Ui界面会存在小蓝点
+    enableVersion: true
+    # 是否显示界面中SwaggerModel功能
+    enableSwaggerModels: true
+    # 是否显示界面中"文档管理"功能
+    enableDocumentManage: true
+    # 重命名SwaggerModel名称
+    swaggerModelName: 实体类列表
+    # 是否开启动态参数调试功能
+    enableDynamicParameter: true
+    # 是否显示footer
+    enableFooter: false
+
+# Sa-Token配置 https://sa-token.dev33.cn/doc/index.html#/use/config
+sa-token:
+  # token名称 (同时也是cookie名称)
+  token-name: ${zeta.token.tokenName}
+  # token有效期 1天，单位s 默认30天, -1代表永不过期
+  timeout: ${zeta.token.expireTime}
+  # jwt秘钥 仅当zeta.token.type不为DEFAULT时有效
+  jwt-secret-key: ${zeta.token.signerKey}
+  # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+  activity-timeout: -1
+  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  is-share: false
+  # 是否尝试从 cookie 里读取 Token
+  is-read-cookie: false
+  # 是否输出操作日志
+  is-log: false
+  # 是否在初始化配置时打印版本字符画
+  is-print: false
+  # 自定义token样式
+  token-style: tik

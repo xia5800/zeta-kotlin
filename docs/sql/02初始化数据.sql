@@ -1,0 +1,55 @@
+-- 初始化菜单
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724692992, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '系统管理', 0, 2, '', '', '', '', '', 'MENU', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724692993, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '用户管理', 1479269992724692992, 1, '', '', '', '', '', 'MENU', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724692994, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '查看用户', 1479269992724692993, 1, '', '', '', '', 'sys:user:view', 'RESOURCE', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724692995, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '新增用户', 1479269992724692993, 2, '', '', '', '', 'sys:user:save', 'RESOURCE', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724692996, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '修改用户', 1479269992724692993, 3, '', '', '', '', 'sys:user:update', 'RESOURCE', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724692997, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '删除用户', 1479269992724692993, 4, '', '', '', '', 'sys:user:delete', 'RESOURCE', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724692998, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '角色管理', 1479269992724692992, 2, '', '', '', '', '', 'MENU', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724692999, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '查看角色', 1479269992724692998, 1, '', '', '', '', 'sys:role:view', 'RESOURCE', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724693000, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '新增角色', 1479269992724692998, 2, '', '', '', '', 'sys:role:save', 'RESOURCE', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724693001, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '修改角色', 1479269992724692998, 3, '', '', '', '', 'sys:role:update', 'RESOURCE', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724693002, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '删除角色', 1479269992724692998, 4, '', '', '', '', 'sys:role:delete', 'RESOURCE', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724693003, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '菜单管理', 1479269992724692992, 3, '', '', '', '', '', 'MENU', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724693004, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '查看角色', 1479269992724693003, 1, '', '', '', '', 'sys:menu:view', 'RESOURCE', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724693005, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '新增角色', 1479269992724693003, 2, '', '', '', '', 'sys:menu:save', 'RESOURCE', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724693006, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '修改角色', 1479269992724693003, 3, '', '', '', '', 'sys:menu:update', 'RESOURCE', b'0');
+INSERT INTO `sys_menu` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `label`, `parent_id`, `sort_value`, `path`, `component`, `icon`, `color`, `authority`, `type`, `deleted`) VALUES (1479269992724693007, '2022-01-07 09:53:45', 0, '2022-01-07 09:53:45', 0, '删除角色', 1479269992724693003, 4, '', '', '', '', 'sys:menu:delete', 'RESOURCE', b'0');
+
+
+-- 初始化角色
+INSERT INTO `sys_role` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `name`, `code`, `describe_`, `deleted`) VALUES (1479269998546386944, '2022-01-07 09:53:46', 0, '2022-01-07 09:53:46', 0, '超级管理员', 'SUPER_ADMIN', '超级管理员，拥有至高无上的权利', b'0');
+INSERT INTO `sys_role` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `name`, `code`, `describe_`, `deleted`) VALUES (1479269998546386945, '2022-01-07 09:53:46', 0, '2022-01-07 09:53:46', 0, '管理员', 'ADMIN', '管理员，拥有99%的权利', b'0');
+INSERT INTO `sys_role` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `name`, `code`, `describe_`, `deleted`) VALUES (1479269998546386946, '2022-01-07 09:53:46', 0, '2022-01-07 09:53:46', 0, '普通用户', 'USER', '普通用户，拥有管理员赋予的权利', b'0');
+
+
+-- 初始化角色_菜单
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000341549056, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992720498688);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000349937664, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992720498689);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000354131968, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992720498690);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000354131969, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992720498691);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000358326272, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724692992);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000362520576, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724692993);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000362520577, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724692994);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000366714880, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724692995);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000366714881, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724692996);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000370909184, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724692997);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000370909185, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724692998);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000375103488, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724692999);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000379297792, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724693000);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000383492096, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724693001);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000387686400, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724693002);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000391880704, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724693003);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000396075008, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724693004);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000396075009, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724693005);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000400269312, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724693006);
+INSERT INTO `sys_role_menu` (`id`, `create_time`, `created_by`, `role_id`, `menu_id`) VALUES (1479270000400269313, '2022-01-07 09:53:46', 0, 1479269998546386944, 1479269992724693007);
+
+
+-- 初始化用户  账号：zetaAdmin  密码：zetaAdmin
+INSERT INTO `sys_user` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `username`, `account`, `password`, `email`, `mobile`, `sex`, `avatar`, `birthday`, `state`, `deleted`) VALUES (1479270004078673920, '2022-01-07 09:53:47', 0, '2022-01-07 09:53:47', 0, '管理员', 'zetaAdmin', '$2a$10$MOXSwue.u0sGHk8wkcniD.lbEsC1G6Bt6WVa2oJmNyv44inRvMuw6', '', '', 1, '', NULL, 0, b'0');
+
+
+-- 初始化用户_角色
+INSERT INTO `sys_user_role` (`id`, `create_time`, `created_by`, `user_id`, `role_id`) VALUES (1479270004934311936, '2022-01-07 09:53:47', 0, 1479270004078673920, 1479269998546386944);
+

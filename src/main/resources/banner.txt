@@ -1,0 +1,10 @@
+${AnsiColor.BRIGHT_YELLOW}
+               _               _              _     _   _
+              | |             | |            | |   | | (_)
+  ____   ___  | |_    __ _    | | __   ___   | |_  | |  _   _ __
+ |_  /  / _ \ | __|  / _` |   | |/ /  / _ \  | __| | | | | | '_ \
+  / /  |  __/ | |_  | (_| |   |   <  | (_) | | |_  | | | | | | | |
+ /___|  \___|  \__|  \__,_|   |_|\_\  \___/   \__| |_| |_| |_| |_|
+
+Spring Boot Version: ${spring-boot.version}
+项目名: ${spring.application.name}   激活环境: ${spring.profiles.active}   当前版本: ${zeta.version}

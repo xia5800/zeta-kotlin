@@ -1,0 +1,23 @@
+# 测试环境配置
+zeta:
+  redis:
+    database: 0
+    ip: localhost
+    port: 6379
+    password:
+  # 数据源配置
+  database:
+    url: jdbc:mysql://localhost:3306/zeta_kotlin?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 'root'
+    druid:
+      # druid web监控台是否启动
+      WebConsoleEnabled: true
+      login-username: admin
+      login-password: admin
+
+# 日志配置
+logging:
+  file:
+    path: D:/server/log/zeta-kotlin
+  config: classpath:logback-spring.xml
