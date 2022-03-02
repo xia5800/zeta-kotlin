@@ -1,4 +1,4 @@
-package org.zetaframework.core.saToken
+package org.zetaframework.core.saToken.filter
 
 import cn.dev33.satoken.`fun`.SaParamFunction
 import cn.dev33.satoken.exception.BackResultException

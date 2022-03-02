@@ -7,7 +7,6 @@ import cn.dev33.satoken.exception.NotLoginException
 import cn.dev33.satoken.exception.NotPermissionException
 import cn.dev33.satoken.exception.NotRoleException
 import cn.dev33.satoken.filter.SaServletFilter
-import cn.dev33.satoken.interceptor.SaRouteInterceptor
 import cn.dev33.satoken.jwt.StpLogicJwtForMix
 import cn.dev33.satoken.jwt.StpLogicJwtForStateless
 import cn.dev33.satoken.jwt.StpLogicJwtForStyle
@@ -25,6 +24,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.enums.ErrorCodeEnum
 import org.zetaframework.core.saToken.enums.TokenTypeEnum
+import org.zetaframework.core.saToken.filter.KtServletFilter
+import org.zetaframework.core.saToken.interceptor.KtRouteInterceptor
 import org.zetaframework.core.saToken.properties.IgnoreProperties
 import org.zetaframework.core.saToken.properties.TokenProperties
 import org.zetaframework.core.utils.ContextUtil
@@ -65,7 +66,7 @@ class SaTokenConfigure(
         val ignoreUrl: Array<String> = Convert.toStrArray(ignoreProperties.ignoreUrl)
 
         // sa  路由权限配置
-        registry.addInterceptor(SaRouteInterceptor { req: SaRequest, res: SaResponse, handler: Any? ->
+        registry.addInterceptor(KtRouteInterceptor { req: SaRequest, res: SaResponse, handler: Any? ->
             // 自定义路由拦截
             SaRouter.match("/**").notMatch(*baseUrl).notMatch(*ignoreUrl)
                 .check(SaFunction { this.checkRequest(req) })
@@ -94,6 +95,7 @@ class SaTokenConfigure(
                     // 获取用户id，并设置到ThreadLocal中。（mybatisplus自动填充用到）
                     ContextUtil.setUserId(StpUtil.getLoginIdAsLong())
                     ContextUtil.setToken(StpUtil.getTokenValue())
+                    // 也可以用这种写法 ContextUtil["token"] = StpUtil.getTokenValue()
                 })
             }.setError(this::returnFail);
     }
