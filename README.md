@@ -45,6 +45,6 @@ zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。�
 - lamp-boot：[https://github.com/zuihou/lamp-boot](https://github.com/zuihou/lamp-boot)
 - sa-token [https://sa-token.dev33.cn/](https://sa-token.dev33.cn/)
 - mybatis-plus：[https://baomidou.com/](https://baomidou.com/)
-- knife4j：[http://doc.xiaominfo.com/](http://doc.xiaominfo.com/)
+- knife4j：[https://doc.xiaominfo.com/](https://doc.xiaominfo.com/)
 - hutool：[https://hutool.cn/](https://hutool.cn/)
 
