@@ -7,33 +7,30 @@ import java.io.Serializable
  * List转tree工具类
  *
  * @author gcc
+ * @since 1.1 修改为object单例类，使用方式和之前无任何区别
  */
-class TreeUtil private constructor(){
+object TreeUtil {
 
-    companion object {
+    /**
+     * buildTree
+     * @param treeList List<E>
+     * @return List<E>
+     */
+    fun <E : TreeEntity<E, out Serializable>> buildTree(list: MutableList<E>): List<E> {
+        if (list.isEmpty() || list.size == 0) { return list }
 
-        /**
-         * buildTree
-         * @param treeList List<E>
-         * @return List<E>
-         */
-        fun <E : TreeEntity<E, out Serializable>> buildTree(list: MutableList<E>): List<E> {
-            if (list.isEmpty() || list.size == 0) { return list }
-
-            for (entity in list) {
-                // filter出 entity 的子节点
-                val children = list.filter { entity.id == it.parentId }
-                entity.children = children as MutableList<E>
-            }
-
-            // filter出 entity 的父节点
-            val parentTreeList = list.filter {
-                it.parentId == null || it.parentId.toString() == "" || it.parentId.toString() == "0"
-            }
-
-            return parentTreeList.ifEmpty { list }
+        for (entity in list) {
+            // filter出 entity 的子节点
+            val children = list.filter { entity.id == it.parentId }
+            entity.children = children as MutableList<E>
         }
 
+        // filter出 entity 的父节点
+        val parentTreeList = list.filter {
+            it.parentId == null || it.parentId.toString() == "" || it.parentId.toString() == "0"
+        }
+
+        return parentTreeList.ifEmpty { list }
     }
 
 
