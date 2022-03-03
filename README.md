@@ -25,8 +25,15 @@ zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。�
 | hutool                     | [Java工具类大全](https://hutool.cn/docs/#/)                  |
 | RedisUtil                  | [最全的Java操作Redis的工具类](https://gitee.com/whvse/RedisUtil) |
 
+## 配套项目
+
+| 名称                  | 说明                                  | 项目地址                                                     |
+| --------------------- | ------------------------------------- | ------------------------------------------------------------ |
+| zeta-kotlin-generator | 专门为zeta-kotlin项目定做的代码生成器 | [gitee](https://gitee.com/xia5800/zeta-kotlin-generator)  [github](https://github.com/xia5800/zeta-kotlin-generator) |
+
 
 ## 待办
+- [X] 代码生成器
 - [ ] 文件管理
 - [ ] 操作记录
 - [ ] 登录记录
