@@ -18,7 +18,7 @@ interface ExistenceController<Entity, Id>: BaseController<Entity> {
     /**
      * 验证字段是否存在
      * @param param ExistenceParam<Entity, Id>
-     * @return ApiResult<String>
+     * @return ApiResult<Boolean>
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperation("验证字段是否存在")

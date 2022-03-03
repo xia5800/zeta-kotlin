@@ -23,7 +23,7 @@
     </sql>
 
     <!-- 用法：<include refid="Sys_Role_JOIN_Column_List"><property name="tableName" value="t1"/></include>, -->
-    <!-- 通用查询结果列 -->
+    <!-- 关联查询字段列 -->
     <sql id="Sys_Role_JOIN_Column_List">
         ${tableName}.id, ${tableName}.create_time, ${tableName}.created_by, ${tableName}.update_time, ${tableName}.updated_by,
         ${tableName}.name, ${tableName}.code, ${tableName}.describe_, ${tableName}.deleted

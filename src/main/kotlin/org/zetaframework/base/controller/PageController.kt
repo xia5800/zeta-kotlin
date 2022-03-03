@@ -65,7 +65,7 @@ interface PageController<Entity, QueryParam>: BaseController<Entity> {
     /**
      * 处理查询后的数据
      *
-     * @param page IPage<Entity>
+     * @param page IPage
      */
     fun handlerResult(page: IPage<Entity>) { }
 
