@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeta.system.dao.SysOptLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zeta.system.model.entity.SysOptLog">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="url" jdbcType="VARCHAR" property="url" />
+        <result column="http_method" jdbcType="VARCHAR" property="httpMethod" />
+        <result column="class_path" jdbcType="VARCHAR" property="classPath" />
+        <result column="params" jdbcType="LONGVARCHAR" property="params" />
+        <result column="result" jdbcType="LONGVARCHAR" property="result" />
+        <result column="exception" jdbcType="LONGVARCHAR" property="exception" />
+        <result column="spend_time" jdbcType="INTEGER" property="spendTime" />
+        <result column="os" jdbcType="VARCHAR" property="os" />
+        <result column="device" jdbcType="VARCHAR" property="device" />
+        <result column="browser" jdbcType="VARCHAR" property="browser" />
+        <result column="ip" jdbcType="VARCHAR" property="ip" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, create_time, created_by,
+        type, description, url, http_method, class_path, params, result, exception, spend_time, os, device, browser, ip
+    </sql>
+
+    <!-- 用法：<include refid="SYS_OPT_LOG_JOIN_COLUMN_LIST"><property name="tableName" value="t1"/></include>, -->
+    <!-- 关联查询字段列 -->
+    <sql id="SYS_OPT_LOG_JOIN_COLUMN_LIST">
+        ${tableName}.id, ${tableName}.create_time, ${tableName}.created_by,
+        ${tableName}.type, ${tableName}.description, ${tableName}.url, ${tableName}.http_method, ${tableName}.class_path,
+        ${tableName}.params, ${tableName}.result, ${tableName}.exception, ${tableName}.spend_time, ${tableName}.os,
+        ${tableName}.device, ${tableName}.browser, ${tableName}.ip
+    </sql>
+
+    <!-- 分页查询操作日志 前端数据表格用-->
+    <select id="pageTable" resultType="com.zeta.system.model.dto.sysOptLog.SysOptLogTableDTO">
+        SELECT
+           <include refid="SYS_OPT_LOG_JOIN_COLUMN_LIST">
+               <property name="tableName" value="t1"/>
+           </include>,
+           t2.username as user_name
+        FROM sys_opt_log t1
+        LEFT JOIN sys_user t2 ON t1.created_by = t2.id
+        <where>
+            <if test="param.id != null and param.id != ''">
+                and t1.id = #{param.id}
+            </if>
+            <if test="param.type != null and param.type != ''">
+                and t1.type = #{param.type}
+            </if>
+            <if test="param.userName != null and param.userName != ''">
+                and t2.username = #{param.userName}
+            </if>
+            <if test="param.description != null and param.description != ''">
+                and t1.description like CONCAT('%', #{param.description}, '%')
+            </if>
+            <if test="param.url != null and param.url != ''">
+                and t1.url = #{param.url}
+            </if>
+            <if test="param.httpMethod != null and param.httpMethod != ''">
+                and t1.http_method = #{param.httpMethod}
+            </if>
+            <if test="param.classPath != null and param.classPath != ''">
+                and t1.class_path = #{param.classPath}
+            </if>
+            <if test="param.os != null and param.os != ''">
+                and t1.os like CONCAT('%', #{param.os}, '%')
+            </if>
+            <if test="param.device != null and param.device != ''">
+                and t1.device like CONCAT('%', #{param.device}, '%')
+            </if>
+            <if test="param.browser != null and param.browser != ''">
+                and t1.browser like CONCAT('%', #{param.browser}, '%')
+            </if>
+            <if test="param.ip != null and param.ip != ''">
+                and t1.ip = #{param.ip}
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -4,9 +4,13 @@ server:
 
 zeta:
   # 项目版本
-  version: 1.0.0
+  version: 1.0.1
   # 项目名
   name: zeta-kotlin
+  # 操作日志配置
+  log:
+    # 记录用户操作日志
+    enabled: true
   # mybatis plus配置
   database:
     # 是否启用防止全表更新与删除插件 默认false
@@ -135,7 +139,7 @@ spring:
 
 # Mybatis-plus配置 https://baomidou.com/pages/56bac0/#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F
 mybatis-plus:
-  mapper-locations: classpath*:mapper_**/**/*Mapper.xml
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: true

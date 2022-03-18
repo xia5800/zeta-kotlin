@@ -70,8 +70,8 @@ class SysUserController: SuperController<ISysUserService, Long, SysUser, SysUser
      * 处理单体查询数据
      * @param entity Entity
      */
-    override fun handlerGetData(entity: SysUser) {
-        entity.id?.let { userId ->
+    override fun handlerGetData(entity: SysUser?) {
+        entity?.id?.let { userId ->
             entity.roles = service.getUserRoles(userId)
         }
     }

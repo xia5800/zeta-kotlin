@@ -101,6 +101,6 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
      * 处理单体查询数据
      * @param entity Entity
      */
-    fun handlerGetData(entity: Entity) { }
+    fun handlerGetData(entity: Entity?) { }
 
 }

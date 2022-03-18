@@ -6,7 +6,7 @@ import org.zetaframework.core.log.model.SysLogDTO
 /**
  * 保存系统日志事件
  *
- * @author gcc gcc@bestgcc.cn
+ * @author gcc
  */
 class SysLogEvent(source: SysLogDTO): ApplicationEvent(source) {
 

@@ -146,6 +146,7 @@
     <!-- 开发、测试环境: 记录日志-->
     <springProfile name="dev,test">
         <logger name="com.zeta" level="debug"/>
+        <logger name="org.zetaframework" level="debug"/>
         <logger name="com.baomidou.mybatisplus" level="debug"/>
     </springProfile>
 

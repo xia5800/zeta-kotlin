@@ -94,7 +94,11 @@ class KtZetaApplicationTests {
         batchList.add(SysMenu().apply { id = menuIdC; parentId = menuId; sortValue = 2; label = "新增角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:menu:save" })
         batchList.add(SysMenu().apply { id = menuIdU; parentId = menuId; sortValue = 3; label = "修改角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:menu:update" })
         batchList.add(SysMenu().apply { id = menuIdD; parentId = menuId; sortValue = 4; label = "删除角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:menu:delete" })
-
+        // 系统管理-操作日志
+        val optId = uidGenerator.getUid()
+        val optIdR = uidGenerator.getUid()
+        batchList.add(SysMenu().apply { id = optId; parentId = systemId; sortValue = systemSort++; label = "操作日志"; type = MenuTypeEnum.MENU.name; authority = "" })
+        batchList.add(SysMenu().apply { id = optIdR; parentId = optId; sortValue = 1; label = "查看操作日志"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:optLog:view" })
         menuService.saveBatch(batchList)
 
         return mutableListOf(
