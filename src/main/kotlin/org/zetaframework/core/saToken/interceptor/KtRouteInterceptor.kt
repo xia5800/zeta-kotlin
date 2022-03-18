@@ -2,9 +2,7 @@ package org.zetaframework.core.saToken.interceptor
 
 import cn.dev33.satoken.interceptor.SaRouteInterceptor
 import cn.dev33.satoken.router.SaRouteFunction
-import org.slf4j.LoggerFactory
 import org.zetaframework.core.utils.ContextUtil
-import java.lang.Exception
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 

@@ -20,7 +20,6 @@ import org.zetaframework.core.log.enums.LogTypeEnum
 import org.zetaframework.core.log.event.SysLogEvent
 import org.zetaframework.core.log.model.SysLogDTO
 import org.zetaframework.core.utils.JSONUtil
-import java.lang.StringBuilder
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
