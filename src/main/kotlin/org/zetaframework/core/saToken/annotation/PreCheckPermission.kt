@@ -7,7 +7,7 @@ package org.zetaframework.core.saToken.annotation
  * 参考sa-token框架的@SaCheckPermission注解实现
  *
  * 使用方式:
- * <pre>
+ * ```
  *      @PreAuth(replace = "sys:user")
  *      // 校验是否有sys:user:add权限
  *      @PreCheckPermission(value = ["{}:add"])
@@ -20,7 +20,7 @@ package org.zetaframework.core.saToken.annotation
  *      // 关闭接口鉴权
  *      @PreCheckPermission(enabled = false)
  *      @PreCheckPermission(value = ["{}:add"], enabled = false)
- * </pre>
+ * ```
  * @author gcc
  */
 @kotlin.annotation.Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)

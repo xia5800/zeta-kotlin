@@ -7,7 +7,7 @@ package org.zetaframework.core.saToken.annotation
  * 参考sa-token框架的@SaCheckRole注解实现
  *
  * 使用方式:
- * <pre>
+ * ```
  *      // 校验是否有admin角色
  *      @PreCheckRole(value = ["admin"])
  *      // 校验是否有admin 和 super_admin角色
@@ -17,7 +17,7 @@ package org.zetaframework.core.saToken.annotation
  *      // 关闭角色鉴权
  *      @PreCheckRole(enable = false)
  *      @PreCheckRole(value = ["admin"], enable = false)
- * </pre>
+ * ```
  * @author gcc
  */
 @kotlin.annotation.Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
