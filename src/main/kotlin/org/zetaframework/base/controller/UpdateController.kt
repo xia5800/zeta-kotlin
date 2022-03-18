@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.zetaframework.base.result.ApiResult
+import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.saToken.annotation.PreCheckPermission
 import org.zetaframework.core.saToken.annotation.PreMode
 import org.zetaframework.core.validation.group.Update
@@ -29,6 +30,7 @@ interface UpdateController<Entity, UpdateDTO>: BaseController<Entity> {
     @PreCheckPermission(value = ["{}:edit", "{}:update"], mode = PreMode.OR)
     @ApiOperationSupport(order = 50, author = "AutoGenerate")
     @ApiOperation(value = "修改")
+    @SysLog
     @PutMapping
     fun update(@RequestBody @Validated(Update::class) updateDTO: UpdateDTO): ApiResult<Boolean> {
         val result = handlerUpdate(updateDTO)

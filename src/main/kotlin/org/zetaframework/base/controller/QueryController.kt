@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.zetaframework.base.param.PageParam
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.base.result.PageResult
+import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.saToken.annotation.PreCheckPermission
 import java.io.Serializable
 
@@ -34,6 +35,7 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 10, author = "AutoGenerate")
     @ApiOperation(value = "分页查询")
+    @SysLog
     @PostMapping("/page")
     fun page(@RequestBody param: PageParam<QueryParam>): ApiResult<PageResult<Entity>> {
         return success(super.query(param))
@@ -48,6 +50,7 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 20, author = "AutoGenerate")
     @ApiOperation(value = "批量查询")
+    @SysLog
     @PostMapping("/query")
     fun list(@RequestBody param: QueryParam): ApiResult<MutableList<Entity>> {
         return success(handlerBatchQuery(param))
@@ -84,6 +87,7 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 30, author = "AutoGenerate")
     @ApiOperation(value = "单体查询", notes = "根据主键查询唯一数据，若查询不到则返回null")
+    @SysLog
     @GetMapping("/{id}")
     fun get(@PathVariable("id") @ApiParam("主键") id: Id): ApiResult<Entity?> {
         val entity = getBaseService().getById(id)

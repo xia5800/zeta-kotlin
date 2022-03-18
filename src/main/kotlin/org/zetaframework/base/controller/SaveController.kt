@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.zetaframework.base.result.ApiResult
+import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.saToken.annotation.PreCheckPermission
 import org.zetaframework.core.saToken.annotation.PreMode
 
@@ -27,6 +28,7 @@ interface SaveController<Entity, SaveDTO>: BaseController<Entity> {
      */
     @PreCheckPermission(value = ["{}:add", "{}:save"], mode = PreMode.OR)
     @ApiOperationSupport(order = 40, author = "AutoGenerate")
+    @SysLog
     @ApiOperation(value = "新增")
     @PostMapping
     fun save(@RequestBody @Validated saveDTO: SaveDTO): ApiResult<Boolean> {
