@@ -1,5 +1,7 @@
 package org.zetaframework.core.log.model
 
+import org.zetaframework.core.log.enums.LogTypeEnum
+
 /**
  * 系统日志
  *
@@ -7,7 +9,7 @@ package org.zetaframework.core.log.model
  */
 data class SysLogDTO(
 
-    /** 日志类型 */
+    /**  日志类型 see: [LogTypeEnum] */
     var type: String? = null,
 
     /** 操作描述 */

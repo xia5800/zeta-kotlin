@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationEvent
 import org.zetaframework.core.log.model.SysLogDTO
 
 /**
- * 保存系统日志事件
+ * 系统日志 事件
  *
  * @author gcc
  */
