@@ -4,7 +4,7 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.zeta.system.model.entity.SysOptLog">
-        <result column="id" jdbcType="BIGINT" property="id" />
+        <id column="id" jdbcType="BIGINT" property="id" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="created_by" jdbcType="BIGINT" property="createdBy" />
         <result column="type" jdbcType="VARCHAR" property="type" />
