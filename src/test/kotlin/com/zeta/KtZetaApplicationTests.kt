@@ -5,6 +5,7 @@ import com.zeta.system.model.enumeration.MenuTypeEnum
 import com.zeta.system.model.enumeration.SexEnum
 import com.zeta.system.model.enumeration.UserStateEnum
 import com.zeta.system.service.*
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -99,6 +100,11 @@ class KtZetaApplicationTests {
         val optIdR = uidGenerator.getUid()
         batchList.add(SysMenu().apply { id = optId; parentId = systemId; sortValue = systemSort++; label = "操作日志"; type = MenuTypeEnum.MENU.name; authority = "" })
         batchList.add(SysMenu().apply { id = optIdR; parentId = optId; sortValue = 1; label = "查看操作日志"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:optLog:view" })
+        // 系统管理-登录日志
+        val loginLogId = uidGenerator.getUid()
+        val loginLogIdR = uidGenerator.getUid()
+        batchList.add(SysMenu().apply { id = loginLogId; parentId = systemId; sortValue = systemSort++; label = "登录日志"; type = MenuTypeEnum.MENU.name; authority = "" })
+        batchList.add(SysMenu().apply { id = loginLogIdR; parentId = loginLogId; sortValue = 1; label = "查看登录日志"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:loginLog:view" })
         menuService.saveBatch(batchList)
 
         return mutableListOf(

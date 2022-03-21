@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeta.system.dao.SysLoginLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zeta.system.model.entity.SysLoginLog">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+        <result column="state" jdbcType="VARCHAR" property="state" />
+        <result column="account" jdbcType="VARCHAR" property="account" />
+        <result column="comments" jdbcType="VARCHAR" property="comments" />
+        <result column="os" jdbcType="VARCHAR" property="os" />
+        <result column="device" jdbcType="VARCHAR" property="device" />
+        <result column="browser" jdbcType="VARCHAR" property="browser" />
+        <result column="ip" jdbcType="VARCHAR" property="ip" />
+    </resultMap>
+
+    <!-- 表名 -->
+    <sql id="TABLE_NAME">
+        sys_login_log
+    </sql>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, create_time, created_by, 
+        state, account, comments, os, device, browser, ip
+    </sql>
+
+    <!-- 用法：<include refid="SYS_LOGIN_LOG_JOIN_COLUMN_LIST"><property name="tableName" value="t1"/></include>, -->
+    <!-- 关联查询字段列 -->
+    <sql id="SYS_LOGIN_LOG_JOIN_COLUMN_LIST">
+        ${tableName}.id, ${tableName}.create_time, ${tableName}.created_by, 
+        ${tableName}.state, ${tableName}.account, ${tableName}.comments, ${tableName}.os, ${tableName}.device, ${tableName}.browser, 
+        ${tableName}.ip
+    </sql>
+
+    <!-- 通用查询条件 -->
+    <sql id="Base_Where">
+        <where>
+            <if test="param.id != null and param.id != ''">
+                AND id = #{param.id}
+            </if>
+            <if test="param.createTime != null and param.createTime != ''">
+                AND create_time = #{param.createTime}
+            </if>
+            <if test="param.createdBy != null and param.createdBy != ''">
+                AND created_by = #{param.createdBy}
+            </if>
+            <if test="param.state != null and param.state != ''">
+                AND state LIKE CONCAT('%', #{param.state}, '%') 
+            </if>
+            <if test="param.account != null and param.account != ''">
+                AND account LIKE CONCAT('%', #{param.account}, '%') 
+            </if>
+            <if test="param.comments != null and param.comments != ''">
+                AND comments LIKE CONCAT('%', #{param.comments}, '%') 
+            </if>
+            <if test="param.os != null and param.os != ''">
+                AND os LIKE CONCAT('%', #{param.os}, '%') 
+            </if>
+            <if test="param.device != null and param.device != ''">
+                AND device LIKE CONCAT('%', #{param.device}, '%') 
+            </if>
+            <if test="param.browser != null and param.browser != ''">
+                AND browser LIKE CONCAT('%', #{param.browser}, '%') 
+            </if>
+            <if test="param.ip != null and param.ip != ''">
+                AND ip LIKE CONCAT('%', #{param.ip}, '%') 
+            </if>
+        </where>
+    </sql>
+
+</mapper>
