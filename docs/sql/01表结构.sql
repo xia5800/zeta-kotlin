@@ -7,9 +7,9 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu`  (
   `id` bigint(20) UNSIGNED NOT NULL COMMENT 'id',
-  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `created_by` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
-  `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   `updated_by` bigint(20) NULL DEFAULT NULL COMMENT '修改人',
   `label` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
   `parent_id` bigint(20) UNSIGNED NOT NULL COMMENT '父级id',
@@ -30,7 +30,7 @@ CREATE TABLE `sys_menu`  (
 DROP TABLE IF EXISTS `sys_opt_log`;
 CREATE TABLE `sys_opt_log`  (
   `id` bigint(20) NOT NULL COMMENT 'id',
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_datetime ON UPDATE CURRENT_datetime COMMENT '创建时间',
   `created_by` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
   `type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '操作类型',
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '操作描述',
@@ -54,9 +54,9 @@ PRIMARY KEY (`id`) USING BTREE
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
   `id` bigint(20) NOT NULL COMMENT 'id',
-  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `created_by` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
-  `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   `updated_by` bigint(20) NULL DEFAULT NULL COMMENT '修改人',
   `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色名',
   `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色标识',
@@ -71,7 +71,7 @@ CREATE TABLE `sys_role`  (
 DROP TABLE IF EXISTS `sys_role_menu`;
 CREATE TABLE `sys_role_menu`  (
   `id` bigint(20) NOT NULL COMMENT 'id',
-  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `created_by` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
   `role_id` bigint(20) NOT NULL COMMENT '角色id',
   `menu_id` bigint(20) NOT NULL COMMENT '菜单id',
@@ -84,9 +84,9 @@ CREATE TABLE `sys_role_menu`  (
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`  (
   `id` bigint(20) NOT NULL COMMENT 'id',
-  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `created_by` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
-  `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   `updated_by` bigint(20) NULL DEFAULT NULL COMMENT '修改人',
   `username` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户名',
   `account` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '账号',
@@ -107,7 +107,7 @@ CREATE TABLE `sys_user`  (
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role`  (
   `id` bigint(20) NOT NULL COMMENT 'id',
-  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `created_by` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
   `user_id` bigint(20) NOT NULL COMMENT '用户id',
   `role_id` bigint(20) NOT NULL COMMENT '角色id',
