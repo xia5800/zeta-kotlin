@@ -30,7 +30,7 @@ CREATE TABLE `sys_menu`  (
 DROP TABLE IF EXISTS `sys_opt_log`;
 CREATE TABLE `sys_opt_log`  (
   `id` bigint(20) NOT NULL COMMENT 'id',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_datetime ON UPDATE CURRENT_datetime COMMENT '创建时间',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
   `created_by` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
   `type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '操作类型',
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '操作描述',
@@ -54,7 +54,7 @@ PRIMARY KEY (`id`) USING BTREE
 DROP TABLE IF EXISTS `sys_login_log`;
 CREATE TABLE `sys_login_log`  (
   `id` bigint(20) NOT NULL COMMENT 'id',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
   `created_by` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
   `state` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '状态',
   `account` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '账号',
@@ -114,6 +114,7 @@ CREATE TABLE `sys_user`  (
   `sex` int(1) NULL DEFAULT 0 COMMENT '性别 0未知 1男 2女',
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '头像',
   `birthday` date NULL DEFAULT NULL COMMENT '生日',
+  `readonly_` bit(1) DEFAULT b'0' COMMENT '内置',
   `state` int(10) NULL DEFAULT NULL COMMENT '状态',
   `deleted` bit(1) NULL DEFAULT b'0' COMMENT '逻辑删除字段',
   PRIMARY KEY (`id`) USING BTREE

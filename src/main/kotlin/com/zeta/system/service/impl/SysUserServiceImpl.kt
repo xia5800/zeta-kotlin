@@ -51,6 +51,7 @@ class SysUserServiceImpl(
         // 保存用户
         val user = BeanUtil.toBean(saveDTO, SysUser::class.java)
         user.password = encodePassword(saveDTO.password!!)
+        user.readonly = false
         if(!this.save(user)) {
             throw BusinessException("新增用户失败")
         }

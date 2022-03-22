@@ -160,6 +160,7 @@ class KtZetaApplicationTests {
             password = passwordEncoder
             sex = SexEnum.MALE.code
             state = UserStateEnum.NORMAL.code
+            readonly = true
         })
 
         return userId

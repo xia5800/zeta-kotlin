@@ -26,6 +26,7 @@ import org.zetaframework.base.controller.UpdateStateController
 import org.zetaframework.base.param.ExistParam
 import org.zetaframework.base.param.UpdateStateParam
 import org.zetaframework.base.result.ApiResult
+import org.zetaframework.core.exception.BusinessException
 import org.zetaframework.core.saToken.annotation.PreAuth
 
 /**
@@ -119,6 +120,39 @@ class SysUserController: SuperController<ISysUserService, Long, SysUser, SysUser
 
         // 修改状态
         return super.handlerUpdateState(param)
+    }
+
+    /**
+     * 自定义单体删除
+     *
+     * @param id Id
+     * @return R<Boolean>
+     */
+    override fun handlerDelete(id: Long): ApiResult<Boolean> {
+        // 判断用户是否允许删除
+        val user = service.getById(id)
+        if(user?.readonly != null && user.readonly == true) {
+            throw BusinessException("用户[${user.username}]禁止删除")
+        }
+        return super.handlerDelete(id)
+    }
+
+    /**
+     * 自定义批量删除
+     *
+     * @param ids Id
+     * @return R<Boolean>
+     */
+    override fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> {
+        val userList = service.listByIds(ids)
+        if(userList.isEmpty()) {
+            userList.forEach { user ->
+                if(user.readonly != null && user.readonly == true) {
+                    throw BusinessException("用户[${user.username}]禁止删除")
+                }
+            }
+        }
+        return super.handlerBatchDelete(ids)
     }
 
     /**

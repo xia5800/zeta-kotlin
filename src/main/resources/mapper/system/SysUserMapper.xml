@@ -17,6 +17,7 @@
         <result column="sex" jdbcType="INTEGER" property="sex"/>
         <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
         <result column="birthday" jdbcType="DATE" property="birthday"/>
+        <result column="readonly_" jdbcType="BIT" property="readonly"/>
         <result column="state" jdbcType="INTEGER" property="state"/>
         <result column="deleted" jdbcType="BIT" property="deleted"/>
     </resultMap>
@@ -24,7 +25,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, create_time, created_by, update_time, updated_by,
-        username, account, password, email, mobile, sex, avatar, birthday, state, deleted
+        username, account, password, email, mobile, sex, avatar, birthday, readonly_, state, deleted
     </sql>
 
 
