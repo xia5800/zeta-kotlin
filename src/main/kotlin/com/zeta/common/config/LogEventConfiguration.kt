@@ -1,4 +1,4 @@
-package com.zeta.config
+package com.zeta.common.config
 
 import com.zeta.system.service.ISysLoginLogService
 import com.zeta.system.service.ISysOptLogService
@@ -9,12 +9,12 @@ import org.zetaframework.core.log.event.SysLogListener
 import org.zetaframework.core.log.event.SysLoginLogListener
 
 /**
- * 日志配置
+ * 日志事件配置
  *
  * @author gcc
  */
 @Configuration
-class LogConfiguration(
+class LogEventConfiguration(
     private val sysOptLogService: ISysOptLogService,
     private val sysLoginLogService: ISysLoginLogService
 ) {

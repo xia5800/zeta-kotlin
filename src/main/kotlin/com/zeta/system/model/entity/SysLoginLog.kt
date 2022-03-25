@@ -1,14 +1,12 @@
 package com.zeta.system.model.entity
 
-import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
-import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
-import java.io.Serializable
-import org.zetaframework.base.entity.SuperEntity
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
-import javax.validation.constraints.*
+import org.zetaframework.base.entity.SuperEntity
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.Size
 
 /**
  * <p>

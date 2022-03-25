@@ -4,7 +4,7 @@ server:
 
 zeta:
   # 项目版本
-  version: 1.0.2
+  version: 1.0.3
   # 项目名
   name: zeta-kotlin
   # 操作日志配置
@@ -64,7 +64,11 @@ zeta:
       # 忽略鉴权的地址
       ignoreUrl:
         - /**/noToken/**
-
+  # websocket配置
+  websocket:
+    enabled: true
+    # 心跳间隔 单位：毫秒 设为0则不发送心跳
+    heartbeat: 10000
 
 # spring配置
 spring:

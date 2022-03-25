@@ -24,6 +24,7 @@ class IgnoreProperties {
         "/**/webjars/**",
         "/druid/**",
         "/error",
+        "/ws/**",
         "/api/login",
     )
 
