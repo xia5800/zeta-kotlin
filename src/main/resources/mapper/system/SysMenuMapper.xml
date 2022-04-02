@@ -9,21 +9,27 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="updated_by" jdbcType="BIGINT" property="updatedBy"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="label" jdbcType="VARCHAR" property="label"/>
         <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
         <result column="sort_value" jdbcType="INTEGER" property="sortValue"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="path" jdbcType="VARCHAR" property="path"/>
+        <result column="redirect" jdbcType="VARCHAR" property="redirect"/>
         <result column="component" jdbcType="VARCHAR" property="component"/>
         <result column="icon" jdbcType="VARCHAR" property="icon"/>
-        <result column="color" jdbcType="VARCHAR" property="color"/>
+        <result column="hide" jdbcType="VARCHAR" property="hide"/>
         <result column="authority" jdbcType="VARCHAR" property="authority"/>
         <result column="type" jdbcType="VARCHAR" property="type"/>
         <result column="deleted" jdbcType="BIT" property="deleted"/>
+        <result column="requires_auth" jdbcType="BIT" property="requiresAuth"/>
+        <result column="href" jdbcType="VARCHAR" property="href"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, create_time, created_by, update_time, updated_by,
-        parent_id, sort_value, path, component, icon, color, authority, type, deleted
+        label, parent_id, sort_value, name, path, redirect, component, icon, hide,
+        authority, type, deleted, requires_auth, href
     </sql>
 
 

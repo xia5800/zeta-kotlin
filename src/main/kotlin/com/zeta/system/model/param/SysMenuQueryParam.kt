@@ -40,9 +40,9 @@ data class SysMenuQueryParam (
     @ApiModelProperty("图标")
     var icon: String? = null,
 
-    /** 图标颜色 */
-    @ApiModelProperty("图标颜色")
-    var color: String? = null,
+    /** 是否隐藏 */
+    @ApiModelProperty("是否隐藏")
+    var hide: Boolean? = null,
 
     /** 权限标识 */
     @ApiModelProperty("权限标识")

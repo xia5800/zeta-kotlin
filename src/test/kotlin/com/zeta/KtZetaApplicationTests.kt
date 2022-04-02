@@ -61,14 +61,14 @@ class KtZetaApplicationTests {
         // 系统管理
         var systemSort = 1;
         val systemId = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = systemId; parentId = 0L; sortValue = menuSort++; label = "系统管理"; type = MenuTypeEnum.MENU.name; authority = "" })
+        batchList.add(SysMenu().apply { id = systemId; parentId = 0L; sortValue = menuSort++; label = "系统管理"; name = "system"; path = "/system"; component = "basic"; type = MenuTypeEnum.MENU.name; authority = "" })
         // 系统管理-用户管理
         val userId = uidGenerator.getUid()
         val userIdR = uidGenerator.getUid()
         val userIdC = uidGenerator.getUid()
         val userIdU = uidGenerator.getUid()
         val userIdD = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = userId; parentId = systemId; sortValue = systemSort++; label = "用户管理"; type = MenuTypeEnum.MENU.name; authority = "" })
+        batchList.add(SysMenu().apply { id = userId; parentId = systemId; sortValue = systemSort++; label = "用户管理"; name = "system_user"; path = "/system/user"; component = "self"; type = MenuTypeEnum.MENU.name; authority = "" })
         batchList.add(SysMenu().apply { id = userIdR; parentId = userId; sortValue = 1; label = "查看用户"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:user:view" })
         batchList.add(SysMenu().apply { id = userIdC; parentId = userId; sortValue = 2; label = "新增用户"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:user:save" })
         batchList.add(SysMenu().apply { id = userIdU; parentId = userId; sortValue = 3; label = "修改用户"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:user:update" })
@@ -79,7 +79,7 @@ class KtZetaApplicationTests {
         val roleIdC = uidGenerator.getUid()
         val roleIdU = uidGenerator.getUid()
         val roleIdD = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = roleId; parentId = systemId; sortValue = systemSort++; label = "角色管理"; type = MenuTypeEnum.MENU.name; authority = "" })
+        batchList.add(SysMenu().apply { id = roleId; parentId = systemId; sortValue = systemSort++; label = "角色管理"; name = "system_role"; path = "/system/role"; component = "self";  type = MenuTypeEnum.MENU.name; authority = "" })
         batchList.add(SysMenu().apply { id = roleIdR; parentId = roleId; sortValue = 1; label = "查看角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:role:view" })
         batchList.add(SysMenu().apply { id = roleIdC; parentId = roleId; sortValue = 2; label = "新增角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:role:save" })
         batchList.add(SysMenu().apply { id = roleIdU; parentId = roleId; sortValue = 3; label = "修改角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:role:update" })
@@ -90,7 +90,7 @@ class KtZetaApplicationTests {
         val menuIdC = uidGenerator.getUid()
         val menuIdU = uidGenerator.getUid()
         val menuIdD = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = menuId; parentId = systemId; sortValue = systemSort++; label = "菜单管理"; type = MenuTypeEnum.MENU.name; authority = "" })
+        batchList.add(SysMenu().apply { id = menuId; parentId = systemId; sortValue = systemSort++; label = "菜单管理"; name = "system_menu"; path = "/system/menu"; component = "self"; type = MenuTypeEnum.MENU.name; authority = "" })
         batchList.add(SysMenu().apply { id = menuIdR; parentId = menuId; sortValue = 1; label = "查看角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:menu:view" })
         batchList.add(SysMenu().apply { id = menuIdC; parentId = menuId; sortValue = 2; label = "新增角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:menu:save" })
         batchList.add(SysMenu().apply { id = menuIdU; parentId = menuId; sortValue = 3; label = "修改角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:menu:update" })
@@ -98,12 +98,12 @@ class KtZetaApplicationTests {
         // 系统管理-操作日志
         val optId = uidGenerator.getUid()
         val optIdR = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = optId; parentId = systemId; sortValue = systemSort++; label = "操作日志"; type = MenuTypeEnum.MENU.name; authority = "" })
+        batchList.add(SysMenu().apply { id = optId; parentId = systemId; sortValue = systemSort++; label = "操作日志"; name = "system_optLog"; path = "/system/optLog"; component = "self"; type = MenuTypeEnum.MENU.name; authority = "" })
         batchList.add(SysMenu().apply { id = optIdR; parentId = optId; sortValue = 1; label = "查看操作日志"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:optLog:view" })
         // 系统管理-登录日志
         val loginLogId = uidGenerator.getUid()
         val loginLogIdR = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = loginLogId; parentId = systemId; sortValue = systemSort++; label = "登录日志"; type = MenuTypeEnum.MENU.name; authority = "" })
+        batchList.add(SysMenu().apply { id = loginLogId; parentId = systemId; sortValue = systemSort++; label = "登录日志"; name = "system_loginLog"; path = "/system/loginLog"; component = "self"; type = MenuTypeEnum.MENU.name; authority = "" })
         batchList.add(SysMenu().apply { id = loginLogIdR; parentId = loginLogId; sortValue = 1; label = "查看登录日志"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:loginLog:view" })
         menuService.saveBatch(batchList)
 

@@ -19,6 +19,11 @@ data class SysMenuSaveDTO(
     @get:NotBlank(message = "名称不能为空")
     var label: String? = null,
 
+    /** 菜单编码 */
+    @ApiModelProperty(value = "菜单编码 唯一")
+    @get:NotBlank(message = "菜单编码不能为空")
+    var name: String? = null,
+
     /** 父级Id */
     @ApiModelProperty(value = "父级Id")
     @get:NotNull(message = "上级菜单不能为空")
@@ -33,17 +38,21 @@ data class SysMenuSaveDTO(
     @ApiModelProperty("菜单路由地址")
     var path: String? = null,
 
-    /** 组件路由地址 */
-    @ApiModelProperty("组件路由地址")
+    /** 重定向路径 */
+    @ApiModelProperty("重定向路径")
+    var redirect: String? = null,
+
+    /** 组件路由 */
+    @ApiModelProperty("组件路由")
     var component: String? = null,
 
     /** 图标 */
     @ApiModelProperty("图标")
     var icon: String? = null,
 
-    /** 图标颜色 */
-    @ApiModelProperty("图标颜色")
-    var color: String? = null,
+    /** 是否隐藏 */
+    @ApiModelProperty("是否隐藏")
+    var hide: Boolean? = null,
 
     /** 权限标识 */
     @ApiModelProperty("权限标识")
@@ -53,4 +62,8 @@ data class SysMenuSaveDTO(
     @ApiModelProperty(value = "菜单类型", required = true)
     @get:NotBlank(message = "菜单类型不能为空")
     var type: String? = null,
+
+    /** 外链链接 */
+    @ApiModelProperty(value = "外链链接")
+    var href: String? = null,
 )
