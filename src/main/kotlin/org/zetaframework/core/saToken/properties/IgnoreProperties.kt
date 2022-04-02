@@ -26,6 +26,7 @@ class IgnoreProperties {
         "/error",
         "/ws/**",
         "/api/login",
+        "/api/captcha"
     )
 
     /** 忽略鉴权的地址 */

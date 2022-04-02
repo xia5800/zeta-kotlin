@@ -2,14 +2,19 @@ package com.zeta.system.controller
 
 import cn.dev33.satoken.stp.StpUtil
 import cn.hutool.core.bean.BeanUtil
+import cn.hutool.core.util.StrUtil
+import com.wf.captcha.SpecCaptcha
+import com.zeta.common.constants.SystemRedisKeyConstants.CAPTCHA_KEY
 import com.zeta.system.model.entity.SysUser
 import com.zeta.system.model.enumeration.UserStateEnum
 import com.zeta.system.model.param.LoginParam
+import com.zeta.system.model.result.CaptchaResult
 import com.zeta.system.model.result.LoginResult
 import com.zeta.system.model.result.LoginUserDTO
 import com.zeta.system.service.ISysUserService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.ApplicationContext
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
@@ -18,7 +23,9 @@ import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.log.enums.LoginStateEnum
 import org.zetaframework.core.log.event.SysLoginEvent
 import org.zetaframework.core.log.model.SysLoginLogDTO
+import org.zetaframework.core.redis.util.RedisUtil
 import org.zetaframework.core.utils.ContextUtil
+import java.util.concurrent.TimeUnit
 import javax.servlet.http.HttpServletRequest
 
 /**
@@ -28,7 +35,13 @@ import javax.servlet.http.HttpServletRequest
 @Api(tags = ["登录认证"])
 @RestController
 @RequestMapping("/api")
-class MainController(private val applicationContext: ApplicationContext): SuperSimpleController<ISysUserService, SysUser>() {
+class MainController(
+    private val applicationContext: ApplicationContext,
+    private val redisUtil: RedisUtil
+): SuperSimpleController<ISysUserService, SysUser>() {
+
+    @Value("\${spring.profiles.active:prod}")
+    private val env: String? = null
 
 
     /**
@@ -39,6 +52,17 @@ class MainController(private val applicationContext: ApplicationContext): SuperS
     @ApiOperation("登录")
     @PostMapping("/login")
     fun login(@RequestBody @Validated param: LoginParam, request: HttpServletRequest): ApiResult<LoginResult> {
+        // 验证验证码
+        val captchaKey = "${CAPTCHA_KEY}:${param.key}"
+        val verifyCode = redisUtil.get<String>(captchaKey)
+        if (StrUtil.isBlank(verifyCode)) {
+            return fail("验证码过期")
+        }
+        if (!param.code.equals(verifyCode, true)) {
+            return fail("验证码错误")
+        }
+        redisUtil.delete(captchaKey)
+
         // 查询用户, 因为账号已经判空过了所以这里直接param.account!!
         val user = service.getByAccount(param.account!!) ?: return fail("用户不存在")
 
@@ -91,6 +115,24 @@ class MainController(private val applicationContext: ApplicationContext): SuperS
             return success(true)
         }
         return fail("用户异常")
+    }
+
+    /**
+     * 图形验证码
+     */
+    @ApiOperation("图形验证码")
+    @GetMapping("/captcha")
+    fun captcha(): ApiResult<CaptchaResult> {
+        val key = System.currentTimeMillis()
+
+        // 验证码值缓存到redis, 5分钟有效
+        val specCaptcha = SpecCaptcha(130, 48, 5)
+        redisUtil.setEx("${CAPTCHA_KEY}:${key}", specCaptcha.text(), 5, TimeUnit.MINUTES)
+
+        return if ("prod" === env) {
+            // 如果生产环境，不返回验证码的值
+            success(CaptchaResult(key, specCaptcha.toBase64()))
+        } else success(CaptchaResult(key, specCaptcha.toBase64(), specCaptcha.text()))
     }
 
 }

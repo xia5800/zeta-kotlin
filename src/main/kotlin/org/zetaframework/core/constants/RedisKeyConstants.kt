@@ -16,6 +16,7 @@ object RedisKeyConstants {
 
     /**
      * 存放用户权限的缓存key
+     *
      * 完整key: user:permission:{userId} -> { authorities }
      */
     const val USER_PERMISSION_KEY = "user:permission"

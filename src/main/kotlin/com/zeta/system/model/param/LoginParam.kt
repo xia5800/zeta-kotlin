@@ -3,6 +3,7 @@ package com.zeta.system.model.param
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotNull
 
 /**
  * 登录参数
@@ -20,4 +21,14 @@ data class LoginParam(
     @ApiModelProperty("密码")
     @get:NotBlank(message = "密码不能为空")
     var password: String? = null,
+
+    /** 验证码key */
+    @ApiModelProperty("验证码key")
+    @get:NotNull(message = "验证码key不能为空")
+    var key: Long? = null,
+
+    /** 验证码 */
+    @ApiModelProperty("验证码")
+    @get:NotBlank(message = "验证码不能为空")
+    val code: String? = null,
 )

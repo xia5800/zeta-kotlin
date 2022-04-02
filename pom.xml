@@ -28,6 +28,7 @@
         <fastjson.version>1.2.79</fastjson.version>
         <knife4j.version>2.0.9</knife4j.version>
         <hutool.version>5.7.18</hutool.version>
+        <easy-captcha.version>1.6.2</easy-captcha.version>
         <!-- logback 解决漏洞问题 -->
         <logback.version>1.2.10</logback.version>
     </properties>
@@ -162,6 +163,12 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
+        </dependency>
+        <!-- 图形验证码 -->
+        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+            <version>${easy-captcha.version}</version>
         </dependency>
 
         <!-- 其它 -->
