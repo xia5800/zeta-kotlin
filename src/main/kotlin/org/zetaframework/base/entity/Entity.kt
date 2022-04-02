@@ -16,12 +16,12 @@ abstract class Entity<T>(
     /** 最后修改时间 */
     @ApiModelProperty(value = "最后修改时间")
     @TableField(value = UPDATE_TIME_COLUMN, fill = FieldFill.INSERT_UPDATE)
-    var updateTime: LocalDateTime? = null,
+    open var updateTime: LocalDateTime? = null,
 
     /** 最后修改人ID */
     @ApiModelProperty(value = "最后修改人ID")
     @TableField(value = UPDATED_BY_COLUMN, fill = FieldFill.INSERT_UPDATE)
-    var updatedBy: T? = null,
+    open var updatedBy: T? = null,
 ): SuperEntity<T>() {
 
     companion object {

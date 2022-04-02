@@ -18,5 +18,5 @@ abstract class StateEntity<T: Serializable, U: Serializable>(
     /** 状态 */
     @ApiModelProperty("状态")
     @TableField("state")
-    var state: U? = null
+    open var state: U? = null
 ): Entity<T>()

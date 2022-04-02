@@ -22,17 +22,17 @@ abstract class SuperEntity<T>(
     @TableId(value = FIELD_ID, type = IdType.INPUT)
     @ApiModelProperty(value = "主键")
     @get:NotNull(message = "id不能为空",groups = [Update::class])
-    var id: T? = null,
+    open var id: T? = null,
 
     /** 创建时间 */
     @ApiModelProperty(value = "创建时间")
     @TableField(value = CREATE_TIME_COLUMN, fill = FieldFill.INSERT)
-    var createTime: LocalDateTime? = null,
+    open var createTime: LocalDateTime? = null,
 
     /** 创建人ID */
     @ApiModelProperty(value = "创建人ID")
     @TableField(value = CREATED_BY_COLUMN, fill = FieldFill.INSERT)
-    var createdBy: T? = null,
+    open var createdBy: T? = null,
 ): Serializable {
 
     companion object {
