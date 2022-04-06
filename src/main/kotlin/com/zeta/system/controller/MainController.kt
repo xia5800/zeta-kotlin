@@ -23,6 +23,7 @@ import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.log.enums.LoginStateEnum
 import org.zetaframework.core.log.event.SysLoginEvent
 import org.zetaframework.core.log.model.SysLoginLogDTO
+import org.zetaframework.core.redis.annotation.Limit
 import org.zetaframework.core.redis.util.RedisUtil
 import org.zetaframework.core.utils.ContextUtil
 import java.util.concurrent.TimeUnit
@@ -119,7 +120,11 @@ class MainController(
 
     /**
      * 图形验证码
+     *
+     * 说明：
+     * 限流规则一分钟十次调用
      */
+    @Limit(name = "验证码接口限流", count = 10)
     @ApiOperation("图形验证码")
     @GetMapping("/captcha")
     fun captcha(): ApiResult<CaptchaResult> {

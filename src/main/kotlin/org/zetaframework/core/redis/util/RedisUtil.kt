@@ -1,9 +1,12 @@
 package org.zetaframework.core.redis.util
 
+import org.springframework.core.io.ClassPathResource
 import org.springframework.data.redis.connection.DataType
 import org.springframework.data.redis.core.*
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple
+import org.springframework.data.redis.core.script.DefaultRedisScript
 import org.springframework.lang.NonNull
+import org.springframework.scripting.support.ResourceScriptSource
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -1177,6 +1180,23 @@ class RedisUtil(private val redisTemplate: RedisTemplate<String, Any>) {
      */
     fun zScan(key: String, options: ScanOptions): Cursor<TypedTuple<Any>> {
         return zSetOps.scan(key, options)
+    }
+
+    /** -------------------限流相关操作--------------------- */
+    /**
+     * 针对某个key使用lua脚本进行限流
+     *
+     * 说明：参考[redis lua限流脚本](https://www.cnblogs.com/use-D/p/11746299.html)
+     * @param key 限流key
+     * @param limitPeriod 给定的时间范围 单位(秒)
+     * @param limitCount 一定时间内最多访问次数
+     */
+    fun luaScriptLimit(key: String, limitPeriod: Int, limitCount: Int): Boolean {
+        val redisScript = DefaultRedisScript<Boolean>()
+        redisScript.setScriptSource(ResourceScriptSource(ClassPathResource("/limit.lua")))
+        redisScript.resultType = Boolean::class.java
+
+        return redisTemplate.execute(redisScript, mutableListOf(key), limitPeriod, limitCount)
     }
 
 }

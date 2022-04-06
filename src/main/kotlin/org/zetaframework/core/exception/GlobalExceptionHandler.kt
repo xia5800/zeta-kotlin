@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.enums.ErrorCodeEnum
+import org.zetaframework.core.redis.annotation.Limit
+import org.zetaframework.core.redis.exception.LimitException
 import java.util.*
 
 /**
@@ -65,6 +67,21 @@ class GlobalExceptionHandler {
     fun illegalArgumentExceptionHandler(ex: IllegalArgumentException): ApiResult<*> {
         logger.warn("抛出非法参数异常：", ex)
         return ApiResult.result(ErrorCodeEnum.ERR_ARGUMENT.code, ex.message, null)
+    }
+
+    /**
+     * 限流异常处理
+     *
+     * 说明：
+     * 主要用于接口限流注解[Limit]的异常处理
+     * @param ex LimitException
+     * @return ApiResult<*>
+     */
+    @ExceptionHandler(LimitException::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun limitExceptionHandler(ex: LimitException): ApiResult<*> {
+        logger.warn("抛出接口限流异常：", ex)
+        return ApiResult.result(ex.code, ex.message, null)
     }
 
     /**
