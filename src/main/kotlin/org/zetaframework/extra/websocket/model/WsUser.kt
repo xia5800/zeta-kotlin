@@ -1,6 +1,6 @@
-package org.zetaframework.core.websoket.model
+package org.zetaframework.extra.websocket.model
 
-import org.zetaframework.core.websoket.interceptor.WsUserInterceptor
+import org.zetaframework.extra.websocket.interceptor.WsUserInterceptor
 import java.security.Principal
 
 
@@ -10,7 +10,7 @@ import java.security.Principal
  * 说明：主要用于[WsUserInterceptor]
  * @author gcc
  */
-class WsUser: Principal{
+class WsUser : Principal {
     var userId: String? = null
 
     override fun getName(): String? {

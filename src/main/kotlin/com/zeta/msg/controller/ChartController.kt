@@ -11,7 +11,7 @@ import org.springframework.messaging.simp.annotation.SendToUser
 import org.springframework.messaging.simp.annotation.SubscribeMapping
 import org.springframework.messaging.simp.user.SimpUserRegistry
 import org.springframework.stereotype.Controller
-import org.zetaframework.core.websoket.model.WsUser
+import org.zetaframework.extra.websocket.model.WsUser
 
 /**
  * 聊天室

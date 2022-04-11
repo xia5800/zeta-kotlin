@@ -1,4 +1,4 @@
-package org.zetaframework.core.websoket.properties
+package org.zetaframework.extra.websocket.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 

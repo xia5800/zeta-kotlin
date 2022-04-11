@@ -1,9 +1,9 @@
-package org.zetaframework.core.websoket.event
+package org.zetaframework.extra.websocket.event
 
 import org.springframework.context.event.EventListener
 import org.springframework.scheduling.annotation.Async
-import org.zetaframework.core.websoket.enums.WsUserTypeEnum
-import org.zetaframework.core.websoket.model.WsUser
+import org.zetaframework.extra.websocket.enums.WsUserTypeEnum
+import org.zetaframework.extra.websocket.model.WsUser
 
 /**
  * Websocket用户状态 事件监听
@@ -16,7 +16,7 @@ import org.zetaframework.core.websoket.model.WsUser
  * 2. 用户上线、下线之后要做的事交给具体的业务去实现
  * @author gcc
  */
-open class WsUserEventListener constructor(consumer: (user: WsUser?, userType: WsUserTypeEnum) -> Unit){
+open class WsUserEventListener constructor(consumer: (user: WsUser?, userType: WsUserTypeEnum) -> Unit) {
     private var block = consumer
 
     /**

@@ -1,4 +1,4 @@
-package org.zetaframework.core.websoket
+package org.zetaframework.extra.websocket
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -16,8 +16,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer
-import org.zetaframework.core.websoket.interceptor.WsUserInterceptor
-import org.zetaframework.core.websoket.properties.WebsocketProperties
+import org.zetaframework.extra.websocket.interceptor.WsUserInterceptor
+import org.zetaframework.extra.websocket.properties.WebsocketProperties
 import java.util.concurrent.ThreadPoolExecutor
 
 
@@ -31,12 +31,17 @@ import java.util.concurrent.ThreadPoolExecutor
 @EnableWebSocketMessageBroker
 @EnableConfigurationProperties(WebsocketProperties::class)
 @ConditionalOnWebApplication
-@ConditionalOnProperty(prefix = WebsocketProperties.PREFIX, name = ["enabled"], havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(
+    prefix = WebsocketProperties.PREFIX,
+    name = ["enabled"],
+    havingValue = "true",
+    matchIfMissing = true
+)
 class WebsocketStompConfiguration(
     private val websocketProperties: WebsocketProperties,
     @Lazy private val taskExecutor: TaskScheduler,
     private val userInterceptor: WsUserInterceptor
-): WebSocketMessageBrokerConfigurer {
+) : WebSocketMessageBrokerConfigurer {
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     init {

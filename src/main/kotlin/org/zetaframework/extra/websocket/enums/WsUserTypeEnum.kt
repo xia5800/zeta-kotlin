@@ -1,4 +1,4 @@
-package org.zetaframework.core.websoket.enums
+package org.zetaframework.extra.websocket.enums
 
 /**
  * websocket用户状态 枚举
@@ -7,6 +7,7 @@ package org.zetaframework.core.websoket.enums
 enum class WsUserTypeEnum {
     /** 在线 */
     ONLINE,
+
     /** 离线 */
     OFFLINE;
 }

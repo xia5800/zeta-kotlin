@@ -4,8 +4,8 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.zetaframework.core.websoket.enums.WsUserTypeEnum
-import org.zetaframework.core.websoket.event.WsUserEventListener
+import org.zetaframework.extra.websocket.enums.WsUserTypeEnum
+import org.zetaframework.extra.websocket.event.WsUserEventListener
 
 /**
  * websocket事件配置
