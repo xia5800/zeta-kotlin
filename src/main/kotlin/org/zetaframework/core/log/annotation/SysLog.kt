@@ -21,13 +21,13 @@ package org.zetaframework.core.log.annotation
  *      fun page(params: PageParam<UserQueryParam>): ApiResult<PageResult<User>> { ... }
  *
  *      // 关闭记录请求参数
- *      @PreAuth(value = "" , request = false)
+ *      @SysLog(value = "" , request = false)
  *
  *      // 关闭记录返回值
- *      @PreAuth(value = "" , response = false)
+ *      @SysLog(value = "" , response = false)
  *
  *      // 关闭记录操作日志
- *      @PreAuth(enable = false)
+ *      @SysLog(enable = false)
  * ```
  * @author gcc
  */
