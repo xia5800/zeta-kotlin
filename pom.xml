@@ -29,12 +29,16 @@
         <knife4j.version>2.0.9</knife4j.version>
         <hutool.version>5.7.18</hutool.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
+        <aliyun-oss.version>3.14.0</aliyun-oss.version>
+        <minio.version>8.3.7</minio.version>
         <!-- logback 解决漏洞问题 -->
         <logback.version>1.2.10</logback.version>
     </properties>
 
     <dependencies>
-        <!-- spring boot 相关 -->
+        <!--
+         spring boot 相关
+         -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -66,14 +70,9 @@
             <scope>test</scope>
         </dependency>
 
-
-        <!-- 加密 -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-crypto</artifactId>
-        </dependency>
-
-        <!-- redis 相关 -->
+        <!--
+         缓存、redis 相关
+         -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -83,7 +82,9 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
 
-        <!-- kotlin 相关 -->
+        <!--
+         kotlin 相关
+         -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-reflect</artifactId>
@@ -93,7 +94,9 @@
             <artifactId>kotlin-stdlib-jdk8</artifactId>
         </dependency>
 
-        <!-- 数据库 相关 -->
+        <!--
+         数据库 相关
+         -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -110,7 +113,9 @@
             <version>${druid.version}</version>
         </dependency>
 
-        <!-- security 相关 -->
+        <!--
+         security 相关
+         -->
         <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-spring-boot-starter</artifactId>
@@ -131,8 +136,15 @@
             <artifactId>sa-token-jwt</artifactId>
             <version>${sa-token.version}</version>
         </dependency>
+        <!-- 加密 ps：主要是用BCrypt来加密账号密码 -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
 
-        <!-- json 相关 -->
+        <!--
+         json 相关
+         -->
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
@@ -151,14 +163,47 @@
             <version>${fastjson.version}</version>
         </dependency>
 
-        <!-- swagger 相关 -->
+        <!--
+         swagger 相关
+         -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
             <version>${knife4j.version}</version>
         </dependency>
 
-        <!-- utils 相关 -->
+        <!--
+         OSS 相关
+         -->
+        <!-- 阿里云oss -->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>${aliyun-oss.version}</version>
+        </dependency>
+        <!-- minio -->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>${minio.version}</version>
+            <exclusions>
+                <!-- 不知道为啥，minio自己依赖的okhttp3会导致项目启动失败 -->
+                <exclusion>
+                    <groupId>com.squareup.okhttp3</groupId>
+                    <artifactId>okhttp</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.8.1</version>
+        </dependency>
+
+        <!--
+         utils 相关
+         -->
+        <!-- hutool -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
@@ -171,7 +216,9 @@
             <version>${easy-captcha.version}</version>
         </dependency>
 
-        <!-- 其它 -->
+        <!--
+         其它
+         -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>transmittable-thread-local</artifactId>
