@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeta.system.dao.SysFileMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zeta.system.model.entity.SysFile">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="updated_by" jdbcType="BIGINT" property="updatedBy" />
+        <result column="biz_type" jdbcType="VARCHAR" property="bizType" />
+        <result column="bucket" jdbcType="VARCHAR" property="bucket" />
+        <result column="storage_type" jdbcType="VARCHAR" property="storageType" />
+        <result column="path" jdbcType="VARCHAR" property="path" />
+        <result column="url" jdbcType="VARCHAR" property="url" />
+        <result column="unique_file_name" jdbcType="VARCHAR" property="uniqueFileName" />
+        <result column="original_file_name" jdbcType="VARCHAR" property="originalFileName" />
+        <result column="file_type" jdbcType="VARCHAR" property="fileType" />
+        <result column="content_type" jdbcType="VARCHAR" property="contentType" />
+        <result column="suffix" jdbcType="VARCHAR" property="suffix" />
+        <result column="size" jdbcType="BIGINT" property="size" />
+    </resultMap>
+
+    <!-- 表名 -->
+    <sql id="TABLE_NAME">
+        sys_file
+    </sql>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, create_time, created_by, update_time, updated_by,
+        biz_type, bucket, storage_type, path, url, unique_file_name, original_file_name, file_type, content_type, suffix, size
+    </sql>
+
+    <!-- 用法：<include refid="SYS_FILE_JOIN_COLUMN_LIST"><property name="tableName" value="t1"/></include>, -->
+    <!-- 关联查询字段列 -->
+    <sql id="SYS_FILE_JOIN_COLUMN_LIST">
+        ${tableName}.id, ${tableName}.create_time, ${tableName}.created_by, ${tableName}.update_time, ${tableName}.updated_by,
+        ${tableName}.biz_type, ${tableName}.bucket, ${tableName}.storage_type, ${tableName}.path,
+        ${tableName}.url, ${tableName}.unique_file_name, ${tableName}.original_file_name, ${tableName}.file_type, ${tableName}.content_type,
+        ${tableName}.suffix, ${tableName}.size
+    </sql>
+
+    <!-- 通用查询条件 -->
+    <sql id="Base_Where">
+        <where>
+            <if test="param.id != null and param.id != ''">
+                AND id = #{param.id}
+            </if>
+            <if test="param.createTime != null and param.createTime != ''">
+                AND create_time = #{param.createTime}
+            </if>
+            <if test="param.createdBy != null and param.createdBy != ''">
+                AND created_by = #{param.createdBy}
+            </if>
+            <if test="param.updateTime != null and param.updateTime != ''">
+                AND update_time = #{param.updateTime}
+            </if>
+            <if test="param.updatedBy != null and param.updatedBy != ''">
+                AND updated_by = #{param.updatedBy}
+            </if>
+            <if test="param.bizType != null and param.bizType != ''">
+                AND biz_type LIKE CONCAT('%', #{param.bizType}, '%')
+            </if>
+            <if test="param.bucket != null and param.bucket != ''">
+                AND bucket LIKE CONCAT('%', #{param.bucket}, '%')
+            </if>
+            <if test="param.storageType != null and param.storageType != ''">
+                AND storage_type LIKE CONCAT('%', #{param.storageType}, '%')
+            </if>
+            <if test="param.path != null and param.path != ''">
+                AND path LIKE CONCAT('%', #{param.path}, '%')
+            </if>
+            <if test="param.url != null and param.url != ''">
+                AND url LIKE CONCAT('%', #{param.url}, '%')
+            </if>
+            <if test="param.uniqueFileName != null and param.uniqueFileName != ''">
+                AND unique_file_name LIKE CONCAT('%', #{param.uniqueFileName}, '%')
+            </if>
+            <if test="param.originalFileName != null and param.originalFileName != ''">
+                AND original_file_name LIKE CONCAT('%', #{param.originalFileName}, '%')
+            </if>
+            <if test="param.fileType != null and param.fileType != ''">
+                AND file_type LIKE CONCAT('%', #{param.fileType}, '%')
+            </if>
+            <if test="param.contentType != null and param.contentType != ''">
+                AND content_type LIKE CONCAT('%', #{param.contentType}, '%')
+            </if>
+            <if test="param.suffix != null and param.suffix != ''">
+                AND suffix LIKE CONCAT('%', #{param.suffix}, '%')
+            </if>
+            <if test="param.size != null and param.size != ''">
+                AND size = #{param.size}
+            </if>
+        </where>
+    </sql>
+
+</mapper>
