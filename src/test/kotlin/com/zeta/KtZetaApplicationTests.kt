@@ -36,7 +36,7 @@ class KtZetaApplicationTests {
     /**
      * 初始化数据库
      */
-    // @Test 注释掉，防止maven打包的时候没有跳过测试
+    // @Test // 注释掉，防止maven打包的时候没有跳过测试
     fun initDatabase() {
         // 初始化系统菜单、权限
         val menuIds = initMenu()
@@ -105,13 +105,27 @@ class KtZetaApplicationTests {
         val loginLogIdR = uidGenerator.getUid()
         batchList.add(SysMenu().apply { id = loginLogId; parentId = systemId; sortValue = systemSort++; label = "登录日志"; name = "system_loginLog"; path = "/system/loginLog"; component = "self"; type = MenuTypeEnum.MENU.name; authority = "" })
         batchList.add(SysMenu().apply { id = loginLogIdR; parentId = loginLogId; sortValue = 1; label = "查看登录日志"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:loginLog:view" })
+        // 系统管理-文件管理
+        val fileId = uidGenerator.getUid()
+        val fileIdR = uidGenerator.getUid()
+        val fileIdC = uidGenerator.getUid()
+        val fileIdE = uidGenerator.getUid()
+        val fileIdD = uidGenerator.getUid()
+        batchList.add(SysMenu().apply { id = fileId; parentId = systemId; sortValue = systemSort++; label = "文件管理"; name = "system_file"; path = "/system/file"; component = "self"; type = MenuTypeEnum.MENU.name; authority = "" })
+        batchList.add(SysMenu().apply { id = fileIdR; parentId = fileId; sortValue = 1; label = "查看文件"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:file:view" })
+        batchList.add(SysMenu().apply { id = fileIdC; parentId = fileId; sortValue = 2; label = "上传文件"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:file:save" })
+        batchList.add(SysMenu().apply { id = fileIdE; parentId = fileId; sortValue = 3; label = "下载文件"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:file:export" })
+        batchList.add(SysMenu().apply { id = fileIdD; parentId = fileId; sortValue = 4; label = "删除文件"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:file:delete" })
         menuService.saveBatch(batchList)
 
         return mutableListOf(
             systemId,
             userId, userIdR ,userIdC, userIdU, userIdD,
             roleId, roleIdR, roleIdC, roleIdU, roleIdD,
-            menuId, menuIdR, menuIdC, menuIdU, menuIdD
+            menuId, menuIdR, menuIdC, menuIdU, menuIdD,
+            optId, optIdR,
+            loginLogId, loginLogIdR,
+            fileId, fileIdR, fileIdC, fileIdE, fileIdD,
         )
     }
 
