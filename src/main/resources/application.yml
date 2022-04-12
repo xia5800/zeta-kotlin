@@ -69,6 +69,30 @@ zeta:
     enabled: true
     # 心跳间隔 单位：毫秒 设为0则不发送心跳
     heartbeat: 10000
+  # 文件存储配置
+  file:
+    # 文件存储策略 LOCAL、ALI_OSS、MINIO
+    storageType: ALI_OSS
+    # 本地存储配置 仅当zeta.file.storageType=LOCAL时有效
+    local:
+      bucket: zeta
+      # web访问地址  需要配置nginx
+      endpoint: http://127.0.0.1/file/
+      # 文件存放路径
+      storagePath: D:\\fileUpload\\
+    # 阿里云存储配置 仅当zeta.file.storageType=ALI_OSS时有效
+    ali:
+      bucket: zeta
+      endpoint: oss-cn-guangzhou.aliyuncs.com
+      accessKeyId: 'alioss'
+      accessKeySecret: 'alioss123'
+    # Minio存储配置 仅当zeta.file.storageType=MINIO时有效
+    minio:
+      bucket: zeta
+      # minio地址+端口号
+      endpoint: http://127.0.0.1:9000/
+      accessKey: 'minio'
+      secretKey: 'minio123'
 
 # spring配置
 spring:
@@ -115,8 +139,8 @@ spring:
   # 设置上传文件大小
   servlet:
     multipart:
-      max-file-size: 100MB
-      max-request-size: 100MB
+      max-file-size: 1024MB
+      max-request-size: 1024MB
 
   # redis
   redis:
