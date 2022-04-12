@@ -27,7 +27,7 @@ class LimitAspect(private val redisUtil: RedisUtil) {
 
 
     @Around("@annotation(org.zetaframework.core.redis.annotation.Limit)")
-    fun doAround(joinPoint: ProceedingJoinPoint): Any {
+    fun doAround(joinPoint: ProceedingJoinPoint): Any? {
         // 获取方法上的注解
         val signature = joinPoint.signature as MethodSignature
         val method = signature.method

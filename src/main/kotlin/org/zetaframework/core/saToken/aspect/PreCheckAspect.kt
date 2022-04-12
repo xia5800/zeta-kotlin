@@ -33,7 +33,7 @@ class PreCheckAspect {
     }
 
     @Around(POINTCUT_SIGN)
-    fun doAround(joinPoint: ProceedingJoinPoint): Any {
+    fun doAround(joinPoint: ProceedingJoinPoint): Any? {
         val signature = joinPoint.signature as MethodSignature
         val method = signature.method
 
