@@ -2,12 +2,10 @@ package com.zeta.system.service.impl
 
 import cn.hutool.core.bean.BeanUtil
 import cn.hutool.core.io.IoUtil
-import cn.hutool.core.util.StrUtil
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import com.zeta.system.dao.SysFileMapper
 import com.zeta.system.model.entity.SysFile
 import com.zeta.system.service.ISysFileService
-import org.apache.tomcat.util.http.fileupload.IOUtils
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
 import org.springframework.stereotype.Service

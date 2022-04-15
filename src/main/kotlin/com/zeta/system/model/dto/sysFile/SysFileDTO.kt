@@ -2,7 +2,7 @@ package com.zeta.system.model.dto.sysFile
 
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
-import java.time.*
+import java.time.LocalDateTime
 
 /**
  * <p>

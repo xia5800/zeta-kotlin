@@ -39,7 +39,7 @@
         <where>
             AND id IN (
                 SELECT menu_id from sys_role_menu  where role_id in (
-                    <foreach collection="roleIds" item="roleId" separator="," open="("  close=")">
+                    <foreach collection="roleIds" item="roleId" separator=",">
                         #{roleId}
                     </foreach>
                 )
