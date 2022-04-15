@@ -158,4 +158,41 @@ CREATE TABLE `sys_file`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统文件表' ROW_FORMAT = DYNAMIC;
 
+-- ----------------------------
+-- Table structure for sys_dict
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict`;
+CREATE TABLE `sys_dict`  (
+  `id` bigint(20) NOT NULL COMMENT 'id',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `created_by` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  `updated_by` bigint(20) NULL DEFAULT NULL COMMENT '修改人',
+  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '名称',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '编码',
+  `describe_` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `sort_value` int(11) NULL DEFAULT NULL COMMENT '排序',
+  `deleted` bit(1) NULL DEFAULT b'0' COMMENT '逻辑删除字段',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for sys_dict_item
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict_item`;
+CREATE TABLE `sys_dict_item`  (
+  `id` bigint(20) NOT NULL COMMENT 'id',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `created_by` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  `updated_by` bigint(20) NULL DEFAULT NULL COMMENT '修改人',
+  `dict_id` bigint(20) NOT NULL COMMENT '字典id',
+  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '字典项',
+  `value` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '值',
+  `describe_` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `sort_value` int(11) NULL DEFAULT NULL COMMENT '排序',
+  `deleted` bit(1) NULL DEFAULT b'0' COMMENT '逻辑删除字段',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典项表' ROW_FORMAT = DYNAMIC;
+
 SET FOREIGN_KEY_CHECKS = 1;

@@ -70,3 +70,11 @@ INSERT INTO `sys_user` (`id`, `create_time`, `created_by`, `update_time`, `updat
 -- 初始化用户_角色
 INSERT INTO `sys_user_role` (`id`, `create_time`, `created_by`, `user_id`, `role_id`) VALUES (1513812730551730176, '2022-04-12 17:34:15', 0, 1513812728576212992, 1513812723689848832);
 
+
+-- 初始化字典
+INSERT INTO `sys_dict` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `name`, `code`, `describe_`, `sort_value`, `deleted`) VALUES (1514793150437130240, '2022-04-15 10:30:05', 1513812728576212992, '2022-04-15 10:30:05', 1513812728576212992, '设备状态', 'device_status', '设备运行状态', 1, b'0');
+
+
+-- 初始化字典项
+INSERT INTO `sys_dict_item` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `dict_id`, `name`, `value`, `describe_`, `sort_value`, `deleted`) VALUES (1514793655058038784, '2022-04-15 10:32:06', 1513812728576212992, '2022-04-15 10:32:06', 1513812728576212992, 1514793150437130240, '运行', 'RUNNING', '设备正在运行', 1, b'0');
+INSERT INTO `sys_dict_item` (`id`, `create_time`, `created_by`, `update_time`, `updated_by`, `dict_id`, `name`, `value`, `describe_`, `sort_value`, `deleted`) VALUES (1514793952320946176, '2022-04-15 10:33:16', 1513812728576212992, '2022-04-15 10:45:27', 1513812728576212992, 1514793150437130240, '停止', 'WAITING', '设备已停止', 2, b'0');

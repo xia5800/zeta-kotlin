@@ -5,7 +5,6 @@ import com.zeta.system.model.enumeration.MenuTypeEnum
 import com.zeta.system.model.enumeration.SexEnum
 import com.zeta.system.model.enumeration.UserStateEnum
 import com.zeta.system.service.*
-import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -31,6 +30,10 @@ class KtZetaApplicationTests {
     @Autowired
     private lateinit var roleMenuService: ISysRoleMenuService
     @Autowired
+    private lateinit var sysDictService: ISysDictService
+    @Autowired
+    private lateinit var sysDictItemService: ISysDictItemService
+    @Autowired
     private lateinit var passwordEncoder: BCryptPasswordEncoder
 
     /**
@@ -48,6 +51,8 @@ class KtZetaApplicationTests {
         val userId = initAdminUser()
         // 初始化用户角色
         initUserRole(userId, superAdminId)
+        // 初始化数据字典
+        initSysDict()
     }
 
 
@@ -116,6 +121,27 @@ class KtZetaApplicationTests {
         batchList.add(SysMenu().apply { id = fileIdC; parentId = fileId; sortValue = 2; label = "上传文件"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:file:save" })
         batchList.add(SysMenu().apply { id = fileIdE; parentId = fileId; sortValue = 3; label = "下载文件"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:file:export" })
         batchList.add(SysMenu().apply { id = fileIdD; parentId = fileId; sortValue = 4; label = "删除文件"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:file:delete" })
+
+        // 系统管理-数据字典
+        val dictId = uidGenerator.getUid()
+        val dictIdR = uidGenerator.getUid()
+        val dictIdC = uidGenerator.getUid()
+        val dictIdU = uidGenerator.getUid()
+        val dictIdD = uidGenerator.getUid()
+        batchList.add(SysMenu().apply { id = dictId; parentId = systemId; sortValue = systemSort++; label = "数据字典"; name = "system_dict"; path = "/system/dict"; component = "self"; type = MenuTypeEnum.MENU.name; authority = "" })
+        batchList.add(SysMenu().apply { id = dictIdR; parentId = dictId; sortValue = 1; label = "查看字典"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dict:view" })
+        batchList.add(SysMenu().apply { id = dictIdC; parentId = dictId; sortValue = 2; label = "新增字典"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dict:save" })
+        batchList.add(SysMenu().apply { id = dictIdU; parentId = dictId; sortValue = 3; label = "修改字典"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dict:update" })
+        batchList.add(SysMenu().apply { id = dictIdD; parentId = dictId; sortValue = 4; label = "删除字典"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dict:delete" })
+        val dictItemR = uidGenerator.getUid()
+        val dictItemC = uidGenerator.getUid()
+        val dictItemU = uidGenerator.getUid()
+        val dictItemD = uidGenerator.getUid()
+        batchList.add(SysMenu().apply { id = dictItemR; parentId = dictId; sortValue = 5; label = "查看字典项"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dictItem:view" })
+        batchList.add(SysMenu().apply { id = dictItemC; parentId = dictId; sortValue = 6; label = "新增字典项"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dictItem:save" })
+        batchList.add(SysMenu().apply { id = dictItemU; parentId = dictId; sortValue = 7; label = "修改字典项"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dictItem:update" })
+        batchList.add(SysMenu().apply { id = dictItemD; parentId = dictId; sortValue = 8; label = "删除字典项"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dictItem:delete" })
+
         menuService.saveBatch(batchList)
 
         return mutableListOf(
@@ -126,6 +152,8 @@ class KtZetaApplicationTests {
             optId, optIdR,
             loginLogId, loginLogIdR,
             fileId, fileIdR, fileIdC, fileIdE, fileIdD,
+            dictId, dictIdR, dictIdC, dictIdU, dictIdD,
+            dictItemR, dictItemC, dictItemU, dictItemD,
         )
     }
 
@@ -187,6 +215,23 @@ class KtZetaApplicationTests {
      */
     fun initUserRole(userId: Long, superAdminId: Long) {
         userRoleService.save(SysUserRole(userId, superAdminId))
+    }
+
+    /**
+     * 初始化数据字典
+     */
+    fun initSysDict() {
+        // 初始化字典
+        val dictList = mutableListOf<SysDict>()
+        val dictId = uidGenerator.getUid()
+        dictList.add(SysDict().apply { id = dictId; name = "设备状态"; code = "device_status"; describe = "设备运行状态"; sortValue = 0 })
+        sysDictService.saveBatch(dictList)
+
+        // 初始化字典项
+        val dictItemList = mutableListOf<SysDictItem>()
+        dictItemList.add(SysDictItem().apply { this.dictId = dictId; name = "运行"; value = "RUNNING";  describe = "设备正在运行"; sortValue = 1 })
+        dictItemList.add(SysDictItem().apply { this.dictId = dictId; name = "停止"; value = "WAITING";  describe = "设备已停止"; sortValue = 2 })
+        sysDictItemService.saveBatch(dictItemList)
     }
 
 }
