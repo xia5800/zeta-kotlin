@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeta.system.dao.SysDictMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zeta.system.model.entity.SysDict">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="updated_by" jdbcType="BIGINT" property="updatedBy" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="code" jdbcType="VARCHAR" property="code" />
+        <result column="describe_" jdbcType="VARCHAR" property="describe" />
+        <result column="sort_value" jdbcType="INTEGER" property="sortValue" />
+        <result column="deleted" jdbcType="BIT" property="deleted" />
+    </resultMap>
+
+    <!-- 表名 -->
+    <sql id="TABLE_NAME">
+        sys_dict
+    </sql>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, create_time, created_by, update_time, updated_by, 
+        name, code, describe_, sort_value, deleted
+    </sql>
+
+    <!-- 用法：<include refid="SYS_DICT_JOIN_COLUMN_LIST"><property name="tableName" value="t1"/></include>, -->
+    <!-- 关联查询字段列 -->
+    <sql id="SYS_DICT_JOIN_COLUMN_LIST">
+        ${tableName}.id, ${tableName}.create_time, ${tableName}.created_by, ${tableName}.update_time, ${tableName}.updated_by, 
+        ${tableName}.name, ${tableName}.code, ${tableName}.describe_, ${tableName}.sort_value, ${tableName}.deleted
+    </sql>
+
+    <!-- 通用查询条件 -->
+    <sql id="Base_Where">
+        <where>
+            <if test="param.id != null and param.id != ''">
+                AND id = #{param.id}
+            </if>
+            <if test="param.createTime != null and param.createTime != ''">
+                AND create_time = #{param.createTime}
+            </if>
+            <if test="param.createdBy != null and param.createdBy != ''">
+                AND created_by = #{param.createdBy}
+            </if>
+            <if test="param.updateTime != null and param.updateTime != ''">
+                AND update_time = #{param.updateTime}
+            </if>
+            <if test="param.updatedBy != null and param.updatedBy != ''">
+                AND updated_by = #{param.updatedBy}
+            </if>
+            <if test="param.name != null and param.name != ''">
+                AND name LIKE CONCAT('%', #{param.name}, '%') 
+            </if>
+            <if test="param.code != null and param.code != ''">
+                AND code LIKE CONCAT('%', #{param.code}, '%') 
+            </if>
+            <if test="param.describe != null and param.describe != ''">
+                AND describe_ LIKE CONCAT('%', #{param.describe}, '%') 
+            </if>
+            <if test="param.sortValue != null and param.sortValue != ''">
+                AND sort_value = #{param.sortValue}
+            </if>
+            <if test="param.deleted != null and param.deleted != ''">
+                AND deleted = #{param.deleted}
+            </if>
+        </where>
+    </sql>
+
+</mapper>
