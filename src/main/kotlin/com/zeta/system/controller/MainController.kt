@@ -124,7 +124,7 @@ class MainController(
      * 说明：
      * 限流规则一分钟十次调用
      */
-    @Limit(name = "验证码接口限流", count = 10)
+    @Limit(name = "验证码接口限流", count = 10, describe="您的操作过于频繁，请稍后再试")
     @ApiOperation("图形验证码")
     @GetMapping("/captcha")
     fun captcha(): ApiResult<CaptchaResult> {
