@@ -1,15 +1,18 @@
 package org.zetaframework.core.saToken
 
 import cn.dev33.satoken.`fun`.SaFunction
+import cn.dev33.satoken.context.SaHolder
 import cn.dev33.satoken.context.model.SaRequest
 import cn.dev33.satoken.context.model.SaResponse
 import cn.dev33.satoken.exception.NotLoginException
 import cn.dev33.satoken.exception.NotPermissionException
 import cn.dev33.satoken.exception.NotRoleException
+import cn.dev33.satoken.filter.SaFilterAuthStrategy
 import cn.dev33.satoken.filter.SaServletFilter
 import cn.dev33.satoken.jwt.StpLogicJwtForMix
 import cn.dev33.satoken.jwt.StpLogicJwtForStateless
 import cn.dev33.satoken.jwt.StpLogicJwtForStyle
+import cn.dev33.satoken.router.SaHttpMethod
 import cn.dev33.satoken.router.SaRouter
 import cn.dev33.satoken.stp.StpLogic
 import cn.dev33.satoken.stp.StpUtil
@@ -18,7 +21,6 @@ import org.slf4j.LoggerFactory
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import org.zetaframework.base.result.ApiResult
@@ -47,13 +49,16 @@ class SaTokenConfigure(
      * 跨域配置
      * @param registry CorsRegistry
      */
-    override fun addCorsMappings(registry: CorsRegistry) {
-        registry.addMapping("/**")
-            .allowedOriginPatterns("*")
-            .allowedHeaders("*")
-            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
-            .allowCredentials(true)
-            .maxAge(3600L);
+    private val beforeAuth: SaFilterAuthStrategy = SaFilterAuthStrategy {
+        // ---------- 设置跨域响应头 ----------
+        SaHolder.getResponse()
+            .setHeader("Access-Control-Allow-Origin", "*")
+            .setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH")
+            .setHeader("Access-Control-Max-Age", "3600")
+            .setHeader("Access-Control-Allow-Headers", "*")
+
+        // 如果是预检请求，则立即返回到前端
+        SaRouter.match(SaHttpMethod.OPTIONS).back()
     }
 
     /**
@@ -97,7 +102,9 @@ class SaTokenConfigure(
                     ContextUtil.setToken(StpUtil.getTokenValue())
                     // 也可以用这种写法 ContextUtil["token"] = StpUtil.getTokenValue()
                 })
-            }.setError(this::returnFail);
+            }
+            .setError(this::returnFail)
+            .setBeforeAuth(beforeAuth)
     }
 
 
