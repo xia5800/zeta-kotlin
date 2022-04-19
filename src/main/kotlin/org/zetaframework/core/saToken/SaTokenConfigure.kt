@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import org.zetaframework.base.result.ApiResult
@@ -47,7 +48,25 @@ class SaTokenConfigure(
 
     /**
      * 跨域配置
+     *
+     * 说明：
+     * 非saToken拦截的接口的跨域配置
      * @param registry CorsRegistry
+     */
+    override fun addCorsMappings(registry: CorsRegistry) {
+        registry.addMapping("/**")
+            .allowedOriginPatterns("*")
+            .allowedHeaders("*")
+            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
+            .allowCredentials(true)
+            .maxAge(3600L);
+    }
+
+    /**
+     * saToken跨域配置
+     *
+     * 说明：
+     * saToken拦截的接口的跨域配置
      */
     private val beforeAuth: SaFilterAuthStrategy = SaFilterAuthStrategy {
         // ---------- 设置跨域响应头 ----------
