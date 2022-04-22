@@ -112,7 +112,7 @@ object ContextUtil {
      *
      * @return String
      */
-    fun getUserIdStr(): String = get("userId")
+    fun getUserIdStr(): String = get("userId", String::class.java, "")
     /*********************** 用户id end ***********************/
 
 

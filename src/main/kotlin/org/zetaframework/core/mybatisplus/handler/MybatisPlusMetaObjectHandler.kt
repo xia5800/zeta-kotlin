@@ -2,12 +2,14 @@ package org.zetaframework.core.mybatisplus.handler
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler
 import org.apache.ibatis.reflection.MetaObject
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.zetaframework.base.entity.Entity
 import org.zetaframework.base.entity.SuperEntity
 import org.zetaframework.core.mybatisplus.generator.UidGenerator
 import org.zetaframework.core.utils.ContextUtil
 import java.time.LocalDateTime
+import com.baomidou.mybatisplus.annotation.FieldFill as FieldFill
 
 /**
  * 自动填充处理
@@ -15,6 +17,7 @@ import java.time.LocalDateTime
  */
 @Component
 class MybatisPlusMetaObjectHandler(private val uidGenerator: UidGenerator): MetaObjectHandler {
+    private val logger = LoggerFactory.getLogger(this::class.java)
 
     /**
      * 插入元对象字段填充（用于插入时对公共字段的填充）
@@ -39,6 +42,9 @@ class MybatisPlusMetaObjectHandler(private val uidGenerator: UidGenerator): Meta
 
     /**
      * 填充创建时间、创建人
+     *
+     * 说明：
+     * 字段上未设置填充方式 fill = [FieldFill].INSERT也能进行填充
      * @param metaObject MetaObject
      */
     private fun fillCreated(metaObject: MetaObject) {
@@ -57,19 +63,26 @@ class MybatisPlusMetaObjectHandler(private val uidGenerator: UidGenerator): Meta
             // 设置创建人
             if (value == null) {
                 // 判断创建人字段的类型
-                val createBy: Any = when (metaObject.getGetterType(SuperEntity.CREATED_BY).name) {
-                    "java.lang.String" -> ContextUtil.getUserId().toString()
-                    // 雪花算法生成的id长度超过了Int类型的长度，故此处toInt()会丢失精度。建议实体类主键类型为Int的时候，不继承SuperEntity或Entity。
-                    // "java.lang.Integer" -> ContextUtil.getUserId().toInt()
-                    else -> ContextUtil.getUserId()
+                when (metaObject.getGetterType(SuperEntity.CREATED_BY).name) {
+                    "java.lang.String" -> {
+                        setFieldValByName(SuperEntity.CREATED_BY, ContextUtil.getUserIdStr(), metaObject)
+                    }
+                    "java.lang.Long" -> {
+                        setFieldValByName(SuperEntity.CREATED_BY, ContextUtil.getUserId(), metaObject)
+                    }
+                    else -> {
+                        logger.warn("【${SuperEntity.CREATED_BY_COLUMN}】字段仅支持String和Long类型填充，不是这两种类型的请插入时手动设置值")
+                    }
                 }
-                setFieldValByName(SuperEntity.CREATED_BY, createBy, metaObject)
             }
         }
     }
 
     /**
      * 填充修改时间修改人
+     *
+     * 说明：
+     * 字段上未设置填充方式 fill = [FieldFill].UPDATE也能进行填充
      * @param metaObject MetaObject
      */
     private fun fillUpdated(metaObject: MetaObject) {
@@ -83,17 +96,16 @@ class MybatisPlusMetaObjectHandler(private val uidGenerator: UidGenerator): Meta
 
         // 有updatedBy字段，且字段值为null
         if (metaObject.hasGetter(Entity.UPDATED_BY)) {
-            val value = metaObject.getValue(Entity.UPDATED_BY)
-            // 设置用户id
-            if (value == null) {
-                // 判断修改人字段的类型
-                val updateBy: Any = when (metaObject.getGetterType(Entity.UPDATED_BY).name) {
-                    "java.lang.String" -> ContextUtil.getUserId().toString()
-                    // 雪花算法生成的id长度超过了Int类型的长度，故此处toInt()会丢失精度。建议实体类主键类型为Int的时候，不继承SuperEntity或Entity。
-                    // "java.lang.Integer" -> ContextUtil.getUserId().toInt()
-                    else -> ContextUtil.getUserId()
+            when (metaObject.getGetterType(Entity.UPDATED_BY).name) {
+                "java.lang.String" -> {
+                    setFieldValByName(Entity.UPDATED_BY, ContextUtil.getUserIdStr(), metaObject)
                 }
-                setFieldValByName(Entity.UPDATED_BY, updateBy, metaObject)
+                "java.lang.Long" -> {
+                    setFieldValByName(Entity.UPDATED_BY, ContextUtil.getUserId(), metaObject)
+                }
+                else -> {
+                    logger.warn("【${Entity.UPDATE_TIME_COLUMN}】字段仅支持String和Long类型填充，不是这两种类型的请更新时手动设置值")
+                }
             }
         }
     }
@@ -105,16 +117,16 @@ class MybatisPlusMetaObjectHandler(private val uidGenerator: UidGenerator): Meta
     private fun fillId(metaObject: MetaObject) {
         // 有Id字段，且字段值为null
         if (metaObject.hasGetter(SuperEntity.FIELD_ID)) {
-            val value = metaObject.getValue(SuperEntity.FIELD_ID)
-            if (value == null) {
-                // 判断Id字段的类型
-                val id: Any = when (metaObject.getGetterType(SuperEntity.FIELD_ID).name) {
-                    "java.lang.String" -> uidGenerator.getUid().toString()
-                    // 雪花算法生成的id长度超过了Int类型的长度，故此处toInt()会丢失精度。建议实体类主键类型为Int的时候，不继承SuperEntity或Entity。
-                    // "java.lang.Integer" -> uidGenerator.getUid().toInt()
-                    else -> uidGenerator.getUid()
+            when (metaObject.getGetterType(SuperEntity.FIELD_ID).name) {
+                "java.lang.String" -> {
+                    setFieldValByName(SuperEntity.FIELD_ID, uidGenerator.getUid().toString(), metaObject)
                 }
-                setFieldValByName(SuperEntity.FIELD_ID, id, metaObject)
+                "java.lang.Long" -> {
+                    setFieldValByName(SuperEntity.FIELD_ID, uidGenerator.getUid(), metaObject)
+                }
+                else -> {
+                    logger.warn("【${SuperEntity.FIELD_ID}】字段仅支持String和Long类型填充，不是这两种类型的请手动设置值")
+                }
             }
         }
     }
