@@ -42,38 +42,54 @@ sa-token:
 
 ## zeta.token.tokenName 
 配置说明: 
+
 对应前端请求头中存放token值的参数名字
 
 例如：
+
+zeta.token.tokenName = access_token
+
 ```
 请求标头
 Accept: */*
 ...
+access_token: we_HsCE7dLfyxuM1N_f1wEXck9gw31yRrD__
 Host: 127.0.0.1:8080
-token: we_HsCE7dLfyxuM1N_f1wEXck9gw31yRrD__
 User-Agent: xxxx
 ```
 
 ## zeta.token.type
 配置说明：
-用来改变token的外貌，DEFAULT是短短的token，非DEFAULT是jwt风格的token
-详情见`org.zetaframework.core.saToken.enums.TokenTypeEnum.kt`有详细注释说明
 
-token类型的说明见文档[token-style](https://sa-token.dev33.cn/doc/index.html#/up/token-style)
+用来改变token的外貌，DEFAULT是短短的token，非DEFAULT是jwt风格的token。
+
+当zeta.token.type的值为DEFAULT时， 我们可以修改sa-token.token-style的值来改变token值的样式
+
+sa-token样式的说明见文档[token-style](https://sa-token.dev33.cn/doc/index.html#/up/token-style)
+
+zeta.token.type的选项说明见`org.zetaframework.core.saToken.enums.TokenTypeEnum.kt`有详细注释说明
+
+
 
 ## zeta.token.prefix
 配置说明：
 1. zeta.token.type的值不为DEFAULT时生效
 2. jwt签名前缀 例如填写 Bearer 实际传参 token: Bearer xxxxxx
 
-token前缀见说明文档[token-prefix](https://sa-token.dev33.cn/doc/index.html#/up/token-prefix)
+sa-token前缀见说明文档[token-prefix](https://sa-token.dev33.cn/doc/index.html#/up/token-prefix)
+
+
 
 ## zeta.token.signerKey
+
 配置说明：
 1. zeta.token.type的值不为DEFAULT时生效
 2. jwt签名加密用的
 
+
+
 ## zeta.token.expireTime
+
 配置说明：
 1. token过期时间 单位：秒, -1代表永不过期
 2. 前端建议和后端保持一致
