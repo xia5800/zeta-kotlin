@@ -30,7 +30,7 @@ zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。�
 | 名称                  | 说明                                  | 项目地址                                                     |
 | --------------------- | ------------------------------------- | ------------------------------------------------------------ |
 | zeta-kotlin-generator | 专门为zeta-kotlin项目定做的代码生成器 | [gitee](https://gitee.com/xia5800/zeta-kotlin-generator)  [github](https://github.com/xia5800/zeta-kotlin-generator) |
-
+| zeta-kotlin-web       | zeta-kotlin项目的前端               | [gitee](https://gitee.com/xia5800/zeta-kotlin-web) |
 
 ## 待办
 - [X] 代码生成器
@@ -46,7 +46,7 @@ zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。�
 
 ## 前端
 
-暂无
+[zeta-kotlin-web](https://gitee.com/xia5800/zeta-kotlin-web)
 
 
 ## 友情链接 & 特别鸣谢
@@ -56,4 +56,4 @@ zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。�
 - mybatis-plus：[https://baomidou.com/](https://baomidou.com/)
 - knife4j：[https://doc.xiaominfo.com/](https://doc.xiaominfo.com/)
 - hutool：[https://hutool.cn/](https://hutool.cn/)
-
+- Soybean Admin：[https://github.com/honghuangdc/soybean-admin](https://github.com/honghuangdc/soybean-admin)
