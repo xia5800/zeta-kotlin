@@ -53,17 +53,6 @@ class SysDict: Entity<Long>() {
     @TableLogic
     var deleted: Boolean? = null
 
-
-    /** 查询不返回的字段 */
-    @JsonIgnore
-    override var createTime: LocalDateTime? = null
-    @JsonIgnore
-    override var createdBy: Long? = null
-    @JsonIgnore
-    override var updateTime: LocalDateTime? = null
-    @JsonIgnore
-    override var updatedBy: Long? = null
-
     override fun toString(): String {
         return "SysDict(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, name=$name, code=$code, describe=$describe, sortValue=$sortValue, deleted=$deleted)"
     }
