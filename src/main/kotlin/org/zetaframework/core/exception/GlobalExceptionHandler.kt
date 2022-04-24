@@ -178,7 +178,7 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     fun saTokenExceptionHandler(ex: SaTokenException): ApiResult<*> {
         logger.warn("抛出sa-token相关异常：", ex)
-        var code: Int = ErrorCodeEnum.ERROR.code
+        var code: Int = ErrorCodeEnum.FAIL.code
         var message: String? = ""
         if(ex is NotLoginException) {
             return notLoginExceptionHandler(ex);

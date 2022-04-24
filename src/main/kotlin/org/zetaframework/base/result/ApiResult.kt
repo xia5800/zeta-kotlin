@@ -44,7 +44,7 @@ class ApiResult<T> {
         this.defExec = defExec
     }
 
-    constructor(code: Int? = 0, message: String? = null, data: T? = null, error: String? = null) {
+    constructor(code: Int? = ErrorCodeEnum.SUCCESS.code, message: String? = null, data: T? = null, error: String? = null) {
         this.code = code;
         this.message = message;
         this.data = data
@@ -86,7 +86,7 @@ class ApiResult<T> {
          * @param data E?
          * @return ApiResult<E>
          */
-        fun <E> success(code: Int? = ErrorCodeEnum.OK.code, message: String? = ErrorCodeEnum.OK.msg, data: E? = null): ApiResult<E> {
+        fun <E> success(code: Int? = ErrorCodeEnum.SUCCESS.code, message: String? = ErrorCodeEnum.SUCCESS.msg, data: E? = null): ApiResult<E> {
             return ApiResult(code, message, data)
         }
 
@@ -95,7 +95,7 @@ class ApiResult<T> {
          * @return ApiResult<Entity>
          */
         fun <E> successDef(): ApiResult<E> {
-            return ApiResult(ErrorCodeEnum.OK.code, ErrorCodeEnum.OK.msg, null, true)
+            return ApiResult(ErrorCodeEnum.SUCCESS.code, ErrorCodeEnum.SUCCESS.msg, null, true)
         }
 
         /**
@@ -105,7 +105,7 @@ class ApiResult<T> {
          * @param data E?
          * @return ApiResult<E>
          */
-        fun <E> fail(code: Int? = ErrorCodeEnum.ERROR.code, message: String? = ErrorCodeEnum.ERROR.msg, data: E? = null): ApiResult<E> {
+        fun <E> fail(code: Int? = ErrorCodeEnum.FAIL.code, message: String? = ErrorCodeEnum.FAIL.msg, data: E? = null): ApiResult<E> {
             return ApiResult(code, message, data)
         }
     }

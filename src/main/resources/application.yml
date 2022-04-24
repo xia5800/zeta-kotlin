@@ -48,8 +48,8 @@ zeta:
       name: gcc
   # token配置
   token:
-    # 请求头中token参数的名字 token: xxxxx
-    tokenName: token
+    # 请求头中token参数的名字 Authorization: xxxxx
+    tokenName: Authorization
     # token类型 DEFAULT、STYLE、MIX、STATELESS
     type: DEFAULT
     # jwt签名前缀 例如填写 Bearer 实际传参 token: Bearer xxxxxx

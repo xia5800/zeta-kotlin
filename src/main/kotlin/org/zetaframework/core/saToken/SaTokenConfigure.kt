@@ -163,7 +163,7 @@ class SaTokenConfigure(
      */
     private fun returnFail(e: Throwable): String? {
         // 初始化错误码和错误信息
-        var code: Int = ErrorCodeEnum.ERROR.code
+        var code: Int = ErrorCodeEnum.FAIL.code
         var message: String? = ""
 
         when(e) {

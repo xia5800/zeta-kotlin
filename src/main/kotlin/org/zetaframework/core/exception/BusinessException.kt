@@ -19,7 +19,7 @@ class BusinessException: RuntimeException {
         this.code = code
     }
 
-    constructor(message: String, cause: Throwable) : this(ErrorCodeEnum.ERROR.code, message, cause)
+    constructor(message: String, cause: Throwable) : this(ErrorCodeEnum.FAIL.code, message, cause)
 
     constructor(code: Int, message: String, cause: Throwable) : super(message, cause) {
         this.code = code
