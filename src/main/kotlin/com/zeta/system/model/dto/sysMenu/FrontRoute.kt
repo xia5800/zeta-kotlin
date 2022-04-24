@@ -33,13 +33,13 @@ class FrontRoute: TreeEntity<FrontRoute, Long>() {
     @ApiModelProperty(value = "路由路径")
     var path: String? = null
 
-    /** 重定向路径 */
-    @ApiModelProperty(value = "重定向路径")
-    var redirect: String? = null
-
     /** 路由组件 */
     @ApiModelProperty(value = "路由组件")
     var component: String? = null
+
+    /** 重定向地址 */
+    @ApiModelProperty(value = "重定向地址")
+    var redirect: String? = null
 
     /** 路由描述 */
     @ApiModelProperty(value = "路由描述")
@@ -63,16 +63,12 @@ class FrontRoute: TreeEntity<FrontRoute, Long>() {
                 this.id = sysMenu.id
                 this.name = sysMenu.name
                 this.path = sysMenu.path
-                this.redirect = sysMenu.redirect
                 this.component = sysMenu.component
+                this.redirect = sysMenu.redirect
                 this.parentId = sysMenu.parentId
                 this.meta = meta
             }
         }
-    }
-
-    override fun toString(): String {
-        return "FrontRoute(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, name=$name, path=$path, redirect=$redirect, component=$component, meta=$meta)"
     }
 }
 

@@ -14,15 +14,23 @@ object TreeUtil {
     /**
      * buildTree
      * @param treeList List<E>
+     * @param isShowNullChildren Boolean 是否显示为空的children
      * @return List<E>
      */
-    fun <E : TreeEntity<E, out Serializable>> buildTree(list: MutableList<E>): List<E> {
+    fun <E : TreeEntity<E, out Serializable>> buildTree(list: MutableList<E>, isShowNullChildren: Boolean = true): List<E> {
         if (list.isEmpty() || list.size == 0) { return list }
 
         for (entity in list) {
             // filter出 entity 的子节点
             val children = list.filter { entity.id == it.parentId }
-            entity.children = children as MutableList<E>
+
+            if(isShowNullChildren) {
+                entity.children = children as MutableList<E>
+            } else {
+                if(children.isNotEmpty()) {
+                    entity.children = children as MutableList<E>
+                }
+            }
         }
 
         // filter出 entity 的父节点

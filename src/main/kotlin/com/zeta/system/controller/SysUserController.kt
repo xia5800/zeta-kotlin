@@ -5,21 +5,23 @@ import cn.hutool.core.bean.BeanUtil
 import cn.hutool.core.collection.CollUtil
 import cn.hutool.core.lang.Assert
 import com.baomidou.mybatisplus.core.metadata.IPage
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
+import com.zeta.system.model.dto.sysMenu.FrontRoute
 import com.zeta.system.model.dto.sysRole.SysRoleDTO
 import com.zeta.system.model.dto.sysUser.SysUserSaveDTO
 import com.zeta.system.model.dto.sysUser.SysUserUpdateDTO
+import com.zeta.system.model.dto.sysUser.UserInfoDTO
 import com.zeta.system.model.entity.SysUser
+import com.zeta.system.model.enumeration.MenuTypeEnum
 import com.zeta.system.model.enumeration.UserStateEnum
 import com.zeta.system.model.param.ResetPasswordParam
 import com.zeta.system.model.param.SysUserQueryParam
+import com.zeta.system.service.ISysRoleMenuService
 import com.zeta.system.service.ISysUserService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.zetaframework.base.controller.ExistenceController
 import org.zetaframework.base.controller.SuperController
 import org.zetaframework.base.controller.UpdateStateController
@@ -28,6 +30,8 @@ import org.zetaframework.base.param.UpdateStateParam
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.exception.BusinessException
 import org.zetaframework.core.saToken.annotation.PreAuth
+import org.zetaframework.core.utils.ContextUtil
+import org.zetaframework.core.utils.TreeUtil
 
 /**
  * 用户 前端控制器
@@ -39,7 +43,7 @@ import org.zetaframework.core.saToken.annotation.PreAuth
 @PreAuth(replace = "sys:user")
 @RestController
 @RequestMapping("/api/system/user")
-class SysUserController: SuperController<ISysUserService, Long, SysUser, SysUserQueryParam, SysUserSaveDTO, SysUserUpdateDTO>(),
+class SysUserController(private val roleMenuService: ISysRoleMenuService): SuperController<ISysUserService, Long, SysUser, SysUserQueryParam, SysUserSaveDTO, SysUserUpdateDTO>(),
     UpdateStateController<SysUser, Long, Int>,
     ExistenceController<SysUser, Long>
 {
@@ -175,5 +179,39 @@ class SysUserController: SuperController<ISysUserService, Long, SysUser, SysUser
             StpUtil.logout(entity.id)
         }
         return success(result)
+    }
+
+    /**
+     * 获取登录用户信息
+     */
+    @ApiOperation("获取登录用户信息")
+    @GetMapping("/info")
+    fun userInfo(): ApiResult<UserInfoDTO> {
+        // 获取用户基本信息
+        val user = service.getById(ContextUtil.getUserId()) ?: return fail("用户不存在")
+        val userInfoDto = BeanUtil.toBean(user, UserInfoDTO::class.java)
+
+        // 获取用户角色列表
+        userInfoDto.roles = StpUtil.getRoleList()
+        // 获取用户权限列表
+        userInfoDto.permissions = StpUtil.getPermissionList()
+        return success(userInfoDto)
+    }
+
+    /**
+     * 获取用户菜单
+     */
+    @ApiOperationSupport(order = 100)
+    @ApiOperation("获取用户菜单")
+    @GetMapping("/menu")
+    fun userMenu(): ApiResult<List<FrontRoute>> {
+        // 查询用户对应的菜单
+        val menuList = roleMenuService.listMenuByUserId(ContextUtil.getUserId(), MenuTypeEnum.MENU.name)
+
+        val frontRouteList = mutableListOf<FrontRoute>()
+        menuList.forEach {
+            frontRouteList.add(FrontRoute.convert(it))
+        }
+        return success(TreeUtil.buildTree(frontRouteList, false))
     }
 }
