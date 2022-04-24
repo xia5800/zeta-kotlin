@@ -2,23 +2,50 @@ package com.zeta.system.model.dto.sysMenu
 
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
-import javax.validation.constraints.NotEmpty
-import javax.validation.constraints.Size
+import java.time.LocalDateTime
 
 /**
  * <p>
- * 修改 菜单
+ * 菜单 详情
  * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-24 17:45:03
  */
-@ApiModel(description = "修改菜单")
-data class SysMenuUpdateDTO(
+@ApiModel(description = "菜单详情")
+data class SysMenuDTO(
 
     /** id */
     @ApiModelProperty(value = "id")
     var id: Long? = null,
+
+    /** 创建时间 */
+    @ApiModelProperty(value = "创建时间")
+    var createTime: LocalDateTime? = null,
+
+    /** 创建人 */
+    @ApiModelProperty(value = "创建人")
+    var createdBy: Long? = null,
+
+    /** 修改时间 */
+    @ApiModelProperty(value = "修改时间")
+    var updateTime: LocalDateTime? = null,
+
+    /** 修改人 */
+    @ApiModelProperty(value = "修改人")
+    var updatedBy: Long? = null,
+
+    /** 名称 */
+    @ApiModelProperty(value = "名称")
+    var label: String? = null,
+
+    /** 父级id */
+    @ApiModelProperty(value = "父级id")
+    var parentId: Long? = null,
+
+    /** 排序 */
+    @ApiModelProperty(value = "排序")
+    var sortValue: Int? = null,
 
     /** 路由key */
     @ApiModelProperty(value = "路由key")
@@ -46,10 +73,11 @@ data class SysMenuUpdateDTO(
 
     /** 菜单类型 */
     @ApiModelProperty(value = "菜单类型")
-    @get:NotEmpty(message = "菜单类型不能为空")
-    @get:Size(max = 32, message = "菜单类型长度不能超过32")
     var type: String? = null,
 
+    /** 逻辑删除字段 */
+    @ApiModelProperty(value = "逻辑删除字段")
+    var deleted: Boolean? = null,
 
     /** 是否隐藏 0否 1是 */
     @ApiModelProperty(value = "是否隐藏 0否 1是")
