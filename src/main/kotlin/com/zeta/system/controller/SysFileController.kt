@@ -12,7 +12,6 @@ import org.zetaframework.base.controller.DeleteController
 import org.zetaframework.base.controller.QueryController
 import org.zetaframework.base.controller.SuperSimpleController
 import org.zetaframework.base.result.ApiResult
-import org.zetaframework.core.exception.BusinessException
 import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.saToken.annotation.PreAuth
 import org.zetaframework.core.saToken.annotation.PreCheckPermission
