@@ -60,7 +60,6 @@ class MybatisPlusMetaObjectHandler(private val uidGenerator: UidGenerator): Meta
         // 有createdBy字段，且字段值为null
         if (metaObject.hasGetter(SuperEntity.CREATED_BY)) {
             val value = metaObject.getValue(SuperEntity.CREATED_BY)
-            // 设置创建人
             if (value == null) {
                 // 判断创建人字段的类型
                 when (metaObject.getGetterType(SuperEntity.CREATED_BY).name) {
@@ -96,15 +95,18 @@ class MybatisPlusMetaObjectHandler(private val uidGenerator: UidGenerator): Meta
 
         // 有updatedBy字段，且字段值为null
         if (metaObject.hasGetter(Entity.UPDATED_BY)) {
-            when (metaObject.getGetterType(Entity.UPDATED_BY).name) {
-                "java.lang.String" -> {
-                    setFieldValByName(Entity.UPDATED_BY, ContextUtil.getUserIdStr(), metaObject)
-                }
-                "java.lang.Long" -> {
-                    setFieldValByName(Entity.UPDATED_BY, ContextUtil.getUserId(), metaObject)
-                }
-                else -> {
-                    logger.warn("【${Entity.UPDATE_TIME_COLUMN}】字段仅支持String和Long类型填充，不是这两种类型的请更新时手动设置值")
+            val value = metaObject.getValue(Entity.UPDATED_BY)
+            if (value == null) {
+                when (metaObject.getGetterType(Entity.UPDATED_BY).name) {
+                    "java.lang.String" -> {
+                        setFieldValByName(Entity.UPDATED_BY, ContextUtil.getUserIdStr(), metaObject)
+                    }
+                    "java.lang.Long" -> {
+                        setFieldValByName(Entity.UPDATED_BY, ContextUtil.getUserId(), metaObject)
+                    }
+                    else -> {
+                        logger.warn("【${Entity.UPDATE_TIME_COLUMN}】字段仅支持String和Long类型填充，不是这两种类型的请更新时手动设置值")
+                    }
                 }
             }
         }
@@ -117,15 +119,18 @@ class MybatisPlusMetaObjectHandler(private val uidGenerator: UidGenerator): Meta
     private fun fillId(metaObject: MetaObject) {
         // 有Id字段，且字段值为null
         if (metaObject.hasGetter(SuperEntity.FIELD_ID)) {
-            when (metaObject.getGetterType(SuperEntity.FIELD_ID).name) {
-                "java.lang.String" -> {
-                    setFieldValByName(SuperEntity.FIELD_ID, uidGenerator.getUid().toString(), metaObject)
-                }
-                "java.lang.Long" -> {
-                    setFieldValByName(SuperEntity.FIELD_ID, uidGenerator.getUid(), metaObject)
-                }
-                else -> {
-                    logger.warn("【${SuperEntity.FIELD_ID}】字段仅支持String和Long类型填充，不是这两种类型的请手动设置值")
+            val value = metaObject.getValue(SuperEntity.FIELD_ID)
+            if (value == null) {
+                when (metaObject.getGetterType(SuperEntity.FIELD_ID).name) {
+                    "java.lang.String" -> {
+                        setFieldValByName(SuperEntity.FIELD_ID, uidGenerator.getUid().toString(), metaObject)
+                    }
+                    "java.lang.Long" -> {
+                        setFieldValByName(SuperEntity.FIELD_ID, uidGenerator.getUid(), metaObject)
+                    }
+                    else -> {
+                        logger.warn("【${SuperEntity.FIELD_ID}】字段仅支持String和Long类型填充，不是这两种类型的请手动设置值")
+                    }
                 }
             }
         }
