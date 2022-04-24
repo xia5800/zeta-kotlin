@@ -5,6 +5,7 @@ import com.zeta.system.model.enumeration.MenuTypeEnum
 import com.zeta.system.model.enumeration.SexEnum
 import com.zeta.system.model.enumeration.UserStateEnum
 import com.zeta.system.service.*
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -58,93 +59,109 @@ class KtZetaApplicationTests {
 
     /**
      * 初始化系统菜单、权限
+     *
+     * 说明：
+     * 1.确定了前端，使用[soybean-admin](https://github.com/honghuangdc/soybean-admin)框架
+     * 2.菜单[图标地址](https://icones.js.org/)
      */
     fun initMenu(): List<Long> {
         val batchList: MutableList<SysMenu> = mutableListOf()
         var menuSort = 1;
 
+        // dashboard
+        var dashboardSort = 1;
+        val dashboardId = uidGenerator.getUid()
+        batchList.add(buildMenu(dashboardId, 0L, menuSort++, "dashboard", "/dashboard", "carbon:dashboard"))
+        // dashboard-分析页
+        val dashboardAnalysisId = uidGenerator.getUid()
+        batchList.add(buildMenu(dashboardAnalysisId, dashboardId, dashboardSort++, "分析页", "/dashboard/analysis", "icon-park-outline:analysis"))
+        // dashboard-工作台
+        val dashboardWorkbenchId = uidGenerator.getUid()
+        batchList.add(buildMenu(dashboardWorkbenchId, dashboardId, dashboardSort++, "工作台", "/dashboard/workbench", "icon-park-outline:workbench"))
+
         // 系统管理
         var systemSort = 1;
         val systemId = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = systemId; parentId = 0L; sortValue = menuSort++; label = "系统管理"; name = "system"; path = "/system"; component = "basic"; type = MenuTypeEnum.MENU.name; authority = "" })
+        batchList.add(buildMenu(systemId, 0L, menuSort++, "系统管理", "/system", "system-uicons:grid"))
         // 系统管理-用户管理
         val userId = uidGenerator.getUid()
         val userIdR = uidGenerator.getUid()
         val userIdC = uidGenerator.getUid()
         val userIdU = uidGenerator.getUid()
         val userIdD = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = userId; parentId = systemId; sortValue = systemSort++; label = "用户管理"; name = "system_user"; path = "/system/user"; component = "self"; type = MenuTypeEnum.MENU.name; authority = "" })
-        batchList.add(SysMenu().apply { id = userIdR; parentId = userId; sortValue = 1; label = "查看用户"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:user:view" })
-        batchList.add(SysMenu().apply { id = userIdC; parentId = userId; sortValue = 2; label = "新增用户"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:user:save" })
-        batchList.add(SysMenu().apply { id = userIdU; parentId = userId; sortValue = 3; label = "修改用户"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:user:update" })
-        batchList.add(SysMenu().apply { id = userIdD; parentId = userId; sortValue = 4; label = "删除用户"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:user:delete" })
+        batchList.add(buildMenu(userId, systemId, systemSort++, "用户管理", "/system/user", "ph:user-duotone"))
+        batchList.add(buildButton(userIdR, userId, 1, "查看用户", "sys:user:view"))
+        batchList.add(buildButton(userIdC, userId, 2, "新增用户", "sys:user:save"))
+        batchList.add(buildButton(userIdU, userId, 3, "修改用户", "sys:user:update"))
+        batchList.add(buildButton(userIdD, userId, 4, "删除用户", "sys:user:delete"))
         // 系统管理-角色管理
         val roleId = uidGenerator.getUid()
         val roleIdR = uidGenerator.getUid()
         val roleIdC = uidGenerator.getUid()
         val roleIdU = uidGenerator.getUid()
         val roleIdD = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = roleId; parentId = systemId; sortValue = systemSort++; label = "角色管理"; name = "system_role"; path = "/system/role"; component = "self";  type = MenuTypeEnum.MENU.name; authority = "" })
-        batchList.add(SysMenu().apply { id = roleIdR; parentId = roleId; sortValue = 1; label = "查看角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:role:view" })
-        batchList.add(SysMenu().apply { id = roleIdC; parentId = roleId; sortValue = 2; label = "新增角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:role:save" })
-        batchList.add(SysMenu().apply { id = roleIdU; parentId = roleId; sortValue = 3; label = "修改角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:role:update" })
-        batchList.add(SysMenu().apply { id = roleIdD; parentId = roleId; sortValue = 4; label = "删除角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:role:delete" })
+        batchList.add(buildMenu(roleId, systemId, systemSort++, "角色管理", "/system/role", "carbon:user-role"))
+        batchList.add(buildButton(roleIdR, roleId, 1, "查看角色", "sys:role:view"))
+        batchList.add(buildButton(roleIdC, roleId, 2, "新增角色", "sys:role:save"))
+        batchList.add(buildButton(roleIdU, roleId, 3, "修改角色", "sys:role:update"))
+        batchList.add(buildButton(roleIdD, roleId, 4, "删除角色", "sys:role:delete"))
         // 系统管理-菜单管理
         val menuId = uidGenerator.getUid()
         val menuIdR = uidGenerator.getUid()
         val menuIdC = uidGenerator.getUid()
         val menuIdU = uidGenerator.getUid()
         val menuIdD = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = menuId; parentId = systemId; sortValue = systemSort++; label = "菜单管理"; name = "system_menu"; path = "/system/menu"; component = "self"; type = MenuTypeEnum.MENU.name; authority = "" })
-        batchList.add(SysMenu().apply { id = menuIdR; parentId = menuId; sortValue = 1; label = "查看角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:menu:view" })
-        batchList.add(SysMenu().apply { id = menuIdC; parentId = menuId; sortValue = 2; label = "新增角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:menu:save" })
-        batchList.add(SysMenu().apply { id = menuIdU; parentId = menuId; sortValue = 3; label = "修改角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:menu:update" })
-        batchList.add(SysMenu().apply { id = menuIdD; parentId = menuId; sortValue = 4; label = "删除角色"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:menu:delete" })
+        batchList.add(buildMenu(menuId, systemId, systemSort++, "菜单管理", "/system/menu", "ic:sharp-menu"))
+        batchList.add(buildButton(menuIdR, menuId, 1, "查看菜单", "sys:menu:view"))
+        batchList.add(buildButton(menuIdC, menuId, 2, "新增菜单", "sys:menu:save"))
+        batchList.add(buildButton(menuIdU, menuId, 3, "修改菜单", "sys:menu:update"))
+        batchList.add(buildButton(menuIdD, menuId, 4, "删除菜单", "sys:menu:delete"))
         // 系统管理-操作日志
         val optId = uidGenerator.getUid()
         val optIdR = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = optId; parentId = systemId; sortValue = systemSort++; label = "操作日志"; name = "system_optLog"; path = "/system/optLog"; component = "self"; type = MenuTypeEnum.MENU.name; authority = "" })
-        batchList.add(SysMenu().apply { id = optIdR; parentId = optId; sortValue = 1; label = "查看操作日志"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:optLog:view" })
+        batchList.add(buildMenu(optId, systemId, systemSort++, "操作日志", "/system/optLog", "carbon:flow-logs-vpc"))
+        batchList.add(buildButton(optIdR, optId, 1, "查看操作日志", "sys:optLog:view"))
         // 系统管理-登录日志
         val loginLogId = uidGenerator.getUid()
         val loginLogIdR = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = loginLogId; parentId = systemId; sortValue = systemSort++; label = "登录日志"; name = "system_loginLog"; path = "/system/loginLog"; component = "self"; type = MenuTypeEnum.MENU.name; authority = "" })
-        batchList.add(SysMenu().apply { id = loginLogIdR; parentId = loginLogId; sortValue = 1; label = "查看登录日志"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:loginLog:view" })
+        batchList.add(buildMenu(loginLogId, systemId, systemSort++, "登录日志", "/system/loginLog", "carbon:flow-logs-vpc"))
+        batchList.add(buildButton(loginLogIdR, loginLogId, 1, "查看登录日志", "sys:loginLog:view"))
         // 系统管理-文件管理
         val fileId = uidGenerator.getUid()
         val fileIdR = uidGenerator.getUid()
         val fileIdC = uidGenerator.getUid()
         val fileIdE = uidGenerator.getUid()
         val fileIdD = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = fileId; parentId = systemId; sortValue = systemSort++; label = "文件管理"; name = "system_file"; path = "/system/file"; component = "self"; type = MenuTypeEnum.MENU.name; authority = "" })
-        batchList.add(SysMenu().apply { id = fileIdR; parentId = fileId; sortValue = 1; label = "查看文件"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:file:view" })
-        batchList.add(SysMenu().apply { id = fileIdC; parentId = fileId; sortValue = 2; label = "上传文件"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:file:save" })
-        batchList.add(SysMenu().apply { id = fileIdE; parentId = fileId; sortValue = 3; label = "下载文件"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:file:export" })
-        batchList.add(SysMenu().apply { id = fileIdD; parentId = fileId; sortValue = 4; label = "删除文件"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:file:delete" })
-
+        batchList.add(buildMenu(fileId, systemId, systemSort++, "文件管理", "/system/file", "ic:baseline-file-copy"))
+        batchList.add(buildButton(fileIdR, fileId, 1, "查看文件", "sys:file:view"))
+        batchList.add(buildButton(fileIdC, fileId, 2, "上传文件", "sys:file:save"))
+        batchList.add(buildButton(fileIdE, fileId, 3, "下载文件", "sys:file:export"))
+        batchList.add(buildButton(fileIdD, fileId, 4, "删除文件", "sys:file:delete"))
         // 系统管理-数据字典
         val dictId = uidGenerator.getUid()
         val dictIdR = uidGenerator.getUid()
         val dictIdC = uidGenerator.getUid()
         val dictIdU = uidGenerator.getUid()
         val dictIdD = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = dictId; parentId = systemId; sortValue = systemSort++; label = "数据字典"; name = "system_dict"; path = "/system/dict"; component = "self"; type = MenuTypeEnum.MENU.name; authority = "" })
-        batchList.add(SysMenu().apply { id = dictIdR; parentId = dictId; sortValue = 1; label = "查看字典"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dict:view" })
-        batchList.add(SysMenu().apply { id = dictIdC; parentId = dictId; sortValue = 2; label = "新增字典"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dict:save" })
-        batchList.add(SysMenu().apply { id = dictIdU; parentId = dictId; sortValue = 3; label = "修改字典"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dict:update" })
-        batchList.add(SysMenu().apply { id = dictIdD; parentId = dictId; sortValue = 4; label = "删除字典"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dict:delete" })
+        batchList.add(buildMenu(dictId, systemId, systemSort++, "数据字典", "/system/dict", "arcticons:colordict"))
+        batchList.add(buildButton(dictIdR, dictId, 1, "查看字典", "sys:dict:view"))
+        batchList.add(buildButton(dictIdC, dictId, 2, "新增字典", "sys:dict:save"))
+        batchList.add(buildButton(dictIdU, dictId, 3, "修改字典", "sys:dict:update"))
+        batchList.add(buildButton(dictIdD, dictId, 4, "删除字典", "sys:dict:delete"))
         val dictItemR = uidGenerator.getUid()
         val dictItemC = uidGenerator.getUid()
         val dictItemU = uidGenerator.getUid()
         val dictItemD = uidGenerator.getUid()
-        batchList.add(SysMenu().apply { id = dictItemR; parentId = dictId; sortValue = 5; label = "查看字典项"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dictItem:view" })
-        batchList.add(SysMenu().apply { id = dictItemC; parentId = dictId; sortValue = 6; label = "新增字典项"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dictItem:save" })
-        batchList.add(SysMenu().apply { id = dictItemU; parentId = dictId; sortValue = 7; label = "修改字典项"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dictItem:update" })
-        batchList.add(SysMenu().apply { id = dictItemD; parentId = dictId; sortValue = 8; label = "删除字典项"; type = MenuTypeEnum.RESOURCE.name; authority = "sys:dictItem:delete" })
+        batchList.add(buildButton(dictItemR, dictId, 5, "查看字典项", "sys:dictItem:view"))
+        batchList.add(buildButton(dictItemC, dictId, 6, "新增字典项", "sys:dictItem:save"))
+        batchList.add(buildButton(dictItemU, dictId, 7, "修改字典项", "sys:dictItem:update"))
+        batchList.add(buildButton(dictItemD, dictId, 8, "删除字典项", "sys:dictItem:delete"))
 
         menuService.saveBatch(batchList)
 
         return mutableListOf(
+            dashboardId,
+            dashboardAnalysisId, dashboardWorkbenchId,
             systemId,
             userId, userIdR ,userIdC, userIdU, userIdD,
             roleId, roleIdR, roleIdC, roleIdU, roleIdD,
@@ -229,9 +246,58 @@ class KtZetaApplicationTests {
 
         // 初始化字典项
         val dictItemList = mutableListOf<SysDictItem>()
-        dictItemList.add(SysDictItem().apply { this.dictId = dictId; name = "运行"; value = "RUNNING";  describe = "设备正在运行"; sortValue = 1 })
-        dictItemList.add(SysDictItem().apply { this.dictId = dictId; name = "停止"; value = "WAITING";  describe = "设备已停止"; sortValue = 2 })
+        dictItemList.add(SysDictItem().apply { this.id = uidGenerator.getUid(); this.dictId = dictId; name = "运行"; value = "RUNNING";  describe = "设备正在运行"; sortValue = 1 })
+        dictItemList.add(SysDictItem().apply { this.id = uidGenerator.getUid(); this.dictId = dictId; name = "停止"; value = "WAITING";  describe = "设备已停止"; sortValue = 2 })
         sysDictItemService.saveBatch(dictItemList)
+    }
+
+    /**
+     * 构造菜单
+     *
+     * @param id
+     * @param parentId
+     * @param sortValue
+     * @param label
+     * @param path
+     * @param icon
+     */
+    private fun buildMenu(id: Long, parentId: Long, sortValue: Int, label: String, path: String, icon: String): SysMenu {
+        // 将"/system" => "system";  "/system/user" => "system_user";  "/system/user/123" => "system_user_123"
+        val name = path.split("/").filterNot { it.isBlank() }.joinToString("_")
+        // 判断组件
+        val component = if (parentId == 0L) { "basic" } else { "self" }
+        return SysMenu().apply {
+            this.id = id
+            this.parentId = parentId
+            this.sortValue = sortValue
+            this.label = label
+            this.path = path
+            this.name = name
+            this.component = component
+            this.icon = icon
+            this.type = MenuTypeEnum.MENU.name
+            this.authority = ""
+        }
+    }
+
+    /**
+     * 构造按钮
+     *
+     * @param id
+     * @param parentId
+     * @param sortValue
+     * @param label
+     * @param authority
+     */
+    private fun buildButton(id: Long, parentId: Long, sortValue: Int, label: String, authority: String): SysMenu {
+        return SysMenu().apply {
+            this.id = id
+            this.parentId = parentId
+            this.sortValue = sortValue
+            this.label = label
+            this.type = MenuTypeEnum.RESOURCE.name
+            this.authority = authority
+        }
     }
 
 }
