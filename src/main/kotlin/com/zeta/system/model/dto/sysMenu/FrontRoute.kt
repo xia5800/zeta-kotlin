@@ -55,6 +55,7 @@ class FrontRoute: TreeEntity<FrontRoute, Long>() {
                 this.title = sysMenu.label
                 this.icon = sysMenu.icon
                 this.hide = sysMenu.hide
+                this.keepAlive = sysMenu.keepAlive
                 this.href = sysMenu.href
                 this.order = sysMenu.sortValue
             }
@@ -87,7 +88,13 @@ data class RouteMeta(
     @ApiModelProperty(value = "需要身份验证")
     var requiresAuth: Boolean = true,
 
-    /** 角色编码列表 */
+    /**
+     * 角色编码列表
+     *
+     * 说明：
+     * Soybean Admin的前端菜单方案是获取系统所有的菜单，每个菜单都能让哪些角色能够访问就是通过这个字段来进行判断的。
+     * 但是zeta-kotlin项目不同，本项目用的是查询用户可以访问的菜单，返回给前端。所以这个字段不需要设置值
+     */
     @ApiModelProperty(value = "角色编码列表")
     var permissions: MutableList<String> = mutableListOf(),
 
@@ -98,6 +105,10 @@ data class RouteMeta(
     /** 是否在菜单中隐藏 */
     @ApiModelProperty(value = "是否在菜单中隐藏")
     var hide: Boolean? = null,
+
+    /** 是否缓存 */
+    @ApiModelProperty(value = "是否缓存")
+    var keepAlive: Boolean? = null,
 
     /** 外链链接 */
     @ApiModelProperty(value = "外链链接")

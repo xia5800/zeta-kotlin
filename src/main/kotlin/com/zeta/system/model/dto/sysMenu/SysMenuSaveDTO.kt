@@ -51,6 +51,10 @@ data class SysMenuSaveDTO(
     @ApiModelProperty(value = "是否隐藏 0否 1是")
     var hide: Boolean? = null,
 
+    /** 是否缓存 */
+    @ApiModelProperty(value = "是否缓存 0否 1是")
+    var keepAlive: Boolean? = null,
+
     /** 外链地址 */
     @ApiModelProperty(value = "外链地址")
     var href: String? = null,

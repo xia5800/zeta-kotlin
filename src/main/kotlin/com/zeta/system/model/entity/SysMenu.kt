@@ -68,6 +68,11 @@ class SysMenu: TreeEntity<SysMenu, Long>() {
     @TableField(value = "hide")
     var hide: Boolean? = null
 
+    /** 是否缓存 */
+    @ApiModelProperty(value = "是否缓存 0否 1是")
+    @TableField(value = "keep_alive")
+    var keepAlive: Boolean? = null
+
     /** 外链地址 */
     @ApiModelProperty(value = "外链地址")
     @TableField(value = "href")
@@ -79,7 +84,7 @@ class SysMenu: TreeEntity<SysMenu, Long>() {
     var checked: Boolean? = null
 
     override fun toString(): String {
-        return "SysMenu(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, label=$label, parentId=$parentId, sortValue=$sortValue, name=$name, path=$path, component=$component, redirect=$redirect, icon=$icon, authority=$authority, type=$type, deleted=$deleted, hide=$hide, href=$href)"
+        return "SysMenu(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, label=$label, parentId=$parentId, sortValue=$sortValue, name=$name, path=$path, component=$component, redirect=$redirect, icon=$icon, authority=$authority, type=$type, deleted=$deleted, hide=$hide, keepAlive=$keepAlive, href=$href)"
     }
 
 }
