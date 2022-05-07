@@ -58,6 +58,8 @@ zeta:
     signerKey: zeta-kotlin
     # token过期时间 单位：秒, -1代表永不过期
     expireTime: 7200
+    # token自动续期
+    renew: true
   # security配置
   security:
     ignore:

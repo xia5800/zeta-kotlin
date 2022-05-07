@@ -116,6 +116,10 @@ class SaTokenConfigure(
                 // 需要登录认证的路由:所有, 排除登录认证的路由:/api/login、swagger等
                 SaRouter.match("/**").notMatch(*ignoreUrl).check(SaFunction {
                     StpUtil.checkLogin()
+                    // token续期
+                    if(tokenProperties.renew) {
+                        StpUtil.renewTimeout(tokenProperties.expireTime)
+                    }
                     // 获取用户id，并设置到ThreadLocal中。（mybatisplus自动填充用到）
                     ContextUtil.setUserId(StpUtil.getLoginIdAsLong())
                     ContextUtil.setToken(StpUtil.getTokenValue())
