@@ -69,15 +69,16 @@ class MainController(
 
         // 判断密码
         if(!service.comparePassword(param.password!!, user.password!!)) {
-            applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.build(
-                param.account!!, LoginStateEnum.ERROR_PWD.name, "密码不正确",  request
+            applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginFail(
+                param.account!!, LoginStateEnum.ERROR_PWD, request
             )))
-            return fail("密码不正确")
+            // 密码不正确
+            return fail(LoginStateEnum.ERROR_PWD.desc)
         }
         // 判断用户状态
         if(user.state == UserStateEnum.FORBIDDEN.code) {
-            applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.build(
-                param.account!!, LoginStateEnum.FAIL.name, "用户被禁用，无法登录",  request
+            applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginFail(
+                param.account!!, LoginStateEnum.FAIL, "用户被禁用，无法登录", request
             )))
             return fail("用户被禁用，无法登录")
         }
@@ -88,9 +89,7 @@ class MainController(
         ContextUtil.setUserId(user.id!!)
 
         // 登录日志
-        applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.build(
-            param.account!!, LoginStateEnum.SUCCESS.name, request = request
-        )))
+        applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginSuccess(param.account!!, request = request)))
 
         // 构造登录返回结果
         val userDto = BeanUtil.toBean(user, LoginUserDTO::class.java)
@@ -107,9 +106,9 @@ class MainController(
     fun logout(request: HttpServletRequest): ApiResult<Boolean> {
         val user = service.getById(StpUtil.getLoginIdAsLong())
         if(user != null) {
-            // 登录日志
-            applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.build(
-                user.account ?: "", LoginStateEnum.LOGOUT.name, "注销登录", request
+            // 登出日志
+            applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginFail(
+                user.account ?: "", LoginStateEnum.LOGOUT, request
             )))
             // 注销登录
             StpUtil.logout()

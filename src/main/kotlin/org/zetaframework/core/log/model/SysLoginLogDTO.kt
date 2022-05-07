@@ -39,6 +39,16 @@ data class SysLoginLogDTO (
 ) {
 
     companion object {
+
+        /**
+         * 构造登录日志
+         *
+         * @param account 账号
+         * @param state 状态
+         * @param comments 备注
+         * @param request HttpServletRequest
+         * @return SysLoginLogDTO
+         */
         fun build(account: String, state: String, comments: String? = "登录成功", request: HttpServletRequest): SysLoginLogDTO {
             val ua = UserAgentUtil.parse(ServletUtil.getHeaderIgnoreCase(request, "User-Agent"))
             return SysLoginLogDTO().apply {
@@ -52,6 +62,41 @@ data class SysLoginLogDTO (
                 ip = ServletUtil.getClientIP(request)
             }
         }
+
+        /**
+         * 构造登录成功日志
+         *
+         * @param account 账号
+         * @param comments 备注
+         * @param request HttpServletRequest
+         * @return SysLoginLogDTO
+         */
+        fun loginSuccess(account: String, comments: String? = "登录成功", request: HttpServletRequest): SysLoginLogDTO =
+            build(account, LoginStateEnum.SUCCESS.name, request = request)
+
+
+        /**
+         * 构造登录失败日志
+         *
+         * @param account 账号
+         * @param state [LoginStateEnum]
+         * @param request HttpServletRequest
+         * @return SysLoginLogDTO
+         */
+        fun loginFail(account: String, state: LoginStateEnum, request: HttpServletRequest): SysLoginLogDTO =
+            build(account, state.name, state.desc, request)
+
+        /**
+         * 构造登录失败日志
+         *
+         * @param account 账号
+         * @param state 状态
+         * @param comments 备注
+         * @param request HttpServletRequest
+         * @return SysLoginLogDTO
+         */
+        fun loginFail(account: String, state: LoginStateEnum, comments: String, request: HttpServletRequest): SysLoginLogDTO =
+            build(account, state.name, comments, request)
     }
 
 }
