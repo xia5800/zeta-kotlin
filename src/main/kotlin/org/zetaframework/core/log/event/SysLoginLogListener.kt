@@ -23,7 +23,7 @@ open class SysLoginLogListener constructor(consumer: (loginLogDTO: SysLoginLogDT
      */
     @Async
     @EventListener(SysLoginEvent::class)
-    open fun saveSysLog(event: SysLoginEvent) {
+    open fun saveSysLoginLog(event: SysLoginEvent) {
         val loginLogDTO = event.source as SysLoginLogDTO
         block.invoke(loginLogDTO)
     }
