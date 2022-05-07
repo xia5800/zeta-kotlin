@@ -1,5 +1,6 @@
 package com.zeta.system.service.impl
 
+import cn.dev33.satoken.secure.BCrypt
 import cn.dev33.satoken.stp.StpInterface
 import cn.hutool.core.bean.BeanUtil
 import cn.hutool.core.collection.CollUtil
@@ -19,7 +20,6 @@ import com.zeta.system.service.ISysUserRoleService
 import com.zeta.system.service.ISysUserService
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Cacheable
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.zetaframework.core.constants.RedisKeyConstants.USER_PERMISSION_KEY
@@ -34,7 +34,6 @@ import org.zetaframework.core.exception.BusinessException
  */
 @Service
 class SysUserServiceImpl(
-    private val bCryptPasswordEncoder: BCryptPasswordEncoder,
     private val userRoleService: ISysUserRoleService,
     private val roleMenuService: ISysRoleMenuService,
 ): ISysUserService, ServiceImpl<SysUserMapper, SysUser>(), StpInterface {
@@ -162,7 +161,7 @@ class SysUserServiceImpl(
      * @param password String 明文
      * @return String   密文
      */
-    override fun encodePassword(password: String): String = bCryptPasswordEncoder.encode(password)
+    override fun encodePassword(password: String): String = BCrypt.hashpw(password)
 
     /**
      * 比较密码
@@ -171,7 +170,7 @@ class SysUserServiceImpl(
      * @param dbPwd String    用户数据库中的密码
      * @return Boolean
      */
-    override fun comparePassword(inputPwd: String, dbPwd: String): Boolean = bCryptPasswordEncoder.matches(inputPwd, dbPwd)
+    override fun comparePassword(inputPwd: String, dbPwd: String): Boolean = BCrypt.checkpw(inputPwd, dbPwd)
 
     /**
      * 返回指定账号id所拥有的权限码集合
