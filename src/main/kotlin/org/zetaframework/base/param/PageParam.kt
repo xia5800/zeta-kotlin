@@ -54,8 +54,10 @@ class PageParam<T> private constructor(){
         val sortArr = StrUtil.splitToArray(this.sort, StrUtil.COMMA)
         val orderArr = StrUtil.splitToArray(this.order, StrUtil.COMMA)
         for (i in sortArr.indices) {
+            // bug fix: 驼峰转下划线  说明：忘记处理了orz --by gcc
+            val sortField = StrUtil.toUnderlineCase(sortArr[i])
             orders.add(
-                if (StrUtil.equalsAny(orderArr[i], "asc", "ascending")) OrderItem.asc(sortArr[i]) else OrderItem.desc(sortArr[i])
+                if (StrUtil.equalsAny(orderArr[i], "asc", "ascending")) OrderItem.asc(sortField) else OrderItem.desc(sortField)
             )
         }
         page.orders = orders
