@@ -34,8 +34,8 @@ class SysLogAspect(private val context: ApplicationContext) {
     companion object {
         val logger: Logger = LoggerFactory.getLogger(this::class.java)
         val START_TIME: ThreadLocal<Long> = ThreadLocal()
-        val MAX_LENGTH = 65535
 
+        const val MAX_LENGTH = 65535
         const val POINTCUT_SIGN: String =
             "@annotation(org.zetaframework.core.log.annotation.SysLog)"
     }
