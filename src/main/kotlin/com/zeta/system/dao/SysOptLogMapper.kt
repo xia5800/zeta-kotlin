@@ -29,7 +29,7 @@ interface SysOptLogMapper: BaseMapper<SysOptLog> {
      */
     fun pageTable(
         @Param("page") page: IPage<SysOptLogTableDTO>,
-        @Param("param") param: SysOptLogQueryParam?
+        @Param("param") param: SysOptLogQueryParam
     ): List<SysOptLogTableDTO>
 
 }

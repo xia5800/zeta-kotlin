@@ -43,7 +43,8 @@ class SysOptLogServiceImpl: ISysOptLogService, ServiceImpl<SysOptLogMapper, SysO
      */
     override fun pageTable(param: PageParam<SysOptLogQueryParam>): PageResult<SysOptLogTableDTO> {
         val page = param.buildPage<SysOptLogTableDTO>()
-        val optLogList: List<SysOptLogTableDTO> = baseMapper.pageTable(page, param.model)
+        // bug fix: 解决“分页查询参数model值为null时，mybatis的查询条件构造失败”问题 --by gcc
+        val optLogList: List<SysOptLogTableDTO> = baseMapper.pageTable(page, param.model ?: SysOptLogQueryParam())
         return PageResult(optLogList, page.total)
     }
 
