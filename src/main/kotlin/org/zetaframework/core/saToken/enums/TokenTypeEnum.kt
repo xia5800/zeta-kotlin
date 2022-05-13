@@ -13,14 +13,14 @@ enum class TokenTypeEnum {
     DEFAULT,
 
     /**
-     * sa-token  [jwt-style模式]：Token 风格替换
+     * sa-token  [jwt-simple模式]：Token 风格替换
      */
-    STYLE,
+    SIMPLE,
 
     /**
-     * sa-token  [jwt-mix模式]：混入部分逻辑
+     * sa-token  [jwt-mixin模式]：混入部分逻辑
      */
-    MIX,
+    MIXIN,
 
     /**
      * sa-token  [jwt-stateless模式]：服务器完全无状态

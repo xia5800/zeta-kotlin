@@ -9,9 +9,9 @@ import cn.dev33.satoken.exception.NotPermissionException
 import cn.dev33.satoken.exception.NotRoleException
 import cn.dev33.satoken.filter.SaFilterAuthStrategy
 import cn.dev33.satoken.filter.SaServletFilter
-import cn.dev33.satoken.jwt.StpLogicJwtForMix
+import cn.dev33.satoken.jwt.StpLogicJwtForMixin
 import cn.dev33.satoken.jwt.StpLogicJwtForStateless
-import cn.dev33.satoken.jwt.StpLogicJwtForStyle
+import cn.dev33.satoken.jwt.StpLogicJwtForSimple
 import cn.dev33.satoken.router.SaHttpMethod
 import cn.dev33.satoken.router.SaRouter
 import cn.dev33.satoken.stp.StpLogic
@@ -138,13 +138,13 @@ class SaTokenConfigure(
     @Bean
     fun stpLogic(): StpLogic {
         return when(tokenProperties.type) {
-            TokenTypeEnum.STYLE -> {
-                logger.info("检测到sa-token采用了[jwt-style模式]")
-                StpLogicJwtForStyle()
+            TokenTypeEnum.SIMPLE -> {
+                logger.info("检测到sa-token采用了[jwt-simple模式]")
+                StpLogicJwtForSimple()
             }
-            TokenTypeEnum.MIX -> {
-                logger.info("检测到sa-token采用了[jwt-mix模式]")
-                StpLogicJwtForMix()
+            TokenTypeEnum.MIXIN -> {
+                logger.info("检测到sa-token采用了[jwt-mixin模式]")
+                StpLogicJwtForMixin()
             }
             TokenTypeEnum.STATELESS -> {
                 logger.info("检测到sa-token采用了[jwt-stateless模式]")

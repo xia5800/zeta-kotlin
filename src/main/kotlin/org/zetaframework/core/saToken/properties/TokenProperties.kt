@@ -13,7 +13,7 @@ class TokenProperties(
     var signerKey: String = "zeta-kotlin",
 
     /** token类型 */
-    var type: TokenTypeEnum = TokenTypeEnum.STYLE,
+    var type: TokenTypeEnum = TokenTypeEnum.DEFAULT,
 
     /** jwt签名前缀 例如填写 Bearer 实际传参 token: Bearer xxxxxx */
     var prefix: String? = "",
