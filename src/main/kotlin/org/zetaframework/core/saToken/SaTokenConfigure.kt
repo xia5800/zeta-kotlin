@@ -10,13 +10,13 @@ import cn.dev33.satoken.exception.NotRoleException
 import cn.dev33.satoken.filter.SaFilterAuthStrategy
 import cn.dev33.satoken.filter.SaServletFilter
 import cn.dev33.satoken.jwt.StpLogicJwtForMixin
-import cn.dev33.satoken.jwt.StpLogicJwtForStateless
 import cn.dev33.satoken.jwt.StpLogicJwtForSimple
+import cn.dev33.satoken.jwt.StpLogicJwtForStateless
 import cn.dev33.satoken.router.SaHttpMethod
 import cn.dev33.satoken.router.SaRouter
+import cn.dev33.satoken.spring.SpringMVCUtil
 import cn.dev33.satoken.stp.StpLogic
 import cn.dev33.satoken.stp.StpUtil
-import cn.hutool.core.convert.Convert
 import org.slf4j.LoggerFactory
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
@@ -27,7 +27,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.enums.ErrorCodeEnum
 import org.zetaframework.core.saToken.enums.TokenTypeEnum
-import org.zetaframework.core.saToken.filter.KtServletFilter
 import org.zetaframework.core.saToken.interceptor.KtRouteInterceptor
 import org.zetaframework.core.saToken.properties.IgnoreProperties
 import org.zetaframework.core.saToken.properties.TokenProperties
@@ -85,14 +84,10 @@ class SaTokenConfigure(
      * @param registry InterceptorRegistry
      */
     override fun addInterceptors(registry: InterceptorRegistry) {
-        // list -> array -> 可变参数
-        val baseUrl: Array<String> = Convert.toStrArray(ignoreProperties.baseUrl)
-        val ignoreUrl: Array<String> = Convert.toStrArray(ignoreProperties.ignoreUrl)
-
         // sa  路由权限配置
         registry.addInterceptor(KtRouteInterceptor { req: SaRequest, res: SaResponse, handler: Any? ->
             // 自定义路由拦截
-            SaRouter.match("/**").notMatch(*baseUrl).notMatch(*ignoreUrl)
+            SaRouter.match("/**").notMatch(ignoreProperties.baseUrl).notMatch(ignoreProperties.ignoreUrl)
                 .check(SaFunction { this.checkRequest(req) })
         }).addPathPatterns("/**")
     }
@@ -103,21 +98,24 @@ class SaTokenConfigure(
      */
     @Bean
     fun saServletFilter(): SaServletFilter {
-        // list -> array -> 可变参数
-        val baseUrl: Array<String> = Convert.toStrArray(ignoreProperties.baseUrl)
-        val ignoreUrl: Array<String> = Convert.toStrArray(ignoreProperties.ignoreUrl)
+        val excludeList = ignoreProperties.baseUrl
 
-        return KtServletFilter()
+        if (ignoreProperties.ignoreUrl.isNotEmpty()) {
+            // 如果存在 忽略鉴权的地址
+            excludeList.addAll(ignoreProperties.ignoreUrl)
+        }
+
+        return SaServletFilter()
             // 指定拦截路由
             .addInclude("/**")
             // 指定放行路由
-            .addExclude(*baseUrl)
+            .setExcludeList(excludeList)
             .setAuth {
                 // 需要登录认证的路由:所有, 排除登录认证的路由:/api/login、swagger等
-                SaRouter.match("/**").notMatch(*ignoreUrl).check(SaFunction {
+                SaRouter.match("/**").check(SaFunction {
                     StpUtil.checkLogin()
                     // token续期
-                    if(tokenProperties.renew) {
+                    if (tokenProperties.renew) {
                         StpUtil.renewTimeout(tokenProperties.expireTime)
                     }
                     // 获取用户id，并设置到ThreadLocal中。（mybatisplus自动填充用到）
@@ -137,7 +135,7 @@ class SaTokenConfigure(
      */
     @Bean
     fun stpLogic(): StpLogic {
-        return when(tokenProperties.type) {
+        return when (tokenProperties.type) {
             TokenTypeEnum.SIMPLE -> {
                 logger.info("检测到sa-token采用了[jwt-simple模式]")
                 StpLogicJwtForSimple()
@@ -170,10 +168,10 @@ class SaTokenConfigure(
         var code: Int = ErrorCodeEnum.FAIL.code
         var message: String? = ""
 
-        when(e) {
+        when (e) {
             // 处理NotLoginException异常的错误信息
             is NotLoginException -> {
-                message = when(e.type) {
+                message = when (e.type) {
                     NotLoginException.NOT_TOKEN -> NotLoginException.NOT_TOKEN_MESSAGE
                     NotLoginException.INVALID_TOKEN -> NotLoginException.INVALID_TOKEN_MESSAGE
                     NotLoginException.TOKEN_TIMEOUT -> NotLoginException.TOKEN_TIMEOUT_MESSAGE
@@ -192,6 +190,8 @@ class SaTokenConfigure(
             else -> message = e.message
         }
 
+        // 手动设置Content-Type为json格式，替换之前重写SaServletFilter.doFilter方法的写法
+        SpringMVCUtil.getResponse().setHeader("Content-Type", "application/json;charset=utf-8")
         return JSONUtil.toJsonStr(ApiResult<Boolean>(code, message))
     }
 
