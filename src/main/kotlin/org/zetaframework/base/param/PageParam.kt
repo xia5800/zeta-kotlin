@@ -14,19 +14,23 @@ import io.swagger.annotations.ApiModelProperty
  */
 @ApiModel(description = "分页查询参数")
 class PageParam<T> private constructor(){
-
+    /** 当前页 */
     @ApiModelProperty(value = "当前页", example = "0")
     var page: Long = 0
 
+    /** 每页显示条数 */
     @ApiModelProperty(value = "每页显示条数", example = "10")
     var limit: Long = 10
 
+    /** 查询条件 */
     @ApiModelProperty(value = "查询条件")
     var model: T? = null
 
+    /** 排序字段 */
     @ApiModelProperty(value = "排序字段", allowableValues = "id,createTime,updateTime", example = "id")
     var sort: String? = null
 
+    /** 排序规则 */
     @ApiModelProperty(value = "排序规则", allowableValues = "desc,asc", example = "desc")
     var order: String? = null
 

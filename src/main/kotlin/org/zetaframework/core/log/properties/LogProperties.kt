@@ -3,7 +3,7 @@ package org.zetaframework.core.log.properties
 import org.springframework.boot.context.properties.ConfigurationProperties
 
 /**
- * 系统日志配置类
+ * 系统日志配置参数
  *
  * @author gcc
  */
