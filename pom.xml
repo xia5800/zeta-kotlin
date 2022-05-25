@@ -25,7 +25,6 @@
         <mybatis-plus.version>3.4.3.3</mybatis-plus.version>
         <druid.version>1.2.5</druid.version>
         <sa-token.version>1.30.0</sa-token.version>
-        <fastjson.version>2.0.2</fastjson.version>
         <knife4j.version>2.0.9</knife4j.version>
         <hutool.version>5.8.0</hutool.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
@@ -156,11 +155,6 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
         </dependency>
 
         <!--

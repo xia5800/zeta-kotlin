@@ -1,7 +1,6 @@
 package org.zetaframework.core.redis
 
 import cn.hutool.core.text.StrPool
-import com.alibaba.fastjson.parser.ParserConfig
 import org.springframework.cache.CacheManager
 import org.springframework.cache.annotation.EnableCaching
 import org.springframework.context.annotation.Bean
@@ -15,7 +14,6 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializationContext
 import org.springframework.data.redis.serializer.StringRedisSerializer
 import org.zetaframework.core.jackson.KtObjectMapper
-import org.zetaframework.core.redis.serializer.FastJsonRedisSerializer
 import org.zetaframework.core.redis.util.RedisUtil
 import java.time.Duration
 
@@ -106,21 +104,4 @@ class RedisConfiguration {
             it.setObjectMapper(KtObjectMapper.instance)
         }
     }
-
-    /**
-     * 获取配置好的FastJsonRedisSerializer对象
-     *
-     * @return
-     */
-    private fun getFastJsonRedisSerializer(): FastJsonRedisSerializer<Any> {
-        ParserConfig.getGlobalInstance().isAutoTypeSupport = true
-
-        // 白名单
-        val globalInstance = ParserConfig.getGlobalInstance().also {
-            it.addAccept("com.zeta")
-            it.addAccept("org.zetaframework")
-        }
-        return FastJsonRedisSerializer(Any::class.java);
-    }
-
 }
