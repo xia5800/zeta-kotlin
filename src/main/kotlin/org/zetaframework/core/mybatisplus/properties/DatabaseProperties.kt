@@ -2,6 +2,7 @@ package org.zetaframework.core.mybatisplus.properties
 
 import com.baomidou.mybatisplus.annotation.DbType
 import org.springframework.boot.context.properties.ConfigurationProperties
+import org.zetaframework.core.mybatisplus.enum.UserIdType
 
 /**
  * 数据源配置参数
@@ -28,7 +29,10 @@ class DatabaseProperties(
     var optimizeJoin: Boolean = true,
 
     /** hutoolId生成配置 */
-    var hutoolId: HutoolId = HutoolId()
+    var hutoolId: HutoolId = HutoolId(),
+
+    /** 用户id类型, 关系到数据库表中create_by、update_by。ContextUtil中的userId类型 */
+    var userIdType: UserIdType = UserIdType.Long
 ) {
 
     data class HutoolId (

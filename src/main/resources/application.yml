@@ -29,6 +29,8 @@ zeta:
       workerId: 0
       # 数据中心ID (0-31) 单机配置0 即可。 集群部署，根据情况每个实例自增即可。
       dataCenterId: 0
+    # 用户表id类型, 可选值：Int,Long,String。关系到数据库表中create_by、update_by。ContextUtil中的userId类型
+    userIdType: Long
   # swagger 文档通用配置
   swagger:
     # 标题

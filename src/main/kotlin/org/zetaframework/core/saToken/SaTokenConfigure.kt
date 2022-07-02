@@ -26,6 +26,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.enums.ErrorCodeEnum
+import org.zetaframework.core.mybatisplus.enum.UserIdType
+import org.zetaframework.core.mybatisplus.properties.DatabaseProperties
 import org.zetaframework.core.saToken.enums.TokenTypeEnum
 import org.zetaframework.core.saToken.interceptor.KtRouteInterceptor
 import org.zetaframework.core.saToken.properties.IgnoreProperties
@@ -41,7 +43,8 @@ import org.zetaframework.core.utils.JSONUtil
 @EnableConfigurationProperties(IgnoreProperties::class, TokenProperties::class)
 class SaTokenConfigure(
     private val ignoreProperties: IgnoreProperties,
-    private val tokenProperties: TokenProperties
+    private val tokenProperties: TokenProperties,
+    private val dataBaseProperties: DatabaseProperties
 ): WebMvcConfigurer {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
@@ -94,9 +97,12 @@ class SaTokenConfigure(
                 StpUtil.renewTimeout(tokenProperties.expireTime)
             }
             // 获取用户id，并设置到ThreadLocal中。（mybatisplus自动填充用到）
-            ContextUtil.setUserId(StpUtil.getLoginIdAsLong())
+            when (dataBaseProperties.userIdType) {
+                UserIdType.Long -> ContextUtil.setUserId(StpUtil.getLoginIdAsLong())
+                UserIdType.Int -> ContextUtil.setSubjectId(StpUtil.getLoginIdAsInt())
+                UserIdType.String -> ContextUtil.setUserId(StpUtil.getLoginIdAsString())
+            }
             ContextUtil.setToken(StpUtil.getTokenValue())
-            // 也可以用这种写法 ContextUtil["token"] = StpUtil.getTokenValue()
         })
     }
 
