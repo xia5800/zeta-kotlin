@@ -16,7 +16,7 @@ import java.io.Serializable
  */
 abstract class StateEntity<T: Serializable, U: Serializable>(
     /** 状态 */
-    @ApiModelProperty("状态")
-    @TableField("state")
+    @ApiModelProperty(value = "状态")
+    @TableField(value = "state")
     open var state: U? = null
 ): Entity<T>()
