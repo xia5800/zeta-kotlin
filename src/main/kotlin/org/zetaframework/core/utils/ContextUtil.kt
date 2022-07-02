@@ -88,6 +88,11 @@ object ContextUtil {
 
     /**
      * 设置用户ID
+     */
+    fun setSubjectId(userId: Int) = set("subjectId", userId)
+
+    /**
+     * 设置用户ID
      *
      * @param userId
      */
@@ -113,6 +118,13 @@ object ContextUtil {
      * @return String
      */
     fun getUserIdStr(): String = get("userId", String::class.java, "")
+
+    /**
+     * 获取用户ID
+     *
+     * @return Int
+     */
+    fun getSubjectId(): Int = get("setSubjectId", Int::class.java, 0)
     /*********************** 用户id end ***********************/
 
 

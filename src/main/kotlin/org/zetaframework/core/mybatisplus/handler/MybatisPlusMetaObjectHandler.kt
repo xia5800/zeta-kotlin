@@ -69,8 +69,11 @@ class MybatisPlusMetaObjectHandler(private val uidGenerator: UidGenerator): Meta
                     "java.lang.Long" -> {
                         setFieldValByName(SuperEntity.CREATED_BY, ContextUtil.getUserId(), metaObject)
                     }
+                    "java.lang.Integer" -> {
+                        setFieldValByName(SuperEntity.CREATED_BY, ContextUtil.getSubjectId(), metaObject)
+                    }
                     else -> {
-                        logger.warn("【${SuperEntity.CREATED_BY_COLUMN}】字段仅支持String和Long类型填充，不是这两种类型的请插入时手动设置值")
+                        logger.warn("【${SuperEntity.CREATED_BY_COLUMN}】字段仅支持String、Long、Integer类型填充，不是这三种类型的请插入时手动设置值")
                     }
                 }
             }
@@ -104,8 +107,11 @@ class MybatisPlusMetaObjectHandler(private val uidGenerator: UidGenerator): Meta
                     "java.lang.Long" -> {
                         setFieldValByName(Entity.UPDATED_BY, ContextUtil.getUserId(), metaObject)
                     }
+                    "java.lang.Integer" -> {
+                        setFieldValByName(Entity.UPDATED_BY, ContextUtil.getSubjectId(), metaObject)
+                    }
                     else -> {
-                        logger.warn("【${Entity.UPDATE_TIME_COLUMN}】字段仅支持String和Long类型填充，不是这两种类型的请更新时手动设置值")
+                        logger.warn("【${Entity.UPDATED_BY_COLUMN}】字段仅支持String、Long、Integer类型填充，不是这三种类型的请插入时手动设置值")
                     }
                 }
             }
@@ -128,8 +134,11 @@ class MybatisPlusMetaObjectHandler(private val uidGenerator: UidGenerator): Meta
                     "java.lang.Long" -> {
                         setFieldValByName(SuperEntity.FIELD_ID, uidGenerator.getUid(), metaObject)
                     }
+                    "java.lang.Integer" -> {
+                        // 不处理，数据库id设置为自增即可
+                    }
                     else -> {
-                        logger.warn("【${SuperEntity.FIELD_ID}】字段仅支持String和Long类型填充，不是这两种类型的请手动设置值")
+                        logger.warn("【${SuperEntity.FIELD_ID}】字段仅支持String、Long、Integer类型填充，不是这三种类型的请插入时手动设置值")
                     }
                 }
             }
