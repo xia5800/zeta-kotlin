@@ -3,16 +3,20 @@ package org.zetaframework.core.saToken.aspect
 import cn.dev33.satoken.exception.NotPermissionException
 import cn.dev33.satoken.stp.StpUtil
 import cn.dev33.satoken.util.SaFoxUtil
+import cn.hutool.core.text.AntPathMatcher
 import cn.hutool.core.util.StrUtil
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.reflect.MethodSignature
 import org.springframework.stereotype.Component
+import org.springframework.web.context.request.RequestContextHolder
+import org.springframework.web.context.request.ServletRequestAttributes
 import org.zetaframework.core.saToken.annotation.PreAuth
 import org.zetaframework.core.saToken.annotation.PreCheckPermission
 import org.zetaframework.core.saToken.annotation.PreCheckRole
 import org.zetaframework.core.saToken.annotation.PreMode
+import org.zetaframework.core.saToken.properties.IgnoreProperties
 import java.lang.reflect.AnnotatedElement
 import java.lang.reflect.Method
 
@@ -23,8 +27,10 @@ import java.lang.reflect.Method
  */
 @Aspect
 @Component
-class PreCheckAspect {
+class PreCheckAspect(private val ignoreProperties: IgnoreProperties) {
     companion object {
+        private val ANT_PATH_MATCHER = AntPathMatcher()
+
         const val POINTCUT_SIGN: String =
             "@within(org.zetaframework.core.saToken.annotation.PreCheckPermission) || " +
             "@annotation(org.zetaframework.core.saToken.annotation.PreCheckPermission) || " +
@@ -54,6 +60,11 @@ class PreCheckAspect {
             val clazzAnnotation: PreAuth = clazz.getAnnotation(PreAuth::class.java)
             enabled = clazzAnnotation.enabled
             replace = clazzAnnotation.replace
+        }
+
+        // 判断路由是否放行路由
+        if(isIgnoreToken()) {
+            enabled = false
         }
 
         // 鉴权
@@ -153,5 +164,24 @@ class PreCheckAspect {
             }.toTypedArray()
         }
         return result
+    }
+
+    /**
+     * 是否是saToken放行路由
+     *
+     * @return boolean
+     */
+    private fun isIgnoreToken(): Boolean {
+        val attributes = RequestContextHolder.getRequestAttributes() as ServletRequestAttributes?
+        // 获取当前访问的路由。获取不到直接return false
+        return attributes?.request?.let {
+            val path = it.requestURI
+            // 判断当前访问的路由，是否是saToken放行路由.
+            // ps:这里对不熟悉kotlin的人来说可能有点难以理解。 看上面↑↑↑ let{ }块的最后一行代码即为当前块的返回值
+            // 所以这里的stream().anyMatch()方法返回的true或者false值，就是let{}块的返回值，同时也是这个方法的返回值
+            ignoreProperties.getNotMatchUrl().any { url ->
+                path.startsWith(url) || ANT_PATH_MATCHER.match(url, path)
+            }
+        } ?: false
     }
 }
