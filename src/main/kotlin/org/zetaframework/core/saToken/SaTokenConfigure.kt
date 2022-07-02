@@ -62,13 +62,13 @@ class SaTokenConfigure(
     }
 
     /**
-     * saToken跨域配置
+     * SaToken过滤器[前置函数]：在每次[认证函数]之前执行
      *
      * 说明：
      * saToken拦截的接口的跨域配置
      */
     private val beforeAuth: SaFilterAuthStrategy = SaFilterAuthStrategy {
-        // ---------- 设置跨域响应头 ----------
+        // saToken跨域配置
         SaHolder.getResponse()
             .setHeader("Access-Control-Allow-Origin", "*")
             .setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH")
@@ -80,16 +80,45 @@ class SaTokenConfigure(
     }
 
     /**
+     * SaToken过滤器[认证函数]: 每次请求都会执行
+     *
+     * 说明：
+     * saToken接口拦截并处理
+     */
+    private val auth: SaFilterAuthStrategy = SaFilterAuthStrategy {
+        // 需要登录认证的路由:所有, 排除登录认证的路由:/api/login、swagger等
+        SaRouter.match("/**").check(SaFunction {
+            StpUtil.checkLogin()
+            // token续期
+            if (tokenProperties.renew) {
+                StpUtil.renewTimeout(tokenProperties.expireTime)
+            }
+            // 获取用户id，并设置到ThreadLocal中。（mybatisplus自动填充用到）
+            ContextUtil.setUserId(StpUtil.getLoginIdAsLong())
+            ContextUtil.setToken(StpUtil.getTokenValue())
+            // 也可以用这种写法 ContextUtil["token"] = StpUtil.getTokenValue()
+        })
+    }
+
+    /**
      * 拦截器配置
+     *
+     * 说明：
+     * 可以在这里使用[拦截器鉴权](https://sa-token.dev33.cn/doc/index.html#/use/route-check)
+     * 针对某个接口，某些接口单独进行权限校验
      * @param registry InterceptorRegistry
      */
     override fun addInterceptors(registry: InterceptorRegistry) {
         // sa  路由权限配置
         registry.addInterceptor(KtRouteInterceptor { req: SaRequest, res: SaResponse, handler: Any? ->
             // 自定义路由拦截
-            SaRouter.match("/**").notMatch(ignoreProperties.baseUrl).notMatch(ignoreProperties.ignoreUrl)
-                .check(SaFunction { this.checkRequest(req) })
-        }).addPathPatterns("/**")
+            SaRouter.match("/**").check(SaFunction { this.checkRequest(req) })
+
+            // 其它拦截器..
+
+            // 举个栗子：/api/user/**相关的接口，必须有user角色才能访问
+            // SaRouter.match("/api/user/**").check(SaFunction { StpUtil.checkRole("user") })
+        }).addPathPatterns("/**").excludePathPatterns(ignoreProperties.getNotMatchUrl())
     }
 
     /**
@@ -98,34 +127,14 @@ class SaTokenConfigure(
      */
     @Bean
     fun saServletFilter(): SaServletFilter {
-        val excludeList = ignoreProperties.baseUrl
-
-        if (ignoreProperties.ignoreUrl.isNotEmpty()) {
-            // 如果存在 忽略鉴权的地址
-            excludeList.addAll(ignoreProperties.ignoreUrl)
-        }
-
         return SaServletFilter()
             // 指定拦截路由
             .addInclude("/**")
             // 指定放行路由
-            .setExcludeList(excludeList)
-            .setAuth {
-                // 需要登录认证的路由:所有, 排除登录认证的路由:/api/login、swagger等
-                SaRouter.match("/**").check(SaFunction {
-                    StpUtil.checkLogin()
-                    // token续期
-                    if (tokenProperties.renew) {
-                        StpUtil.renewTimeout(tokenProperties.expireTime)
-                    }
-                    // 获取用户id，并设置到ThreadLocal中。（mybatisplus自动填充用到）
-                    ContextUtil.setUserId(StpUtil.getLoginIdAsLong())
-                    ContextUtil.setToken(StpUtil.getTokenValue())
-                    // 也可以用这种写法 ContextUtil["token"] = StpUtil.getTokenValue()
-                })
-            }
-            .setError(this::returnFail)
+            .setExcludeList(ignoreProperties.getNotMatchUrl())
             .setBeforeAuth(beforeAuth)
+            .setAuth(auth)
+            .setError(this::returnFail)
     }
 
 

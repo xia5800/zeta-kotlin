@@ -32,4 +32,14 @@ class IgnoreProperties {
     /** 忽略鉴权的地址 */
     var ignoreUrl: MutableList<String> = mutableListOf("/**/noToken/**")
 
+
+    /**
+     * 获取saToken放行路由
+     */
+    fun getNotMatchUrl(): MutableList<String> {
+        return mutableListOf<String>().apply {
+            addAll(baseUrl)
+            addAll(ignoreUrl)
+        }
+    }
 }
