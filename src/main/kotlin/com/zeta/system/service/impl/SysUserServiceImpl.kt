@@ -45,32 +45,17 @@ class SysUserServiceImpl(
      */
     @Transactional(rollbackFor = [Exception::class])
     override fun saveUser(saveDTO: SysUserSaveDTO): Boolean {
-        // 设置用户状态
-        saveDTO.state = UserStateEnum.NORMAL.code
         // 保存用户
         val user = BeanUtil.toBean(saveDTO, SysUser::class.java)
         user.password = encodePassword(saveDTO.password!!)
         user.readonly = false
+        user.state = UserStateEnum.NORMAL.code
         if(!this.save(user)) {
             throw BusinessException("新增用户失败")
         }
 
-        // 关联角色
-        if(CollUtil.isNotEmpty(saveDTO.roleIds)) {
-            // 删除用户角色关联
-            userRoleService.remove(KtQueryWrapper(SysUserRole()).eq(SysUserRole::userId, user.id))
-
-            // 构造保存条件
-            val batchList = mutableListOf<SysUserRole>()
-            saveDTO.roleIds!!.forEach {
-                batchList.add(SysUserRole(user.id, it))
-            }
-            // 保存用户与角色的关联关系
-            if(!userRoleService.saveBatch(batchList)) {
-                throw BusinessException("用户角色关联失败")
-            }
-        }
-        return true
+        // 删除并重新关联角色
+        return userRoleService.saveUserRole(user.id!!, saveDTO.roleIds!!)
     }
 
     /**
@@ -86,21 +71,8 @@ class SysUserServiceImpl(
             throw BusinessException("修改用户失败")
         }
 
-        // 删除用户角色关联
-        userRoleService.remove(KtQueryWrapper(SysUserRole()).eq(SysUserRole::userId, user.id))
-        // 关联角色
-        if(CollUtil.isNotEmpty(updateDTO.roleIds)) {
-            // 构造保存条件
-            val batchList = mutableListOf<SysUserRole>()
-            updateDTO.roleIds!!.forEach {
-                batchList.add(SysUserRole(user.id, it))
-            }
-            // 保存用户与角色的关联关系
-            if(!userRoleService.saveBatch(batchList)) {
-                throw BusinessException("用户角色关联失败")
-            }
-        }
-        return true
+        // 删除并重新关联角色
+        return userRoleService.saveUserRole(user.id!!, updateDTO.roleIds)
     }
 
     /**
@@ -132,11 +104,10 @@ class SysUserServiceImpl(
         val roleList = userRoleService.listByUserIds(userIds)
 
         // 处理返回值
-        var result: Map<Long, List<SysRoleDTO>> = mutableMapOf();
+        var result: Map<Long, List<SysRoleDTO>> = mutableMapOf()
         if(CollUtil.isNotEmpty(roleList)) {
             // 处理得到 Map<用户id, 用户角色列表>
             result = roleList.filter { it.userId != null }.groupBy { it.userId!! }
-            // 相当于java的 roleList.stream().collect(Collectors.groupingBy { SysRoleDTO::userId })
         }
         return result
     }

@@ -51,8 +51,4 @@ data class SysUserSaveDTO(
     @ApiModelProperty("角色id列表")
     @get:NotEmpty(message = "角色不能为空")
     var roleIds: List<Long>? = null,
-
-    /** 状态 */
-    @JsonIgnore
-    var state: Int? = null,
 )
