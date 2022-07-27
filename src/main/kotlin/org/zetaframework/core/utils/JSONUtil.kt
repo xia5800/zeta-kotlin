@@ -35,7 +35,7 @@ object JSONUtil{
 
     init {
         // 禁止:将日期写为时间戳，解决日期格式化问题
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
 
         // 自定义扩展
         val javaTimeModule = JavaTimeModule()

@@ -52,7 +52,7 @@ class SysLogAspect(private val context: ApplicationContext) {
     @Before(value = "SysLogAspect()")
     fun doBefore(joinPoint: JoinPoint) {
         // 记录操作开始时间
-        START_TIME.set(System.currentTimeMillis());
+        START_TIME.set(System.currentTimeMillis())
     }
 
     /**

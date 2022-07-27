@@ -27,6 +27,7 @@ abstract class SuperSimpleController<S: IService<Entity>, Entity> : BaseControll
      */
     override fun getEntityClass(): Class<Entity> {
         if (clazz == null) {
+            // 获取当前类的第二个泛型的值(下标从0开始)。 即Entity的值
             clazz =
                 (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<Entity>
         }

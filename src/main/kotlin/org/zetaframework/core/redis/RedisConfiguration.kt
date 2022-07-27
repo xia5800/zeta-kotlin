@@ -45,7 +45,7 @@ class RedisConfiguration {
             .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(stringRedisSerializer))
             // 使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值
             .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jsonRedisSerializer))
-            // 缓存有效期
+            // 缓存有效期 // TODO 应该从配置文件中读取
             .entryTtl(Duration.ofDays(1))
         return RedisCacheManager.builder(connectionFactory).cacheDefaults(configuration).build()
     }
@@ -81,7 +81,7 @@ class RedisConfiguration {
     fun stringRedisTemplate(connectionFactory: RedisConnectionFactory): StringRedisTemplate {
         val stringRedisTemplate = StringRedisTemplate()
         stringRedisTemplate.setConnectionFactory(connectionFactory)
-        return stringRedisTemplate;
+        return stringRedisTemplate
     }
 
     /**

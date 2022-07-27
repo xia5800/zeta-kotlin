@@ -45,11 +45,11 @@ class ApiResult<T> {
     }
 
     constructor(code: Int? = ErrorCodeEnum.SUCCESS.code, message: String? = null, data: T? = null, error: String? = null) {
-        this.code = code;
-        this.message = message;
+        this.code = code
+        this.message = message
         this.data = data
-        this.error = error;
-        this.defExec = false;
+        this.error = error
+        this.defExec = false
     }
 
     fun setMessage(message: String?): ApiResult<T> {

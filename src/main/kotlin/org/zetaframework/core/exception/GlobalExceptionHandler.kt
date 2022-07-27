@@ -181,7 +181,7 @@ class GlobalExceptionHandler {
         var code: Int = ErrorCodeEnum.FAIL.code
         var message: String? = ""
         if(ex is NotLoginException) {
-            return notLoginExceptionHandler(ex);
+            return notLoginExceptionHandler(ex)
         } else if(ex is NotRoleException || ex is NotPermissionException) {
             message = ErrorCodeEnum.FORBIDDEN.msg
             code = ErrorCodeEnum.FORBIDDEN.code

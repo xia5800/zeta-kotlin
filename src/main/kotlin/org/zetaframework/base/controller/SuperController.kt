@@ -31,6 +31,7 @@ abstract class SuperController<S: IService<Entity>, Id: Serializable, Entity, Qu
      */
     override fun getEntityClass(): Class<Entity> {
         if (super.clazz == null) {
+            // 获取当前类的第三个泛型的值(下标从0开始)。 即Entity的值
             super.clazz =
                 (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[2] as Class<Entity>
         }

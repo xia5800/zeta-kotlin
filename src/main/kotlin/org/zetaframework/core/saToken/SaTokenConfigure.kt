@@ -61,7 +61,7 @@ class SaTokenConfigure(
             .allowedHeaders("*")
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
             .allowCredentials(true)
-            .maxAge(3600L);
+            .maxAge(3600L)
     }
 
     /**
@@ -216,7 +216,7 @@ class SaTokenConfigure(
      * 说明：自定义路由拦截demo
      */
     private fun checkRequest(request: SaRequest) {
-        logger.info("本次请求的请求路径为: {}", request.requestPath);
+        logger.info("本次请求的请求路径为: {}", request.requestPath)
         // 获取请求头中的xx参数，进行校验...
     }
 

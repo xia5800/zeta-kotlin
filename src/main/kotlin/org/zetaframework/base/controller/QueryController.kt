@@ -35,7 +35,7 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 10, author = "AutoGenerate")
     @ApiOperation(value = "分页查询")
-    @SysLog
+    @SysLog(response = false)
     @PostMapping("/page")
     fun page(@RequestBody param: PageParam<QueryParam>): ApiResult<PageResult<Entity>> {
         return success(super.query(param))
@@ -50,7 +50,7 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 20, author = "AutoGenerate")
     @ApiOperation(value = "批量查询")
-    @SysLog
+    @SysLog(response = false)
     @PostMapping("/query")
     fun list(@RequestBody param: QueryParam): ApiResult<MutableList<Entity>> {
         return success(handlerBatchQuery(param))
@@ -66,7 +66,7 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
     fun handlerBatchQuery(param: QueryParam): MutableList<Entity> {
         val entity = BeanUtil.toBean(param, getEntityClass())
         // 批量查询
-        val list = getBaseService().list(QueryWrapper(entity))
+        val list = getBaseService().list(QueryWrapper<Entity>(entity))
         // 处理批量查询数据
         handlerBatchData(list)
         return list

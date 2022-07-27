@@ -1,5 +1,6 @@
 package org.zetaframework.base.result
 
+import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 
 /**
@@ -7,6 +8,7 @@ import io.swagger.annotations.ApiModelProperty
  *
  * @author gcc
  */
+@ApiModel(description = "分页查询返回结果")
 class PageResult<T> private constructor(){
 
     @ApiModelProperty(value = "当前页数据")

@@ -120,7 +120,7 @@ class MybatisPlusMetaObjectHandler(private val uidGenerator: UidGenerator): Meta
 
     /**
      * 填充主键
-      * @param metaObject MetaObject
+     * @param metaObject MetaObject
      */
     private fun fillId(metaObject: MetaObject) {
         // 有Id字段，且字段值为null
