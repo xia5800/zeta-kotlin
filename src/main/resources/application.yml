@@ -71,8 +71,6 @@ zeta:
   # websocket配置
   websocket:
     enabled: true
-    # 心跳间隔 单位：毫秒 设为0则不发送心跳
-    heartbeat: 10000
   # 文件存储配置
   file:
     # 文件存储策略 LOCAL、ALI_OSS、MINIO

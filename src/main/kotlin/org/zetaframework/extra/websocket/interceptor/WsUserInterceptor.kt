@@ -49,7 +49,7 @@ class WsUserInterceptor(private val applicationContext: ApplicationContext) : Ch
                 StompCommand.DISCONNECT -> {
                     val wsUser = accessor.user
                     // 说明：临时解决客户端断开连接，触发两次DISCONNECT问题
-                    if (wsUser != null && accessor.messageHeaders.size == 6) {
+                    if (wsUser != null && accessor.messageHeaders.size == 5) {
                         // 发布一个用户离线事件，用户离线之后要做的事交给具体的业务去实现
                         applicationContext.publishEvent(WsUserEvent(wsUser as WsUser, WsUserTypeEnum.OFFLINE))
                     }
