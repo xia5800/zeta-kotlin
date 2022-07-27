@@ -19,7 +19,7 @@ class FileContext(private val fileStrategy: FileStrategy) {
 
     companion object {
         /** OSS支持的最大文件上传大小:  5GB */
-        private const val MAX_FILE_SIZE = 5 * 1024 * 1024
+        private const val MAX_FILE_SIZE = 5 * 1024 * 1024 * 1024L
     }
 
     /**
