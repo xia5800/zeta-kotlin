@@ -92,7 +92,7 @@ class SysUserController(private val roleMenuService: ISysRoleMenuService): Super
         if(ExistParam<SysUser, Long>("account", saveDTO.account).isExist(service)) {
             return fail("账号已存在")
         }
-        return success(service.saveUser(saveDTO));
+        return success(service.saveUser(saveDTO))
     }
 
 
@@ -103,7 +103,7 @@ class SysUserController(private val roleMenuService: ISysRoleMenuService): Super
      * @return ApiResult<Entity>
      */
     override fun handlerUpdate(updateDTO: SysUserUpdateDTO): ApiResult<Boolean> {
-        return success(service.updateUser(updateDTO));
+        return success(service.updateUser(updateDTO))
     }
 
     /**
@@ -122,6 +122,12 @@ class SysUserController(private val roleMenuService: ISysRoleMenuService): Super
             return fail("参数异常")
         }
 
+        // 判断用户是否允许修改
+        val user = service.getById(param.id) ?: return fail("用户不存在")
+        if(user.readonly != null && user.readonly == true) {
+            throw BusinessException("用户[${user.username}]禁止修改状态")
+        }
+
         // 修改状态
         return super.handlerUpdateState(param)
     }
@@ -133,9 +139,9 @@ class SysUserController(private val roleMenuService: ISysRoleMenuService): Super
      * @return R<Boolean>
      */
     override fun handlerDelete(id: Long): ApiResult<Boolean> {
+        val user = service.getById(id) ?: return success(true)
         // 判断用户是否允许删除
-        val user = service.getById(id)
-        if(user?.readonly != null && user.readonly == true) {
+        if(user.readonly != null && user.readonly == true) {
             throw BusinessException("用户[${user.username}]禁止删除")
         }
         return super.handlerDelete(id)
@@ -148,12 +154,11 @@ class SysUserController(private val roleMenuService: ISysRoleMenuService): Super
      * @return R<Boolean>
      */
     override fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> {
-        val userList = service.listByIds(ids)
-        if(userList.isEmpty()) {
-            userList.forEach { user ->
-                if(user.readonly != null && user.readonly == true) {
-                    throw BusinessException("用户[${user.username}]禁止删除")
-                }
+        val userList = service.listByIds(ids) ?: return success(true)
+        // 判断是否存在不允许删除的用户
+        userList.forEach { user ->
+            if(user.readonly != null && user.readonly == true) {
+                throw BusinessException("用户[${user.username}]禁止删除")
             }
         }
         return super.handlerBatchDelete(ids)
