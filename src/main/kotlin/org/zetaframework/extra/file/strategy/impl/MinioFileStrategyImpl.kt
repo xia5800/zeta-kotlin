@@ -42,15 +42,12 @@ class MinioFileStrategyImpl(
         }
 
         // 文件上传
-        val putObjectArgs = PutObjectArgs.builder()
+        minioClient.putObject(PutObjectArgs.builder()
             .bucket(minio.bucket)
             .contentType(file.contentType)
             .`object`(fileInfo.path)
             .stream(file.inputStream, file.size, PutObjectArgs.MIN_MULTIPART_SIZE.toLong())
-            .build()
-        val response = minioClient.putObject(putObjectArgs)
-        logger.info("minio文件上传结果：${JSONUtil.toJsonStr(response)}")
-
+            .build())
 
         // 设置文件详情
         fileInfo.bucket = minio.bucket
