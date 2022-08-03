@@ -48,17 +48,19 @@ class LimitAspect(private val redisUtil: RedisUtil) {
         val suffix: String = getRedisKey(limitAnnotation, methodName)
         val redisKey = "${limitAnnotation.prefix}:$suffix"
 
+        var limitResult = false
         try {
             // 获取限流情况
-            val limit = redisUtil.luaScriptLimit(redisKey, limitAnnotation.period, limitAnnotation.count)
-            if (!limit) {
-                // 触发限流
-                logger.info("触发接口限流")
-                throw LimitException(limitAnnotation.describe)
-            }
+            limitResult = redisUtil.luaScriptLimit(redisKey, limitAnnotation.period, limitAnnotation.count)
         } catch (e: Exception) {
-            logger.error("获取限流情况失败", e)
             // 获取限流情况失败
+            logger.error("获取限流情况失败", e)
+            throw LimitException(limitAnnotation.describe)
+        }
+
+        if (!limitResult) {
+            // 触发限流
+            logger.info("触发接口限流")
             throw LimitException(limitAnnotation.describe)
         }
 
