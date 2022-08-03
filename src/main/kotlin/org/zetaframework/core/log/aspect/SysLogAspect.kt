@@ -32,15 +32,12 @@ import javax.servlet.http.HttpServletResponse
 @Aspect
 class SysLogAspect(private val context: ApplicationContext) {
     companion object {
-        val logger: Logger = LoggerFactory.getLogger(this::class.java)
-        val START_TIME: ThreadLocal<Long> = ThreadLocal()
-
-        const val MAX_LENGTH = 65535
-        const val POINTCUT_SIGN: String =
-            "@annotation(org.zetaframework.core.log.annotation.SysLog)"
+        private val logger: Logger = LoggerFactory.getLogger(this::class.java)
+        private val START_TIME: ThreadLocal<Long> = ThreadLocal()
+        private const val MAX_LENGTH = 65535
     }
 
-    @Pointcut(POINTCUT_SIGN)
+    @Pointcut("@annotation(org.zetaframework.core.log.annotation.SysLog)")
     fun SysLogAspect() {}
 
 
@@ -91,10 +88,10 @@ class SysLogAspect(private val context: ApplicationContext) {
         val method = signature.method
         var sysLog: SysLog? = null
         // 方法上的@SysLog注解
-        if(method.isAnnotationPresent(SysLog::class.java)) {
+        if (method.isAnnotationPresent(SysLog::class.java)) {
             sysLog = method.getAnnotation(SysLog::class.java)
         }
-        if(sysLog == null || !sysLog.enabled) {
+        if (sysLog == null || !sysLog.enabled) {
             return
         }
 
@@ -116,7 +113,7 @@ class SysLogAspect(private val context: ApplicationContext) {
     private fun getSpendTime(): Long {
         // 记录结束时间
         var spendTime = 0L
-        if(START_TIME.get() != null) {
+        if (START_TIME.get() != null) {
             spendTime = System.currentTimeMillis() - START_TIME.get()
         }
         START_TIME.remove()
@@ -170,10 +167,10 @@ class SysLogAspect(private val context: ApplicationContext) {
         var params: String? = null
 
         val paramMap = ServletUtil.getParamMap(request)
-        if(paramMap.isNotEmpty()) {
+        if (paramMap.isNotEmpty()) {
             params = JSONUtil.toJsonStr(paramMap)
-        }else {
-            if(joinPoint.args.isNotEmpty()) {
+        } else {
+            if (joinPoint.args.isNotEmpty()) {
                 val paramList = mutableListOf<Any>()
                 joinPoint.args.forEach {
                     if (it !is HttpServletRequest
@@ -183,7 +180,7 @@ class SysLogAspect(private val context: ApplicationContext) {
                         paramList.add(it)
                     }
                 }
-                if(paramList.isNotEmpty()) {
+                if (paramList.isNotEmpty()) {
                     params = JSONUtil.toJsonStr(paramList)
                 }
             }
@@ -203,14 +200,14 @@ class SysLogAspect(private val context: ApplicationContext) {
 
         // 获取@Api的value值
         val api = joinPoint.target.javaClass.getAnnotation(Api::class.java)
-        if(api != null) {
+        if (api != null) {
             if(api.tags.isNotEmpty()) {
                 sb.append(api.tags[0]).append("-")
             }
         }
 
         // 获取@SysLog的value值
-        if(StrUtil.isNotBlank(sysLog.value)) {
+        if (StrUtil.isNotBlank(sysLog.value)) {
             sb.append(sysLog.value)
         } else {
             // 获取@ApiOperation的value值
@@ -218,13 +215,13 @@ class SysLogAspect(private val context: ApplicationContext) {
             val method = signature.method
             if (method.isAnnotationPresent(ApiOperation::class.java)) {
                 val apiOperation = method.getAnnotation(ApiOperation::class.java)
-                if(StrUtil.isNotBlank(apiOperation.value)) {
+                if (StrUtil.isNotBlank(apiOperation.value)) {
                     sb.append(apiOperation.value)
-                }else{
+                } else {
                     // @SysLog没有value值、@ApiOperation没有value值的情况下。显示方法名
                     sb.append(method.name)
                 }
-            }else{
+            } else {
                 // @SysLog没有value值、没有@ApiOperation注解的情况下。显示方法名
                 sb.append(method.name)
             }
@@ -253,7 +250,7 @@ class SysLogAspect(private val context: ApplicationContext) {
     private fun getException(exception: Throwable?, block: () -> Unit): String? = if(exception != null) {
         block.invoke()
         ExceptionUtil.stacktraceToString(exception, MAX_LENGTH)
-    }else {
+    } else {
         ""
     }
 }

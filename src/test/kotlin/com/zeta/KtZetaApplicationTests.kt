@@ -66,10 +66,10 @@ class KtZetaApplicationTests {
      */
     fun initMenu(): List<Long> {
         val batchList: MutableList<SysMenu> = mutableListOf()
-        var menuSort = 1;
+        var menuSort = 1
 
         // dashboard
-        var dashboardSort = 1;
+        var dashboardSort = 1
         val dashboardId = uidGenerator.getUid()
         batchList.add(buildMenu(dashboardId, 0L, menuSort++, "dashboard", "/dashboard", "carbon:dashboard"))
         // dashboard-分析页
@@ -80,7 +80,7 @@ class KtZetaApplicationTests {
         batchList.add(buildMenu(dashboardWorkbenchId, dashboardId, dashboardSort++, "工作台", "/dashboard/workbench", "icon-park-outline:workbench"))
 
         // 系统管理
-        var systemSort = 1;
+        var systemSort = 1
         val systemId = uidGenerator.getUid()
         batchList.add(buildMenu(systemId, 0L, menuSort++, "系统管理", "/system", "system-uicons:grid"))
         // 系统管理-用户管理

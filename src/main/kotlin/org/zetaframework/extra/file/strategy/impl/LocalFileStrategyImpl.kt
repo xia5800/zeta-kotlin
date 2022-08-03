@@ -28,7 +28,6 @@ class LocalFileStrategyImpl(
      *
      * @param file     文件对象
      * @param fileInfo 文件详情
-     * @param callback 回调方法。 kotlin的形参是val的，无法修改。故使用回调方法进行修改
      */
     override fun onUpload(file: MultipartFile, fileInfo: FileInfo) {
         val local = fileProperties.local
@@ -62,7 +61,7 @@ class LocalFileStrategyImpl(
         return try {
             // 获取本地文件
             FileUtil.getFile(absolutePath)
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             logger.error("获取本地文件异常：", e)
             null
         }

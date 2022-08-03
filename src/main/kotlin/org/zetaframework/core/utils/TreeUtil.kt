@@ -13,7 +13,8 @@ object TreeUtil {
 
     /**
      * buildTree
-     * @param treeList List<E>
+     *
+     * @param treeList List<TreeEntity>
      * @param isShowNullChildren Boolean 是否显示为空的children
      * @return List<E>
      */

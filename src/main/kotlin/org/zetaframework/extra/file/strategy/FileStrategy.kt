@@ -36,5 +36,7 @@ interface FileStrategy {
      *
      * @param path
      */
-    fun getObject(path: String): InputStream? { return null }
+    fun getObject(path: String): InputStream? {
+        return null
+    }
 }
