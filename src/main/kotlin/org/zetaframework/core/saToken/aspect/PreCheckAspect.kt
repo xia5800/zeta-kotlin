@@ -3,13 +3,13 @@ package org.zetaframework.core.saToken.aspect
 import cn.dev33.satoken.exception.NotPermissionException
 import cn.dev33.satoken.stp.StpUtil
 import cn.dev33.satoken.util.SaFoxUtil
-import cn.hutool.core.text.AntPathMatcher
 import cn.hutool.core.util.StrUtil
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.reflect.MethodSignature
 import org.springframework.stereotype.Component
+import org.springframework.util.AntPathMatcher
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
 import org.zetaframework.core.saToken.annotation.PreAuth
