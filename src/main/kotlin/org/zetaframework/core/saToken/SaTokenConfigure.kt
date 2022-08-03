@@ -99,7 +99,7 @@ class SaTokenConfigure(
             // 获取用户id，并设置到ThreadLocal中。（mybatisplus自动填充用到）
             when (dataBaseProperties.userIdType) {
                 UserIdType.Long -> ContextUtil.setUserId(StpUtil.getLoginIdAsLong())
-                UserIdType.Int -> ContextUtil.setSubjectId(StpUtil.getLoginIdAsInt())
+                UserIdType.Int -> ContextUtil.setUserId(StpUtil.getLoginIdAsInt())
                 UserIdType.String -> ContextUtil.setUserId(StpUtil.getLoginIdAsString())
             }
             ContextUtil.setToken(StpUtil.getTokenValue())

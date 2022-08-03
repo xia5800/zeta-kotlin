@@ -87,44 +87,63 @@ object ContextUtil {
     /*********************** 用户id ***********************/
 
     /**
-     * 设置用户ID
+     * 设置用户ID (Int)
+     *
+     * @param userId Int
      */
     fun setSubjectId(userId: Int) = set("subjectId", userId)
 
     /**
-     * 设置用户ID
+     * 设置用户ID (Int)
      *
-     * @param userId
+     * @param userId Int
+     */
+    fun setUserId(userId: Int) = setSubjectId(userId)
+
+    /**
+     * 设置用户ID (Long)
+     *
+     * @param userId Long
      */
     fun setUserId(userId: Long) = set("userId", userId)
 
     /**
-     * 设置用户ID
+     * 设置用户ID (String)
      *
-     * @param userId
+     * @param userId String
      */
     fun setUserId(userId: String) = set("userId", userId)
 
     /**
-     * 获取用户ID
+     * 获取用户ID (Long)
      *
      * @return Long
      */
     fun getUserId(): Long = get("userId", Long::class.java, 0)
 
     /**
-     * 获取用户ID
+     * 获取用户ID (String)
      *
+     * 说明：如果userId获取不到，就获取subjectId
      * @return String
      */
-    fun getUserIdStr(): String = get("userId", String::class.java, "")
+    fun getUserIdStr(): String {
+        val userId = get("userId", String::class.java, "")
+        // 如果userId获取不到，就获取subjectId
+        return userId.ifBlank { getUserIdInt().toString() }
+    }
 
     /**
-     * 获取用户ID
+     * 获取用户ID (Int)
+     */
+    fun getUserIdInt(): Int = getSubjectId()
+
+    /**
+     * 获取用户ID (Int)
      *
      * @return Int
      */
-    fun getSubjectId(): Int = get("setSubjectId", Int::class.java, 0)
+    fun getSubjectId(): Int = get("subjectId", Int::class.java, 0)
     /*********************** 用户id end ***********************/
 
 

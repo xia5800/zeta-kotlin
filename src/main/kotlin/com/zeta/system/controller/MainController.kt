@@ -66,7 +66,7 @@ class MainController(
 
         // 查询用户, 因为账号已经判空过了所以这里直接param.account!!
         val user = service.getByAccount(param.account!!) ?: return fail("用户不存在")
-        // 设置用户id，方便记录日志的时候设置创建人。ps，这里有点问题，得判断配置文件`zeta.database.userIdType`的值是啥。
+        // 设置用户id，方便记录日志的时候设置创建人。
         ContextUtil.setUserId(user.id!!)
 
         // 判断密码
