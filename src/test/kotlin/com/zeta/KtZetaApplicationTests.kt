@@ -1,5 +1,6 @@
 package com.zeta
 
+import cn.dev33.satoken.secure.BCrypt
 import com.zeta.system.model.entity.*
 import com.zeta.system.model.enumeration.MenuTypeEnum
 import com.zeta.system.model.enumeration.SexEnum
@@ -8,7 +9,6 @@ import com.zeta.system.service.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.zetaframework.core.mybatisplus.generator.UidGenerator
 
 /**
@@ -34,8 +34,6 @@ class KtZetaApplicationTests {
     private lateinit var sysDictService: ISysDictService
     @Autowired
     private lateinit var sysDictItemService: ISysDictItemService
-    @Autowired
-    private lateinit var passwordEncoder: BCryptPasswordEncoder
 
     /**
      * 初始化数据库
@@ -211,7 +209,7 @@ class KtZetaApplicationTests {
      */
     fun initAdminUser(): Long {
         val userId = uidGenerator.getUid()
-        val passwordEncoder = passwordEncoder.encode("admin")
+        val passwordEncoder = BCrypt.hashpw("admin")
         userService.save(SysUser().apply {
             id = userId
             username = "zeta管理员"
