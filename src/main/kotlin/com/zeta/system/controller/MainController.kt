@@ -4,7 +4,7 @@ import cn.dev33.satoken.stp.StpUtil
 import cn.hutool.core.bean.BeanUtil
 import cn.hutool.core.util.StrUtil
 import com.wf.captcha.SpecCaptcha
-import com.zeta.common.constants.SystemRedisKeyConstants.CAPTCHA_KEY
+import com.zeta.common.cacheKey.CaptchaStringCacheKey
 import com.zeta.system.model.entity.SysUser
 import com.zeta.system.model.enumeration.UserStateEnum
 import com.zeta.system.model.param.LoginParam
@@ -24,9 +24,7 @@ import org.zetaframework.core.log.enums.LoginStateEnum
 import org.zetaframework.core.log.event.SysLoginEvent
 import org.zetaframework.core.log.model.SysLoginLogDTO
 import org.zetaframework.core.redis.annotation.Limit
-import org.zetaframework.core.redis.util.RedisUtil
 import org.zetaframework.core.utils.ContextUtil
-import java.util.concurrent.TimeUnit
 import javax.servlet.http.HttpServletRequest
 
 /**
@@ -38,7 +36,7 @@ import javax.servlet.http.HttpServletRequest
 @RequestMapping("/api")
 class MainController(
     private val applicationContext: ApplicationContext,
-    private val redisUtil: RedisUtil
+    private val captchaCacheKey: CaptchaStringCacheKey
 ): SuperSimpleController<ISysUserService, SysUser>() {
 
     @Value("\${spring.profiles.active:prod}")
@@ -54,15 +52,14 @@ class MainController(
     @PostMapping("/login")
     fun login(@RequestBody @Validated param: LoginParam, request: HttpServletRequest): ApiResult<LoginResult> {
         // 验证验证码
-        val captchaKey = "${CAPTCHA_KEY}:${param.key}"
-        val verifyCode = redisUtil.get<String>(captchaKey)
+        val verifyCode = captchaCacheKey.get<String>(param.key)
         if (StrUtil.isBlank(verifyCode)) {
             return fail("验证码过期")
         }
         if (!param.code.equals(verifyCode, true)) {
             return fail("验证码错误")
         }
-        redisUtil.delete(captchaKey)
+        captchaCacheKey.delete(param.key)
 
         // 查询用户, 因为账号已经判空过了所以这里直接param.account!!
         val user = service.getByAccount(param.account!!) ?: return fail("用户不存在")
@@ -132,7 +129,7 @@ class MainController(
 
         // 验证码值缓存到redis, 5分钟有效
         val specCaptcha = SpecCaptcha(130, 48, 5)
-        redisUtil.setEx("${CAPTCHA_KEY}:${key}", specCaptcha.text(), 5, TimeUnit.MINUTES)
+        captchaCacheKey.set(key, specCaptcha.text())
 
         return if ("prod" === env) {
             // 如果生产环境，不返回验证码的值
