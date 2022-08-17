@@ -4,7 +4,6 @@ import cn.dev33.satoken.secure.BCrypt
 import cn.dev33.satoken.stp.StpInterface
 import cn.hutool.core.bean.BeanUtil
 import cn.hutool.core.collection.CollUtil
-import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import com.zeta.system.dao.SysUserMapper
 import com.zeta.system.model.dto.sysRole.SysRoleDTO
@@ -13,7 +12,6 @@ import com.zeta.system.model.dto.sysUser.SysUserUpdateDTO
 import com.zeta.system.model.entity.SysMenu
 import com.zeta.system.model.entity.SysRole
 import com.zeta.system.model.entity.SysUser
-import com.zeta.system.model.entity.SysUserRole
 import com.zeta.system.model.enumeration.UserStateEnum
 import com.zeta.system.service.ISysRoleMenuService
 import com.zeta.system.service.ISysUserRoleService
