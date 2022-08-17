@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.7</version>
+        <version>2.7.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -18,13 +18,12 @@
     </description>
 
     <properties>
-        <!-- 下次更新，将升级spring boot版本到 2.7.x 届时java版本将改为11 -->
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <kotlin.version>1.6.21</kotlin.version>
 
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <spring-boot-maven-plugin.version>2.6.7</spring-boot-maven-plugin.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <spring-boot-maven-plugin.version>2.7.2</spring-boot-maven-plugin.version>
 
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <druid.version>1.2.5</druid.version>
