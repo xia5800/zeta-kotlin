@@ -47,9 +47,6 @@ class SysRoleMenuController(private val menuService: ISysMenuService) : SuperSim
             menu.checked = roleMenuList.any {
                 it.menuId == menu.id
             }
-            // menu.checked = roleMenuList.stream().anyMatch {
-            //     it.menuId == menu.id
-            // }
         }
         return success(TreeUtil.buildTree(menuList))
     }
@@ -74,9 +71,10 @@ class SysRoleMenuController(private val menuService: ISysMenuService) : SuperSim
                 batchList.add(SysRoleMenu(roleMenuHandleDto.roleId, it))
             }
             if (!service.saveBatch(batchList)) return fail("操作失败")
-            // 删除用户角色、权限缓存
-            service.clearUserCache(roleMenuHandleDto.roleId!!)
         }
+
+        // 删除用户角色、权限缓存
+        service.clearUserCache(roleMenuHandleDto.roleId!!)
         return success(true)
     }
 

@@ -3,6 +3,8 @@ package com.zeta.system.service.impl
 import cn.hutool.core.collection.CollUtil
 import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
+import com.zeta.common.cacheKey.SaPermissionStringCacheKey
+import com.zeta.common.cacheKey.SaRoleStringCacheKey
 import com.zeta.system.dao.SysRoleMenuMapper
 import com.zeta.system.model.entity.SysMenu
 import com.zeta.system.model.entity.SysRoleMenu
@@ -10,9 +12,6 @@ import com.zeta.system.model.entity.SysUserRole
 import com.zeta.system.service.ISysRoleMenuService
 import com.zeta.system.service.ISysUserRoleService
 import org.springframework.stereotype.Service
-import org.zetaframework.core.constants.RedisKeyConstants.USER_PERMISSION_KEY
-import org.zetaframework.core.constants.RedisKeyConstants.USER_ROLE_KEY
-import org.zetaframework.core.redis.util.RedisUtil
 
 /**
  * 角色菜单 服务实现类
@@ -23,7 +22,8 @@ import org.zetaframework.core.redis.util.RedisUtil
 @Service
 class SysRoleMenuServiceImpl(
     private val userRoleService: ISysUserRoleService,
-    private val redisUtil: RedisUtil
+    private val saRoleStringCacheKey: SaRoleStringCacheKey,
+    private val saPermissionStringCacheKey: SaPermissionStringCacheKey
 ): ISysRoleMenuService, ServiceImpl<SysRoleMenuMapper, SysRoleMenu>() {
 
     /**
@@ -61,11 +61,9 @@ class SysRoleMenuServiceImpl(
         if(CollUtil.isNotEmpty(userRoleList)) {
             val userIds = userRoleList!!.map { it.userId }
             // 删除用户权限缓存
-            val permissionKeys: List<String> = userIds.map { "${USER_PERMISSION_KEY}:${it}" }
-            redisUtil.delete(permissionKeys)
+            saPermissionStringCacheKey.delete(userIds)
             // 删除用户角色缓存
-            val roleKeys: List<String> = userIds.map { "${USER_ROLE_KEY}:${it}" }
-            redisUtil.delete(roleKeys)
+            saRoleStringCacheKey.delete(userIds)
         }
     }
 }
