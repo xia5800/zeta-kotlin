@@ -14,12 +14,14 @@ import com.zeta.system.model.dto.sysUser.UserInfoDTO
 import com.zeta.system.model.entity.SysUser
 import com.zeta.system.model.enumeration.MenuTypeEnum
 import com.zeta.system.model.enumeration.UserStateEnum
+import com.zeta.system.model.param.ChangePasswordParam
 import com.zeta.system.model.param.ResetPasswordParam
 import com.zeta.system.model.param.SysUserQueryParam
 import com.zeta.system.service.ISysRoleMenuService
 import com.zeta.system.service.ISysUserService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
+import org.springframework.context.ApplicationContext
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import org.zetaframework.base.controller.extra.ExistenceController
@@ -29,9 +31,13 @@ import org.zetaframework.base.param.ExistParam
 import org.zetaframework.base.param.UpdateStateParam
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.exception.BusinessException
+import org.zetaframework.core.log.enums.LoginStateEnum
+import org.zetaframework.core.log.event.SysLoginEvent
+import org.zetaframework.core.log.model.SysLoginLogDTO
 import org.zetaframework.core.saToken.annotation.PreAuth
 import org.zetaframework.core.utils.ContextUtil
 import org.zetaframework.core.utils.TreeUtil
+import javax.servlet.http.HttpServletRequest
 
 /**
  * 用户 前端控制器
@@ -43,8 +49,10 @@ import org.zetaframework.core.utils.TreeUtil
 @PreAuth(replace = "sys:user")
 @RestController
 @RequestMapping("/api/system/user")
-class SysUserController(private val roleMenuService: ISysRoleMenuService):
-    SuperController<ISysUserService, Long, SysUser, SysUserQueryParam, SysUserSaveDTO, SysUserUpdateDTO>(),
+class SysUserController(
+    private val roleMenuService: ISysRoleMenuService,
+    private val applicationContext: ApplicationContext
+) : SuperController<ISysUserService, Long, SysUser, SysUserQueryParam, SysUserSaveDTO, SysUserUpdateDTO>(),
     UpdateStateController<SysUser, Long, Int>,
     ExistenceController<SysUser, Long>
 {
@@ -166,6 +174,39 @@ class SysUserController(private val roleMenuService: ISysRoleMenuService):
     }
 
     /**
+     * 修改自己的密码
+     *
+     * @param param ChangePasswordParam 修改密码的参数
+     * @return ApiResult<Boolean>
+     */
+    @ApiOperation("修改自己的密码")
+    @ResponseBody
+    @PutMapping("/changePwd")
+    fun changePwd(@RequestBody @Validated param: ChangePasswordParam, request: HttpServletRequest): ApiResult<Boolean> {
+        val user = service.getById(ContextUtil.getUserId()) ?: throw BusinessException("用户不存在")
+
+        // 旧密码是否正确
+        if (!service.comparePassword(param.oldPwd!!, user.password!!)) {
+            return fail("旧密码不正确", false)
+        }
+
+        // 修改成新密码
+        user.password = service.encodePassword(param.newPwd!!)
+        if (!service.updateById(user)) {
+            return fail("修改失败", false)
+        }
+
+        // 登出日志
+        applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginFail(
+            user.account ?: "", LoginStateEnum.LOGOUT, "修改密码", request
+        )))
+
+        // 下线
+        StpUtil.logout(user.id)
+        return success("修改成功", true)
+    }
+
+    /**
      * 重置密码
      *
      * @param param ResetPasswordParam 重置密码参数
@@ -173,7 +214,13 @@ class SysUserController(private val roleMenuService: ISysRoleMenuService):
      */
     @ApiOperation("重置密码")
     @PutMapping("/restPwd")
-    fun updatePwd(@RequestBody @Validated param: ResetPasswordParam): ApiResult<Boolean> {
+    fun updatePwd(@RequestBody @Validated param: ResetPasswordParam, request: HttpServletRequest): ApiResult<Boolean> {
+        val user = service.getById(param.id) ?: return success(true)
+        // 判断用户是否允许重置密码
+        if(user.readonly != null && user.readonly == true) {
+            throw BusinessException("用户[${user.username}]禁止重置密码")
+        }
+
         // 密码加密， 因为密码已经判空过了所以这里直接param.password!!
         param.password = service.encodePassword(param.password!!)
         val entity = BeanUtil.toBean(param, getEntityClass())
@@ -181,6 +228,11 @@ class SysUserController(private val roleMenuService: ISysRoleMenuService):
         // 修改密码
         val result = service.updateById(entity)
         if(result) {
+            // 登出日志
+            applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginFail(
+                user.account ?: "", LoginStateEnum.LOGOUT, "重置密码", request
+            )))
+
             // 让被修改密码的人下线
             StpUtil.logout(entity.id)
         }
