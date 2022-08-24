@@ -102,17 +102,16 @@ class MainController(
     @ApiOperation("注销登录")
     @GetMapping("/logout")
     fun logout(request: HttpServletRequest): ApiResult<Boolean> {
-        val user = service.getById(StpUtil.getLoginIdAsLong())
-        if(user != null) {
-            // 登出日志
-            applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginFail(
-                user.account ?: "", LoginStateEnum.LOGOUT, request
-            )))
-            // 注销登录
-            StpUtil.logout()
-            return success(true)
-        }
-        return fail("用户异常")
+        val user = service.getById(StpUtil.getLoginIdAsLong()) ?: return fail("用户异常")
+
+        // 登出日志
+        applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginFail(
+            user.account ?: "", LoginStateEnum.LOGOUT, request
+        )))
+
+        // 注销登录
+        StpUtil.logout()
+        return success(true)
     }
 
     /**
