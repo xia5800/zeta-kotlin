@@ -22,9 +22,9 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
-import org.zetaframework.base.controller.ExistenceController
+import org.zetaframework.base.controller.extra.ExistenceController
 import org.zetaframework.base.controller.SuperController
-import org.zetaframework.base.controller.UpdateStateController
+import org.zetaframework.base.controller.extra.UpdateStateController
 import org.zetaframework.base.param.ExistParam
 import org.zetaframework.base.param.UpdateStateParam
 import org.zetaframework.base.result.ApiResult
@@ -43,7 +43,8 @@ import org.zetaframework.core.utils.TreeUtil
 @PreAuth(replace = "sys:user")
 @RestController
 @RequestMapping("/api/system/user")
-class SysUserController(private val roleMenuService: ISysRoleMenuService): SuperController<ISysUserService, Long, SysUser, SysUserQueryParam, SysUserSaveDTO, SysUserUpdateDTO>(),
+class SysUserController(private val roleMenuService: ISysRoleMenuService):
+    SuperController<ISysUserService, Long, SysUser, SysUserQueryParam, SysUserSaveDTO, SysUserUpdateDTO>(),
     UpdateStateController<SysUser, Long, Int>,
     ExistenceController<SysUser, Long>
 {

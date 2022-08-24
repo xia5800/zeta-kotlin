@@ -1,7 +1,8 @@
-package org.zetaframework.base.controller
+package org.zetaframework.base.controller.extra
 
 import io.swagger.annotations.ApiOperation
 import org.springframework.web.bind.annotation.GetMapping
+import org.zetaframework.base.controller.BaseController
 import org.zetaframework.base.param.ExistParam
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.saToken.annotation.PreCheckPermission

@@ -1,4 +1,4 @@
-package org.zetaframework.base.controller
+package org.zetaframework.base.controller.curd
 
 import cn.hutool.core.bean.BeanUtil
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.zetaframework.base.controller.BaseController
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.saToken.annotation.PreCheckPermission

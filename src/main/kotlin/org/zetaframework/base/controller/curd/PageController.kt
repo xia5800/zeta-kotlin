@@ -1,8 +1,9 @@
-package org.zetaframework.base.controller
+package org.zetaframework.base.controller.curd
 
 import cn.hutool.core.bean.BeanUtil
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper
 import com.baomidou.mybatisplus.core.metadata.IPage
+import org.zetaframework.base.controller.BaseController
 import org.zetaframework.base.param.PageParam
 import org.zetaframework.base.result.PageResult
 

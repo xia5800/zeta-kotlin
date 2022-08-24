@@ -1,4 +1,4 @@
-package org.zetaframework.base.controller
+package org.zetaframework.base.controller.curd
 
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
 import io.swagger.annotations.ApiOperation
@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiParam
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
+import org.zetaframework.base.controller.BaseController
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.saToken.annotation.PreCheckPermission

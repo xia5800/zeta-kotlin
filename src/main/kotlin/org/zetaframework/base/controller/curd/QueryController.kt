@@ -1,4 +1,4 @@
-package org.zetaframework.base.controller
+package org.zetaframework.base.controller.curd
 
 import cn.hutool.core.bean.BeanUtil
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper
