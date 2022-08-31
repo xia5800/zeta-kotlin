@@ -14,15 +14,26 @@ import org.zetaframework.base.entity.SuperEntity
  */
 @ApiModel(description = "用户角色")
 @TableName(value = "sys_user_role")
-class SysUserRole(
+class SysUserRole(): SuperEntity<Long>() {
 
     /** 用户id */
     @ApiModelProperty("用户id")
     @TableField(value = "user_id")
-    var userId: Long? = null,
+    var userId: Long? = null
 
     /** 角色id */
     @ApiModelProperty("角色id")
     @TableField(value = "role_id")
-    var roleId: Long? = null,
-): SuperEntity<Long>()
+    var roleId: Long? = null
+
+
+    constructor(userId: Long?, roleId: Long?): this() {
+        this.userId = userId
+        this.roleId = roleId
+    }
+
+    override fun toString(): String {
+        return "SysUserRole(id=$id, createTime=$createTime, createdBy=$createdBy, userId=$userId, roleId=$roleId)"
+    }
+
+}

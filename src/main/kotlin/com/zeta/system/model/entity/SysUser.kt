@@ -73,4 +73,9 @@ class SysUser: StateEntity<Long, Int>(){
     @ApiModelProperty("用户角色")
     @TableField(exist = false)
     var roles: List<SysRoleDTO>? = null
+
+    override fun toString(): String {
+        return "SysUser(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, username=$username, account=$account, password=$password, email=$email, mobile=$mobile, sex=$sex, avatar=$avatar, birthday=$birthday, readonly=$readonly, deleted=$deleted)"
+    }
+
 }

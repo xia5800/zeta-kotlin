@@ -15,25 +15,30 @@ import org.zetaframework.base.entity.Entity
  */
 @ApiModel(description = "角色")
 @TableName(value = "sys_role")
-class SysRole(
+class SysRole: Entity<Long>() {
 
     /** 角色名 */
     @ApiModelProperty("角色名")
     @TableField(value = "name")
-    var name: String? = null,
+    var name: String? = null
 
     /** 角色编码 */
     @ApiModelProperty("角色编码")
     @TableField(value = "code")
-    var code: String? = null,
+    var code: String? = null
 
     /** 描述 */
     @ApiModelProperty("描述")
     @TableField(value = "describe_")
-    var describe: String? = null,
+    var describe: String? = null
 
     /** 是否删除 true or false  */
     @ApiModelProperty("是否删除 true or false")
     @TableLogic
-    var deleted: Boolean? = null,
-): Entity<Long>()
+    var deleted: Boolean? = null
+
+    override fun toString(): String {
+        return "SysRole(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, name=$name, code=$code, describe=$describe, deleted=$deleted)"
+    }
+
+}
