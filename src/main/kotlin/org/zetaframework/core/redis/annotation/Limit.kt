@@ -1,6 +1,6 @@
 package org.zetaframework.core.redis.annotation
 
-import org.zetaframework.core.redis.enmu.LimitType
+import org.zetaframework.core.redis.enmus.LimitType
 
 /**
  * # 接口限流

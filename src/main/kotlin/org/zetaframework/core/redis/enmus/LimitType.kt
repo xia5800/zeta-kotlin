@@ -1,4 +1,4 @@
-package org.zetaframework.core.redis.enmu
+package org.zetaframework.core.redis.enmus
 
 /**
  * 限流类型

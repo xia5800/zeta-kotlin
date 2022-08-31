@@ -2,7 +2,7 @@ package org.zetaframework.core.mybatisplus.properties
 
 import com.baomidou.mybatisplus.annotation.DbType
 import org.springframework.boot.context.properties.ConfigurationProperties
-import org.zetaframework.core.mybatisplus.enum.UserIdType
+import org.zetaframework.core.mybatisplus.enums.UserIdType
 
 /**
  * 数据源配置参数

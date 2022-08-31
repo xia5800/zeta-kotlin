@@ -1,4 +1,4 @@
-package org.zetaframework.core.mybatisplus.enum
+package org.zetaframework.core.mybatisplus.enums
 
 /**
  * 用户id类型

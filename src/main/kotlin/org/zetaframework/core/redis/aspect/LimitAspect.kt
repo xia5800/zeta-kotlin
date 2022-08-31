@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
 import org.zetaframework.core.redis.annotation.Limit
-import org.zetaframework.core.redis.enmu.LimitType
+import org.zetaframework.core.redis.enmus.LimitType
 import org.zetaframework.core.redis.exception.LimitException
 import org.zetaframework.core.redis.util.RedisUtil
 import org.zetaframework.core.utils.ContextUtil

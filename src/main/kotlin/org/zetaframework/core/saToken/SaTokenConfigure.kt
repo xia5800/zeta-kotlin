@@ -26,7 +26,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.enums.ErrorCodeEnum
-import org.zetaframework.core.mybatisplus.enum.UserIdType
+import org.zetaframework.core.mybatisplus.enums.UserIdType
 import org.zetaframework.core.mybatisplus.properties.DatabaseProperties
 import org.zetaframework.core.saToken.enums.TokenTypeEnum
 import org.zetaframework.core.saToken.interceptor.KtRouteInterceptor
