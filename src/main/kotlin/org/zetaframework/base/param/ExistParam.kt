@@ -14,21 +14,40 @@ import javax.validation.constraints.NotEmpty
  * @author gcc
  */
 @ApiModel(description = "验证存在")
-class ExistParam<Entity, Id>(
+class ExistParam<Entity, Id> private constructor() {
+
     /** 检查的字段名 */
     @ApiModelProperty("检查的字段")
     @get:NotEmpty(message = "检查的字段不能为空")
-    var field: String? = null,
+    var field: String? = null
 
     /** 检查的字段值 */
     @ApiModelProperty("检查字段的值")
     @get:NotEmpty(message = "检查的字段值不能为空")
-    var value: String? = null,
+    var value: String? = null
 
     /** 主键字段的值  修改时用到 */
     @ApiModelProperty("主键字段的值，修改时用到")
     var id: Id? = null
-) {
+
+    /**
+     * 验证存在参数 构造方法
+     */
+    constructor(field: String, value: String?, id: Id? = null): this() {
+        this.field = field
+        this.value = value
+        this.id = id
+    }
+
+    /**
+     * 验证存在参数 构造方法
+     * 支持SysUser::username这种写法
+     */
+    constructor(field: SFunction<Entity, *>, value: String?, id: Id? = null): this() {
+        this.field = field.javaClass.name
+        this.value = value
+        this.id = id
+    }
 
     /**
      * 验证是否存在
@@ -41,14 +60,15 @@ class ExistParam<Entity, Id>(
      * ```
      *     // 语法：
      *     ExistParam<实体类,主键字段类型>(检查的字段名, 检查的字段值, 主键字段的值).isExist(service, 主键字段名)
-     *     ExistParam<SysUser, Long>("account", "admin", "1").isExist(userService, "id")
+     *     ExistParam<SysUser, Long>("account", "admin", 1L).isExist(userService, "id")
+     *     ExistParam<SysUser, Long>(SysUser::username, "admin", 1L).isExist(userService, "id")
      *
      *     // 新增用户的时候，判断账号是否已存在
      *     val param = ExistParam<SysUser, Long>("account", "admin")
      *     if(param.isExist(userService)) { return fail("账号已存在") }
      *
      *     // 修改用户的时候，判断账号是否已存在
-     *     val param = ExistParam<SysUser, Long>("account", "admin", "1")
+     *     val param = ExistParam<SysUser, Long>("account", "admin", 1L)
      *     if(param.isExist(userService, "id")) { return fail("账号已存在") }
      *     等价于
      *     if(param.isExist(userService, SysUser::id)) { return fail("账号已存在") }
