@@ -17,17 +17,17 @@ import javax.validation.constraints.NotEmpty
 class ExistParam<Entity, Id> private constructor() {
 
     /** 检查的字段名 */
-    @ApiModelProperty("检查的字段")
+    @ApiModelProperty(value = "检查的字段", required = true)
     @get:NotEmpty(message = "检查的字段不能为空")
     var field: String? = null
 
     /** 检查的字段值 */
-    @ApiModelProperty("检查字段的值")
+    @ApiModelProperty(value = "检查字段的值", required = true)
     @get:NotEmpty(message = "检查的字段值不能为空")
     var value: String? = null
 
     /** 主键字段的值  修改时用到 */
-    @ApiModelProperty("主键字段的值，修改时用到")
+    @ApiModelProperty(value = "主键字段的值，修改时用到", required = false)
     var id: Id? = null
 
     /**
