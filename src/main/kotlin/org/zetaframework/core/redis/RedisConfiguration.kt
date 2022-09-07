@@ -10,10 +10,10 @@ import org.springframework.data.redis.cache.RedisCacheManager
 import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.redis.core.StringRedisTemplate
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializationContext
 import org.springframework.data.redis.serializer.StringRedisSerializer
 import org.zetaframework.core.jackson.KtObjectMapper
+import org.zetaframework.core.redis.serializer.CustomJackson2JsonRedisSerializer
 import org.zetaframework.core.redis.util.RedisUtil
 import java.time.Duration
 
@@ -99,8 +99,8 @@ class RedisConfiguration {
      *
      * @return
      */
-    private fun getRedisSerializer(): Jackson2JsonRedisSerializer<Any> {
-        return Jackson2JsonRedisSerializer(Any::class.java).also {
+    private fun getRedisSerializer(): CustomJackson2JsonRedisSerializer<Any> {
+        return CustomJackson2JsonRedisSerializer(Any::class.java).also {
             it.setObjectMapper(KtObjectMapper.instance)
         }
     }
