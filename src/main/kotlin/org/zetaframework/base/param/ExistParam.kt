@@ -3,10 +3,12 @@ package org.zetaframework.base.param
 import cn.hutool.core.util.StrUtil
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction
+import com.baomidou.mybatisplus.extension.kotlin.AbstractKtWrapper
 import com.baomidou.mybatisplus.extension.service.IService
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import javax.validation.constraints.NotEmpty
+import kotlin.reflect.KProperty
 
 /**
  * 验证存在参数
@@ -42,9 +44,11 @@ class ExistParam<Entity, Id> private constructor() {
     /**
      * 验证存在参数 构造方法
      * 支持SysUser::username这种写法
+     *
+     * @since 1.0.1 参考：[AbstractKtWrapper]的columnToString()方法
      */
-    constructor(field: SFunction<Entity, *>, value: String?, id: Id? = null): this() {
-        this.field = field.javaClass.name
+    constructor(field: KProperty<*>, value: String?, id: Id? = null): this() {
+        this.field = field.name
         this.value = value
         this.id = id
     }
@@ -80,9 +84,11 @@ class ExistParam<Entity, Id> private constructor() {
      * @param idField String?            主键字段, 例如：id, userId, user_id
      * @param isToUnderlineCase Boolean  检查的字段的字段是否驼峰转下划线
      * @return Boolean
+     *
+     * @since 1.0.1 参考：[AbstractKtWrapper]的columnToString()方法
      */
-    fun isExist(service: IService<Entity>, idField: SFunction<Entity, *>): Boolean {
-        return isExist(service, idField.javaClass.name, false)
+    fun isExist(service: IService<Entity>, idField: KProperty<*>): Boolean {
+        return isExist(service, idField.name, false)
     }
 
     fun isExist(service: IService<Entity>, idField: String? = "id", isToUnderlineCase: Boolean = true): Boolean {
