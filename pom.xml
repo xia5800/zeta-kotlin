@@ -27,9 +27,9 @@
 
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <druid.version>1.2.5</druid.version>
-        <sa-token.version>1.30.0</sa-token.version>
+        <sa-token.version>1.31.0</sa-token.version>
         <knife4j.version>2.0.9</knife4j.version>
-        <hutool.version>5.8.5</hutool.version>
+        <hutool.version>5.8.6</hutool.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <aliyun-oss.version>3.15.1</aliyun-oss.version>
         <minio.version>8.4.3</minio.version>
@@ -215,6 +215,14 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-extra</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-http</artifactId>
         </dependency>
         <!-- 图形验证码 -->
         <dependency>
