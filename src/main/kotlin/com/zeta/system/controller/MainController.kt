@@ -3,6 +3,7 @@ package com.zeta.system.controller
 import cn.dev33.satoken.stp.StpUtil
 import cn.hutool.core.bean.BeanUtil
 import cn.hutool.core.util.StrUtil
+import com.github.xiaoymin.knife4j.annotations.ApiSupport
 import com.wf.captcha.SpecCaptcha
 import com.zeta.common.cacheKey.CaptchaStringCacheKey
 import com.zeta.system.model.entity.SysUser
@@ -31,6 +32,7 @@ import javax.servlet.http.HttpServletRequest
  * 登录认证
  * @author gcc
  */
+@ApiSupport(order = 1)
 @Api(tags = ["登录认证"])
 @RestController
 @RequestMapping("/api")
