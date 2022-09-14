@@ -2,8 +2,6 @@ package org.zetaframework.core.saToken
 
 import cn.dev33.satoken.`fun`.SaFunction
 import cn.dev33.satoken.context.SaHolder
-import cn.dev33.satoken.context.model.SaRequest
-import cn.dev33.satoken.context.model.SaResponse
 import cn.dev33.satoken.exception.NotLoginException
 import cn.dev33.satoken.exception.NotPermissionException
 import cn.dev33.satoken.exception.NotRoleException
@@ -34,6 +32,9 @@ import org.zetaframework.core.saToken.properties.IgnoreProperties
 import org.zetaframework.core.saToken.properties.TokenProperties
 import org.zetaframework.core.utils.ContextUtil
 import org.zetaframework.core.utils.JSONUtil
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
+
 
 /**
  * [Sa-Token 权限认证] 配置类
@@ -115,15 +116,10 @@ class SaTokenConfigure(
      * @param registry InterceptorRegistry
      */
     override fun addInterceptors(registry: InterceptorRegistry) {
-        // sa  路由权限配置
-        registry.addInterceptor(KtRouteInterceptor { req: SaRequest, res: SaResponse, handler: Any? ->
-            // 自定义路由拦截
-            SaRouter.match("/**").check(SaFunction { this.checkRequest(req) })
-
-            // 其它拦截器..
-
-            // 举个栗子：/api/user/**相关的接口，必须有user角色才能访问
-            // SaRouter.match("/api/user/**").check(SaFunction { StpUtil.checkRole("user") })
+        // 添加自定义拦截器
+        registry.addInterceptor(KtRouteInterceptor { req: HttpServletRequest, _: HttpServletResponse, _: Any ->
+            // 每个被拦截到的方法都要做该操作，这里只是举个栗子。实际根据业务来...
+            this.checkRequest(req)
         }).addPathPatterns("/**").excludePathPatterns(ignoreProperties.getNotMatchUrl())
     }
 
@@ -215,8 +211,8 @@ class SaTokenConfigure(
      *
      * 说明：自定义路由拦截demo
      */
-    private fun checkRequest(request: SaRequest) {
-        logger.info("本次请求的请求路径为: {}", request.requestPath)
+    private fun checkRequest(request: HttpServletRequest) {
+        logger.info("本次请求的请求路径为: {}", request.servletPath)
         // 获取请求头中的xx参数，进行校验...
     }
 
