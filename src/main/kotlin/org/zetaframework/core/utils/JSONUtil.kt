@@ -2,6 +2,7 @@ package org.zetaframework.core.utils
 
 import cn.hutool.core.date.DatePattern
 import cn.hutool.core.util.StrUtil
+import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.ObjectWriter
 import com.fasterxml.jackson.databind.SerializationFeature
@@ -101,6 +102,37 @@ object JSONUtil{
 
         try {
             return objectMapper.readValue(json, clazz)
+        }catch (e: Exception) {
+            logger.error("json字符串转对象失败", e)
+        }
+        return null
+    }
+
+    /**
+     * json字符串转对象
+     *
+     * 说明：
+     * 用于转换有泛型的对象
+     *
+     * 使用方法：
+     * ```
+     * // 将jsonStr转成List<SysUser>对象
+     * val userList: List<SysUser>? = JSONUtil.parseObject(jsonStr, object: TypeReference<List<SysUser>>(){})
+     *
+     * // 将jsonStr转成ApiResult<Map<String, Any>>对象
+     * val result: ApiResult<Map<String, Any>>? = JSONUtil.parseObject(jsonStr, object: TypeReference<ApiResult<Map<String, Any>>>(){})
+     * ```
+     * @param json String?    json字符串
+     * @param valueTypeRef TypeReference<T>  值类型参考
+     * @return T?
+     */
+    fun <T> parseObject(json: String?, valueTypeRef: TypeReference<T>): T? {
+        if(StrUtil.isBlank(json)) {
+            return null
+        }
+
+        try {
+            return objectMapper.readValue(json, valueTypeRef)
         }catch (e: Exception) {
             logger.error("json字符串转对象失败", e)
         }
