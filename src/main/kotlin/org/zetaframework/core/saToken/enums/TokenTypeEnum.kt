@@ -18,12 +18,12 @@ enum class TokenTypeEnum {
     SIMPLE,
 
     /**
-     * sa-token  [jwt-mixin模式]：混入部分逻辑
+     * sa-token  [jwt-mixin模式]：jwt 与 Redis 逻辑混合
      */
     MIXIN,
 
     /**
-     * sa-token  [jwt-stateless模式]：服务器完全无状态
+     * sa-token  [jwt-stateless模式]：完全舍弃Redis，只用jwt
      */
     STATELESS
 }
