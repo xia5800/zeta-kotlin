@@ -21,6 +21,14 @@ class XssProperties {
     /** XSS防护开关 默认为：false */
     var enabled: Boolean = false
 
+    /** 基础忽略xss防护的地址 */
+    private val baseUrl: MutableList<String> = mutableListOf(
+        "/doc.html",
+        "/swagger-ui.html",
+        "/v2/api-docs",
+        "/swagger-resources",
+    )
+
     /** 忽略xss防护的地址 */
     var excludeUrl: MutableList<String> = mutableListOf(
         "/**/noxss/**"
@@ -29,13 +37,23 @@ class XssProperties {
 
 
     /**
+     * 获取忽略xss防护的地址
+     */
+    private fun getNotMatchUrl(): MutableList<String> {
+        return mutableListOf<String>().apply {
+            addAll(baseUrl)
+            addAll(excludeUrl)
+        }
+    }
+
+    /**
      * 是否是忽略xss防护的地址
      *
      * @param path 请求地址
      * @return boolean
      */
     fun isIgnoreUrl(path: String): Boolean {
-        return this.excludeUrl.any { url ->
+        return this.getNotMatchUrl().any { url ->
             ANT_PATH_MATCHER.match(url, path)
         }
     }
