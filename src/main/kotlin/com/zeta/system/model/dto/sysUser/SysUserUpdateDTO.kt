@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDate
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 /**
  * 修改 用户
@@ -22,6 +23,7 @@ data class SysUserUpdateDTO(
 
     /** 用户名 */
     @ApiModelProperty("用户名")
+    @get:Size(max = 32, message = "用户名长度不能大于32")
     @get:NotBlank(message = "用户名不能为空")
     var username: String? = null,
 
