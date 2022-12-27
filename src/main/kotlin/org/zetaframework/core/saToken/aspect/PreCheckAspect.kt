@@ -180,7 +180,7 @@ class PreCheckAspect(private val ignoreProperties: IgnoreProperties) {
             // ps:这里对不熟悉kotlin的人来说可能有点难以理解。 看上面↑↑↑ let{ }块的最后一行代码即为当前块的返回值
             // 所以这里的stream().anyMatch()方法返回的true或者false值，就是let{}块的返回值，同时也是这个方法的返回值
             ignoreProperties.getNotMatchUrl().any { url ->
-                path.startsWith(url) || ANT_PATH_MATCHER.match(url, path)
+                ANT_PATH_MATCHER.match(url, path)
             }
         } ?: false
     }

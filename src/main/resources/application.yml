@@ -68,6 +68,15 @@ zeta:
       # 忽略鉴权的地址
       ignoreUrl:
         - /**/noToken/**
+  # XSS防护配置
+  xss:
+    # XSS防护开关 默认：false
+    enabled: true
+    # 忽略xss防护的地址
+    excludeUrl:
+      - /**/noxss/**
+      - /**/page
+      - /**/query
   # websocket配置
   websocket:
     enabled: true

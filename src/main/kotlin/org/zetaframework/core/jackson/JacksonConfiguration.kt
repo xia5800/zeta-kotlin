@@ -25,7 +25,10 @@ import java.time.LocalTime
 @Configuration
 class JacksonConfiguration {
 
-    @Bean
+    /**
+     * 全局Jackson序列化配置
+     */
+    @Bean("jackson2ObjectMapperBuilderCustomizer")
     fun jackson2ObjectMapperBuilderCustomizer(): Jackson2ObjectMapperBuilderCustomizer {
         return Jackson2ObjectMapperBuilderCustomizer { builder: Jackson2ObjectMapperBuilder ->
             // 序列化
