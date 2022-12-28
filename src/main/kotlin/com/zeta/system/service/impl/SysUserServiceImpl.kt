@@ -141,6 +141,33 @@ class SysUserServiceImpl(
      */
     override fun comparePassword(inputPwd: String, dbPwd: String): Boolean = BCrypt.checkpw(inputPwd, dbPwd)
 
+
+    /**
+     * 批量导入用户
+     *
+     * @param userList 待导入的用户列表
+     * @return Boolean
+     */
+    @Transactional(rollbackFor = [Exception::class])
+    override fun batchImportUser(userList: List<SysUser>): Boolean {
+        // 保存用户
+        if(!this.saveBatch(userList)) {
+            throw BusinessException("新增用户失败")
+        }
+
+        try {
+            // 删除并重新关联角色
+            userList.forEach { user ->
+                val roleIds: List<Long>? = user.roles?.mapNotNull { it.id }
+                userRoleService.saveUserRole(user.id!!, roleIds)
+            }
+        } catch (e: Exception) {
+            throw BusinessException("关联用户角色失败")
+        }
+
+        return true
+    }
+
     /**
      * 返回指定账号id所拥有的权限码集合
      *

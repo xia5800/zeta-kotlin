@@ -31,6 +31,7 @@
         <knife4j.version>2.0.9</knife4j.version>
         <hutool.version>5.8.9</hutool.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
+        <easypoi.version>4.4.0</easypoi.version>
         <aliyun-oss.version>3.15.1</aliyun-oss.version>
         <minio.version>8.4.3</minio.version>
         <!-- 更改spring boot默认依赖的okhttp版本，使其和minio依赖的okhttp版本保持一致。这样才不会导致项目启动失败 -->
@@ -206,6 +207,46 @@
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
             <version>${minio.version}</version>
+        </dependency>
+
+        <!--
+         POI 相关
+        -->
+        <!-- easypoi 基础注解包 -->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-annotation</artifactId>
+            <version>${easypoi.version}</version>
+        </dependency>
+        <!-- easypoi springmvc整合包 -->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-web</artifactId>
+            <version>${easypoi.version}</version>
+        </dependency>
+        <!-- easypoi 导入导出的工具包 -->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-base</artifactId>
+            <version>${easypoi.version}</version>
+        </dependency>
+        <!-- easypoi springboot整合 -->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-spring-boot-starter</artifactId>
+            <exclusions>
+                <!--
+                 本项目使用hutoo-bom管理hutool依赖，目的是为了减小jar包体积。
+                 然后StrUtil方法在hutool-core(本项目jar包中)和在hutool-all中都存在
+                 项目启动的时候swagger会扫描url，用到了StrUtil类中的方法
+                 jvm无法判断使用哪个jar包中的方法，导致项目启动失败。故排除掉
+                 -->
+                <exclusion>
+                    <artifactId>hutool-all</artifactId>
+                    <groupId>cn.hutool</groupId>
+                </exclusion>
+            </exclusions>
+            <version>${easypoi.version}</version>
         </dependency>
 
         <!--

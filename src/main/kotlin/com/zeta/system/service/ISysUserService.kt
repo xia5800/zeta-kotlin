@@ -68,4 +68,12 @@ interface ISysUserService : IService<SysUser> {
      */
     fun comparePassword(inputPwd: String, dbPwd: String): Boolean
 
+    /**
+     * 批量导入用户
+     *
+     * @param userList 待导入的用户列表
+     * @return Boolean
+     */
+    fun batchImportUser(userList: List<SysUser>): Boolean
+
 }
