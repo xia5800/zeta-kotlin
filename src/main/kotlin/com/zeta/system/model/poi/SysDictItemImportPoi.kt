@@ -17,10 +17,6 @@ class SysDictItemImportPoi: ImportPoi() {
     @NotNull(message = "不能为空")
     var dictId: Long? = null
 
-    /** 字典名称 */
-    @Excel(name = "字典名称", width = 15.0)
-    var dictName: String? = null
-
     /** 字典项 */
     @Excel(name = "字典项", width = 15.0)
     @NotBlank(message = "不能为空")
