@@ -19,18 +19,21 @@ class XssRequestWrapper(
      */
     override fun getParameterMap(): MutableMap<String, Array<String>> {
         val requestMap: MutableMap<String, Array<String>> = super.getParameterMap()
+        val result: MutableMap<String, Array<String>> = mutableMapOf()
 
         // 处理参数值
         requestMap.forEach { (key, values) ->
             if (values.isNotEmpty()) {
-                // 等价于 requestMap.put(key, 清理过的value)
-                requestMap[key] = values.map {
+                // 等价于 result.put(key, 清理过的value)
+                result[key] = values.map {
                     xssCleaner.clear(it)
                 }.toTypedArray()
+            } else {
+                result[key] = values
             }
         }
 
-        return requestMap
+        return result
     }
 
     /**
