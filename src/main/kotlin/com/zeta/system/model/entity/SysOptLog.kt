@@ -83,13 +83,18 @@ class SysOptLog : SuperEntity<Long>() {
     @TableField(value = "ip")
     var ip: String? = null
 
+    /** ip所在地区 */
+    @ApiModelProperty(value = "ip所在地区")
+    @TableField(value = "ip_region")
+    var ipRegion: String? = null
+
     /** 操作人 */
     @ApiModelProperty(value = "操作人")
     @TableField(exist = false)
     var userName: String? = null
 
     override fun toString(): String {
-        return "SysOptLog(id=$id, createTime=$createTime, createdBy=$createdBy, type=$type, description=$description, url=$url, httpMethod=$httpMethod, classPath=$classPath, params=$params, result=$result, exception=$exception, spendTime=$spendTime, os=$os, device=$device, browser=$browser, ip=$ip)"
+        return "SysOptLog(id=$id, createTime=$createTime, createdBy=$createdBy, type=$type, description=$description, url=$url, httpMethod=$httpMethod, classPath=$classPath, params=$params, result=$result, exception=$exception, spendTime=$spendTime, os=$os, device=$device, browser=$browser, ip=$ip, ipRegion=$ipRegion)"
     }
 
 }

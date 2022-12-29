@@ -69,4 +69,8 @@ data class SysOptLogUpdateDTO(
     /** ip地址 */
     @ApiModelProperty(value = "ip地址")
     var ip: String? = null,
+
+    /** ip所在地区 */
+    @ApiModelProperty(value = "ip所在地区")
+    var ipRegion: String? = null,
 )

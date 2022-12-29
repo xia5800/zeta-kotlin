@@ -14,6 +14,7 @@
         <result column="device" jdbcType="VARCHAR" property="device" />
         <result column="browser" jdbcType="VARCHAR" property="browser" />
         <result column="ip" jdbcType="VARCHAR" property="ip" />
+        <result column="ip_region" jdbcType="VARCHAR" property="ipRegion" />
     </resultMap>
 
     <!-- 表名 -->
@@ -23,16 +24,16 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, create_time, created_by, 
-        state, account, comments, os, device, browser, ip
+        id, create_time, created_by,
+        state, account, comments, os, device, browser, ip, ip_region
     </sql>
 
     <!-- 用法：<include refid="SYS_LOGIN_LOG_JOIN_COLUMN_LIST"><property name="tableName" value="t1"/></include>, -->
     <!-- 关联查询字段列 -->
     <sql id="SYS_LOGIN_LOG_JOIN_COLUMN_LIST">
-        ${tableName}.id, ${tableName}.create_time, ${tableName}.created_by, 
-        ${tableName}.state, ${tableName}.account, ${tableName}.comments, ${tableName}.os, ${tableName}.device, ${tableName}.browser, 
-        ${tableName}.ip
+        ${tableName}.id, ${tableName}.create_time, ${tableName}.created_by,
+        ${tableName}.state, ${tableName}.account, ${tableName}.comments, ${tableName}.os, ${tableName}.device, ${tableName}.browser,
+        ${tableName}.ip, ${tableName}.ip_region
     </sql>
 
     <!-- 通用查询条件 -->
@@ -48,25 +49,28 @@
                 AND created_by = #{param.createdBy}
             </if>
             <if test="param.state != null and param.state != ''">
-                AND state LIKE CONCAT('%', #{param.state}, '%') 
+                AND state LIKE CONCAT('%', #{param.state}, '%')
             </if>
             <if test="param.account != null and param.account != ''">
-                AND account LIKE CONCAT('%', #{param.account}, '%') 
+                AND account LIKE CONCAT('%', #{param.account}, '%')
             </if>
             <if test="param.comments != null and param.comments != ''">
-                AND comments LIKE CONCAT('%', #{param.comments}, '%') 
+                AND comments LIKE CONCAT('%', #{param.comments}, '%')
             </if>
             <if test="param.os != null and param.os != ''">
-                AND os LIKE CONCAT('%', #{param.os}, '%') 
+                AND os LIKE CONCAT('%', #{param.os}, '%')
             </if>
             <if test="param.device != null and param.device != ''">
-                AND device LIKE CONCAT('%', #{param.device}, '%') 
+                AND device LIKE CONCAT('%', #{param.device}, '%')
             </if>
             <if test="param.browser != null and param.browser != ''">
-                AND browser LIKE CONCAT('%', #{param.browser}, '%') 
+                AND browser LIKE CONCAT('%', #{param.browser}, '%')
             </if>
             <if test="param.ip != null and param.ip != ''">
-                AND ip LIKE CONCAT('%', #{param.ip}, '%') 
+                AND ip LIKE CONCAT('%', #{param.ip}, '%')
+            </if>
+            <if test="param.ipRegion != null and param.ipRegion != ''">
+                AND ip_region LIKE CONCAT('%', #{param.ipRegion}, '%')
             </if>
         </where>
     </sql>

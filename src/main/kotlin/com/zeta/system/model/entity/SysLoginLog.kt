@@ -59,9 +59,13 @@ class SysLoginLog: SuperEntity<Long>() {
     @TableField(value = "ip")
     var ip: String? = null
 
+    /** ip所在地区 */
+    @ApiModelProperty(value = "ip所在地区")
+    @TableField(value = "ip_region")
+    var ipRegion: String? = null
 
     override fun toString(): String {
-        return "SysLoginLog(id=$id, createTime=$createTime, createdBy=$createdBy, state=$state, account=$account, comments=$comments, os=$os, device=$device, browser=$browser, ip=$ip)"
+        return "SysLoginLog(id=$id, createTime=$createTime, createdBy=$createdBy, state=$state, account=$account, comments=$comments, os=$os, device=$device, browser=$browser, ip=$ip, ipRegion=$ipRegion)"
     }
 
 }

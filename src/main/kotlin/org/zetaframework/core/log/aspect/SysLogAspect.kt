@@ -19,6 +19,7 @@ import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.log.enums.LogTypeEnum
 import org.zetaframework.core.log.event.SysLogEvent
 import org.zetaframework.core.log.model.SysLogDTO
+import org.zetaframework.core.utils.IpAddressUtil
 import org.zetaframework.core.utils.JSONUtil
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -147,6 +148,9 @@ class SysLogAspect(private val context: ApplicationContext) {
             sysLogDTO.device = ua.os.name
             sysLogDTO.browser = ua.browser.name
             sysLogDTO.ip = ServletUtil.getClientIP(request)
+            sysLogDTO.ip?.let { ip ->
+                sysLogDTO.ipRegion = IpAddressUtil.search(ip)
+            }
             // 获取请求参数
             if(sysLog.request) {
                 sysLogDTO.params = getRequestParam(joinPoint, request)

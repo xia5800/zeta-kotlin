@@ -20,12 +20,13 @@
         <result column="device" jdbcType="VARCHAR" property="device" />
         <result column="browser" jdbcType="VARCHAR" property="browser" />
         <result column="ip" jdbcType="VARCHAR" property="ip" />
+        <result column="ip_region" jdbcType="VARCHAR" property="ipRegion" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, create_time, created_by,
-        type, description, url, http_method, class_path, params, result, exception, spend_time, os, device, browser, ip
+        type, description, url, http_method, class_path, params, result, exception, spend_time, os, device, browser, ip, ip_region
     </sql>
 
     <!-- 用法：<include refid="SYS_OPT_LOG_JOIN_COLUMN_LIST"><property name="tableName" value="t1"/></include>, -->
@@ -34,7 +35,7 @@
         ${tableName}.id, ${tableName}.create_time, ${tableName}.created_by,
         ${tableName}.type, ${tableName}.description, ${tableName}.url, ${tableName}.http_method, ${tableName}.class_path,
         ${tableName}.params, ${tableName}.result, ${tableName}.exception, ${tableName}.spend_time, ${tableName}.os,
-        ${tableName}.device, ${tableName}.browser, ${tableName}.ip
+        ${tableName}.device, ${tableName}.browser, ${tableName}.ip, ${tableName}.ip_region
     </sql>
 
     <!-- 分页查询操作日志 前端数据表格用-->
@@ -79,6 +80,9 @@
             </if>
             <if test="param.ip != null and param.ip != ''">
                 and t1.ip = #{param.ip}
+            </if>
+            <if test="param.ipRegion != null and param.ipRegion != ''">
+                AND ip_region LIKE CONCAT('%', #{param.ipRegion}, '%')
             </if>
         </where>
     </select>

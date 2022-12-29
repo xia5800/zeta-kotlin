@@ -47,4 +47,7 @@ data class SysLogDTO(
 
     /** ip地址 */
     var ip: String? = null,
+
+    /** ip所在地区 */
+    var ipRegion: String? = null,
 )

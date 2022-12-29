@@ -4,6 +4,7 @@ import cn.hutool.extra.servlet.ServletUtil
 import cn.hutool.http.useragent.UserAgentUtil
 import org.zetaframework.core.log.enums.LoginStateEnum
 import org.zetaframework.core.utils.ContextUtil
+import org.zetaframework.core.utils.IpAddressUtil
 import javax.servlet.http.HttpServletRequest
 
 /**
@@ -34,6 +35,9 @@ data class SysLoginLogDTO (
     /** ip地址 */
     var ip: String? = null,
 
+    /** ip所在地区 */
+    var ipRegion: String? = null,
+
     /** 备注 */
     var comments: String? = null,
 ) {
@@ -56,10 +60,13 @@ data class SysLoginLogDTO (
                 this.account = account
                 this.state = state
                 this.comments = comments
-                os = ua.platform.name
-                device = ua.os.name
-                browser = ua.browser.name
-                ip = ServletUtil.getClientIP(request)
+                this.os = ua.platform.name
+                this.device = ua.os.name
+                this.browser = ua.browser.name
+                this.ip = ServletUtil.getClientIP(request)
+                this.ip?.let { ip ->
+                    this.ipRegion = IpAddressUtil.search(ip)
+                }
             }
         }
 
