@@ -32,6 +32,7 @@
         <hutool.version>5.8.9</hutool.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <easypoi.version>4.4.0</easypoi.version>
+        <ip2region.version>2.6.6</ip2region.version>
         <aliyun-oss.version>3.15.1</aliyun-oss.version>
         <minio.version>8.4.3</minio.version>
         <!-- 更改spring boot默认依赖的okhttp版本，使其和minio依赖的okhttp版本保持一致。这样才不会导致项目启动失败 -->
@@ -284,6 +285,12 @@
             <artifactId>transmittable-thread-local</artifactId>
             <version>2.12.2</version>
         </dependency>
+        <!-- 离线IP地址定位库 -->
+        <dependency>
+            <groupId>org.lionsoul</groupId>
+            <artifactId>ip2region</artifactId>
+            <version>${ip2region.version}</version>
+        </dependency>
 
     </dependencies>
 
@@ -401,6 +408,7 @@
                         <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
                         <nonFilteredFileExtension>woff</nonFilteredFileExtension>
                         <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>xdb</nonFilteredFileExtension>
                     </nonFilteredFileExtensions>
                 </configuration>
             </plugin>

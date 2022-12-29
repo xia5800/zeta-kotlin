@@ -41,7 +41,8 @@ zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。�
 - 数据字典
 - 文件管理
 - websocket
-
+- XSS防护
+- Ip2region离线IP地址查询
 
 ## 前端(无)
 
