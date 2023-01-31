@@ -26,8 +26,4 @@ class SysLoginLogController : SuperSimpleController<ISysLoginLogService, SysLogi
     QueryController<SysLoginLog, Long, SysLoginLogQueryParam>
 {
 
-    override fun handlerBatchData(list: MutableList<SysLoginLog>) {
-        super.handlerBatchData(list)
-    }
-
 }

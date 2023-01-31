@@ -33,7 +33,7 @@ class WebsocketController(
      * @param message
      */
     @ApiOperationSupport(order = 1)
-    @ApiOperation("群发消息")
+    @ApiOperation(value = "群发消息")
     @GetMapping("/group")
     fun group(@RequestParam message: String): ApiResult<Boolean> {
         try {
@@ -52,7 +52,7 @@ class WebsocketController(
      * @param message
      */
     @ApiOperationSupport(order = 2)
-    @ApiOperation("私聊消息")
+    @ApiOperation(value = "私聊消息")
     @PostMapping("/group")
     fun privateChat(@RequestBody @Validated message: PrivateMessageParam): ApiResult<Boolean> {
         try {
@@ -69,7 +69,7 @@ class WebsocketController(
      * 获取当前在线人数
      */
     @ApiOperationSupport(order = 3)
-    @ApiOperation("获取当前在线人数")
+    @ApiOperation(value = "获取当前在线人数")
     @GetMapping("/onlineUser")
     fun onlineUser(): ApiResult<Int> {
         return ApiResult.success(data = userRegistry.userCount)

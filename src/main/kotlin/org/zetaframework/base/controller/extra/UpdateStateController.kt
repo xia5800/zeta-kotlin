@@ -31,7 +31,7 @@ interface UpdateStateController<Entity, Id: Serializable, State: Serializable>: 
      */
     @PreCheckPermission(value = ["{}:edit", "{}:update"], mode = PreMode.OR)
     @ApiOperationSupport(order = 51, author = "AutoGenerate")
-    @ApiOperation("修改状态")
+    @ApiOperation(value = "修改状态")
     @PutMapping("/state")
     fun updateState(@RequestBody param: UpdateStateParam<Id, State>): ApiResult<Boolean> {
         val result = handlerUpdateState(param)

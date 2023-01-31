@@ -50,7 +50,7 @@ class SysDictItemController(
      * @param codes List<String>
      */
     @PreCheckPermission(value = ["{}:view"])
-    @ApiOperation("根据字典编码查询字典项")
+    @ApiOperation(value = "根据字典编码查询字典项")
     @PostMapping("/codeList")
     fun codeList(@RequestBody @ApiParam("字典code") codes: List<String>): ApiResult<Map<String, List<SysDictItemDTO>>> {
         Assert.notEmpty(codes, "字典code不能为空")

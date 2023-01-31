@@ -50,7 +50,7 @@ class MainController(
      * @param param LoginParam
      * @return ApiResult<LoginResult>
      */
-    @ApiOperation("登录")
+    @ApiOperation(value = "登录")
     @PostMapping("/login")
     fun login(@RequestBody @Validated param: LoginParam, request: HttpServletRequest): ApiResult<LoginResult> {
         // 验证验证码
@@ -101,7 +101,7 @@ class MainController(
      * 注销登录
      * @return ApiResult<Boolean>
      */
-    @ApiOperation("注销登录")
+    @ApiOperation(value = "注销登录")
     @GetMapping("/logout")
     fun logout(request: HttpServletRequest): ApiResult<Boolean> {
         val user = service.getById(StpUtil.getLoginIdAsLong()) ?: return fail("用户异常")
@@ -122,8 +122,8 @@ class MainController(
      * 说明：
      * 限流规则一分钟十次调用
      */
-    @Limit(name = "验证码接口限流", count = 10, describe="您的操作过于频繁，请稍后再试")
-    @ApiOperation("图形验证码")
+    @Limit(name = "验证码接口限流", count = 10, describe = "您的操作过于频繁，请稍后再试")
+    @ApiOperation(value = "图形验证码")
     @GetMapping("/captcha")
     fun captcha(): ApiResult<CaptchaResult> {
         val key = System.currentTimeMillis()

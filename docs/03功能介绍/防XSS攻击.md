@@ -72,7 +72,7 @@ zeta:
 @RequestMapping("/api/system/dict")
 class DictController {
 
-    @ApiOperation("测试")
+    @ApiOperation(value = "测试")
     @PostMapping("/saveTest")
     fun saveTest(@RequestParam("name") name: String): ApiResult<String> {
         return success("你post的数据是$name")

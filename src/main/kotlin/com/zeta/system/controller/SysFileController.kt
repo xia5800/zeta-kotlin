@@ -44,7 +44,7 @@ class SysFileController: SuperSimpleController<ISysFileService, SysFile>(),
      */
     @SysLog(request = false)
     @PreCheckPermission(value = ["{}:add", "{}:save"], mode = PreMode.OR)
-    @ApiOperation("上传文件")
+    @ApiOperation(value = "上传文件")
     @PostMapping("/upload")
     fun upload(
         @RequestParam
@@ -65,7 +65,7 @@ class SysFileController: SuperSimpleController<ISysFileService, SysFile>(),
      */
     @SysLog(response = false)
     @PreCheckPermission(value = ["{}:export"])
-    @ApiOperation("下载文件")
+    @ApiOperation(value = "下载文件")
     @GetMapping(value = ["/download"], produces = ["application/octet-stream"])
     fun download(@RequestParam @ApiParam("文件id") id: Long, response: HttpServletResponse) {
         service.download(id, response)

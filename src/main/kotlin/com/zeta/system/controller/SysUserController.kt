@@ -273,7 +273,7 @@ class SysUserController(
      * @param param ChangePasswordParam 修改密码的参数
      * @return ApiResult<Boolean>
      */
-    @ApiOperation("修改自己的密码")
+    @ApiOperation(value = "修改自己的密码")
     @ResponseBody
     @PutMapping("/changePwd")
     fun changePwd(@RequestBody @Validated param: ChangePasswordParam, request: HttpServletRequest): ApiResult<Boolean> {
@@ -306,7 +306,7 @@ class SysUserController(
      * @param param ResetPasswordParam 重置密码参数
      * @return ApiResult<Boolean>
      */
-    @ApiOperation("重置密码")
+    @ApiOperation(value = "重置密码")
     @PutMapping("/restPwd")
     fun updatePwd(@RequestBody @Validated param: ResetPasswordParam, request: HttpServletRequest): ApiResult<Boolean> {
         val user = service.getById(param.id) ?: return success(true)
@@ -336,7 +336,7 @@ class SysUserController(
     /**
      * 获取登录用户信息
      */
-    @ApiOperation("获取登录用户信息")
+    @ApiOperation(value = "获取登录用户信息")
     @GetMapping("/info")
     fun userInfo(): ApiResult<UserInfoDTO> {
         // 获取用户基本信息
@@ -354,7 +354,7 @@ class SysUserController(
      * 获取用户菜单
      */
     @ApiOperationSupport(order = 100)
-    @ApiOperation("获取用户菜单")
+    @ApiOperation(value = "获取用户菜单")
     @GetMapping("/menu")
     fun userMenu(): ApiResult<List<FrontRoute>> {
         // 查询用户对应的菜单
