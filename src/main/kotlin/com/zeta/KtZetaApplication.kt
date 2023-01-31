@@ -6,10 +6,8 @@ import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.ComponentScan
-import org.springframework.scheduling.annotation.EnableAsync
 import org.springframework.stereotype.Repository
 
-@EnableAsync
 @ComponentScan(basePackages = ["com.zeta", "org.zetaframework"])
 @MapperScan(value= ["com.zeta.**.dao"], annotationClass = Repository::class)
 @SpringBootApplication
