@@ -3,7 +3,10 @@ package org.zetaframework.core.mybatisplus
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor
 import com.baomidou.mybatisplus.extension.plugins.inner.IllegalSQLInnerInterceptor
+import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -21,6 +24,7 @@ import org.zetaframework.core.mybatisplus.properties.DatabaseProperties
 @EnableTransactionManagement
 @EnableConfigurationProperties(DatabaseProperties::class)
 class MybatisPlusConfiguration(private val databaseProperties: DatabaseProperties) {
+    private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     /**
      * mybatis插件配置
@@ -38,13 +42,21 @@ class MybatisPlusConfiguration(private val databaseProperties: DatabasePropertie
         paginationInnerInterceptor.isOptimizeJoin = databaseProperties.optimizeJoin
         interceptor.addInnerInterceptor(paginationInnerInterceptor)
 
+        // 乐观锁插件
+        if (databaseProperties.isOptimisticLocker) {
+            logger.info("mybatis-plus乐观锁插件：启用")
+            interceptor.addInnerInterceptor(OptimisticLockerInnerInterceptor())
+        }
+
         // 防止全表更新与删除
         if(databaseProperties.isBlockAttack) {
+            logger.info("mybatis-plus防止全表更新与删除插件：启用")
             interceptor.addInnerInterceptor(BlockAttackInnerInterceptor())
         }
 
         // sql性能规范
         if(databaseProperties.isIllegalSql) {
+            logger.info("mybatis-plus sql性能规范插件：启用")
             interceptor.addInnerInterceptor(IllegalSQLInnerInterceptor())
         }
         return interceptor

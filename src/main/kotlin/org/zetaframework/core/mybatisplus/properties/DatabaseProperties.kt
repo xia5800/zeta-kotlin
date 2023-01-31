@@ -16,6 +16,9 @@ class DatabaseProperties(
     /** 是否启用 sql性能规范插件 */
     var isIllegalSql: Boolean = false,
 
+    /** 是否启用 乐观锁插件 */
+    var isOptimisticLocker: Boolean = false,
+
     /** 分页大小限制 */
     var maxLimit: Long = -1,
 

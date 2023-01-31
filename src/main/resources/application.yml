@@ -14,9 +14,11 @@ zeta:
   # mybatis plus配置
   database:
     # 是否启用防止全表更新与删除插件 默认false
-    isBlockAttack: false
+    blockAttack: false
     # 是否启用 sql性能规范插件
-    isIllegalSql: false
+    illegalSql: false
+    # 是否启用 乐观锁插件
+    optimisticLocker: false
     # 数据库类型
     dbType: MYSQL
     # 溢出总页数后是否进行处理 默认true
@@ -152,7 +154,6 @@ spring:
     multipart:
       max-file-size: 1024MB
       max-request-size: 1024MB
-
   # redis
   redis:
     # Redis数据库索引（默认为0）
