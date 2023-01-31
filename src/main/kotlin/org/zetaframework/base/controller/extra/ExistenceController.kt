@@ -23,11 +23,11 @@ interface ExistenceController<Entity, Id>: BaseController<Entity> {
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperation(value = "验证字段是否存在", notes = """
-例如：<br>
-新增用户的时候，验证用户名(username)的值(张三)是否被人使用了 <br>
-{"field": "username",  "value": "张三"} <br><br>
-修改用户的时候，验证用户名(username)的值(李四)是否被除了当前用户id(2011214167781)的人使用了 <br>
-{"field": "username",  "value": "李四",  "id": "2011214167781"}<br>
+    例如：<br>
+    新增用户的时候，验证用户名(username)的值(张三)是否被人使用了 <br>
+    {"field": "username",  "value": "张三"} <br><br>
+    修改用户的时候，验证用户名(username)的值(李四)是否被除了当前用户id(2011214167781)的人使用了 <br>
+    {"field": "username",  "value": "李四",  "id": "2011214167781"}<br>
     """)
     @GetMapping("/existence")
     fun existence(param: ExistParam<Entity, Id>): ApiResult<Boolean> {

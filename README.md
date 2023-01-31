@@ -43,6 +43,8 @@ zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。�
 - websocket
 - XSS防护
 - Ip2region离线IP地址查询
+- Excel导入导出
+- 数据脱敏
 
 ## 前端(无)
 

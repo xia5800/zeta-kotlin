@@ -3,13 +3,12 @@ package com.zeta.system.controller
 import cn.afterturn.easypoi.excel.entity.ImportParams
 import cn.dev33.satoken.stp.StpUtil
 import cn.hutool.core.bean.BeanUtil
-import cn.hutool.core.collection.CollUtil
 import cn.hutool.core.lang.Assert
 import cn.hutool.core.util.StrUtil
-import com.baomidou.mybatisplus.core.metadata.IPage
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
 import com.zeta.system.model.dto.sysMenu.FrontRoute
 import com.zeta.system.model.dto.sysRole.SysRoleDTO
+import com.zeta.system.model.dto.sysUser.SysUserDTO
 import com.zeta.system.model.dto.sysUser.SysUserSaveDTO
 import com.zeta.system.model.dto.sysUser.SysUserUpdateDTO
 import com.zeta.system.model.dto.sysUser.UserInfoDTO
@@ -31,19 +30,24 @@ import io.swagger.annotations.ApiOperation
 import org.springframework.context.ApplicationContext
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
-import org.zetaframework.base.controller.SuperController
+import org.zetaframework.base.controller.SuperNoQueryController
 import org.zetaframework.base.controller.extra.ExistenceController
+import org.zetaframework.base.controller.extra.NoPageQueryController
 import org.zetaframework.base.controller.extra.PoiController
 import org.zetaframework.base.controller.extra.UpdateStateController
 import org.zetaframework.base.param.ExistParam
+import org.zetaframework.base.param.PageParam
 import org.zetaframework.base.param.UpdateStateParam
 import org.zetaframework.base.result.ApiResult
+import org.zetaframework.base.result.PageResult
 import org.zetaframework.core.exception.ArgumentException
 import org.zetaframework.core.exception.BusinessException
+import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.log.enums.LoginStateEnum
 import org.zetaframework.core.log.event.SysLoginEvent
 import org.zetaframework.core.log.model.SysLoginLogDTO
 import org.zetaframework.core.saToken.annotation.PreAuth
+import org.zetaframework.core.saToken.annotation.PreCheckPermission
 import org.zetaframework.core.utils.ContextUtil
 import org.zetaframework.core.utils.TreeUtil
 import javax.servlet.http.HttpServletRequest
@@ -63,34 +67,26 @@ class SysUserController(
     private val roleMenuService: ISysRoleMenuService,
     private val applicationContext: ApplicationContext,
     private val sysUserExcelVerifyHandler: SysUserExcelVerifyHandler
-) : SuperController<ISysUserService, Long, SysUser, SysUserQueryParam, SysUserSaveDTO, SysUserUpdateDTO>(),
+) : SuperNoQueryController<ISysUserService, Long, SysUser, SysUserSaveDTO, SysUserUpdateDTO>(),
+    NoPageQueryController<SysUser, Long, SysUserQueryParam>,
     UpdateStateController<SysUser, Long, Int>,
     ExistenceController<SysUser, Long>,
     PoiController<SysUserImportPoi, SysUserExportPoi, SysUser, SysUserQueryParam>
 {
 
     /**
-     * 处理查询后的数据
-     *
-     * 说明：
-     * 分页查询用户，需要返回用户的角色列表。
-     * 所以需要在分页查询完用户之后再查询每个用户的角色
-     *
-     * @param page IPage<Entity>
+     * 分页查询
+     * @param param PageParam<PageQuery> 分页查询参数
+     * @return ApiResult<IPage<Entity>>
      */
-    override fun handlerResult(page: IPage<SysUser>) {
-        val userList: List<SysUser> = page.records
-        val userIds: List<Long> = userList.map { it.id!! }
-
-        if(CollUtil.isNotEmpty(userIds)) {
-            // 批量获取用户角色 Map<用户id, 用户角色列表>
-            val userRoleMap: Map<Long, List<SysRoleDTO>> = service.getUserRoles(userIds)
-            page.records.forEach { user ->
-                user.roles = userRoleMap.getOrDefault(user.id, mutableListOf())
-            }
-        }
+    @PreCheckPermission(value = ["{}:view"])
+    @ApiOperationSupport(order = 10)
+    @ApiOperation(value = "分页查询")
+    @SysLog(response = false)
+    @PostMapping("/page")
+    fun page(@RequestBody param: PageParam<SysUserQueryParam>): ApiResult<PageResult<SysUserDTO>> {
+        return success(service.customPage(param))
     }
-
 
     /**
      * 处理单体查询数据
