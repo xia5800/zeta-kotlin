@@ -181,7 +181,7 @@ class KtZetaApplicationTests {
         val superAdminId = uidGenerator.getUid()
         val adminId = uidGenerator.getUid()
         val userId = uidGenerator.getUid()
-        batchList.add(SysRole().apply { id = superAdminId; name = "超级管理员"; code = "SUPER_ADMIN"; describe = "超级管理员，拥有至高无上的权利"  })
+        batchList.add(SysRole().apply { id = superAdminId; name = "超级管理员"; code = "SUPER_ADMIN"; describe = "超级管理员，拥有至高无上的权利"; readonly = true  })
         batchList.add(SysRole().apply { id = adminId; name = "管理员"; code = "ADMIN"; describe = "管理员，拥有99%的权利"  })
         batchList.add(SysRole().apply { id = userId; name = "普通用户"; code = "USER"; describe = "普通用户，拥有管理员赋予的权利"  })
         roleService.saveBatch(batchList)

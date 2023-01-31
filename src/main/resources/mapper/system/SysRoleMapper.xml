@@ -12,13 +12,14 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="code" jdbcType="VARCHAR" property="code"/>
         <result column="describe_" jdbcType="VARCHAR" property="describe"/>
+        <result column="readonly_" jdbcType="BIT" property="readonly"/>
         <result column="deleted" jdbcType="BIT" property="deleted"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, create_time, created_by, update_time, updated_by,
-        name, code, describe_, deleted
+        name, code, describe_, readonly_, deleted
     </sql>
 
 </mapper>

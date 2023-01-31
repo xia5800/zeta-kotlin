@@ -39,7 +39,7 @@ class SysUserImportPoi: ImportPoi() {
     var mobile: String? = null
 
     /** 性别 */
-    @Excel(name = "性别", replace = ["男_1", "女_2", "_null"], addressList = true)
+    @Excel(name = "性别", replace = ["男_1", "女_2", "_0"], addressList = true)
     var sex: Int? = null
 
     /** 生日 */
@@ -48,6 +48,5 @@ class SysUserImportPoi: ImportPoi() {
 
     /** 用户角色 说明：多个角色之间逗号隔开 */
     @Excel(name = "用户角色", replace = ["普通用户_普通用户", "管理员_管理员", "_null"], addressList = true, width = 20.0)
-    @NotBlank(message = "不能为空")
     var roleNames: String? = null
 }

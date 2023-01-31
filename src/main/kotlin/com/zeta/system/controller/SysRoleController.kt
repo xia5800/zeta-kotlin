@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 import org.zetaframework.base.controller.SuperController
 import org.zetaframework.base.param.ExistParam
 import org.zetaframework.base.result.ApiResult
+import org.zetaframework.core.exception.BusinessException
 import org.zetaframework.core.saToken.annotation.PreAuth
 
 /**
@@ -62,5 +63,36 @@ class SysRoleController: SuperController<ISysRoleService, Long, SysRole, SysRole
         return super.handlerUpdate(updateDTO)
     }
 
+    /**
+     * 自定义单体删除
+     *
+     * @param id Id
+     * @return R<Boolean>
+     */
+    override fun handlerDelete(id: Long): ApiResult<Boolean> {
+        val role = service.getById(id) ?: return success(true)
+        // 判断角色是否允许删除
+        if(role.readonly != null && role.readonly == true) {
+            throw BusinessException("角色[${role.name}]禁止删除")
+        }
+        return super.handlerDelete(id)
+    }
+
+    /**
+     * 自定义批量删除
+     *
+     * @param ids Id
+     * @return R<Boolean>
+     */
+    override fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> {
+        val roleList = service.listByIds(ids) ?: return success(true)
+        // 判断是否存在不允许删除的角色
+        roleList.forEach { role ->
+            if(role.readonly != null && role.readonly == true) {
+                throw BusinessException("角色[${role.name}]禁止删除")
+            }
+        }
+        return super.handlerBatchDelete(ids)
+    }
 
 }

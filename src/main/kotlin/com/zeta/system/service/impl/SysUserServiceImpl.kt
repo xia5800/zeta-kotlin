@@ -195,9 +195,10 @@ class SysUserServiceImpl(
         }
 
         try {
-            // 删除并重新关联角色
-            userList.forEach { user ->
-                val roleIds: List<Long>? = user.roles?.mapNotNull { it.id }
+            // 筛选出有角色的用户
+            userList.filterNot { it.roles.isNullOrEmpty() }.forEach { user ->
+                // 删除并重新关联角色
+                val roleIds: List<Long> = user.roles!!.mapNotNull { it.id }
                 userRoleService.saveUserRole(user.id!!, roleIds)
             }
         } catch (e: Exception) {

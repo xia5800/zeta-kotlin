@@ -232,8 +232,10 @@ class SysUserController(
             // 处理密码
             user.password = service.encodePassword(importPoi.password!!)
             // 处理角色
-            val roles: List<SysRole> = roleService.getRolesByNames(importPoi.roleNames!!.split(StrUtil.COMMA))
-            user.roles = roles.map { BeanUtil.toBean(it, SysRoleDTO::class.java) }
+            if (!importPoi.roleNames.isNullOrBlank()) {
+                val roles: List<SysRole> = roleService.getRolesByNames(importPoi.roleNames!!.split(StrUtil.COMMA))
+                user.roles = roles.map { BeanUtil.toBean(it, SysRoleDTO::class.java) }
+            }
             // 其它处理
             user.readonly = false
             user.state = UserStateEnum.NORMAL.code
