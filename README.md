@@ -15,7 +15,7 @@ zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。�
 
 ## 技术选型
 
-| 技术                       | 名称                                                         |
+| 技术                       | 说明                                                         |
 | -------------------------- | ------------------------------------------------------------ |
 | spring boot                | 核心框架                                                     |
 | sa-token                   | 权限认证框架                                                     |
@@ -24,6 +24,7 @@ zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。�
 | knife4j                    | [一个增强版本的Swagger 前端UI](https://doc.xiaominfo.com/knife4j/)  |
 | hutool                     | [Java工具类大全](https://hutool.cn/docs/#/)                  |
 | RedisUtil                  | [最全的Java操作Redis的工具类](https://gitee.com/whvse/RedisUtil) |
+| EasyPoi                  | [简单方便的导入导出Excel](https://gitee.com/lemur/easypoi) |
 
 ## 配套项目
 
@@ -46,11 +47,6 @@ zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。�
 - Excel导入导出
 - 数据脱敏
 
-## 前端(无)
-
-[~~zeta-kotlin-web~~](https://gitee.com/xia5800/zeta-kotlin-web) (写的太辣鸡了，不好意思放出来)
-
-
 ## 写在后面
 
 本人的初衷只是想用kotlin写一个简单的curd项目练练手，可是后面写着写着就偏离了初心，于是便有了这个开源项目。
@@ -70,5 +66,6 @@ zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。�
 - sa-token [https://sa-token.dev33.cn/](https://sa-token.dev33.cn/)
 - mybatis-plus：[https://baomidou.com/](https://baomidou.com/)
 - knife4j：[https://doc.xiaominfo.com/](https://doc.xiaominfo.com/)
-- hutool：[https://hutool.cn/](https://hutool.cn/)
+- Hutool：[https://hutool.cn/](https://hutool.cn/)
+- EasyPoi：[https://hutool.cn/](http://doc.wupaas.com/docs/easypoi)
 - Soybean Admin：[https://github.com/honghuangdc/soybean-admin](https://github.com/honghuangdc/soybean-admin)
