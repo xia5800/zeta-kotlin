@@ -3,11 +3,11 @@ package com.zeta.system.model.entity
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableLogic
 import com.baomidou.mybatisplus.annotation.TableName
+import com.zeta.system.model.enums.MenuTypeEnum
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import org.zetaframework.base.entity.TreeEntity
-import javax.validation.constraints.NotBlank
-import javax.validation.constraints.Size
+import javax.validation.constraints.NotNull
 
 /**
  * <p>
@@ -53,10 +53,9 @@ class SysMenu: TreeEntity<SysMenu, Long>() {
 
     /** 菜单类型 */
     @ApiModelProperty(value = "菜单类型")
-    @get:NotBlank(message = "菜单类型不能为空")
-    @get:Size(max = 32, message = "菜单类型长度不能超过32")
+    @get:NotNull(message = "菜单类型不能为空")
     @TableField(value = "type")
-    var type: String? = null
+    var type: MenuTypeEnum? = null
 
     /** 逻辑删除字段 */
     @ApiModelProperty(value = "逻辑删除字段")

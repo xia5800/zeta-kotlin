@@ -1,8 +1,11 @@
 package com.zeta.system.model.dto.sysMenu
 
+import com.zeta.system.model.enums.MenuTypeEnum
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
+import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
 /**
@@ -15,6 +18,21 @@ import javax.validation.constraints.Size
  */
 @ApiModel(description = "新增菜单")
 data class SysMenuSaveDTO(
+
+    /** 父级id */
+    @ApiModelProperty(value = "父级id")
+    @get:NotNull(message = "父级id不能为空")
+    var parentId: Long? = null,
+
+    /** 名称cn */
+    @ApiModelProperty(value = "名称cn")
+    @get:NotBlank(message = "名称不能为空")
+    @get:Size(max = 32, message = "名称长度不能超过32")
+    var label: String? = null,
+
+    /** 排序 */
+    @ApiModelProperty(value = "排序")
+    var sortValue: Int? = null,
 
     /** 路由key */
     @ApiModelProperty(value = "路由key")
@@ -42,10 +60,8 @@ data class SysMenuSaveDTO(
 
     /** 菜单类型 */
     @ApiModelProperty(value = "菜单类型")
-    @get:NotEmpty(message = "菜单类型不能为空")
-    @get:Size(max = 32, message = "菜单类型长度不能超过32")
-    var type: String? = null,
-
+    @get:NotNull(message = "菜单类型不能为空")
+    var type: MenuTypeEnum? = null,
 
     /** 是否隐藏 0否 1是 */
     @ApiModelProperty(value = "是否隐藏 0否 1是")

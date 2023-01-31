@@ -1,5 +1,6 @@
 package com.zeta.system.model.param
 
+import com.zeta.system.model.enums.MenuTypeEnum
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDateTime
@@ -73,7 +74,7 @@ data class SysMenuQueryParam(
 
     /** 菜单类型 */
     @ApiModelProperty(value = "菜单类型")
-    var type: String? = null,
+    var type: MenuTypeEnum? = null,
 
     /** 是否隐藏 0否 1是 */
     @ApiModelProperty(value = "是否隐藏 0否 1是")

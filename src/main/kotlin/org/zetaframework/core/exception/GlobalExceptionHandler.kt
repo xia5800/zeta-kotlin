@@ -133,7 +133,7 @@ class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun httpMessageNotReadableException(ex: HttpMessageNotReadableException): ApiResult<*>? {
-        logger.warn("抛出登录认证异常：", ex)
+        logger.warn("抛出从请求中读取数据失败异常：", ex)
         var msg = ex.message
         if (StrUtil.containsAny(msg, "Could not read document:")) {
             msg = "无法正确的解析json类型的参数：${StrUtil.subBetween(msg, "Could not read document:", " at ")}"
@@ -142,6 +142,11 @@ class GlobalExceptionHandler {
         // Controller接口参数为空
         if (StrUtil.containsAny(msg, "Required request body is missing")) {
             msg = "请求参数为空"
+        }
+
+        // 接口参数枚举值不正确
+        if (StrUtil.containsAny(msg, "not one of the values accepted for Enum class")) {
+            msg = "枚举参数值不正确"
         }
         return ApiResult.result(ErrorCodeEnum.ERR_REQUEST_PARAM_EXCEPTION.code, msg, ex.message)
     }

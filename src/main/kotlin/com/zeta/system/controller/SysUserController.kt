@@ -14,8 +14,8 @@ import com.zeta.system.model.dto.sysUser.SysUserUpdateDTO
 import com.zeta.system.model.dto.sysUser.UserInfoDTO
 import com.zeta.system.model.entity.SysRole
 import com.zeta.system.model.entity.SysUser
-import com.zeta.system.model.enumeration.MenuTypeEnum
-import com.zeta.system.model.enumeration.UserStateEnum
+import com.zeta.system.model.enums.MenuTypeEnum
+import com.zeta.system.model.enums.UserStateEnum
 import com.zeta.system.model.param.ChangePasswordParam
 import com.zeta.system.model.param.ResetPasswordParam
 import com.zeta.system.model.param.SysUserQueryParam

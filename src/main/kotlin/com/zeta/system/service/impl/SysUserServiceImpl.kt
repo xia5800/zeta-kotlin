@@ -14,7 +14,7 @@ import com.zeta.system.model.dto.sysUser.SysUserUpdateDTO
 import com.zeta.system.model.entity.SysMenu
 import com.zeta.system.model.entity.SysRole
 import com.zeta.system.model.entity.SysUser
-import com.zeta.system.model.enumeration.UserStateEnum
+import com.zeta.system.model.enums.UserStateEnum
 import com.zeta.system.model.param.SysUserQueryParam
 import com.zeta.system.service.ISysRoleMenuService
 import com.zeta.system.service.ISysUserRoleService

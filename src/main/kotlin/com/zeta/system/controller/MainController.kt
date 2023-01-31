@@ -7,7 +7,7 @@ import com.github.xiaoymin.knife4j.annotations.ApiSupport
 import com.wf.captcha.SpecCaptcha
 import com.zeta.common.cacheKey.CaptchaStringCacheKey
 import com.zeta.system.model.entity.SysUser
-import com.zeta.system.model.enumeration.UserStateEnum
+import com.zeta.system.model.enums.UserStateEnum
 import com.zeta.system.model.param.LoginParam
 import com.zeta.system.model.result.CaptchaResult
 import com.zeta.system.model.result.LoginResult

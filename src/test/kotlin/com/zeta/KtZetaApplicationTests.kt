@@ -2,11 +2,10 @@ package com.zeta
 
 import cn.dev33.satoken.secure.BCrypt
 import com.zeta.system.model.entity.*
-import com.zeta.system.model.enumeration.MenuTypeEnum
-import com.zeta.system.model.enumeration.SexEnum
-import com.zeta.system.model.enumeration.UserStateEnum
+import com.zeta.system.model.enums.MenuTypeEnum
+import com.zeta.system.model.enums.SexEnum
+import com.zeta.system.model.enums.UserStateEnum
 import com.zeta.system.service.*
-import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.zetaframework.core.mybatisplus.generator.UidGenerator
@@ -273,7 +272,7 @@ class KtZetaApplicationTests {
             this.name = name
             this.component = component
             this.icon = icon
-            this.type = MenuTypeEnum.MENU.name
+            this.type = MenuTypeEnum.MENU
             this.authority = ""
         }
     }
@@ -293,7 +292,7 @@ class KtZetaApplicationTests {
             this.parentId = parentId
             this.sortValue = sortValue
             this.label = label
-            this.type = MenuTypeEnum.RESOURCE.name
+            this.type = MenuTypeEnum.RESOURCE
             this.authority = authority
         }
     }

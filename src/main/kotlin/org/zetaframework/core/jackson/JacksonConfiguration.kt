@@ -1,6 +1,7 @@
 package org.zetaframework.core.jackson
 
 import cn.hutool.core.date.DatePattern
+import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer
@@ -43,6 +44,9 @@ class JacksonConfiguration {
             builder.deserializerByType(LocalDateTime::class.java, LocalDateTimeDeserializer(DatePattern.NORM_DATETIME_FORMATTER))
             builder.deserializerByType(LocalTime::class.java, LocalTimeDeserializer(DatePattern.NORM_TIME_FORMATTER))
             builder.deserializerByType(LocalDate::class.java, LocalDateDeserializer(DatePattern.NORM_DATE_FORMATTER))
+
+            // 配置枚举使用toString方式
+            builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)
         }
     }
 }

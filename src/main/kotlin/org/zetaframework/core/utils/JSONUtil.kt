@@ -39,6 +39,8 @@ object JSONUtil{
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
         // 禁止:FAIL_ON_EMPTY_BEANS
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
+        // 允许：枚举使用toString方式
+        objectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)
 
         // 自定义扩展
         val javaTimeModule = JavaTimeModule()
