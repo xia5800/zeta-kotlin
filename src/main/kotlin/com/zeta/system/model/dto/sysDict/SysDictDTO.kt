@@ -50,8 +50,4 @@ data class SysDictDTO(
     /** 排序 */
     @ApiModelProperty(value = "排序")
     var sortValue: Int? = null,
-
-    /** 逻辑删除字段 */
-    @ApiModelProperty(value = "逻辑删除字段")
-    var deleted: Boolean? = null,
 )

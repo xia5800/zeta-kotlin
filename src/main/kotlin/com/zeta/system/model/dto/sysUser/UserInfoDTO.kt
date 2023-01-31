@@ -1,11 +1,13 @@
 package com.zeta.system.model.dto.sysUser
 
+import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 
 /**
  * 用户信息
  * @author gcc
  */
+@ApiModel(description = "用户信息")
 data class UserInfoDTO(
     /** 用户id */
     @ApiModelProperty(value = "用户id")

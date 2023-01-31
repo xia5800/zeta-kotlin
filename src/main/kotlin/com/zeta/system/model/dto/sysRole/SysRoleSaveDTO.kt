@@ -14,16 +14,16 @@ import javax.validation.constraints.NotBlank
 data class SysRoleSaveDTO(
 
     /** 角色名 */
-    @ApiModelProperty(value = "角色名")
+    @ApiModelProperty(value = "角色名", required = true)
     @get:NotBlank(message = "角色名不能为空")
     var name: String? = null,
 
     /** 角色编码 */
-    @ApiModelProperty(value = "角色编码")
+    @ApiModelProperty(value = "角色编码", required = true)
     @get:NotBlank(message = "角色编码不能为空")
     var code: String? = null,
 
     /** 描述 */
-    @ApiModelProperty(value = "描述")
+    @ApiModelProperty(value = "描述", required = false)
     var describe: String? = null,
 )

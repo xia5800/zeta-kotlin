@@ -39,6 +39,6 @@ data class SysDictItemDTO(
     var sortValue: Int? = null,
 
     /** 字典code */
-    @ApiModelProperty(value = "字典code ")
+    @ApiModelProperty(value = "字典code")
     var dictCode: String? = null,
 )

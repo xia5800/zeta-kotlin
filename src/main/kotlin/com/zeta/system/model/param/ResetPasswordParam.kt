@@ -13,12 +13,12 @@ import javax.validation.constraints.NotNull
 data class ResetPasswordParam(
 
     /** 用户id */
-    @ApiModelProperty(value = "用户id")
+    @ApiModelProperty(value = "用户id", required = true)
     @get:NotNull(message = "用户id不能为空")
     var id: Long? = null,
 
     /** 密码 */
-    @ApiModelProperty(value = "密码")
+    @ApiModelProperty(value = "密码", required = true)
     @get:NotBlank(message = "密码不能为空")
     var password: String? = null,
 )

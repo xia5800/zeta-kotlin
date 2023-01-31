@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import org.zetaframework.base.entity.SuperEntity
+import javax.validation.constraints.NotNull
 
 /**
  * 用户角色
@@ -18,11 +19,13 @@ class SysUserRole(): SuperEntity<Long>() {
 
     /** 用户id */
     @ApiModelProperty(value = "用户id")
+    @get:NotNull(message = "用户id不能为空")
     @TableField(value = "user_id")
     var userId: Long? = null
 
     /** 角色id */
     @ApiModelProperty(value = "角色id")
+    @get:NotNull(message = "角色id不能为空")
     @TableField(value = "role_id")
     var roleId: Long? = null
 

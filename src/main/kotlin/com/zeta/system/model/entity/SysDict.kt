@@ -23,32 +23,32 @@ import javax.validation.constraints.Size
 class SysDict: Entity<Long>() {
 
     /** 名称 */
-    @ApiModelProperty(value = "名称")
+    @ApiModelProperty(value = "名称", required = true)
     @get:NotBlank(message = "名称不能为空")
     @get:Size(max = 32, message = "名称长度不能超过32")
     @TableField(value = "name")
     var name: String? = null
 
     /** 编码 */
-    @ApiModelProperty(value = "编码")
+    @ApiModelProperty(value = "编码", required = true)
     @get:NotBlank(message = "编码不能为空")
     @get:Size(max = 32, message = "编码长度不能超过32")
     @TableField(value = "code")
     var code: String? = null
 
     /** 描述 */
-    @ApiModelProperty(value = "描述")
+    @ApiModelProperty(value = "描述", required = false)
     @TableField(value = "describe_")
     var describe: String? = null
 
     /** 排序 */
-    @ApiModelProperty(value = "排序")
+    @ApiModelProperty(value = "排序", required = false)
     @TableField(value = "sort_value")
     var sortValue: Int? = null
 
     /** 逻辑删除字段 */
     @JsonIgnore
-    @ApiModelProperty(value = "逻辑删除字段")
+    @ApiModelProperty(value = "逻辑删除字段", hidden = true, required = true)
     @TableLogic
     var deleted: Boolean? = null
 
