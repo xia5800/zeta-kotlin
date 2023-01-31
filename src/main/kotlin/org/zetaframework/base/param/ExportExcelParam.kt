@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank
 class ExportExcelParam<QueryParam> {
 
     /** 查询条件 */
-    @ApiModelProperty(value = "查询条件")
+    @ApiModelProperty(value = "查询条件", required = false)
     var queryParam: QueryParam? = null
 
     /** excel文件名 */

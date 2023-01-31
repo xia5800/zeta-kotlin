@@ -11,10 +11,10 @@ import io.swagger.annotations.ApiModelProperty
 @ApiModel(description = "修改状态参数")
 data class UpdateStateParam<T, U>(
     /** id */
-    @ApiModelProperty(value = "id")
+    @ApiModelProperty(value = "id", required = true)
     var id : T? = null,
 
     /** 状态 */
-    @ApiModelProperty(value = "state")
+    @ApiModelProperty(value = "state", required = true)
     var state : U? = null
 )

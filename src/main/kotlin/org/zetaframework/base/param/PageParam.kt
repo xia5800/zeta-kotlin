@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.OrderItem
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
+import javax.validation.Valid
 
 /**
  * 分页查询参数
@@ -15,29 +16,34 @@ import io.swagger.annotations.ApiModelProperty
 @ApiModel(description = "分页查询参数")
 class PageParam<T> private constructor(){
     /** 当前页 */
-    @ApiModelProperty(value = "当前页", example = "0")
-    var page: Long = 0
+    @ApiModelProperty(value = "当前页", example = "1", required = true)
+    var page: Long = 1
 
     /** 每页显示条数 */
-    @ApiModelProperty(value = "每页显示条数", example = "10")
+    @ApiModelProperty(value = "每页显示条数", example = "10", required = true)
     var limit: Long = 10
 
     /** 查询条件 */
-    @ApiModelProperty(value = "查询条件")
+    @ApiModelProperty(value = "查询条件", required = true)
+    @Valid  // 见[docs/03功能介绍/参数校验.md]常见问题
     var model: T? = null
 
     /** 排序字段 */
-    @ApiModelProperty(value = "排序字段", allowableValues = "id,createTime,updateTime", example = "id")
-    var sort: String? = null
+    @ApiModelProperty(value = "排序字段", allowableValues = "id,createTime,updateTime", example = "id", required = false)
+    var sort: String? = "id"
 
     /** 排序规则 */
-    @ApiModelProperty(value = "排序规则", allowableValues = "desc,asc", example = "desc")
-    var order: String? = null
+    @ApiModelProperty(value = "排序规则", allowableValues = "desc,asc", example = "desc", required = false)
+    var order: String? = "desc"
 
 
     constructor(page: Long, limit: Long): this() {
         this.page = page
         this.limit = limit
+    }
+
+    constructor(page: Long, limit: Long, model: T? = null): this(page, limit) {
+        this.model = model
     }
 
 
@@ -66,6 +72,47 @@ class PageParam<T> private constructor(){
         }
         page.orders = orders
         return page
+    }
+
+    /**
+     * 排序字段别名处理
+     *
+     * 说明适用于下面这种情况：
+     * ```
+     * select t1.id, t2.name from order t1 left join user t2 on t1.user_id = t2.id
+     * order by t1.id desc
+     * ```
+     *
+     * 使用方式：
+     * ```
+     * // 查询条件
+     * { "page": 1, "limit": 10, "model": { }, "order": "desc", "sort": "id" }
+     *
+     * // 使用
+     * PageParam(1, 10, Order()).setSortAlias("t1.")
+     * 或者
+     * fun customPage(@RequestBody param: PageParam<QueryParam>) {
+     *     param.setSortAlias("t1.")
+     *     // ...
+     * }
+     *
+     * // 实际生成sql
+     * select t1.id, t2.name from order t1 left join user t2 on t1.user_id = t2.id
+     * order by t1.id desc
+     * ```
+     * @param alias 别名 eg: "t1.","a.","order."
+     */
+    fun setSortAlias(alias: String) {
+        val sortArr = StrUtil.splitToArray(this.sort, StrUtil.COMMA)
+        if (sortArr.isNotEmpty()) {
+            this.sort = sortArr.joinToString(StrUtil.COMMA) {
+                if (!it.startsWith(alias)) {
+                    "$alias$it"
+                } else {
+                    it
+                }
+            }
+        }
     }
 
 }
