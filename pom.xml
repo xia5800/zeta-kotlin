@@ -33,6 +33,7 @@
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <easypoi.version>4.4.0</easypoi.version>
         <ip2region.version>2.6.6</ip2region.version>
+        <aizuda-monitor.version>1.0.0</aizuda-monitor.version>
         <aliyun-oss.version>3.15.1</aliyun-oss.version>
         <minio.version>8.4.3</minio.version>
         <!-- 更改spring boot默认依赖的okhttp版本，使其和minio依赖的okhttp版本保持一致。这样才不会导致项目启动失败 -->
@@ -290,6 +291,12 @@
             <groupId>org.lionsoul</groupId>
             <artifactId>ip2region</artifactId>
             <version>${ip2region.version}</version>
+        </dependency>
+        <!-- 获取系统信息 cpu、内存、jvm等。说明：用于前端展示服务器这些指标数据 -->
+        <dependency>
+            <groupId>com.aizuda</groupId>
+            <artifactId>aizuda-monitor</artifactId>
+            <version>${aizuda-monitor.version}</version>
         </dependency>
 
     </dependencies>

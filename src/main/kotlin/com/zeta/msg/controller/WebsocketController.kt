@@ -1,9 +1,8 @@
 package com.zeta.msg.controller
 
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
+import com.zeta.msg.model.PrivateMessageParam
 import io.swagger.annotations.Api
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
 import io.swagger.annotations.ApiOperation
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -13,7 +12,6 @@ import org.springframework.messaging.simp.user.SimpUserRegistry
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import org.zetaframework.base.result.ApiResult
-import javax.validation.constraints.NotBlank
 
 /**
  * websocket测试
@@ -77,16 +75,3 @@ class WebsocketController(
         return ApiResult.success(data = userRegistry.userCount)
     }
 }
-
-/**
- * 私聊消息参数
- */
-@ApiModel("私聊消息")
-data class PrivateMessageParam(
-    @ApiModelProperty("接收人")
-    @get:NotBlank(message = "消息接收人不能为空")
-    var toUserId: String? = null,
-    @ApiModelProperty("发送的消息")
-    @get:NotBlank(message= "消息不能为空")
-    var message: String? = null
-)
