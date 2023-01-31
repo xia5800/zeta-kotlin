@@ -3,7 +3,6 @@ package org.zetaframework.core.redis.model
 import org.springframework.data.redis.core.DefaultTypedTuple
 import org.springframework.data.redis.core.ZSetOperations
 import java.time.Duration
-import java.util.HashSet
 
 /**
  * ZSet类型的缓存key

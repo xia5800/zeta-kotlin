@@ -6,8 +6,8 @@ import com.zeta.system.service.ISysLoginLogService
 import io.swagger.annotations.Api
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import org.zetaframework.base.controller.curd.QueryController
 import org.zetaframework.base.controller.SuperSimpleController
+import org.zetaframework.base.controller.curd.QueryController
 import org.zetaframework.core.saToken.annotation.PreAuth
 
 /**

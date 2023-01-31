@@ -1,7 +1,6 @@
 package org.zetaframework.base.controller
 
 import com.baomidou.mybatisplus.extension.service.IService
-import org.zetaframework.base.result.ApiResult
 
 /**
  * 基础接口

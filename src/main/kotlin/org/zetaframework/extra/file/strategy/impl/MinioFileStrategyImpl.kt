@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
-import org.zetaframework.core.utils.JSONUtil
 import org.zetaframework.extra.file.enums.FileStorageType
 import org.zetaframework.extra.file.model.FileDeleteParam
 import org.zetaframework.extra.file.model.FileInfo

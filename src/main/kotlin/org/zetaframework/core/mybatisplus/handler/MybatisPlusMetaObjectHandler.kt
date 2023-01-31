@@ -1,5 +1,6 @@
 package org.zetaframework.core.mybatisplus.handler
 
+import com.baomidou.mybatisplus.annotation.FieldFill
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler
 import org.apache.ibatis.reflection.MetaObject
 import org.slf4j.LoggerFactory
@@ -9,7 +10,6 @@ import org.zetaframework.base.entity.SuperEntity
 import org.zetaframework.core.mybatisplus.generator.UidGenerator
 import org.zetaframework.core.utils.ContextUtil
 import java.time.LocalDateTime
-import com.baomidou.mybatisplus.annotation.FieldFill as FieldFill
 
 /**
  * 自动填充处理

@@ -8,9 +8,9 @@ import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
+import org.zetaframework.base.controller.SuperSimpleController
 import org.zetaframework.base.controller.curd.DeleteController
 import org.zetaframework.base.controller.curd.QueryController
-import org.zetaframework.base.controller.SuperSimpleController
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.saToken.annotation.PreAuth
