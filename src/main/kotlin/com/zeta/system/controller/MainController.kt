@@ -1,7 +1,6 @@
 package com.zeta.system.controller
 
 import cn.dev33.satoken.stp.StpUtil
-import cn.hutool.core.bean.BeanUtil
 import cn.hutool.core.util.StrUtil
 import com.github.xiaoymin.knife4j.annotations.ApiSupport
 import com.wf.captcha.SpecCaptcha
@@ -11,7 +10,6 @@ import com.zeta.system.model.enums.UserStateEnum
 import com.zeta.system.model.param.LoginParam
 import com.zeta.system.model.result.CaptchaResult
 import com.zeta.system.model.result.LoginResult
-import com.zeta.system.model.result.LoginUserDTO
 import com.zeta.system.service.ISysUserService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -92,8 +90,7 @@ class MainController(
         applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginSuccess(param.account!!, request = request)))
 
         // 构造登录返回结果
-        val userDto = BeanUtil.toBean(user, LoginUserDTO::class.java)
-        return success(LoginResult(StpUtil.getTokenValue(), userDto))
+        return success(LoginResult(StpUtil.getTokenName(), StpUtil.getTokenValue()))
     }
 
 
