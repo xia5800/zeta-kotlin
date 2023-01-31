@@ -78,7 +78,7 @@ class SysMenu: TreeEntity<SysMenu, Long>() {
     var href: String? = null
 
     /** 角色权限树选中状态 */
-    @ApiModelProperty("角色权限树选中状态")
+    @ApiModelProperty(value = "角色权限树选中状态")
     @TableField(exist = false)
     var checked: Boolean? = null
 

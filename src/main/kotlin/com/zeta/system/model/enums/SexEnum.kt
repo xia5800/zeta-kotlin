@@ -9,9 +9,9 @@ import io.swagger.annotations.ApiModelProperty
  */
 @ApiModel(description = "性别 枚举")
 enum class SexEnum(
-    @ApiModelProperty("性别编码")
+    @ApiModelProperty(value = "性别编码")
     var code: Int,
-    @ApiModelProperty("性别描述")
+    @ApiModelProperty(value = "性别描述")
     var msg: String
 ) {
     /** 未知 */

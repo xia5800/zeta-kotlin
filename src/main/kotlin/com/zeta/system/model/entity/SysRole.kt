@@ -18,22 +18,22 @@ import org.zetaframework.base.entity.Entity
 class SysRole: Entity<Long>() {
 
     /** 角色名 */
-    @ApiModelProperty("角色名")
+    @ApiModelProperty(value = "角色名")
     @TableField(value = "name")
     var name: String? = null
 
     /** 角色编码 */
-    @ApiModelProperty("角色编码")
+    @ApiModelProperty(value = "角色编码")
     @TableField(value = "code")
     var code: String? = null
 
     /** 描述 */
-    @ApiModelProperty("描述")
+    @ApiModelProperty(value = "描述")
     @TableField(value = "describe_")
     var describe: String? = null
 
     /** 是否删除 true or false  */
-    @ApiModelProperty("是否删除 true or false")
+    @ApiModelProperty(value = "是否删除 true or false")
     @TableLogic
     var deleted: Boolean? = null
 

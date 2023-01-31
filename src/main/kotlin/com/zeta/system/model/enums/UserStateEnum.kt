@@ -9,9 +9,9 @@ import io.swagger.annotations.ApiModelProperty
  */
 @ApiModel(description = "用户状态 枚举")
 enum class UserStateEnum(
-    @ApiModelProperty("状态码")
+    @ApiModelProperty(value = "状态码")
     var code: Int,
-    @ApiModelProperty("状态描述")
+    @ApiModelProperty(value = "状态描述")
     var msg: String)
 {
     /** 正常 */

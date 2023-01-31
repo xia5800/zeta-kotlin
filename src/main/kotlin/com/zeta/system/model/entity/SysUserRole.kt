@@ -17,12 +17,12 @@ import org.zetaframework.base.entity.SuperEntity
 class SysUserRole(): SuperEntity<Long>() {
 
     /** 用户id */
-    @ApiModelProperty("用户id")
+    @ApiModelProperty(value = "用户id")
     @TableField(value = "user_id")
     var userId: Long? = null
 
     /** 角色id */
-    @ApiModelProperty("角色id")
+    @ApiModelProperty(value = "角色id")
     @TableField(value = "role_id")
     var roleId: Long? = null
 

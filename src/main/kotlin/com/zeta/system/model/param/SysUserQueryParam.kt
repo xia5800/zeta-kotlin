@@ -13,30 +13,30 @@ import io.swagger.annotations.ApiModelProperty
 data class SysUserQueryParam (
 
     /** 用户id */
-    @ApiModelProperty("用户id")
+    @ApiModelProperty(value = "用户id")
     var id: Long? = null,
 
     /** 用户名 */
-    @ApiModelProperty("用户名")
+    @ApiModelProperty(value = "用户名")
     var username: String? = null,
 
     /** 账号 */
-    @ApiModelProperty("账号")
+    @ApiModelProperty(value = "账号")
     var account: String? = null,
 
     /** 邮箱 */
-    @ApiModelProperty("邮箱")
+    @ApiModelProperty(value = "邮箱")
     var email: String? = null,
 
     /** 手机号 */
-    @ApiModelProperty("手机号")
+    @ApiModelProperty(value = "手机号")
     var mobile: String? = null,
 
     /** 性别 */
-    @ApiModelProperty("性别")
+    @ApiModelProperty(value = "性别")
     var sex: Int? = null,
 
     /** 状态 */
-    @ApiModelProperty("状态")
+    @ApiModelProperty(value = "状态")
     var state: Int? = null,
 )

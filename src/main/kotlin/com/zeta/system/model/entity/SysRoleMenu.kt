@@ -17,12 +17,12 @@ import org.zetaframework.base.entity.SuperEntity
 class SysRoleMenu(): SuperEntity<Long>() {
 
     /** 角色id */
-    @ApiModelProperty("角色id")
+    @ApiModelProperty(value = "角色id")
     @TableField(value = "role_id")
     var roleId: Long? = null
 
     /** 菜单id */
-    @ApiModelProperty("菜单id")
+    @ApiModelProperty(value = "菜单id")
     @TableField(value = "menu_id")
     var menuId: Long? = null
 
