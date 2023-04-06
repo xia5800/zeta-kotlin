@@ -24,6 +24,7 @@ import org.zetaframework.core.log.event.SysLoginEvent
 import org.zetaframework.core.log.model.SysLoginLogDTO
 import org.zetaframework.core.redis.annotation.Limit
 import org.zetaframework.core.utils.ContextUtil
+import org.zetaframework.extra.crypto.helper.AESHelper
 import javax.servlet.http.HttpServletRequest
 
 /**
@@ -36,7 +37,8 @@ import javax.servlet.http.HttpServletRequest
 @RequestMapping("/api")
 class MainController(
     private val applicationContext: ApplicationContext,
-    private val captchaCacheKey: CaptchaStringCacheKey
+    private val captchaCacheKey: CaptchaStringCacheKey,
+    private val aseHelper: AESHelper
 ): SuperSimpleController<ISysUserService, SysUser>() {
 
     @Value("\${spring.profiles.active:prod}")
@@ -66,8 +68,15 @@ class MainController(
         // 设置用户id，方便记录日志的时候设置创建人。
         ContextUtil.setUserId(user.id!!)
 
+        // 密码解密
+        val password = try {
+            aseHelper.decryptStr(param.password!!)
+        } catch (e: Exception) {
+            ""
+        }
+
         // 判断密码
-        if(!service.comparePassword(param.password!!, user.password!!)) {
+        if(!service.comparePassword(password, user.password!!)) {
             applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginFail(
                 param.account!!, LoginStateEnum.ERROR_PWD, request
             )))
@@ -126,7 +135,7 @@ class MainController(
         val key = System.currentTimeMillis()
 
         // 验证码值缓存到redis, 5分钟有效
-        val specCaptcha = SpecCaptcha(130, 48, 5)
+        val specCaptcha = SpecCaptcha(120, 40, 5)
         captchaCacheKey.set(key, specCaptcha.text())
 
         return if ("prod" === env) {

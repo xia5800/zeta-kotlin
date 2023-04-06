@@ -79,6 +79,17 @@ zeta:
       - /**/noxss/**
       - /**/page
       - /**/query
+  # 加密解密配置
+  crypto:
+    aes:
+      # AES加密秘钥 长度规定：16、24、32
+      cryptoKey: 'kwYkDdgVXcqK03E3zioyr3ocMYmf4XYh'
+      # AES加密盐
+      cryptoIv: ''
+      # 加密模式 默认：ECB
+      mode: ECB
+      # 填充方式 默认：PKCS5Padding
+      padding: PKCS5Padding
   # websocket配置
   websocket:
     enabled: true
