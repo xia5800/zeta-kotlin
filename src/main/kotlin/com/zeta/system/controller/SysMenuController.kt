@@ -44,7 +44,7 @@ class SysMenuController: SuperController<ISysMenuService, Long, SysMenu, SysMenu
         if(menuList.isEmpty()) return fail("未查询到菜单")
 
         // 转换成树形结构
-        return success(TreeUtil.buildTree(menuList))
+        return success(TreeUtil.buildTree(menuList, false))
     }
 
 }

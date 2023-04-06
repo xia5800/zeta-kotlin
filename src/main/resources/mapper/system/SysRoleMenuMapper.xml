@@ -30,7 +30,7 @@
                 AND type = #{menuType}
             </if>
         </where>
-        ORDER BY id, sort_value
+        ORDER BY sort_value, id
     </select>
 
     <!-- 根据角色id查询菜单 -->

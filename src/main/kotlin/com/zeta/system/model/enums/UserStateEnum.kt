@@ -14,10 +14,10 @@ enum class UserStateEnum(
     @ApiModelProperty(value = "状态描述")
     var msg: String)
 {
-    /** 正常 */
-    NORMAL(0, "正常"),
     /** 禁用 */
-    FORBIDDEN(1, "禁用");
+    FORBIDDEN(0, "禁用"),
+    /** 正常 */
+    NORMAL(1, "正常");
 
 
     companion object {

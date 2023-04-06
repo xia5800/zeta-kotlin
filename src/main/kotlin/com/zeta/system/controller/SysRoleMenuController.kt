@@ -15,7 +15,9 @@ import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import org.zetaframework.base.controller.SuperSimpleController
 import org.zetaframework.base.result.ApiResult
+import org.zetaframework.core.saToken.annotation.PreAuth
 import org.zetaframework.core.saToken.annotation.PreCheckPermission
+import org.zetaframework.core.saToken.annotation.PreMode
 import org.zetaframework.core.utils.TreeUtil
 
 /**
@@ -25,6 +27,7 @@ import org.zetaframework.core.utils.TreeUtil
  * @date 2021-12-30 15:24:03
  */
 @Api(tags = ["角色菜单"])
+@PreAuth(replace = "sys:role")
 @RestController
 @RequestMapping("/api/system/roleMenu")
 class SysRoleMenuController(private val menuService: ISysMenuService) : SuperSimpleController<ISysRoleMenuService, SysRoleMenu>() {
@@ -58,7 +61,7 @@ class SysRoleMenuController(private val menuService: ISysMenuService) : SuperSim
      * @param roleMenuHandleDto SysRoleMenuHandleDTO 批量新增、修改角色菜单关联关系参数
      * @return ApiResult<Boolean>
      */
-    @PreCheckPermission(value = ["sys:role:save", "sys:role:update"]) // 同时有新增、修改角色权限
+    @PreCheckPermission(value = ["{}:edit", "{}:update"], mode = PreMode.OR)
     @ApiOperationSupport(order = 2)
     @ApiOperation(value = "新增或修改")
     @PutMapping

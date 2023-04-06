@@ -68,11 +68,15 @@ data class SysUserDTO(
     @ApiModelProperty(value = "性别")
     var sex: Int? = null,
 
+    /** 头像 */
+    @ApiModelProperty(value = "头像")
+    var avatar: String? = null,
+
     /** 生日 */
     @ApiModelProperty(value = "生日")
     var birthday: LocalDate? = null,
 
     /** 用户角色 */
     @ApiModelProperty(value = "用户角色")
-    var roleIds: List<SysRoleDTO>? = null,
+    var roles: List<SysRoleDTO>? = null,
 )
