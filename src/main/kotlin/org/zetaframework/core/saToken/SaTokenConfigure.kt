@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpStatus
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
@@ -173,6 +174,7 @@ class SaTokenConfigure(
      */
     private fun returnFail(e: Throwable): String? {
         // 初始化错误码和错误信息
+        var statusCode: Int = HttpStatus.BAD_REQUEST.value()
         var code: Int = ErrorCodeEnum.FAIL.code
         var message: String? = ""
 
@@ -188,18 +190,23 @@ class SaTokenConfigure(
                     else -> NotLoginException.DEFAULT_MESSAGE
                 }
                 code = ErrorCodeEnum.UNAUTHORIZED.code
+                statusCode = HttpStatus.UNAUTHORIZED.value()
             }
             // 处理NotRoleException和NotPermissionException异常的错误信息
             is NotRoleException, is NotPermissionException -> {
                 message = ErrorCodeEnum.FORBIDDEN.msg
                 code = ErrorCodeEnum.FORBIDDEN.code
+                statusCode = HttpStatus.FORBIDDEN.value()
             }
             // 处理其它异常的错误信息
             else -> message = e.message
         }
 
         // 手动设置Content-Type为json格式，替换之前重写SaServletFilter.doFilter方法的写法
-        SpringMVCUtil.getResponse().setHeader("Content-Type", "application/json;charset=utf-8")
+        SpringMVCUtil.getResponse().apply {
+            this.setHeader("Content-Type", "application/json;charset=utf-8")
+            this.status = statusCode
+        }
         return JSONUtil.toJsonStr(ApiResult<Boolean>(code, message))
     }
 

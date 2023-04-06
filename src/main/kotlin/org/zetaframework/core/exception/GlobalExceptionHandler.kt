@@ -174,26 +174,29 @@ class GlobalExceptionHandler {
 
 
     /**
-     * sa-token相关异常处理
+     * 角色认证异常处理
      *
      * @param ex SaTokenException
      * @return ApiResult<*>
      */
-    @ExceptionHandler(SaTokenException::class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    fun saTokenExceptionHandler(ex: SaTokenException): ApiResult<*> {
-        logger.warn("抛出sa-token相关异常：", ex)
-        var code: Int = ErrorCodeEnum.FAIL.code
-        var message: String? = ""
-        if(ex is NotLoginException) {
-            return notLoginExceptionHandler(ex)
-        } else if(ex is NotRoleException || ex is NotPermissionException) {
-            message = ErrorCodeEnum.FORBIDDEN.msg
-            code = ErrorCodeEnum.FORBIDDEN.code
-        } else {
-            message = ex.message
-        }
-        return ApiResult.result(code, message, null)
+    @ExceptionHandler(NotRoleException::class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    fun notRoleExceptionHandler(ex: NotRoleException): ApiResult<*> {
+        logger.warn("抛出角色认证异常：", ex)
+        return ApiResult.result(ErrorCodeEnum.FORBIDDEN.code, ErrorCodeEnum.FORBIDDEN.msg, null)
+    }
+
+    /**
+     * 权限认证异常处理
+     *
+     * @param ex SaTokenException
+     * @return ApiResult<*>
+     */
+    @ExceptionHandler(NotPermissionException::class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    fun notPermissionExceptionHandler(ex: NotPermissionException): ApiResult<*> {
+        logger.warn("抛出权限认证异常：", ex)
+        return ApiResult.result(ErrorCodeEnum.FORBIDDEN.code, ErrorCodeEnum.FORBIDDEN.msg, null)
     }
 
 
