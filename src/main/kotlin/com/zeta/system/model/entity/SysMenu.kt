@@ -21,18 +21,18 @@ import javax.validation.constraints.NotNull
 @TableName(value = "sys_menu")
 class SysMenu: TreeEntity<SysMenu, Long>() {
 
-    /** 路由key */
-    @ApiModelProperty(value = "路由key", required = false)
+    /** 路由名称 */
+    @ApiModelProperty(value = "路由名称", required = true)
     @TableField(value = "name")
     var name: String? = null
 
-    /** 菜单路由地址 */
-    @ApiModelProperty(value = "菜单路由地址", required = false)
+    /** 路由地址 */
+    @ApiModelProperty(value = "路由地址", required = false)
     @TableField(value = "path")
     var path: String? = null
 
-    /** 组件 */
-    @ApiModelProperty(value = "组件", required = false)
+    /** 组件地址 */
+    @ApiModelProperty(value = "组件地址", required = false)
     @TableField(value = "component")
     var component: String? = null
 
@@ -77,13 +77,18 @@ class SysMenu: TreeEntity<SysMenu, Long>() {
     @TableField(value = "href")
     var href: String? = null
 
+    /** 内链地址 */
+    @ApiModelProperty(value = "内链地址", required = false)
+    @TableField(value = "frame_src")
+    var frameSrc: String? = null
+
     /** 角色权限树选中状态 */
     @ApiModelProperty(value = "角色权限树选中状态", required = false)
     @TableField(exist = false)
     var checked: Boolean? = null
 
     override fun toString(): String {
-        return "SysMenu(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, label=$label, parentId=$parentId, sortValue=$sortValue, name=$name, path=$path, component=$component, redirect=$redirect, icon=$icon, authority=$authority, type=$type, deleted=$deleted, hide=$hide, keepAlive=$keepAlive, href=$href)"
+        return "SysMenu(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, label=$label, parentId=$parentId, sortValue=$sortValue, name=$name, path=$path, component=$component, redirect=$redirect, icon=$icon, authority=$authority, type=$type, deleted=$deleted, hide=$hide, keepAlive=$keepAlive, href=$href, frameSrc=$frameSrc)"
     }
 
 }

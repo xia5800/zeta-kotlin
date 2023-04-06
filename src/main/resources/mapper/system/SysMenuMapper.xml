@@ -23,6 +23,7 @@
         <result column="hide" jdbcType="BIT" property="hide" />
         <result column="keep_alive" jdbcType="BIT" property="keepAlive" />
         <result column="href" jdbcType="VARCHAR" property="href" />
+        <result column="frame_src" jdbcType="VARCHAR" property="frameSrc" />
     </resultMap>
 
     <!-- 表名 -->
@@ -33,7 +34,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, create_time, created_by, update_time, updated_by, label, parent_id, sort_value,
-        name, path, component, redirect, icon, authority, type, deleted, hide, keep_alive, href
+        name, path, component, redirect, icon, authority, type, deleted, hide, keep_alive, href, frame_src
     </sql>
 
     <!-- 用法：<include refid="SYS_MENU_JOIN_COLUMN_LIST"><property name="tableName" value="t1"/></include>, -->
@@ -41,7 +42,7 @@
     <sql id="SYS_MENU_JOIN_COLUMN_LIST">
         ${tableName}.id, ${tableName}.create_time, ${tableName}.created_by, ${tableName}.update_time, ${tableName}.updated_by, ${tableName}.label, ${tableName}.parent_id, ${tableName}.sort_value,
         ${tableName}.name, ${tableName}.path, ${tableName}.component, ${tableName}.redirect, ${tableName}.icon, ${tableName}.authority,
-        ${tableName}.type, ${tableName}.deleted, ${tableName}.hide, ${tableName}.keep_alive, ${tableName}.href
+        ${tableName}.type, ${tableName}.deleted, ${tableName}.hide, ${tableName}.keep_alive, ${tableName}.href, ${tableName}.frame_src
     </sql>
 
     <!-- 通用查询条件 -->
@@ -103,6 +104,9 @@
             </if>
             <if test="param.href != null and param.href != ''">
                 AND href LIKE CONCAT('%', #{param.href}, '%')
+            </if>
+            <if test="param.frameSrc != null and param.frameSrc != ''">
+                AND frame_src LIKE CONCAT('%', #{param.frameSrc}, '%')
             </if>
         </where>
     </sql>

@@ -24,26 +24,27 @@ data class SysMenuSaveDTO(
     @get:NotNull(message = "父级id不能为空")
     var parentId: Long? = null,
 
-    /** 名称 */
-    @ApiModelProperty(value = "名称", required = true)
-    @get:NotBlank(message = "名称不能为空")
-    @get:Size(max = 32, message = "名称长度不能超过32")
+    /** 菜单名称 */
+    @ApiModelProperty(value = "菜单名称", required = true)
+    @get:NotBlank(message = "菜单名称不能为空")
+    @get:Size(max = 32, message = "菜单名称长度不能超过32")
     var label: String? = null,
 
     /** 排序 */
     @ApiModelProperty(value = "排序", required = false)
     var sortValue: Int? = null,
 
-    /** 路由key */
-    @ApiModelProperty(value = "路由key", required = false)
+    /** 路由名称 */
+    @ApiModelProperty(value = "路由名称", required = true)
+    @get:NotBlank(message = "路由名称不能为空")
     var name: String? = null,
 
-    /** 菜单路由地址 */
-    @ApiModelProperty(value = "菜单路由地址", required = false)
+    /** 路由地址 */
+    @ApiModelProperty(value = "路由地址", required = false)
     var path: String? = null,
 
-    /** 组件 */
-    @ApiModelProperty(value = "组件", required = false)
+    /** 组件地址 */
+    @ApiModelProperty(value = "组件地址", required = false)
     var component: String? = null,
 
     /** 重定向地址 */
@@ -74,4 +75,8 @@ data class SysMenuSaveDTO(
     /** 外链地址 */
     @ApiModelProperty(value = "外链地址", required = false)
     var href: String? = null,
+
+    /** 内链地址 */
+    @ApiModelProperty(value = "内链地址", required = false)
+    var frameSrc: String? = null,
 )

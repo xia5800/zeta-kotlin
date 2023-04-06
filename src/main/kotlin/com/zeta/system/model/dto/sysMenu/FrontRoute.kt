@@ -29,20 +29,20 @@ class FrontRoute: TreeEntity<FrontRoute, Long>() {
     @ApiModelProperty(value = "路由名称")
     var name: String? = null
 
-    /** 路由路径 */
-    @ApiModelProperty(value = "路由路径")
+    /** 路由地址 */
+    @ApiModelProperty(value = "路由地址")
     var path: String? = null
 
-    /** 路由组件 */
-    @ApiModelProperty(value = "路由组件")
+    /** 组件地址 */
+    @ApiModelProperty(value = "组件地址")
     var component: String? = null
 
     /** 重定向地址 */
     @ApiModelProperty(value = "重定向地址")
     var redirect: String? = null
 
-    /** 路由描述 */
-    @ApiModelProperty(value = "路由描述")
+    /** 路由元数据 */
+    @ApiModelProperty(value = "路由元数据")
     var meta: RouteMeta? = null
 
     companion object {
@@ -57,7 +57,7 @@ class FrontRoute: TreeEntity<FrontRoute, Long>() {
                 this.hide = sysMenu.hide
                 this.keepAlive = sysMenu.keepAlive
                 this.href = sysMenu.href
-                this.order = sysMenu.sortValue
+                this.frameSrc = sysMenu.frameSrc
             }
 
             return FrontRoute().apply {
@@ -84,20 +84,6 @@ data class RouteMeta(
     @ApiModelProperty(value = "路由标题")
     var title: String? = null,
 
-    /** 该路由需要登录才能访问 */
-    @ApiModelProperty(value = "需要身份验证")
-    var requiresAuth: Boolean = true,
-
-    /**
-     * 角色编码列表
-     *
-     * 说明：
-     * Soybean Admin的前端菜单方案是获取系统所有的菜单，每个菜单都能让哪些角色能够访问就是通过这个字段来进行判断的。
-     * 但是zeta-kotlin项目不同，本项目用的是查询用户可以访问的菜单，返回给前端。所以这个字段不需要设置值
-     */
-    @ApiModelProperty(value = "角色编码列表")
-    var permissions: MutableList<String> = mutableListOf(),
-
     /** 菜单和面包屑对应的图标 */
     @ApiModelProperty(value = "菜单和面包屑对应的图标")
     var icon: String? = null,
@@ -110,11 +96,11 @@ data class RouteMeta(
     @ApiModelProperty(value = "是否缓存")
     var keepAlive: Boolean? = null,
 
-    /** 外链链接 */
+    /** 外链地址 */
     @ApiModelProperty(value = "外链链接")
     var href: String? = null,
 
-    /** 路由顺序，可用于菜单的排序 */
-    @ApiModelProperty(value = "路由顺序")
-    var order: Int? = null,
+    /** 内链地址 */
+    @ApiModelProperty(value = "内链地址")
+    var frameSrc: String? = null,
 )

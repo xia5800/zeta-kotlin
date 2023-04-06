@@ -48,16 +48,16 @@ data class SysMenuQueryParam(
     @ApiModelProperty(value = "排序")
     var sortValue: Int? = null,
 
-    /** 路由key */
-    @ApiModelProperty(value = "路由key")
+    /** 路由名称 */
+    @ApiModelProperty(value = "路由名称")
     var name: String? = null,
 
-    /** 菜单路由地址 */
-    @ApiModelProperty(value = "菜单路由地址")
+    /** 路由地址 */
+    @ApiModelProperty(value = "路由地址")
     var path: String? = null,
 
-    /** 组件 */
-    @ApiModelProperty(value = "组件")
+    /** 组件地址 */
+    @ApiModelProperty(value = "组件地址")
     var component: String? = null,
 
     /** 重定向地址 */
@@ -87,4 +87,8 @@ data class SysMenuQueryParam(
     /** 外链地址 */
     @ApiModelProperty(value = "外链地址")
     var href: String? = null,
+
+    /** 内链地址 */
+    @ApiModelProperty(value = "内链地址")
+    var frameSrc: String? = null,
 )
