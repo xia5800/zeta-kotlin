@@ -17,6 +17,11 @@ class ApiResult<T> {
     @ApiModelProperty(value = "状态码")
     var code: Int? = null
 
+    /** 是否成功 */
+    val success: Boolean
+        @ApiModelProperty(value = "是否成功")
+        get() = code == ErrorCodeEnum.SUCCESS.code
+
     /** 状态信息 */
     @ApiModelProperty(value = "状态信息")
     var message: String? = null
@@ -76,7 +81,7 @@ class ApiResult<T> {
          * @return ApiResult<E>
          */
         fun <E> result(code: Int?, message: String?, data: E? = null): ApiResult<E> {
-            return ApiResult(code, message)
+            return ApiResult(code, message, data)
         }
 
         /**
