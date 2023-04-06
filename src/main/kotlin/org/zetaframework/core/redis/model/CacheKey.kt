@@ -4,7 +4,7 @@ import cn.hutool.core.text.StrPool
 import cn.hutool.core.util.ObjectUtil
 import cn.hutool.core.util.StrUtil
 import org.springframework.data.redis.core.RedisTemplate
-import org.zetaframework.core.redis.util.NullVal
+import org.zetaframework.core.redis.helper.NullVal
 import java.time.Duration
 
 /**

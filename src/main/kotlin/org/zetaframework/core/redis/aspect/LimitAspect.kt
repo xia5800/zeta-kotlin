@@ -13,7 +13,7 @@ import org.springframework.web.context.request.ServletRequestAttributes
 import org.zetaframework.core.redis.annotation.Limit
 import org.zetaframework.core.redis.enmus.LimitType
 import org.zetaframework.core.redis.exception.LimitException
-import org.zetaframework.core.redis.util.RedisUtil
+import org.zetaframework.core.redis.helper.RedisHelper
 import org.zetaframework.core.utils.ContextUtil
 
 /**
@@ -22,7 +22,7 @@ import org.zetaframework.core.utils.ContextUtil
  */
 @Aspect
 @Component
-class LimitAspect(private val redisUtil: RedisUtil) {
+class LimitAspect(private val redisHelper: RedisHelper) {
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
 
@@ -51,7 +51,7 @@ class LimitAspect(private val redisUtil: RedisUtil) {
         var limitResult = false
         try {
             // 获取限流情况
-            limitResult = redisUtil.luaScriptLimit(redisKey, limitAnnotation.period, limitAnnotation.count)
+            limitResult = redisHelper.luaScriptLimit(redisKey, limitAnnotation.period, limitAnnotation.count)
         } catch (e: Exception) {
             // 获取限流情况失败
             logger.error("获取限流情况失败", e)

@@ -1,4 +1,4 @@
-package org.zetaframework.core.redis.util
+package org.zetaframework.core.redis.helper
 
 import org.springframework.core.io.ClassPathResource
 import org.springframework.data.redis.connection.DataType
@@ -11,14 +11,18 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
- * Redis工具类
+ * Redis帮助类
+ *
+ * 说明：
+ * 为什么叫Helper类，因为util类应该是只具有静态方法的类，不需要new出来也无需注入bean。所以用Helper命名比较好
  *
  * @author WangFan
  * @author gcc
- * @version 1.1 (GitHub文档: https://github.com/whvcse/RedisUtil )
+ * @version 1.1 (GitHub文档: https://github.com/whvcse/RedisHelper )
+ * @version 1.2 类名变更 util -> helper
  */
 @Suppress("UNCHECKED_CAST", "DEPRECATION", "unused")
-class RedisUtil(private val redisTemplate: RedisTemplate<String, Any>) {
+class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
 
     val valueOps: ValueOperations<String, Any> = redisTemplate.opsForValue()
     val hashOps: HashOperations<String, Any, Any> = redisTemplate.opsForHash()

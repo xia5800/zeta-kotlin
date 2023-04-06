@@ -14,7 +14,7 @@ import org.springframework.data.redis.serializer.RedisSerializationContext
 import org.springframework.data.redis.serializer.StringRedisSerializer
 import org.zetaframework.core.jackson.KtObjectMapper
 import org.zetaframework.core.redis.serializer.CustomJackson2JsonRedisSerializer
-import org.zetaframework.core.redis.util.RedisUtil
+import org.zetaframework.core.redis.helper.RedisHelper
 import java.time.Duration
 
 /**
@@ -85,13 +85,13 @@ class RedisConfiguration {
     }
 
     /**
-     * 配置Redis工具类
+     * 配置Redis帮助类
      * @param redisTemplate RedisTemplate<String, Any>
      * @return RedisOps
      */
     @Bean
-    fun redisUtil(redisTemplate: RedisTemplate<String, Any>): RedisUtil {
-        return RedisUtil(redisTemplate)
+    fun redisHelper(redisTemplate: RedisTemplate<String, Any>): RedisHelper {
+        return RedisHelper(redisTemplate)
     }
 
     /**

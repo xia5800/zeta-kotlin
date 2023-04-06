@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.type.TypeFactory
 import org.springframework.data.redis.serializer.RedisSerializer
 import org.springframework.data.redis.serializer.SerializationException
-import org.zetaframework.core.redis.util.NullVal
+import org.zetaframework.core.redis.helper.NullVal
 
 /**
  * 自定义Jackson2JsonRedisSerializer类
