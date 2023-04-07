@@ -1,5 +1,7 @@
 package com.zeta.system.controller
 
+import cn.hutool.core.bean.BeanUtil
+import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
 import com.zeta.system.model.dto.sysMenu.SysMenuSaveDTO
 import com.zeta.system.model.dto.sysMenu.SysMenuUpdateDTO
@@ -28,6 +30,25 @@ import org.zetaframework.core.utils.TreeUtil
 @RestController
 @RequestMapping("/api/system/menu")
 class SysMenuController: SuperController<ISysMenuService, Long, SysMenu, SysMenuQueryParam, SysMenuSaveDTO, SysMenuUpdateDTO>() {
+
+    /**
+     * 自定义批量查询
+     *
+     * @param param QueryParam
+     * @return MutableList<Entity>
+     */
+    override fun handlerBatchQuery(param: SysMenuQueryParam): MutableList<SysMenu> {
+        val entity = BeanUtil.toBean(param, getEntityClass())
+        // 批量查询
+        val list = service.list(
+            KtQueryWrapper<SysMenu>(entity)
+                .orderByAsc(SysMenu::sortValue, SysMenu::id)
+        )
+
+        // 处理批量查询数据
+        super.handlerBatchData(list)
+        return list
+    }
 
     /**
      * 查询菜单树
