@@ -56,37 +56,22 @@ class KtZetaApplicationTests {
 
     /**
      * 初始化系统菜单、权限
-     *
-     * 说明：
-     * 1.确定了前端，使用[soybean-admin](https://github.com/honghuangdc/soybean-admin)框架
-     * 2.菜单[图标地址](https://icones.js.org/)
      */
     fun initMenu(): List<Long> {
         val batchList: MutableList<SysMenu> = mutableListOf()
         var menuSort = 1
 
-        // dashboard
-        var dashboardSort = 1
-        val dashboardId = uidGenerator.getUid()
-        batchList.add(buildMenu(dashboardId, 0L, menuSort++, "dashboard", "/dashboard", "carbon:dashboard"))
-        // dashboard-分析页
-        val dashboardAnalysisId = uidGenerator.getUid()
-        batchList.add(buildMenu(dashboardAnalysisId, dashboardId, dashboardSort++, "分析页", "/dashboard/analysis", "icon-park-outline:analysis"))
-        // dashboard-工作台
-        val dashboardWorkbenchId = uidGenerator.getUid()
-        batchList.add(buildMenu(dashboardWorkbenchId, dashboardId, dashboardSort++, "工作台", "/dashboard/workbench", "icon-park-outline:workbench"))
-
         // 系统管理
         var systemSort = 1
         val systemId = uidGenerator.getUid()
-        batchList.add(buildMenu(systemId, 0L, menuSort++, "系统管理", "/system", "system-uicons:grid"))
+        batchList.add(buildMenu(systemId, 0L, menuSort++, "系统管理", "/system", icon = "layui-icon-set"))
         // 系统管理-用户管理
         val userId = uidGenerator.getUid()
         val userIdR = uidGenerator.getUid()
         val userIdC = uidGenerator.getUid()
         val userIdU = uidGenerator.getUid()
         val userIdD = uidGenerator.getUid()
-        batchList.add(buildMenu(userId, systemId, systemSort++, "用户管理", "/system/user", "ph:user-duotone"))
+        batchList.add(buildMenu(userId, systemId, systemSort++, "用户管理", "/system/user", "system/user"))
         batchList.add(buildButton(userIdR, userId, 1, "查看用户", "sys:user:view"))
         batchList.add(buildButton(userIdC, userId, 2, "新增用户", "sys:user:save"))
         batchList.add(buildButton(userIdU, userId, 3, "修改用户", "sys:user:update"))
@@ -97,7 +82,7 @@ class KtZetaApplicationTests {
         val roleIdC = uidGenerator.getUid()
         val roleIdU = uidGenerator.getUid()
         val roleIdD = uidGenerator.getUid()
-        batchList.add(buildMenu(roleId, systemId, systemSort++, "角色管理", "/system/role", "carbon:user-role"))
+        batchList.add(buildMenu(roleId, systemId, systemSort++, "角色管理", "/system/role", "system/role"))
         batchList.add(buildButton(roleIdR, roleId, 1, "查看角色", "sys:role:view"))
         batchList.add(buildButton(roleIdC, roleId, 2, "新增角色", "sys:role:save"))
         batchList.add(buildButton(roleIdU, roleId, 3, "修改角色", "sys:role:update"))
@@ -108,7 +93,7 @@ class KtZetaApplicationTests {
         val menuIdC = uidGenerator.getUid()
         val menuIdU = uidGenerator.getUid()
         val menuIdD = uidGenerator.getUid()
-        batchList.add(buildMenu(menuId, systemId, systemSort++, "菜单管理", "/system/menu", "ic:sharp-menu"))
+        batchList.add(buildMenu(menuId, systemId, systemSort++, "菜单管理", "/system/menu", "system/menu"))
         batchList.add(buildButton(menuIdR, menuId, 1, "查看菜单", "sys:menu:view"))
         batchList.add(buildButton(menuIdC, menuId, 2, "新增菜单", "sys:menu:save"))
         batchList.add(buildButton(menuIdU, menuId, 3, "修改菜单", "sys:menu:update"))
@@ -116,12 +101,12 @@ class KtZetaApplicationTests {
         // 系统管理-操作日志
         val optId = uidGenerator.getUid()
         val optIdR = uidGenerator.getUid()
-        batchList.add(buildMenu(optId, systemId, systemSort++, "操作日志", "/system/optLog", "carbon:flow-logs-vpc"))
+        batchList.add(buildMenu(optId, systemId, systemSort++, "操作日志", "/system/optLog", "system/optLog"))
         batchList.add(buildButton(optIdR, optId, 1, "查看操作日志", "sys:optLog:view"))
         // 系统管理-登录日志
         val loginLogId = uidGenerator.getUid()
         val loginLogIdR = uidGenerator.getUid()
-        batchList.add(buildMenu(loginLogId, systemId, systemSort++, "登录日志", "/system/loginLog", "carbon:flow-logs-vpc"))
+        batchList.add(buildMenu(loginLogId, systemId, systemSort++, "登录日志", "/system/loginLog", "system/loginLog"))
         batchList.add(buildButton(loginLogIdR, loginLogId, 1, "查看登录日志", "sys:loginLog:view"))
         // 系统管理-文件管理
         val fileId = uidGenerator.getUid()
@@ -129,7 +114,7 @@ class KtZetaApplicationTests {
         val fileIdC = uidGenerator.getUid()
         val fileIdE = uidGenerator.getUid()
         val fileIdD = uidGenerator.getUid()
-        batchList.add(buildMenu(fileId, systemId, systemSort++, "文件管理", "/system/file", "ic:baseline-file-copy"))
+        batchList.add(buildMenu(fileId, systemId, systemSort++, "文件管理", "/system/file", "system/file"))
         batchList.add(buildButton(fileIdR, fileId, 1, "查看文件", "sys:file:view"))
         batchList.add(buildButton(fileIdC, fileId, 2, "上传文件", "sys:file:save"))
         batchList.add(buildButton(fileIdE, fileId, 3, "下载文件", "sys:file:export"))
@@ -140,7 +125,7 @@ class KtZetaApplicationTests {
         val dictIdC = uidGenerator.getUid()
         val dictIdU = uidGenerator.getUid()
         val dictIdD = uidGenerator.getUid()
-        batchList.add(buildMenu(dictId, systemId, systemSort++, "数据字典", "/system/dict", "arcticons:colordict"))
+        batchList.add(buildMenu(dictId, systemId, systemSort++, "数据字典", "/system/dict", "system/dict"))
         batchList.add(buildButton(dictIdR, dictId, 1, "查看字典", "sys:dict:view"))
         batchList.add(buildButton(dictIdC, dictId, 2, "新增字典", "sys:dict:save"))
         batchList.add(buildButton(dictIdU, dictId, 3, "修改字典", "sys:dict:update"))
@@ -157,8 +142,6 @@ class KtZetaApplicationTests {
         menuService.saveBatch(batchList)
 
         return mutableListOf(
-            dashboardId,
-            dashboardAnalysisId, dashboardWorkbenchId,
             systemId,
             userId, userIdR ,userIdC, userIdU, userIdD,
             roleId, roleIdR, roleIdC, roleIdU, roleIdD,
@@ -258,11 +241,9 @@ class KtZetaApplicationTests {
      * @param path
      * @param icon
      */
-    private fun buildMenu(id: Long, parentId: Long, sortValue: Int, label: String, path: String, icon: String): SysMenu {
+    private fun buildMenu(id: Long, parentId: Long, sortValue: Int, label: String, path: String, component: String = "", icon: String = ""): SysMenu {
         // 将"/system" => "system";  "/system/user" => "system_user";  "/system/user/123" => "system_user_123"
         val name = path.split("/").filterNot { it.isBlank() }.joinToString("_")
-        // 判断组件
-        val component = if (parentId == 0L) { "basic" } else { "self" }
         return SysMenu().apply {
             this.id = id
             this.parentId = parentId
