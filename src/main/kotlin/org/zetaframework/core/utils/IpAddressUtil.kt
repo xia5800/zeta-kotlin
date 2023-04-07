@@ -41,6 +41,7 @@ object IpAddressUtil {
      */
     fun search(ip: String): String {
         if (searcher == null) return StrUtil.EMPTY
+        if (ip == "0:0:0:0:0:0:0:1") return "0|0|0|内网IP|内网IP"
 
         return try {
             searcher!!.search(ip)
