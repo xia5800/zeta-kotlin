@@ -33,4 +33,27 @@ abstract class TreeEntity<E, T: Serializable>(
     @ApiModelProperty(value = "子节点")
     @TableField(exist = false)
     open var children: MutableList<E>? = null
-): Entity<T>()
+): Entity<T>(), ITree<E, T> {
+
+    /**
+     * 获取树节点id
+     */
+    override fun getTreeId(): T? {
+        return this.id
+    }
+
+    /**
+     * 获取树父节点id
+     */
+    override fun getTreeParentId(): T? {
+        return this.parentId
+    }
+
+    /**
+     * 设置树子级
+     */
+    override fun setTreeChildren(children: MutableList<E>?) {
+        this.children = children
+    }
+
+}
