@@ -12,8 +12,7 @@ import org.zetaframework.core.log.model.SysLogDTO
  * 2. 保存系统日志的方式交给具体的业务去实现
  * @author gcc
  */
-open class SysLogListener constructor(consumer: (sysLogDTO: SysLogDTO) -> Unit) {
-    private var block = consumer
+open class SysLogListener(private val consumer: (sysLogDTO: SysLogDTO) -> Unit) {
 
     /**
      * 保存系统日志
@@ -25,6 +24,6 @@ open class SysLogListener constructor(consumer: (sysLogDTO: SysLogDTO) -> Unit) 
     @EventListener(SysLogEvent::class)
     open fun saveSysLog(event: SysLogEvent) {
         val sysLogDTO = event.source as SysLogDTO
-        block.invoke(sysLogDTO)
+        consumer.invoke(sysLogDTO)
     }
 }

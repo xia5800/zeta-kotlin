@@ -16,8 +16,7 @@ import org.zetaframework.extra.websocket.model.WsUser
  * 2. 用户上线、下线之后要做的事交给具体的业务去实现
  * @author gcc
  */
-open class WsUserEventListener constructor(consumer: (user: WsUser?, userType: WsUserTypeEnum) -> Unit) {
-    private var block = consumer
+open class WsUserEventListener(private val consumer: (user: WsUser?, userType: WsUserTypeEnum) -> Unit) {
 
     /**
      * 处理用户上线、下线事件
@@ -29,7 +28,7 @@ open class WsUserEventListener constructor(consumer: (user: WsUser?, userType: W
     @EventListener(WsUserEvent::class)
     open fun handler(event: WsUserEvent) {
         val userType = event.source as WsUserTypeEnum
-        block.invoke(event.user, userType)
+        consumer.invoke(event.user, userType)
     }
 
 }
