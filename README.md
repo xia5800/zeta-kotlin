@@ -36,6 +36,12 @@ zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。�
 ## 前端
 [zeta-web-layui](https://gitee.com/xia5800/zeta-web-layui)
 
+## 后端
+[http://localhost:8080/doc.html](http://localhost:8080/doc.html)
+
+账号：zetaAdmin
+
+密码：dDEWFk6fJKwZ55cL3zVUsQ==
 
 ## 已有功能
 
