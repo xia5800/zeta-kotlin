@@ -4,7 +4,7 @@ server:
 
 zeta:
   # 项目版本
-  version: 1.1.8
+  version: 2.0.0-SNAPSHOT
   # 项目名
   name: zeta-kotlin
   # 操作日志配置
