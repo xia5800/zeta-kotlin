@@ -270,10 +270,11 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-extra</artifactId>
-        </dependency>
+        <!-- 等待hutool兼容JDK17 -->
+        <!-- <dependency> -->
+        <!--     <groupId>cn.hutool</groupId> -->
+        <!--     <artifactId>hutool-extra</artifactId> -->
+        <!-- </dependency> -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-crypto</artifactId>

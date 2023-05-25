@@ -1,11 +1,11 @@
 package org.zetaframework.core.log.model
 
-import cn.hutool.extra.servlet.ServletUtil
 import cn.hutool.http.useragent.UserAgentUtil
 import org.zetaframework.core.log.enums.LoginStateEnum
 import org.zetaframework.core.utils.ContextUtil
 import org.zetaframework.core.utils.IpAddressUtil
 import jakarta.servlet.http.HttpServletRequest
+import org.zetaframework.core.utils.ServletUtil
 
 /**
  * 登录日志

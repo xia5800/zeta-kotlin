@@ -2,7 +2,6 @@ package org.zetaframework.core.log.aspect
 
 import cn.hutool.core.exceptions.ExceptionUtil
 import cn.hutool.core.util.StrUtil
-import cn.hutool.extra.servlet.ServletUtil
 import cn.hutool.http.useragent.UserAgentUtil
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -23,6 +22,7 @@ import org.zetaframework.core.utils.IpAddressUtil
 import org.zetaframework.core.utils.JSONUtil
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
+import org.zetaframework.core.utils.ServletUtil
 
 /**
  * 系统日志 切面

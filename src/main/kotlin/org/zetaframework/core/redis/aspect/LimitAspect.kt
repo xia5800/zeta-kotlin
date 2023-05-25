@@ -1,6 +1,5 @@
 package org.zetaframework.core.redis.aspect
 
-import cn.hutool.extra.servlet.ServletUtil
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
@@ -15,6 +14,7 @@ import org.zetaframework.core.redis.enmus.LimitType
 import org.zetaframework.core.redis.exception.LimitException
 import org.zetaframework.core.redis.helper.RedisHelper
 import org.zetaframework.core.utils.ContextUtil
+import org.zetaframework.core.utils.ServletUtil
 
 /**
  * 限流注解 切面
