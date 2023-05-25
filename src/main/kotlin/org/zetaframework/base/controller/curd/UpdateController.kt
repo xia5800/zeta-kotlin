@@ -2,7 +2,7 @@ package org.zetaframework.base.controller.curd
 
 import cn.hutool.core.bean.BeanUtil
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
-import io.swagger.annotations.ApiOperation
+import io.swagger.v3.oas.annotations.Operation
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -30,7 +30,7 @@ interface UpdateController<Entity, UpdateDTO>: BaseController<Entity> {
      */
     @PreCheckPermission(value = ["{}:edit", "{}:update"], mode = PreMode.OR)
     @ApiOperationSupport(order = 50, author = "AutoGenerate")
-    @ApiOperation(value = "修改")
+    @Operation(summary = "修改")
     @SysLog
     @PutMapping
     fun update(@RequestBody @Validated(Update::class) updateDTO: UpdateDTO): ApiResult<Boolean> {

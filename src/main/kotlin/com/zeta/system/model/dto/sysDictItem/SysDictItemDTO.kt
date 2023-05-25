@@ -1,7 +1,6 @@
 package com.zeta.system.model.dto.sysDictItem
 
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
+import io.swagger.v3.oas.annotations.media.Schema
 
 /**
  * <p>
@@ -11,34 +10,34 @@ import io.swagger.annotations.ApiModelProperty
  * @author AutoGenerator
  * @date 2022-04-15 10:38:20
  */
-@ApiModel(description = "字典项详情")
+@Schema(description = "字典项详情")
 data class SysDictItemDTO(
 
     /** id */
-    @ApiModelProperty(value = "id")
+    @Schema(description = "id")
     var id: Long? = null,
 
     /** 字典id */
-    @ApiModelProperty(value = "字典id")
+    @Schema(description = "字典id")
     var dictId: Long? = null,
 
     /** 字典项 */
-    @ApiModelProperty(value = "字典项")
+    @Schema(description = "字典项")
     var name: String? = null,
 
     /** 值 */
-    @ApiModelProperty(value = "值")
+    @Schema(description = "值")
     var value: String? = null,
 
     /** 描述 */
-    @ApiModelProperty(value = "描述")
+    @Schema(description = "描述")
     var describe: String? = null,
 
     /** 排序 */
-    @ApiModelProperty(value = "排序")
+    @Schema(description = "排序")
     var sortValue: Int? = null,
 
     /** 字典code */
-    @ApiModelProperty(value = "字典code")
+    @Schema(description = "字典code")
     var dictCode: String? = null,
 )

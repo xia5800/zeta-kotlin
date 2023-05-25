@@ -10,7 +10,7 @@ import com.zeta.system.model.poi.SysDictExportPoi
 import com.zeta.system.model.poi.SysDictImportPoi
 import com.zeta.system.poi.SysDictExcelVerifyHandler
 import com.zeta.system.service.ISysDictService
-import io.swagger.annotations.Api
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.zetaframework.base.controller.SuperController
@@ -27,7 +27,7 @@ import org.zetaframework.core.saToken.annotation.PreAuth
  * @author AutoGenerator
  * @date 2022-04-15 10:12:09
  */
-@Api(tags = ["字典"])
+@Tag(name = "字典", description = "字典")
 @PreAuth(replace = "sys:dict")
 @RestController
 @RequestMapping("/api/system/dict")

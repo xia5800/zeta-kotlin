@@ -7,9 +7,9 @@ import com.zeta.system.model.entity.SysOptLog
 import com.zeta.system.model.param.SysOptLogQueryParam
 import com.zeta.system.service.ISysOptLogService
 import com.zeta.system.service.ISysUserService
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.ApiParam
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
 import org.zetaframework.base.controller.SuperSimpleController
 import org.zetaframework.base.param.PageParam
@@ -26,7 +26,7 @@ import org.zetaframework.core.saToken.annotation.PreCheckPermission
  * @author gcc
  * @date 2022-03-18 15:27:15
  */
-@Api(tags = ["操作日志"])
+@Tag(name = "操作日志", description = "操作日志")
 @PreAuth(replace = "sys:optLog")
 @RestController
 @RequestMapping("/api/system/optLog")
@@ -39,7 +39,7 @@ class SysOptLogController(private val userService: ISysUserService): SuperSimple
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 10)
-    @ApiOperation(value = "分页查询")
+    @Operation(summary = "分页查询")
     @PostMapping("/page")
     fun page(@RequestBody param: PageParam<SysOptLogQueryParam>): ApiResult<PageResult<SysOptLogTableDTO>> {
         return success(service.pageTable(param))
@@ -53,9 +53,9 @@ class SysOptLogController(private val userService: ISysUserService): SuperSimple
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 20)
-    @ApiOperation(value = "单体查询", notes = "根据主键查询唯一数据，若查询不到则返回null")
+    @Operation(summary = "单体查询", description = "根据主键查询唯一数据，若查询不到则返回null")
     @GetMapping("/{id}")
-    fun get(@PathVariable("id") @ApiParam("主键") id: Long): ApiResult<SysOptLog> {
+    fun get(@PathVariable("id") @Parameter(description = "主键") id: Long): ApiResult<SysOptLog> {
         val entity = service.getById(id)
         if(ObjectUtil.isNotEmpty(entity)) {
             // 查询操作人

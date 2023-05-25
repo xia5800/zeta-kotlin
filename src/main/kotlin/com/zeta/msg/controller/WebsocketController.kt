@@ -2,8 +2,8 @@ package com.zeta.msg.controller
 
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
 import com.zeta.msg.model.PrivateMessageParam
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.messaging.MessagingException
@@ -17,7 +17,7 @@ import org.zetaframework.base.result.ApiResult
  * websocket测试
  * @author gcc
  */
-@Api(tags = ["websocket测试"])
+@Tag(name = "websocket测试", description = "websocket测试")
 @RestController
 @RequestMapping("/api/msg")
 class WebsocketController(
@@ -33,7 +33,7 @@ class WebsocketController(
      * @param message
      */
     @ApiOperationSupport(order = 1)
-    @ApiOperation(value = "群发消息")
+    @Operation(summary = "群发消息")
     @GetMapping("/group")
     fun group(@RequestParam message: String): ApiResult<Boolean> {
         try {
@@ -52,7 +52,7 @@ class WebsocketController(
      * @param message
      */
     @ApiOperationSupport(order = 2)
-    @ApiOperation(value = "私聊消息")
+    @Operation(summary = "私聊消息")
     @PostMapping("/group")
     fun privateChat(@RequestBody @Validated message: PrivateMessageParam): ApiResult<Boolean> {
         try {
@@ -69,7 +69,7 @@ class WebsocketController(
      * 获取当前在线人数
      */
     @ApiOperationSupport(order = 3)
-    @ApiOperation(value = "获取当前在线人数")
+    @Operation(summary = "获取当前在线人数")
     @GetMapping("/onlineUser")
     fun onlineUser(): ApiResult<Int> {
         return ApiResult.success(data = userRegistry.userCount)

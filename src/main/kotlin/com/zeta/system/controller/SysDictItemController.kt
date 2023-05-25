@@ -13,9 +13,9 @@ import com.zeta.system.model.poi.SysDictItemExportPoi
 import com.zeta.system.model.poi.SysDictItemImportPoi
 import com.zeta.system.service.ISysDictItemService
 import com.zeta.system.service.ISysDictService
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.ApiParam
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -34,7 +34,7 @@ import org.zetaframework.core.saToken.annotation.PreCheckPermission
  * @author AutoGenerator
  * @date 2022-04-15 10:12:10
  */
-@Api(tags = ["字典项"])
+@Tag(name = "字典项", description = "字典项")
 @PreAuth(replace = "sys:dictItem")
 @RestController
 @RequestMapping("/api/system/dictItem")
@@ -50,9 +50,9 @@ class SysDictItemController(
      * @param codes List<String>
      */
     @PreCheckPermission(value = ["{}:view"])
-    @ApiOperation(value = "根据字典编码查询字典项")
+    @Operation(summary = "根据字典编码查询字典项")
     @PostMapping("/codeList")
-    fun codeList(@RequestBody @ApiParam("字典code") codes: List<String>): ApiResult<Map<String, List<SysDictItemDTO>>> {
+    fun codeList(@RequestBody @Parameter(description = "字典code") codes: List<String>): ApiResult<Map<String, List<SysDictItemDTO>>> {
         Assert.notEmpty(codes, "字典code不能为空")
         return success(service.listByCodes(codes))
     }

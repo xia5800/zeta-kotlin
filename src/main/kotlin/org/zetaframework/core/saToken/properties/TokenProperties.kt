@@ -12,6 +12,9 @@ class TokenProperties(
     /** jwt签名key */
     var signerKey: String = "zeta-kotlin",
 
+    /** 请求头中token参数的名字 默认：Authorization */
+    var tokenName: String = "Authorization",
+
     /** token类型 */
     var type: TokenTypeEnum = TokenTypeEnum.DEFAULT,
 

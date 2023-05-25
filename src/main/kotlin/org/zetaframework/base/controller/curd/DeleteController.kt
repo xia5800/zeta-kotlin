@@ -1,8 +1,8 @@
 package org.zetaframework.base.controller.curd
 
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
-import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.ApiParam
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
@@ -30,10 +30,10 @@ interface DeleteController<Entity, Id: Serializable>: BaseController<Entity> {
      */
     @PreCheckPermission(value = ["{}:delete", "{}:remove"], mode = PreMode.OR)
     @ApiOperationSupport(order = 60, author = "AutoGenerate")
-    @ApiOperation(value = "单体删除")
+    @Operation(summary = "单体删除")
     @SysLog
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable @ApiParam("主键") id: Id): ApiResult<Boolean> {
+    fun delete(@PathVariable @Parameter(description = "主键") id: Id): ApiResult<Boolean> {
         val result = handlerDelete(id)
         if(result.defExec) {
             result.setData(getBaseService().removeById(id))
@@ -59,7 +59,7 @@ interface DeleteController<Entity, Id: Serializable>: BaseController<Entity> {
      */
     @PreCheckPermission(value = ["{}:delete", "{}:remove"], mode = PreMode.OR)
     @ApiOperationSupport(order = 70, author = "AutoGenerate")
-    @ApiOperation(value = "批量删除")
+    @Operation(summary = "批量删除")
     @SysLog
     @DeleteMapping("/batch")
     fun batchDelete(@RequestBody ids: MutableList<Id>): ApiResult<Boolean> {

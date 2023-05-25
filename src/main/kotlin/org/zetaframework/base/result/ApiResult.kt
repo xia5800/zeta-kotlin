@@ -1,8 +1,7 @@
 package org.zetaframework.base.result
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
+import io.swagger.v3.oas.annotations.media.Schema
 import org.zetaframework.core.enums.ErrorCodeEnum
 
 /**
@@ -10,33 +9,33 @@ import org.zetaframework.core.enums.ErrorCodeEnum
  *
  * @author gcc
  */
-@ApiModel(description = "返回结果")
+@Schema(description = "返回结果")
 class ApiResult<T> {
 
     /** 状态码 */
-    @ApiModelProperty(value = "状态码")
+    @Schema(description = "状态码")
     var code: Int? = null
 
     /** 是否成功 */
     val success: Boolean
-        @ApiModelProperty(value = "是否成功")
+        @Schema(description = "是否成功")
         get() = code == ErrorCodeEnum.SUCCESS.code
 
     /** 状态信息 */
-    @ApiModelProperty(value = "状态信息")
+    @Schema(description = "状态信息")
     var message: String? = null
 
     /** 返回数据 */
-    @ApiModelProperty(value = "返回数据")
+    @Schema(description = "返回数据")
     var data: T? = null
 
     /** 错误信息 */
-    @ApiModelProperty(value = "错误信息")
+    @Schema(description = "错误信息")
     var error: String? = null
 
     /** 是否执行默认操作 */
     @JsonIgnore
-    @ApiModelProperty(value = "是否执行默认操作", hidden = true)
+    @Schema(description = "是否执行默认操作", hidden = true)
     var defExec = true
 
     constructor() {

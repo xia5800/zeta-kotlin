@@ -4,8 +4,7 @@ import cn.hutool.core.util.StrUtil
 import com.baomidou.mybatisplus.core.metadata.IPage
 import com.baomidou.mybatisplus.core.metadata.OrderItem
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
+import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.Valid
 
 /**
@@ -13,27 +12,27 @@ import jakarta.validation.Valid
  *
  * @author gcc
  */
-@ApiModel(description = "分页查询参数")
+@Schema(description = "分页查询参数")
 class PageParam<T> private constructor(){
     /** 当前页 */
-    @ApiModelProperty(value = "当前页", example = "1", required = true)
+    @Schema(description = "当前页", example = "1", required = true)
     var page: Long = 1
 
     /** 每页显示条数 */
-    @ApiModelProperty(value = "每页显示条数", example = "10", required = true)
+    @Schema(description = "每页显示条数", example = "10", required = true)
     var limit: Long = 10
 
     /** 查询条件 */
-    @ApiModelProperty(value = "查询条件", required = true)
+    @Schema(description = "查询条件", required = true)
     @Valid  // 见[docs/03功能介绍/参数校验.md]常见问题
     var model: T? = null
 
     /** 排序字段 */
-    @ApiModelProperty(value = "排序字段", allowableValues = "id,createTime,updateTime", example = "id", required = false)
+    @Schema(description = "排序字段", allowableValues = ["id","createTime","updateTime"], example = "id", required = false)
     var sort: String? = "id"
 
     /** 排序规则 */
-    @ApiModelProperty(value = "排序规则", allowableValues = "desc,asc", example = "desc", required = false)
+    @Schema(description = "排序规则", allowableValues = ["desc","asc"], example = "desc", required = false)
     var order: String? = "desc"
 
 

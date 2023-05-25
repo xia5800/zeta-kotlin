@@ -2,7 +2,7 @@ package org.zetaframework.base.controller.extra
 
 import cn.hutool.core.bean.BeanUtil
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
-import io.swagger.annotations.ApiOperation
+import io.swagger.v3.oas.annotations.Operation
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.zetaframework.base.controller.BaseController
@@ -31,7 +31,7 @@ interface UpdateStateController<Entity, Id: Serializable, State: Serializable>: 
      */
     @PreCheckPermission(value = ["{}:edit", "{}:update"], mode = PreMode.OR)
     @ApiOperationSupport(order = 51, author = "AutoGenerate")
-    @ApiOperation(value = "修改状态")
+    @Operation(summary = "修改状态")
     @PutMapping("/state")
     fun updateState(@RequestBody param: UpdateStateParam<Id, State>): ApiResult<Boolean> {
         val result = handlerUpdateState(param)

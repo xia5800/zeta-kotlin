@@ -205,6 +205,41 @@ mybatis-plus:
       update-strategy: not_null
       where-strategy: not_empty
 
+# springdoc-openapi项目配置  https://springdoc.org
+springdoc:
+  # swagger-ui的配置 说明：不影响knife4j
+  swagger-ui:
+    path: /swagger-ui.html
+    # 标签排序规则
+    tags-sorter: sort((a, b) => a.description - b.description)
+    # 接口排序规则
+    operations-sorter: method
+    # 显示请求耗时
+    display-request-duration: true
+    # 显示字段和参数的扩展信息
+    show-common-extensions: true
+    # csrf
+    csrf:
+      enabled: true
+    # 代码高亮
+    syntax-highlight:
+      theme: obsidian
+    # 保存token数据，以保证刷新后数据不会丢失
+    persist-authorization: true
+    # 接口过滤
+    filter: true
+  api-docs:
+    path: /v3/api-docs
+  # 要匹配的路径，多个用逗号隔开，eg: /api/**, /web/**, /other/**
+  paths-to-match: /api/**
+  group-configs:
+    - group: '01.系统管理'
+      packages-to-scan: com.zeta.system
+    - group: '02.消息管理'
+      packages-to-scan: com.zeta.msg
+    - group: '03.系统监控'
+      packages-to-scan: com.zeta.monitor
+
 # knife4j配置 https://doc.xiaominfo.com/knife4j/documentation/enhance.html
 knife4j:
   # 是否开启Knife4j增强模式
@@ -212,21 +247,21 @@ knife4j:
   # 前端Ui的个性化配置属性
   setting:
     # Ui默认显示语言,目前主要有两种:中文(zh-CN)、英文(en-US)
-    language: zh-CN
+    language: zh_cn
     # 是否在每个Debug调试栏后显示刷新变量按钮,默认不显示
-    enableReloadCacheParameter: true
+    enable-reload-cache-parameter: true
     # 是否开启界面中对某接口的版本控制,如果开启，后端变化后Ui界面会存在小蓝点
-    enableVersion: true
+    enable-version: true
     # 是否显示界面中SwaggerModel功能
-    enableSwaggerModels: true
+    enable-swagger-models: true
     # 是否显示界面中"文档管理"功能
-    enableDocumentManage: true
+    enable-document-manage: true
     # 重命名SwaggerModel名称
-    swaggerModelName: 实体类列表
+    swagger-model-name: 实体类列表
     # 是否开启动态参数调试功能
-    enableDynamicParameter: true
+    enable-dynamic-parameter: true
     # 是否显示footer
-    enableFooter: false
+    enable-footer: false
 
 # Sa-Token配置 https://sa-token.dev33.cn/doc/index.html#/use/config
 sa-token:

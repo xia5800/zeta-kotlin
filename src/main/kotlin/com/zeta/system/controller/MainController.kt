@@ -11,8 +11,9 @@ import com.zeta.system.model.param.LoginParam
 import com.zeta.system.model.result.CaptchaResult
 import com.zeta.system.model.result.LoginResult
 import com.zeta.system.service.ISysUserService
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.ApplicationContext
 import org.springframework.validation.annotation.Validated
@@ -25,14 +26,13 @@ import org.zetaframework.core.log.model.SysLoginLogDTO
 import org.zetaframework.core.redis.annotation.Limit
 import org.zetaframework.core.utils.ContextUtil
 import org.zetaframework.extra.crypto.helper.AESHelper
-import jakarta.servlet.http.HttpServletRequest
 
 /**
  * 登录认证
  * @author gcc
  */
 @ApiSupport(order = 1)
-@Api(tags = ["登录认证"])
+@Tag(name = "登录认证", description = "1.登录认证")
 @RestController
 @RequestMapping("/api")
 class MainController(
@@ -50,7 +50,7 @@ class MainController(
      * @param param LoginParam
      * @return ApiResult<LoginResult>
      */
-    @ApiOperation(value = "登录")
+    @Operation(summary = "登录")
     @PostMapping("/login")
     fun login(@RequestBody @Validated param: LoginParam, request: HttpServletRequest): ApiResult<LoginResult> {
         // 验证验证码
@@ -107,7 +107,7 @@ class MainController(
      * 注销登录
      * @return ApiResult<Boolean>
      */
-    @ApiOperation(value = "注销登录")
+    @Operation(summary = "注销登录")
     @GetMapping("/logout")
     fun logout(request: HttpServletRequest): ApiResult<Boolean> {
         val user = service.getById(StpUtil.getLoginIdAsLong()) ?: return fail("用户异常")
@@ -129,7 +129,7 @@ class MainController(
      * 限流规则一分钟十次调用
      */
     @Limit(name = "验证码接口限流", count = 10, describe = "您的操作过于频繁，请稍后再试")
-    @ApiOperation(value = "图形验证码")
+    @Operation(summary = "图形验证码")
     @GetMapping("/captcha")
     fun captcha(): ApiResult<CaptchaResult> {
         val key = System.currentTimeMillis()

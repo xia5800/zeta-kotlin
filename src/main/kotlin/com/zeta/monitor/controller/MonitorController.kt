@@ -3,8 +3,8 @@ package com.zeta.monitor.controller
 import com.aizuda.monitor.OshiMonitor
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
 import com.zeta.monitor.model.ServerInfoDTO
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -20,7 +20,7 @@ import java.util.*
  *
  * @author gcc
  */
-@Api(tags = ["系统监控"])
+@Tag(name = "系统监控", description = "系统监控")
 @RestController
 @RequestMapping("/api/monitor")
 class MonitorController(
@@ -34,7 +34,7 @@ class MonitorController(
      * @return ApiResult<Boolean>
      */
     @ApiOperationSupport(order = 10)
-    @ApiOperation(value = "服务器信息")
+    @Operation(summary = "服务器信息")
     @SysLog
     @GetMapping("/server")
     fun getServerInfo(): ApiResult<ServerInfoDTO> {
@@ -62,7 +62,7 @@ class MonitorController(
      * @return ApiResult<Boolean>
      */
     @ApiOperationSupport(order = 20)
-    @ApiOperation(value = "Redis信息")
+    @Operation(summary = "Redis信息")
     @SysLog
     @GetMapping("/redis")
     fun getRedisInfo(): ApiResult<Properties?> {

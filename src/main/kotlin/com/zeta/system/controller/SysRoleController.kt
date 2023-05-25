@@ -5,7 +5,7 @@ import com.zeta.system.model.dto.sysRole.SysRoleUpdateDTO
 import com.zeta.system.model.entity.SysRole
 import com.zeta.system.model.param.SysRoleQueryParam
 import com.zeta.system.service.ISysRoleService
-import io.swagger.annotations.Api
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.zetaframework.base.controller.SuperController
@@ -20,7 +20,7 @@ import org.zetaframework.core.saToken.annotation.PreAuth
  * @author AutoGenerator
  * @date 2021-12-30 15:24:03
  */
-@Api(tags = ["角色管理"])
+@Tag(name = "角色管理", description = "3.角色管理")
 @PreAuth(replace = "sys:role")
 @RestController
 @RequestMapping("/api/system/role")

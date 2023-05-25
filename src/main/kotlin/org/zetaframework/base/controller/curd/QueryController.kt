@@ -3,8 +3,8 @@ package org.zetaframework.base.controller.curd
 import cn.hutool.core.bean.BeanUtil
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
-import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.ApiParam
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -34,7 +34,7 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 10, author = "AutoGenerate")
-    @ApiOperation(value = "分页查询")
+    @Operation(summary = "分页查询")
     @SysLog(response = false)
     @PostMapping("/page")
     fun page(@RequestBody param: PageParam<QueryParam>): ApiResult<PageResult<Entity>> {
@@ -49,7 +49,7 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 20, author = "AutoGenerate")
-    @ApiOperation(value = "批量查询")
+    @Operation(summary = "批量查询")
     @SysLog(response = false)
     @PostMapping("/query")
     fun list(@RequestBody param: QueryParam): ApiResult<MutableList<Entity>> {
@@ -86,10 +86,10 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 30, author = "AutoGenerate")
-    @ApiOperation(value = "单体查询", notes = "根据主键查询唯一数据，若查询不到则返回null")
+    @Operation(summary = "单体查询", description = "根据主键查询唯一数据，若查询不到则返回null")
     @SysLog
     @GetMapping("/{id}")
-    fun get(@PathVariable("id") @ApiParam("主键") id: Id): ApiResult<Entity?> {
+    fun get(@PathVariable("id") @Parameter(description = "主键") id: Id): ApiResult<Entity?> {
         val entity = getBaseService().getById(id)
         // 处理单体查询数据
         handlerGetData(entity)

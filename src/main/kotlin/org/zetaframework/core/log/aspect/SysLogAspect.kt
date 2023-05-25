@@ -3,8 +3,10 @@ package org.zetaframework.core.log.aspect
 import cn.hutool.core.exceptions.ExceptionUtil
 import cn.hutool.core.util.StrUtil
 import cn.hutool.http.useragent.UserAgentUtil
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.annotation.*
 import org.aspectj.lang.reflect.MethodSignature
@@ -20,8 +22,6 @@ import org.zetaframework.core.log.event.SysLogEvent
 import org.zetaframework.core.log.model.SysLogDTO
 import org.zetaframework.core.utils.IpAddressUtil
 import org.zetaframework.core.utils.JSONUtil
-import jakarta.servlet.http.HttpServletRequest
-import jakarta.servlet.http.HttpServletResponse
 import org.zetaframework.core.utils.ServletUtil
 
 /**
@@ -196,17 +196,17 @@ class SysLogAspect(private val context: ApplicationContext) {
      * 获取操作描述
      *
      * 格式：xxx-xxxx
-     * "Api注解的tags值"-"SysLog注解的value值 或 ApiOperation注解的value值"
+     * "@Tag注解的name值"-"SysLog注解的value值 或 @Operation注解的summary值"
      * @return String?
      */
     private fun getDescription(joinPoint: JoinPoint, sysLog: SysLog): String {
         val sb = StringBuilder()
 
-        // 获取@Api的value值
-        val api = joinPoint.target.javaClass.getAnnotation(Api::class.java)
+        // 获取@Tag的value值
+        val api = joinPoint.target.javaClass.getAnnotation(Tag::class.java)
         if (api != null) {
-            if(api.tags.isNotEmpty()) {
-                sb.append(api.tags[0]).append("-")
+            if(api.name.isNotBlank()) {
+                sb.append(api.name).append("-")
             }
         }
 
@@ -214,19 +214,19 @@ class SysLogAspect(private val context: ApplicationContext) {
         if (StrUtil.isNotBlank(sysLog.value)) {
             sb.append(sysLog.value)
         } else {
-            // 获取@ApiOperation的value值
+            // 获取@Operation的summary值
             val signature = joinPoint.signature as MethodSignature
             val method = signature.method
-            if (method.isAnnotationPresent(ApiOperation::class.java)) {
-                val apiOperation = method.getAnnotation(ApiOperation::class.java)
-                if (StrUtil.isNotBlank(apiOperation.value)) {
-                    sb.append(apiOperation.value)
+            if (method.isAnnotationPresent(Operation::class.java)) {
+                val apiOperation = method.getAnnotation(Operation::class.java)
+                if (StrUtil.isNotBlank(apiOperation.summary)) {
+                    sb.append(apiOperation.summary)
                 } else {
-                    // @SysLog没有value值、@ApiOperation没有value值的情况下。显示方法名
+                    // @SysLog没有value值、@Operation没有summary值的情况下。显示方法名
                     sb.append(method.name)
                 }
             } else {
-                // @SysLog没有value值、没有@ApiOperation注解的情况下。显示方法名
+                // @SysLog没有value值、没有@Operation注解的情况下。显示方法名
                 sb.append(method.name)
             }
         }

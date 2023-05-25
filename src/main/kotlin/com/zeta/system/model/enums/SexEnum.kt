@@ -1,17 +1,16 @@
 package com.zeta.system.model.enums
 
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
+import io.swagger.v3.oas.annotations.media.Schema
 
 /**
  * 性别枚举
  * @author gcc
  */
-@ApiModel(description = "性别 枚举")
+@Schema(description = "性别 枚举")
 enum class SexEnum(
-    @ApiModelProperty(value = "性别编码")
+    @Schema(description = "性别编码")
     var code: Int,
-    @ApiModelProperty(value = "性别描述")
+    @Schema(description = "性别描述")
     var msg: String
 ) {
     /** 未知 */

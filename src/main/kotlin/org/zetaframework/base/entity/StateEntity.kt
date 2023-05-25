@@ -1,7 +1,7 @@
 package org.zetaframework.base.entity
 
 import com.baomidou.mybatisplus.annotation.TableField
-import io.swagger.annotations.ApiModelProperty
+import io.swagger.v3.oas.annotations.media.Schema
 import java.io.Serializable
 
 /**
@@ -16,7 +16,7 @@ import java.io.Serializable
  */
 abstract class StateEntity<T: Serializable, U: Serializable>(
     /** 状态 */
-    @ApiModelProperty(value = "状态")
+    @Schema(description = "状态")
     @TableField(value = "state")
     open var state: U? = null
 ): Entity<T>()

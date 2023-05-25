@@ -4,10 +4,9 @@ import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableLogic
 import com.baomidou.mybatisplus.annotation.TableName
 import com.fasterxml.jackson.annotation.JsonIgnore
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
-import org.zetaframework.base.entity.Entity
+import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotBlank
+import org.zetaframework.base.entity.Entity
 
 /**
  * 角色
@@ -15,35 +14,35 @@ import jakarta.validation.constraints.NotBlank
  * @author AutoGenerator
  * @date 2021-12-30 15:24:03
  */
-@ApiModel(description = "角色")
+@Schema(description = "角色")
 @TableName(value = "sys_role")
 class SysRole: Entity<Long>() {
 
     /** 角色名 */
-    @ApiModelProperty(value = "角色名", required = true)
+    @Schema(description = "角色名", required = true)
     @get:NotBlank(message = "角色名不能为空")
     @TableField(value = "name")
     var name: String? = null
 
     /** 角色编码 */
-    @ApiModelProperty(value = "角色编码", required = true)
+    @Schema(description = "角色编码", required = true)
     @get:NotBlank(message = "角色编码不能为空")
     @TableField(value = "code")
     var code: String? = null
 
     /** 描述 */
-    @ApiModelProperty(value = "描述", required = false)
+    @Schema(description = "描述", required = false)
     @TableField(value = "describe_")
     var describe: String? = null
 
     /** 是否内置 0否 1是 */
-    @ApiModelProperty(value = "是否内置 0否 1是", required = false)
+    @Schema(description = "是否内置 0否 1是", required = false)
     @TableField(value = "readonly_")
     var readonly: Boolean? = null
 
     /** 逻辑删除字段 */
     @JsonIgnore
-    @ApiModelProperty(value = "逻辑删除字段", hidden = true)
+    @Schema(description = "逻辑删除字段", hidden = true)
     @TableLogic
     var deleted: Boolean? = null
 

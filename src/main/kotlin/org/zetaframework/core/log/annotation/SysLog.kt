@@ -11,8 +11,8 @@ package org.zetaframework.core.log.annotation
  * 使用方式：
  * ```
  *      // 使用方式一
- *      @Api(tags = ["用户管理"])  // 类上的注解
- *      @ApiOperation(value = "分页查询")
+ *      @Tag(name = ["用户管理"])  // 类上的注解
+ *      @Operation(summary = "分页查询")
  *      @SysLog // 可以不写value值。 默认使用@ApiOperation注解的value值
  *      fun page(params: PageParam<UserQueryParam>): ApiResult<PageResult<User>> { ... }
  *

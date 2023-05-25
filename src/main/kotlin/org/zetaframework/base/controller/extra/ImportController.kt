@@ -9,7 +9,9 @@ import cn.afterturn.easypoi.view.PoiBaseView
 import cn.hutool.core.convert.Convert
 import cn.hutool.core.io.FileTypeUtil
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
-import io.swagger.annotations.ApiOperation
+import io.swagger.v3.oas.annotations.Operation
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -24,8 +26,6 @@ import org.zetaframework.core.saToken.annotation.PreCheckPermission
 import org.zetaframework.core.saToken.annotation.PreMode
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
-import jakarta.servlet.http.HttpServletRequest
-import jakarta.servlet.http.HttpServletResponse
 
 /**
  * Excel导入Controller
@@ -79,7 +79,7 @@ interface ImportController<ImportBean: ImportPoi, Entity>: BaseController<Entity
      */
     @PreCheckPermission(value = ["{}:import", "{}:view"], mode = PreMode.OR)
     @ApiOperationSupport(order = 80, author = "AutoGenerate")
-    @ApiOperation(value = "获取导入模板", notes = """
+    @Operation(summary = "获取导入模板", description = """
     获取导入模板接口传参示例：
     GET /api/xxxx/template?filename=用户列表&type=XSSF&sheetName=&title=
     
@@ -133,7 +133,7 @@ interface ImportController<ImportBean: ImportPoi, Entity>: BaseController<Entity
      */
     @PreCheckPermission(value = ["{}:import", "{}:save"], mode = PreMode.OR)
     @ApiOperationSupport(order = 81, author = "AutoGenerate")
-    @ApiOperation(value = "导入Excel", notes = """
+    @Operation(summary = "导入Excel", description = """
     【注意】请求类型为form-data
     导入参数示例：
     ----------------------------------

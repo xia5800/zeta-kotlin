@@ -8,9 +8,9 @@ import com.zeta.system.model.entity.SysMenu
 import com.zeta.system.model.entity.SysRoleMenu
 import com.zeta.system.service.ISysMenuService
 import com.zeta.system.service.ISysRoleMenuService
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.ApiParam
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import org.zetaframework.base.controller.SuperSimpleController
@@ -26,7 +26,7 @@ import org.zetaframework.core.utils.TreeUtil
  * @author AutoGenerator
  * @date 2021-12-30 15:24:03
  */
-@Api(tags = ["角色菜单"])
+@Tag(name = "角色菜单", description = "角色菜单")
 @PreAuth(replace = "sys:role")
 @RestController
 @RequestMapping("/api/system/roleMenu")
@@ -41,9 +41,9 @@ class SysRoleMenuController(private val menuService: ISysMenuService) : SuperSim
      * @return ApiResult<List<SysMenu?>>
      */
     @ApiOperationSupport(order = 1)
-    @ApiOperation(value = "查询角色菜单")
+    @Operation(summary = "查询角色菜单")
     @GetMapping("/{roleId}")
-    fun list(@PathVariable("roleId") @ApiParam("角色id") roleId: Long): ApiResult<List<SysMenu?>> {
+    fun list(@PathVariable("roleId") @Parameter(description = "角色id") roleId: Long): ApiResult<List<SysMenu?>> {
         val menuList = menuService.list(KtQueryWrapper(SysMenu()).orderByAsc(SysMenu::sortValue)) ?: return success(mutableListOf())
         val roleMenuList = service.list(KtQueryWrapper(SysRoleMenu()).eq(SysRoleMenu::roleId, roleId))
         for (menu in menuList) {
@@ -63,7 +63,7 @@ class SysRoleMenuController(private val menuService: ISysMenuService) : SuperSim
      */
     @PreCheckPermission(value = ["{}:edit", "{}:update"], mode = PreMode.OR)
     @ApiOperationSupport(order = 2)
-    @ApiOperation(value = "新增或修改")
+    @Operation(summary = "新增或修改")
     @PutMapping
     fun update(@RequestBody @Validated roleMenuHandleDto: SysRoleMenuHandleDTO): ApiResult<Boolean> {
         // 修改前先删除角色所有权限

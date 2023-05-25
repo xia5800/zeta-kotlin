@@ -1,17 +1,16 @@
 package com.zeta.system.model.enums
 
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
+import io.swagger.v3.oas.annotations.media.Schema
 
 /**
  * 用户状态 枚举
  * @author gcc
  */
-@ApiModel(description = "用户状态 枚举")
+@Schema(description = "用户状态 枚举")
 enum class UserStateEnum(
-    @ApiModelProperty(value = "状态码")
+    @Schema(description = "状态码")
     var code: Int,
-    @ApiModelProperty(value = "状态描述")
+    @Schema(description = "状态描述")
     var msg: String)
 {
     /** 禁用 */

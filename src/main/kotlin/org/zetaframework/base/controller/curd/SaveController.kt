@@ -2,7 +2,7 @@ package org.zetaframework.base.controller.curd
 
 import cn.hutool.core.bean.BeanUtil
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
-import io.swagger.annotations.ApiOperation
+import io.swagger.v3.oas.annotations.Operation
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -30,7 +30,7 @@ interface SaveController<Entity, SaveDTO>: BaseController<Entity> {
     @PreCheckPermission(value = ["{}:add", "{}:save"], mode = PreMode.OR)
     @ApiOperationSupport(order = 40, author = "AutoGenerate")
     @SysLog
-    @ApiOperation(value = "新增")
+    @Operation(summary = "新增")
     @PostMapping
     fun save(@RequestBody @Validated saveDTO: SaveDTO): ApiResult<Boolean> {
         val result = handlerSave(saveDTO)

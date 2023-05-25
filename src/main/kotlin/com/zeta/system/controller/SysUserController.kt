@@ -25,8 +25,9 @@ import com.zeta.system.poi.SysUserExcelVerifyHandler
 import com.zeta.system.service.ISysRoleMenuService
 import com.zeta.system.service.ISysRoleService
 import com.zeta.system.service.ISysUserService
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.context.ApplicationContext
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
@@ -50,7 +51,6 @@ import org.zetaframework.core.saToken.annotation.PreAuth
 import org.zetaframework.core.saToken.annotation.PreCheckPermission
 import org.zetaframework.core.utils.ContextUtil
 import org.zetaframework.core.utils.TreeUtil
-import jakarta.servlet.http.HttpServletRequest
 
 /**
  * 用户 前端控制器
@@ -58,7 +58,7 @@ import jakarta.servlet.http.HttpServletRequest
  * @author AutoGenerator
  * @date 2021-12-30 15:24:03
  */
-@Api(tags = ["用户管理"])
+@Tag(name = "用户管理", description = "2.用户管理")
 @PreAuth(replace = "sys:user")
 @RestController
 @RequestMapping("/api/system/user")
@@ -81,7 +81,7 @@ class SysUserController(
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 10)
-    @ApiOperation(value = "分页查询")
+    @Operation(summary = "分页查询")
     @SysLog(response = false)
     @PostMapping("/page")
     fun page(@RequestBody param: PageParam<SysUserQueryParam>): ApiResult<PageResult<SysUserDTO>> {
@@ -275,7 +275,7 @@ class SysUserController(
      * @param param ChangePasswordParam 修改密码的参数
      * @return ApiResult<Boolean>
      */
-    @ApiOperation(value = "修改自己的密码")
+    @Operation(summary = "修改自己的密码")
     @ResponseBody
     @PutMapping("/changePwd")
     fun changePwd(@RequestBody @Validated param: ChangePasswordParam, request: HttpServletRequest): ApiResult<Boolean> {
@@ -309,7 +309,7 @@ class SysUserController(
      * @return ApiResult<Boolean>
      */
     @PreCheckPermission(value = ["{}:update"])
-    @ApiOperation(value = "重置密码")
+    @Operation(summary = "重置密码")
     @PutMapping("/restPwd")
     fun updatePwd(@RequestBody @Validated param: ResetPasswordParam, request: HttpServletRequest): ApiResult<Boolean> {
         val user = service.getById(param.id) ?: return success(true)
@@ -340,7 +340,7 @@ class SysUserController(
      * 获取当前用户基本信息
      */
     @ApiOperationSupport(order = 100)
-    @ApiOperation(value = "获取当前用户基本信息")
+    @Operation(summary = "获取当前用户基本信息")
     @GetMapping("/info")
     fun userInfo(): ApiResult<UserInfoDTO> {
         // 获取用户基本信息
@@ -358,7 +358,7 @@ class SysUserController(
      * 获取当前用户菜单
      */
     @ApiOperationSupport(order = 110)
-    @ApiOperation(value = "获取当前用户菜单")
+    @Operation(summary = "获取当前用户菜单")
     @GetMapping("/menu")
     fun userMenu(): ApiResult<List<FrontRoute>> {
         // 查询用户对应的菜单

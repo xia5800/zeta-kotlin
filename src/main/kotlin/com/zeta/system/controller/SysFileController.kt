@@ -3,9 +3,10 @@ package com.zeta.system.controller
 import com.zeta.system.model.entity.SysFile
 import com.zeta.system.model.param.SysFileQueryParam
 import com.zeta.system.service.ISysFileService
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.ApiParam
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.servlet.http.HttpServletResponse
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import org.zetaframework.base.controller.SuperSimpleController
@@ -16,7 +17,6 @@ import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.saToken.annotation.PreAuth
 import org.zetaframework.core.saToken.annotation.PreCheckPermission
 import org.zetaframework.core.saToken.annotation.PreMode
-import jakarta.servlet.http.HttpServletResponse
 
 /**
  * <p>
@@ -26,7 +26,7 @@ import jakarta.servlet.http.HttpServletResponse
  * @author AutoGenerator
  * @date 2022-04-11 11:18:44
  */
-@Api(tags = ["系统文件"])
+@Tag(name = "系统文件", description = "系统文件")
 @PreAuth(replace = "sys:file")
 @RestController
 @RequestMapping("/api/system/file")
@@ -44,13 +44,13 @@ class SysFileController: SuperSimpleController<ISysFileService, SysFile>(),
      */
     @SysLog(request = false)
     @PreCheckPermission(value = ["{}:add", "{}:save"], mode = PreMode.OR)
-    @ApiOperation(value = "上传文件")
+    @Operation(summary = "上传文件")
     @PostMapping("/upload")
     fun upload(
         @RequestParam
         file: MultipartFile,
         @RequestParam(required = false)
-        @ApiParam(value = "业务类型 例如：order、user_avatar等 会影响文件url的值", example = "avatar")
+        @Parameter(description = "业务类型 例如：order、user_avatar等 会影响文件url的值", example = "avatar")
         bizType: String? = null
     ): ApiResult<SysFile> {
         return success(service.upload(file, bizType))
@@ -65,9 +65,9 @@ class SysFileController: SuperSimpleController<ISysFileService, SysFile>(),
      */
     @SysLog(response = false)
     @PreCheckPermission(value = ["{}:export"])
-    @ApiOperation(value = "下载文件")
+    @Operation(summary = "下载文件")
     @GetMapping(value = ["/download"], produces = ["application/octet-stream"])
-    fun download(@RequestParam @ApiParam("文件id") id: Long, response: HttpServletResponse) {
+    fun download(@RequestParam @Parameter(description = "文件id") id: Long, response: HttpServletResponse) {
         service.download(id, response)
     }
 

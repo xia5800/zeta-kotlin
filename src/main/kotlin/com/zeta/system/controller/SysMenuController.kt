@@ -8,8 +8,8 @@ import com.zeta.system.model.dto.sysMenu.SysMenuUpdateDTO
 import com.zeta.system.model.entity.SysMenu
 import com.zeta.system.model.param.SysMenuQueryParam
 import com.zeta.system.service.ISysMenuService
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -25,7 +25,7 @@ import org.zetaframework.core.utils.TreeUtil
  * @author AutoGenerator
  * @date 2021-12-30 15:24:03
  */
-@Api(tags = ["菜单管理"])
+@Tag(name = "菜单管理", description = "菜单管理")
 @PreAuth(replace = "sys:menu")
 @RestController
 @RequestMapping("/api/system/menu")
@@ -57,7 +57,7 @@ class SysMenuController: SuperController<ISysMenuService, Long, SysMenu, SysMenu
      * @return List<Menu>
      */
     @ApiOperationSupport(ignoreParameters = ["children"])
-    @ApiOperation(value = "查询菜单树")
+    @Operation(summary = "查询菜单树")
     @PostMapping("/tree")
     fun tree(@RequestBody param: SysMenuQueryParam): ApiResult<List<SysMenu?>> {
         // 查询所有菜单

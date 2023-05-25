@@ -1,7 +1,6 @@
 package com.zeta.system.model.param
 
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
+import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDateTime
 
 /**
@@ -12,43 +11,43 @@ import java.time.LocalDateTime
  * @author AutoGenerator
  * @date 2022-04-15 10:38:20
  */
-@ApiModel(description = "字典查询参数")
+@Schema(description = "字典查询参数")
 data class SysDictQueryParam(
 
     /** id */
-    @ApiModelProperty(value = "id")
+    @Schema(description = "id")
     var id: Long? = null,
 
     /** 创建时间 */
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间")
     var createTime: LocalDateTime? = null,
 
     /** 创建人 */
-    @ApiModelProperty(value = "创建人")
+    @Schema(description = "创建人")
     var createdBy: Long? = null,
 
     /** 修改时间 */
-    @ApiModelProperty(value = "修改时间")
+    @Schema(description = "修改时间")
     var updateTime: LocalDateTime? = null,
 
     /** 修改人 */
-    @ApiModelProperty(value = "修改人")
+    @Schema(description = "修改人")
     var updatedBy: Long? = null,
 
     /** 名称 */
-    @ApiModelProperty(value = "名称")
+    @Schema(description = "名称")
     var name: String? = null,
 
     /** 编码 */
-    @ApiModelProperty(value = "编码")
+    @Schema(description = "编码")
     var code: String? = null,
 
     /** 描述 */
-    @ApiModelProperty(value = "描述")
+    @Schema(description = "描述")
     var describe: String? = null,
 
     /** 排序 */
-    @ApiModelProperty(value = "排序")
+    @Schema(description = "排序")
     var sortValue: Int? = null,
 
 )

@@ -7,7 +7,9 @@ import cn.afterturn.easypoi.view.PoiBaseView
 import cn.hutool.core.bean.BeanUtil
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
-import io.swagger.annotations.ApiOperation
+import io.swagger.v3.oas.annotations.Operation
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -19,8 +21,6 @@ import org.zetaframework.core.saToken.annotation.PreCheckPermission
 import org.zetaframework.core.saToken.annotation.PreMode
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
-import jakarta.servlet.http.HttpServletRequest
-import jakarta.servlet.http.HttpServletResponse
 
 /**
  * Excel导出Controller
@@ -53,7 +53,7 @@ interface ExportController<ExportBean, Entity, QueryParam>: BaseController<Entit
      */
     @PreCheckPermission(value = ["{}:export", "{}:view"], mode = PreMode.OR)
     @ApiOperationSupport(order = 85, author = "AutoGenerate")
-    @ApiOperation(value = "导出Excel", notes = """
+    @Operation(summary = "导出Excel", description = """
     导出参数示例：
     {
       "fileName": "用户列表",   // 【必传】excel的文件名
