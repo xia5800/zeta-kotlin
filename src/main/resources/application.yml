@@ -165,28 +165,29 @@ spring:
     multipart:
       max-file-size: 1024MB
       max-request-size: 1024MB
-  # redis
-  redis:
-    # Redis数据库索引（默认为0）
-    database: ${zeta.redis.database}
-    # Redis服务器地址
-    host: ${zeta.redis.ip}
-    # Redis服务器连接端口
-    port: ${zeta.redis.port}
-    # Redis服务器连接密码（默认为空）
-    password: ${zeta.redis.password}
-    # 连接超时时间
-    timeout: 10s
-    lettuce:
-      pool:
-        # 连接池最大连接数
-        max-active: 200
-        # 连接池最大阻塞等待时间（使用负值表示没有限制）
-        max-wait: -1ms
-        # 连接池中的最大空闲连接
-        max-idle: 10
-        # 连接池中的最小空闲连接
-        min-idle: 0
+  data:
+    # redis
+    redis:
+      # Redis数据库索引（默认为0）
+      database: ${zeta.redis.database}
+      # Redis服务器地址
+      host: ${zeta.redis.ip}
+      # Redis服务器连接端口
+      port: ${zeta.redis.port}
+      # Redis服务器连接密码（默认为空）
+      password: ${zeta.redis.password}
+      # 连接超时时间
+      timeout: 10s
+      lettuce:
+        pool:
+          # 连接池最大连接数
+          max-active: 200
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1ms
+          # 连接池中的最大空闲连接
+          max-idle: 10
+          # 连接池中的最小空闲连接
+          min-idle: 0
 
 # Mybatis-plus配置 https://baomidou.com/pages/56bac0/#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F
 mybatis-plus:
