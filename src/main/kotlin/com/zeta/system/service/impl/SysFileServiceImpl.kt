@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import com.zeta.system.dao.SysFileMapper
 import com.zeta.system.model.entity.SysFile
 import com.zeta.system.service.ISysFileService
+import jakarta.servlet.http.HttpServletResponse
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
 import org.springframework.stereotype.Service
@@ -15,7 +16,6 @@ import org.zetaframework.extra.file.model.FileDeleteParam
 import org.zetaframework.extra.file.model.FileInfo
 import org.zetaframework.extra.file.strategy.FileContext
 import java.io.InputStream
-import jakarta.servlet.http.HttpServletResponse
 
 /**
  * <p>

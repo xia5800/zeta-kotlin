@@ -1,10 +1,10 @@
 package org.zetaframework.core.log.model
 
 import cn.hutool.http.useragent.UserAgentUtil
+import jakarta.servlet.http.HttpServletRequest
 import org.zetaframework.core.log.enums.LoginStateEnum
 import org.zetaframework.core.utils.ContextUtil
 import org.zetaframework.core.utils.IpAddressUtil
-import jakarta.servlet.http.HttpServletRequest
 import org.zetaframework.core.utils.ServletUtil
 
 /**

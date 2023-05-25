@@ -13,8 +13,8 @@ import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.data.redis.serializer.RedisSerializationContext
 import org.springframework.data.redis.serializer.StringRedisSerializer
 import org.zetaframework.core.jackson.KtObjectMapper
-import org.zetaframework.core.redis.serializer.CustomJackson2JsonRedisSerializer
 import org.zetaframework.core.redis.helper.RedisHelper
+import org.zetaframework.core.redis.serializer.CustomJackson2JsonRedisSerializer
 import java.time.Duration
 
 /**

@@ -1,8 +1,8 @@
 package org.zetaframework.core.xss.wrapper
 
-import org.zetaframework.core.xss.cleaner.XssCleaner
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletRequestWrapper
+import org.zetaframework.core.xss.cleaner.XssCleaner
 
 /**
  * 自定义用于XSS防护的 请求包装器
