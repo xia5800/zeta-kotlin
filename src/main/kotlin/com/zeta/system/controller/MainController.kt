@@ -12,6 +12,7 @@ import com.zeta.system.model.result.CaptchaResult
 import com.zeta.system.model.result.LoginResult
 import com.zeta.system.service.ISysUserService
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.security.SecurityRequirements
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Value
@@ -50,6 +51,7 @@ class MainController(
      * @param param LoginParam
      * @return ApiResult<LoginResult>
      */
+    @SecurityRequirements
     @Operation(summary = "登录")
     @PostMapping("/login")
     fun login(@RequestBody @Validated param: LoginParam, request: HttpServletRequest): ApiResult<LoginResult> {
@@ -129,6 +131,7 @@ class MainController(
      * 限流规则一分钟十次调用
      */
     @Limit(name = "验证码接口限流", count = 10, describe = "您的操作过于频繁，请稍后再试")
+    @SecurityRequirements
     @Operation(summary = "图形验证码")
     @GetMapping("/captcha")
     fun captcha(): ApiResult<CaptchaResult> {

@@ -20,7 +20,8 @@ fun main(args: Array<String>) {
     log.info("""
 ----------------------------------------------------------
 	项目 '${env.getProperty("spring.application.name")}' 启动成功! 访问连接:
-	Swagger文档: 	 http://127.0.0.1:${env.getProperty("server.port", "8080")}/doc.html
+	Knife4j文档: 	 http://127.0.0.1:${env.getProperty("server.port", "8080")}/doc.html
+    Swagger文档: 	 http://127.0.0.1:${env.getProperty("server.port", "8080")}/swagger-ui.html
 	数据库监控: 		 http://127.0.0.1:${env.getProperty("server.port", "8080")}/druid
 ----------------------------------------------------------
     """)

@@ -16,7 +16,12 @@ zeta:
       login-username: admin
       login-password: admin123
 
-# knife4j配置 生产环境禁止访问swagger文档
+# swagger-ui配置 生产环境禁止访问
+springdoc:
+  swagger-ui:
+    enabled: false
+
+# knife4j配置 生产环境禁止访问
 knife4j:
   enable: true
   production: true

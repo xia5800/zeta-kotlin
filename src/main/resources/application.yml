@@ -207,7 +207,7 @@ mybatis-plus:
 
 # springdoc-openapi项目配置  https://springdoc.org
 springdoc:
-  # swagger-ui的配置 说明：不影响knife4j
+  # swagger-ui的配置
   swagger-ui:
     path: /swagger-ui.html
     # 标签排序规则
