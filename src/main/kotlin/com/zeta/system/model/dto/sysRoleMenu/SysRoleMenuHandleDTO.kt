@@ -2,7 +2,7 @@ package com.zeta.system.model.dto.sysRoleMenu
 
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
-import javax.validation.constraints.NotNull
+import jakarta.validation.constraints.NotNull
 
 /**
  * 批量新增、修改角色菜单关联关系

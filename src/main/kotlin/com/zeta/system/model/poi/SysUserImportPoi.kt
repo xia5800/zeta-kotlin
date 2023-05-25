@@ -4,8 +4,8 @@ import cn.afterturn.easypoi.excel.annotation.Excel
 import cn.hutool.core.date.DatePattern
 import org.zetaframework.base.entity.ImportPoi
 import java.time.LocalDate
-import javax.validation.constraints.NotBlank
-import javax.validation.constraints.Size
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.Size
 
 /**
  * 用户Excel导入数据

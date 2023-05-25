@@ -2,8 +2,8 @@ package com.zeta.system.model.poi
 
 import cn.afterturn.easypoi.excel.annotation.Excel
 import org.zetaframework.base.entity.ImportPoi
-import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotNull
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
 
 /**
  * 字典项Excel导入数据

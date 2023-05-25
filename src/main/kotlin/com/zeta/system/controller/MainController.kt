@@ -25,7 +25,7 @@ import org.zetaframework.core.log.model.SysLoginLogDTO
 import org.zetaframework.core.redis.annotation.Limit
 import org.zetaframework.core.utils.ContextUtil
 import org.zetaframework.extra.crypto.helper.AESHelper
-import javax.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletRequest
 
 /**
  * 登录认证

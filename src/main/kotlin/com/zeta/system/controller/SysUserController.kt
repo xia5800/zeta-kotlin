@@ -50,7 +50,7 @@ import org.zetaframework.core.saToken.annotation.PreAuth
 import org.zetaframework.core.saToken.annotation.PreCheckPermission
 import org.zetaframework.core.utils.ContextUtil
 import org.zetaframework.core.utils.TreeUtil
-import javax.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletRequest
 
 /**
  * 用户 前端控制器

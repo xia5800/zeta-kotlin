@@ -5,7 +5,7 @@ import cn.hutool.http.useragent.UserAgentUtil
 import org.zetaframework.core.log.enums.LoginStateEnum
 import org.zetaframework.core.utils.ContextUtil
 import org.zetaframework.core.utils.IpAddressUtil
-import javax.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletRequest
 
 /**
  * 登录日志

@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModelProperty
 import org.zetaframework.core.validation.group.Update
 import java.io.Serializable
 import java.time.LocalDateTime
-import javax.validation.constraints.NotNull
+import jakarta.validation.constraints.NotNull
 
 /**
  * 包括id、create_time、create_by字段的表继承的基础实体

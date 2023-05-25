@@ -2,7 +2,7 @@ package com.zeta.msg.model
 
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
-import javax.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotBlank
 
 /**
  * 私聊消息参数

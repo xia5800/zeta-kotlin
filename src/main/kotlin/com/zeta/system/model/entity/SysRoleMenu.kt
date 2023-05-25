@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import org.zetaframework.base.entity.SuperEntity
-import javax.validation.constraints.NotNull
+import jakarta.validation.constraints.NotNull
 
 /**
  * 角色菜单

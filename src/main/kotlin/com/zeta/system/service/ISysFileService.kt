@@ -3,7 +3,7 @@ package com.zeta.system.service
 import com.baomidou.mybatisplus.extension.service.IService
 import com.zeta.system.model.entity.SysFile
 import org.springframework.web.multipart.MultipartFile
-import javax.servlet.http.HttpServletResponse
+import jakarta.servlet.http.HttpServletResponse
 
 /**
  * <p>

@@ -21,8 +21,8 @@ import org.zetaframework.core.log.event.SysLogEvent
 import org.zetaframework.core.log.model.SysLogDTO
 import org.zetaframework.core.utils.IpAddressUtil
 import org.zetaframework.core.utils.JSONUtil
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 
 /**
  * 系统日志 切面

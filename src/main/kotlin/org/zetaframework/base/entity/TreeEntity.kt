@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.SqlCondition
 import com.baomidou.mybatisplus.annotation.TableField
 import io.swagger.annotations.ApiModelProperty
 import java.io.Serializable
-import javax.validation.constraints.NotEmpty
+import jakarta.validation.constraints.NotEmpty
 
 /**
  * 树形表结构 实体类

@@ -2,7 +2,7 @@ package org.zetaframework.base.param
 
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
-import javax.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotBlank
 
 /**
  * 获取导入Excel模板 参数

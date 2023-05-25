@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.kotlin.AbstractKtWrapper
 import com.baomidou.mybatisplus.extension.service.IService
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
-import javax.validation.constraints.NotEmpty
+import jakarta.validation.constraints.NotEmpty
 import kotlin.reflect.KProperty
 
 /**

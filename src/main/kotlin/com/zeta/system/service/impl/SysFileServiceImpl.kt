@@ -15,7 +15,7 @@ import org.zetaframework.extra.file.model.FileDeleteParam
 import org.zetaframework.extra.file.model.FileInfo
 import org.zetaframework.extra.file.strategy.FileContext
 import java.io.InputStream
-import javax.servlet.http.HttpServletResponse
+import jakarta.servlet.http.HttpServletResponse
 
 /**
  * <p>

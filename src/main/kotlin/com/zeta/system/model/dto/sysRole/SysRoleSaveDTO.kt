@@ -2,7 +2,7 @@ package com.zeta.system.model.dto.sysRole
 
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
-import javax.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotBlank
 
 /**
  * 新增 角色
