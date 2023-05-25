@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil
 import com.baomidou.mybatisplus.core.metadata.IPage
 import com.baomidou.mybatisplus.core.metadata.OrderItem
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page
+import com.fasterxml.jackson.annotation.JsonIgnore
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.Valid
 
@@ -101,6 +102,7 @@ class PageParam<T> private constructor(){
      * ```
      * @param alias 别名 eg: "t1.","a.","order."
      */
+    @JsonIgnore
     fun setSortAlias(alias: String) {
         val sortArr = StrUtil.splitToArray(this.sort, StrUtil.COMMA)
         if (sortArr.isNotEmpty()) {
