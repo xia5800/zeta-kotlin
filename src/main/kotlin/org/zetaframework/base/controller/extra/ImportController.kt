@@ -5,7 +5,6 @@ import cn.afterturn.easypoi.excel.ExcelImportUtil
 import cn.afterturn.easypoi.excel.entity.ExportParams
 import cn.afterturn.easypoi.excel.entity.ImportParams
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType
-import cn.afterturn.easypoi.view.PoiBaseView
 import cn.hutool.core.convert.Convert
 import cn.hutool.core.io.FileTypeUtil
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
@@ -21,6 +20,7 @@ import org.zetaframework.base.controller.BaseController
 import org.zetaframework.base.entity.ImportPoi
 import org.zetaframework.base.param.ImportExcelTemplateParam
 import org.zetaframework.base.result.ApiResult
+import org.zetaframework.base.view.PoiBaseView
 import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.saToken.annotation.PreCheckPermission
 import org.zetaframework.core.saToken.annotation.PreMode
