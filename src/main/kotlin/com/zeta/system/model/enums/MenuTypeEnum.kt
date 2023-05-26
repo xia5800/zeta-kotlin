@@ -1,13 +1,12 @@
 package com.zeta.system.model.enums
 
 import com.baomidou.mybatisplus.annotation.IEnum
-import io.swagger.v3.oas.annotations.media.Schema
 
 /**
  * 菜单类型
+ *
  * @author gcc
  */
-@Schema(description = "菜单类型 枚举")
 enum class MenuTypeEnum: IEnum<String> {
     /** 菜单 */
     MENU,

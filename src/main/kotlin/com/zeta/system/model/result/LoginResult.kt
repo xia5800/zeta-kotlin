@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 
 /**
  * 登录返回结果
+ *
  * @author gcc
  */
 @Schema(description = "登录返回结果")

@@ -10,9 +10,7 @@ import jakarta.validation.constraints.Size
 import org.zetaframework.base.entity.Entity
 
 /**
- * <p>
  * 字典
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:38:20

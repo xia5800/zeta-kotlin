@@ -4,9 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDateTime
 
 /**
- * <p>
  * 字典项 查询参数
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:38:20

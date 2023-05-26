@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull
 
 /**
  * 登录参数
+ *
  * @author gcc
  */
 @Schema(description = "登录参数")

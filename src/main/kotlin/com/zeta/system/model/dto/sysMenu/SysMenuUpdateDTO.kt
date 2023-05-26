@@ -7,9 +7,7 @@ import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 
 /**
- * <p>
  * 修改 菜单
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-24 17:45:03

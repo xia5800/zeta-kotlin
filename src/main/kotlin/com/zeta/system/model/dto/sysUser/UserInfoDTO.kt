@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 
 /**
  * 用户信息
+ *
  * @author gcc
  */
 @Schema(description = "用户信息")

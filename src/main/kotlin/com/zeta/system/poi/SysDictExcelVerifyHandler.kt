@@ -20,7 +20,7 @@ class SysDictExcelVerifyHandler(private val service: ISysDictService): IExcelVer
      * 导入校验方法
      *
      * @param obj 导入对象
-     * @return
+     * @return [ExcelVerifyHandlerResult]
      */
     override fun verifyHandler(obj: SysDictImportPoi): ExcelVerifyHandlerResult {
         var message = ""

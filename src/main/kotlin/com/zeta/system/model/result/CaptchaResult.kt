@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 
 /**
  * 验证码返回结果
+ *
  * @author gcc
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)

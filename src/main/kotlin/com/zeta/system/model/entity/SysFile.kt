@@ -8,9 +8,7 @@ import jakarta.validation.constraints.Size
 import org.zetaframework.base.entity.Entity
 
 /**
- * <p>
  * 系统文件
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-12 16:47:45

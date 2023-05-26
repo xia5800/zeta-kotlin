@@ -5,9 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDateTime
 
 /**
- * <p>
  * 菜单 详情
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-24 17:45:03

@@ -20,7 +20,7 @@ class SysUserExcelVerifyHandler(private val service: ISysUserService): IExcelVer
      * 导入校验方法
      *
      * @param obj 导入对象
-     * @return
+     * @return [ExcelVerifyHandlerResult]
      */
     override fun verifyHandler(obj: SysUserImportPoi): ExcelVerifyHandlerResult {
         var message = ""

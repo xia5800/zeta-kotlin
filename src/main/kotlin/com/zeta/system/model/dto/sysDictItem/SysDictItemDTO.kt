@@ -3,9 +3,7 @@ package com.zeta.system.model.dto.sysDictItem
 import io.swagger.v3.oas.annotations.media.Schema
 
 /**
- * <p>
  * 字典项 详情
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:38:20

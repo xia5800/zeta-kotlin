@@ -3,9 +3,7 @@ package com.zeta.system.model.param
 import io.swagger.v3.oas.annotations.media.Schema
 
 /**
- * <p>
  * 操作日志 查询参数
- * </p>
  *
  * @author gcc
  * @date 2022-03-18 15:27:15

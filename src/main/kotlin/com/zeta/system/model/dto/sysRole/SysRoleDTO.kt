@@ -5,6 +5,7 @@ import java.time.LocalDateTime
 
 /**
  * 角色详情
+ *
  * @author gcc
  */
 @Schema(description = "角色详情")

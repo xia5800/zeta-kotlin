@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull
 
 /**
  * 重置密码参数
+ *
  * @author gcc
  */
 @Schema(description = "重置密码参数")

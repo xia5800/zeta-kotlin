@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull
 
 /**
  * 批量新增、修改角色菜单关联关系
+ *
  * @author gcc
  */
 @Schema(description = "批量新增、修改角色菜单关联关系")

@@ -6,9 +6,7 @@ import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 
 /**
- * <p>
  * 修改 字典
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:38:20

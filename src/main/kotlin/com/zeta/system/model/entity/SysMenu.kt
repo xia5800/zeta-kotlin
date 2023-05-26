@@ -9,9 +9,7 @@ import jakarta.validation.constraints.NotNull
 import org.zetaframework.base.entity.TreeEntity
 
 /**
- * <p>
  * 菜单
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-24 17:45:03
