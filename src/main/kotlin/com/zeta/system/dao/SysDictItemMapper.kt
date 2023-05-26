@@ -7,9 +7,7 @@ import org.apache.ibatis.annotations.Param
 import org.springframework.stereotype.Repository
 
 /**
- * <p>
  * 字典项 Mapper 接口
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:12:10
@@ -20,7 +18,7 @@ interface SysDictItemMapper: BaseMapper<SysDictItem> {
     /**
      * 根据字典编码查询字典项
      *
-     * @param codes
+     * @param codes 字典编码
      */
     fun selectByDictCodes(@Param("codes") codes: List<String>): MutableList<SysDictItemDTO>
 }

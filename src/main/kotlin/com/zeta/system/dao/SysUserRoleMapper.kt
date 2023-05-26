@@ -20,7 +20,7 @@ interface SysUserRoleMapper: BaseMapper<SysUserRole> {
      * 根据用户id查询角色
      *
      * @param userId 用户id
-     * @return List<Role>
+     * @return List<[SysRole]> 角色列表
      */
     fun selectByUserId(@Param("userId") userId: Long?): List<SysRole>
 
@@ -28,7 +28,7 @@ interface SysUserRoleMapper: BaseMapper<SysUserRole> {
      * 批量根据用户id查询角色
      *
      * @param userIds 用户id集合
-     * @return List<RoleResult>
+     * @return List<[SysRoleDTO]> 角色详情列表
      */
     fun selectByUserIds(@Param("userIds") userIds: List<Long>): List<SysRoleDTO>
 }

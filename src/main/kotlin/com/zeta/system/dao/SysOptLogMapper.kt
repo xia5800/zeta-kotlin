@@ -9,9 +9,7 @@ import org.apache.ibatis.annotations.Param
 import org.springframework.stereotype.Repository
 
 /**
- * <p>
  * 操作日志 Mapper 接口
- * </p>
  *
  * @author gcc
  * @date 2022-03-18 15:27:15
@@ -24,8 +22,9 @@ interface SysOptLogMapper: BaseMapper<SysOptLog> {
      *
      * 说明：
      * 前端数据表格用，不查询请求参数、返回值、异常描述字段
-     * @param page
-     * @param param
+     *
+     * @param page 分页对象
+     * @param param 分页查询参数
      */
     fun pageTable(
         @Param("page") page: IPage<SysOptLogTableDTO>,

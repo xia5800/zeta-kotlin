@@ -16,7 +16,9 @@ interface SysUserMapper: BaseMapper<SysUser> {
 
     /**
      * 通过账号查询用户
-     * @param account String
+     *
+     * @param account 账号
+     * @return [SysUser] 用户
      */
     fun selectByAccount(@Param("account") account: String) : SysUser?
 
