@@ -20,7 +20,7 @@ class SysRoleServiceImpl: ISysRoleService, ServiceImpl<SysRoleMapper, SysRole>()
      * 通过角色名查询角色
      *
      * @param name 角色名
-     * @return 角色名对应的角色
+     * @return [SysRole] 角色名对应的角色
      */
     override fun getRoleByName(name: String): SysRole? {
         return this.getOne(KtQueryWrapper(SysRole())
@@ -33,7 +33,7 @@ class SysRoleServiceImpl: ISysRoleService, ServiceImpl<SysRoleMapper, SysRole>()
      * 通过角色名查询角色
      *
      * @param names 角色名列表
-     * @return 角色名对应的角色
+     * @return List<[SysRole]> 角色名对应的角色
      */
     override fun getRolesByNames(names: List<String>): List<SysRole> {
         return this.list(KtQueryWrapper(SysRole()).`in`(SysRole::name, names))
@@ -43,7 +43,7 @@ class SysRoleServiceImpl: ISysRoleService, ServiceImpl<SysRoleMapper, SysRole>()
      * 通过角色编码查询角色
      *
      * @param code 角色编码
-     * @return 角色编码对应的角色
+     * @return [SysRole] 角色编码对应的角色
      */
     override fun getRoleByCode(code: String): SysRole? {
         return this.getOne(KtQueryWrapper(SysRole())
@@ -56,7 +56,7 @@ class SysRoleServiceImpl: ISysRoleService, ServiceImpl<SysRoleMapper, SysRole>()
      * 通过角色编码查询角色
      *
      * @param codes 角色编码列表
-     * @return 角色编码对应的角色
+     * @return List<[SysRole]> 角色编码对应的角色
      */
     override fun getRolesByCodes(codes: List<String>): List<SysRole> {
         return this.list(KtQueryWrapper(SysRole()).`in`(SysRole::code, codes))

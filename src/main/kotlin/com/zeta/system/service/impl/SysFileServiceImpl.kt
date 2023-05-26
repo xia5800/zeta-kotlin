@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
 import org.zetaframework.core.exception.BusinessException
 import org.zetaframework.extra.file.model.FileDeleteParam
@@ -18,9 +19,7 @@ import org.zetaframework.extra.file.strategy.FileContext
 import java.io.InputStream
 
 /**
- * <p>
  * 系统文件 服务实现类
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-11 11:18:44
@@ -34,6 +33,7 @@ class SysFileServiceImpl(private val fileContext: FileContext): ISysFileService,
      *
      * @param file 文件对象
      * @param bizType 业务类型 例如：order、user_avatar等 会影响文件url的值
+     * @return [SysFile]
      */
     override fun upload(file: MultipartFile, bizType: String?): SysFile {
         // 调用具体策略(配置文件里面配置的那个，没配置默认上传到本地)上传文件
@@ -48,6 +48,8 @@ class SysFileServiceImpl(private val fileContext: FileContext): ISysFileService,
 
     /**
      * 下载文件
+     *
+     * @param id 文件id
      */
     override fun download(id: Long, response: HttpServletResponse) {
         val sysFile = this.getById(id) ?: throw BusinessException("文件不存在或已被删除")
@@ -67,7 +69,7 @@ class SysFileServiceImpl(private val fileContext: FileContext): ISysFileService,
     /**
      * 删除文件
      *
-     * @param id
+     * @param id 文件id
      */
     override fun delete(id: Long): Boolean {
         val sysFile = this.getById(id) ?: throw BusinessException("文件不存在或已被删除")
@@ -82,8 +84,9 @@ class SysFileServiceImpl(private val fileContext: FileContext): ISysFileService,
     /**
      * 批量删除文件
      *
-     * @param ids
+     * @param ids 文件id列表
      */
+    @Transactional(rollbackFor = [Exception::class])
     override fun batchDelete(ids: MutableList<Long>): Boolean {
         // 批量查询文件
         val listFile = this.listByIds(ids)

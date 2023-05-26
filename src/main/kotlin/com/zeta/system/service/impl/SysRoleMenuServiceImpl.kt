@@ -1,6 +1,5 @@
 package com.zeta.system.service.impl
 
-import cn.hutool.core.collection.CollUtil
 import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import com.zeta.common.cacheKey.SaPermissionStringCacheKey
@@ -31,7 +30,7 @@ class SysRoleMenuServiceImpl(
      *
      * @param userId    用户id
      * @param menuType  菜单类型
-     * @return List<Menu>
+     * @return List<[SysMenu]> 菜单列表
      */
     override fun listMenuByUserId(userId: Long, menuType: String?): MutableList<SysMenu> {
         return baseMapper.listMenuByUserId(userId, menuType)
@@ -42,7 +41,7 @@ class SysRoleMenuServiceImpl(
      *
      * @param roleIds   角色id
      * @param menuType  菜单类型
-     * @return List<Menu>
+     * @return List<[SysMenu]> 菜单列表
      */
     override fun listMenuByRoleIds(roleIds: List<Long>, menuType: String?): MutableList<SysMenu> {
         return baseMapper.listMenuByRoleIds(roleIds, menuType)
@@ -51,14 +50,14 @@ class SysRoleMenuServiceImpl(
     /**
      * 删除用户角色、权限缓存
      *
-     * @param roleId Long
-     * @return Boolean
+     * @param roleId 角色id
+     * @return
      */
     override fun clearUserCache(roleId: Long) {
         // 查询角色对应的用户
         val userRoleList = userRoleService.list(KtQueryWrapper(SysUserRole())
             .eq(SysUserRole::roleId, roleId))
-        if(CollUtil.isNotEmpty(userRoleList)) {
+        if(userRoleList.isNotEmpty()) {
             val userIds = userRoleList!!.map { it.userId }
             // 删除用户权限缓存
             saPermissionStringCacheKey.delete(userIds)

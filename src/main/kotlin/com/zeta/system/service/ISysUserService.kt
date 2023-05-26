@@ -22,51 +22,55 @@ interface ISysUserService : IService<SysUser> {
      * 自定义分页查询
      *
      * @param param 分页查询参数
-     * @return PageResult<SysUserDTO>
+     * @return PageResult<[SysUserDTO]>
      */
     fun customPage(param: PageParam<SysUserQueryParam>): PageResult<SysUserDTO>
 
     /**
      * 添加用户
-     * @param saveDTO SysUserSaveDTO
-     * @return Boolean
+     *
+     * @param saveDTO 新增用户参数
+     * @return
      */
     fun saveUser(saveDTO: SysUserSaveDTO): Boolean
 
     /**
      * 修改用户
-     * @param updateDTO SysUserUpdateDTO
-     * @return Boolean
+     *
+     * @param updateDTO 修改用户参数
+     * @return
      */
     fun updateUser(updateDTO: SysUserUpdateDTO): Boolean
 
     /**
      * 获取用户角色
      *
-     * @param userId Long
-     * @return List<SysRole?>
+     * @param userId 用户id
+     * @return List<[SysRoleDTO]> 角色详情列表
      */
     fun getUserRoles(userId: Long): List<SysRoleDTO>
 
     /**
      * 批量获取用户角色
-     * @param userIds List<Long>
-     * @return Map<Long, List<SysRole?>>
+     *
+     * @param userIds 用户id列表
+     * @return Map<Long, List<[SysRoleDTO]>>
      */
     fun getUserRoles(userIds: List<Long>): Map<Long, List<SysRoleDTO>>
 
     /**
      * 通过账号查询用户 （演示使用xml查询）
-     * @param account String
-     * @return User
+     *
+     * @param account 账号
+     * @return [SysUser] 用户
      */
     fun getByAccount(account: String): SysUser?
 
     /**
      * 加密用户密码
      *
-     * @param password String 明文
-     * @return String   密文
+     * @param password 明文
+     * @return 密文
      */
     fun encodePassword(password: String): String
 
@@ -74,9 +78,9 @@ interface ISysUserService : IService<SysUser> {
     /**
      * 比较密码
      *
-     * @param inputPwd String 用户输入的密码
-     * @param dbPwd String    用户数据库中的密码
-     * @return Boolean
+     * @param inputPwd 用户输入的密码
+     * @param dbPwd 用户数据库中的密码
+     * @return
      */
     fun comparePassword(inputPwd: String, dbPwd: String): Boolean
 
@@ -84,7 +88,7 @@ interface ISysUserService : IService<SysUser> {
      * 批量导入用户
      *
      * @param userList 待导入的用户列表
-     * @return Boolean
+     * @return
      */
     fun batchImportUser(userList: List<SysUser>): Boolean
 

@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service
 import org.zetaframework.core.log.model.SysLoginLogDTO
 
 /**
- * <p>
  * 登录日志 服务实现类
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-03-21 16:33:13
@@ -24,7 +22,7 @@ class SysLoginLogServiceImpl: ISysLoginLogService, ServiceImpl<SysLoginLogMapper
     /**
      * 保存用户登录日志
      *
-     * @param loginLogDTO [SysLoginLogDTO]
+     * @param loginLogDTO 新增登录日志参数
      */
     override fun save(loginLogDTO: SysLoginLogDTO) {
         val loginLog = BeanUtil.toBean(loginLogDTO, SysLoginLog::class.java)

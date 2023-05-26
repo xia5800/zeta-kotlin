@@ -14,9 +14,7 @@ import org.zetaframework.base.result.PageResult
 import org.zetaframework.core.log.model.SysLogDTO
 
 /**
- * <p>
  * 操作日志 服务实现类
- * </p>
  *
  * @author gcc
  * @date 2022-03-18 15:27:15
@@ -30,7 +28,8 @@ class SysOptLogServiceImpl: ISysOptLogService, ServiceImpl<SysOptLogMapper, SysO
      *
      * 说明：
      * [@SysLog]注解的业务实现
-     * @param org.zetaframework.core.log.model.SysLogDTO
+     *
+     * @param sysLogDTO 新增系统日志参数
      */
     override fun save(sysLogDTO: SysLogDTO) {
         val optLog = BeanUtil.toBean(sysLogDTO, SysOptLog::class.java)
@@ -38,8 +37,9 @@ class SysOptLogServiceImpl: ISysOptLogService, ServiceImpl<SysOptLogMapper, SysO
     }
 
     /**
-     * 分页查询 前端数据表格用
-     * @param param PageParam<SysOptLogQueryParam>
+     * 分页查询 （前端数据表格用）
+     *
+     * @param param 分页查询参数
      */
     override fun pageTable(param: PageParam<SysOptLogQueryParam>): PageResult<SysOptLogTableDTO> {
         val page = param.buildPage<SysOptLogTableDTO>()

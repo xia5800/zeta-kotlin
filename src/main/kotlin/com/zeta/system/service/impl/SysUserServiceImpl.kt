@@ -45,7 +45,7 @@ class SysUserServiceImpl(
      * 自定义分页查询
      *
      * @param param 分页查询参数
-     * @return PageResult<SysUserDTO>
+     * @return PageResult<[SysUserDTO]>
      */
     override fun customPage(param: PageParam<SysUserQueryParam>): PageResult<SysUserDTO> {
         // 构造分页page
@@ -77,8 +77,9 @@ class SysUserServiceImpl(
 
     /**
      * 添加用户
-     * @param saveDTO SysUserSaveDTO
-     * @return Boolean
+     *
+     * @param saveDTO 新增用户参数
+     * @return
      */
     @Transactional(rollbackFor = [Exception::class])
     override fun saveUser(saveDTO: SysUserSaveDTO): Boolean {
@@ -97,8 +98,9 @@ class SysUserServiceImpl(
 
     /**
      * 修改用户
-     * @param updateDTO SysUserUpdateDTO
-     * @return Boolean
+     *
+     * @param updateDTO 修改用户参数
+     * @return
      */
     @CacheEvict(value = [USER_PERMISSION_KEY, USER_ROLE_KEY], key = "#updateDTO.id")
     @Transactional(rollbackFor = [Exception::class])
@@ -115,8 +117,8 @@ class SysUserServiceImpl(
     /**
      * 获取用户角色
      *
-     * @param id Long
-     * @return List<SysRole?>
+     * @param userId 用户id
+     * @return List<[SysRoleDTO]> 角色详情列表
      */
     override fun getUserRoles(userId: Long): List<SysRoleDTO> {
         val result: MutableList<SysRoleDTO> = mutableListOf()
@@ -133,8 +135,9 @@ class SysUserServiceImpl(
 
     /**
      * 批量获取用户角色
-     * @param ids List<Long>
-     * @return Map<Long, List<SysRole?>>
+     *
+     * @param userIds 用户id列表
+     * @return Map<Long, List<[SysRoleDTO]>>
      */
     override fun getUserRoles(userIds: List<Long>): Map<Long, List<SysRoleDTO>> {
         // 批量根据用户id查询角色
@@ -151,8 +154,9 @@ class SysUserServiceImpl(
 
     /**
      * 通过账号查询用户 （演示使用xml查询）
-     * @param account String
-     * @return User
+     *
+     * @param account 账号
+     * @return [SysUser] 用户
      */
     override fun getByAccount(account: String): SysUser? {
         try {
@@ -166,17 +170,17 @@ class SysUserServiceImpl(
     /**
      * 加密用户密码
      *
-     * @param password String 明文
-     * @return String   密文
+     * @param password 明文
+     * @return 密文
      */
     override fun encodePassword(password: String): String = BCrypt.hashpw(password)
 
     /**
      * 比较密码
      *
-     * @param inputPwd String 用户输入的密码
-     * @param dbPwd String    用户数据库中的密码
-     * @return Boolean
+     * @param inputPwd 用户输入的密码
+     * @param dbPwd 用户数据库中的密码
+     * @return
      */
     override fun comparePassword(inputPwd: String, dbPwd: String): Boolean = BCrypt.checkpw(inputPwd, dbPwd)
 
@@ -185,7 +189,7 @@ class SysUserServiceImpl(
      * 批量导入用户
      *
      * @param userList 待导入的用户列表
-     * @return Boolean
+     * @return
      */
     @Transactional(rollbackFor = [Exception::class])
     override fun batchImportUser(userList: List<SysUser>): Boolean {
@@ -211,7 +215,7 @@ class SysUserServiceImpl(
     /**
      * 返回指定账号id所拥有的权限码集合
      *
-     * @param loginId  账号id
+     * @param loginId 账号id
      * @param loginType 账号类型
      * @return 该账号id具有的权限码集合
      */
@@ -228,7 +232,7 @@ class SysUserServiceImpl(
     /**
      * 返回指定账号id所拥有的角色标识集合
      *
-     * @param loginId  账号id
+     * @param loginId 账号id
      * @param loginType 账号类型
      * @return 该账号id具有的角色标识集合
      */

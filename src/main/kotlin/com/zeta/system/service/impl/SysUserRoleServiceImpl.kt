@@ -26,7 +26,7 @@ class SysUserRoleServiceImpl: ISysUserRoleService, ServiceImpl<SysUserRoleMapper
      * 根据用户id查询角色
      *
      * @param userId 用户id
-     * @return List<Role>
+     * @return List<[SysRole]> 角色列表
      */
     override fun listByUserId(userId: Long): List<SysRole> {
         return baseMapper.selectByUserId(userId)
@@ -36,7 +36,7 @@ class SysUserRoleServiceImpl: ISysUserRoleService, ServiceImpl<SysUserRoleMapper
      * 批量根据用户id查询角色
      *
      * @param userIds 用户id集合
-     * @return List<RoleResult>
+     * @return List<[SysRoleDTO]> 角色详情列表
      */
     override fun listByUserIds(userIds: List<Long>): List<SysRoleDTO> {
         return baseMapper.selectByUserIds(userIds)
@@ -45,8 +45,8 @@ class SysUserRoleServiceImpl: ISysUserRoleService, ServiceImpl<SysUserRoleMapper
     /**
      * 关联用户角色
      *
-     * @param userId Long
-     * @param roIeds List<Long>
+     * @param userId 用户id
+     * @param roleIds 角色id列表
      * @return
      */
     @Transactional(rollbackFor = [Exception::class])
@@ -54,7 +54,7 @@ class SysUserRoleServiceImpl: ISysUserRoleService, ServiceImpl<SysUserRoleMapper
         // 删除用户角色关联
         this.remove(KtQueryWrapper(SysUserRole()).eq(SysUserRole::userId, userId))
 
-        if(roleIds == null || roleIds.isEmpty()) {
+        if(roleIds.isNullOrEmpty()) {
             return true;
         }
 
@@ -66,8 +66,8 @@ class SysUserRoleServiceImpl: ISysUserRoleService, ServiceImpl<SysUserRoleMapper
     /**
      * 关联用户角色
      *
-     * @param userId Long
-     * @param roleId Long
+     * @param userId 用户id
+     * @param roleId 角色id
      * @return
      */
     @Transactional(rollbackFor = [Exception::class])

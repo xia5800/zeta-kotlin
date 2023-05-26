@@ -17,7 +17,7 @@ interface ISysRoleMenuService: IService<SysRoleMenu> {
      *
      * @param userId    用户id
      * @param menuType  菜单类型
-     * @return List<Menu>
+     * @return List<[SysMenu]> 菜单列表
      */
     fun listMenuByUserId(userId: Long, menuType: String? = null): MutableList<SysMenu>
 
@@ -26,15 +26,15 @@ interface ISysRoleMenuService: IService<SysRoleMenu> {
      *
      * @param roleIds   角色id
      * @param menuType  菜单类型
-     * @return List<Menu>
+     * @return List<[SysMenu]> 菜单列表
      */
     fun listMenuByRoleIds(roleIds: List<Long>, menuType: String? = null): MutableList<SysMenu>
 
     /**
      * 删除用户角色、权限缓存
      *
-     * @param roleId Long
-     * @return Boolean
+     * @param roleId 角色id
+     * @return
      */
     fun clearUserCache(roleId: Long)
 

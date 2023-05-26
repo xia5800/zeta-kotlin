@@ -17,7 +17,7 @@ interface ISysUserRoleService: IService<SysUserRole> {
      * 根据用户id查询角色
      *
      * @param userId 用户id
-     * @return List<Role>
+     * @return List<[SysRole]> 角色列表
      */
     fun listByUserId(userId: Long): List<SysRole>
 
@@ -25,7 +25,7 @@ interface ISysUserRoleService: IService<SysUserRole> {
      * 批量根据用户id查询角色
      *
      * @param userIds 用户id集合
-     * @return List<RoleResult>
+     * @return List<[SysRoleDTO]> 角色详情列表
      */
     fun listByUserIds(userIds: List<Long>): List<SysRoleDTO>
 
@@ -33,8 +33,8 @@ interface ISysUserRoleService: IService<SysUserRole> {
     /**
      * 关联用户角色
      *
-     * @param userId Long
-     * @param roIeds List<Long>
+     * @param userId 用户id
+     * @param roleIds 角色id列表
      * @return
      */
     fun saveUserRole(userId: Long, roleIds: List<Long>?): Boolean
@@ -42,8 +42,8 @@ interface ISysUserRoleService: IService<SysUserRole> {
     /**
      * 关联用户角色
      *
-     * @param userId Long
-     * @param roleId Long
+     * @param userId 用户id
+     * @param roleId 角色id
      * @return
      */
     fun saveUserRole(userId: Long, roleId: Long): Boolean
