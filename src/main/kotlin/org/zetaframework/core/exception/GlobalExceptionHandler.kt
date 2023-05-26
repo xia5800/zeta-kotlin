@@ -30,7 +30,7 @@ class GlobalExceptionHandler {
     /**
      * 业务异常处理
      *
-     * @param ex BusinessException
+     * @param ex [BusinessException]
      * @return ApiResult<*>
      */
     @ExceptionHandler(BusinessException::class)
@@ -43,7 +43,7 @@ class GlobalExceptionHandler {
     /**
      * 参数异常处理
      *
-     * @param ex ArgumentException
+     * @param ex [ArgumentException]
      * @return ApiResult<*>
      */
     @ExceptionHandler(ArgumentException::class)
@@ -58,7 +58,8 @@ class GlobalExceptionHandler {
      *
      * 说明：
      * 主要用于Hutool的Assert断言异常处理
-     * @param ex IllegalArgumentException
+     *
+     * @param ex [IllegalArgumentException]
      * @return ApiResult<*>
      */
     @ExceptionHandler(IllegalArgumentException::class)
@@ -73,7 +74,7 @@ class GlobalExceptionHandler {
      *
      * 说明：
      * 主要用于接口限流注解[Limit]的异常处理
-     * @param ex LimitException
+     * @param ex [LimitException]
      * @return ApiResult<*>
      */
     @ExceptionHandler(LimitException::class)
@@ -86,7 +87,7 @@ class GlobalExceptionHandler {
     /**
      * 绑定异常
      *
-     * @param ex BindException
+     * @param ex [BindException]
      * @return ApiResult<*>
      */
     @ExceptionHandler(BindException::class)
@@ -112,8 +113,8 @@ class GlobalExceptionHandler {
     /**
      * 方法参数类型不匹配异常
      *
-     * @param ex MethodArgumentTypeMismatchException
-     * @return R<*>?
+     * @param ex [MethodArgumentTypeMismatchException]
+     * @return ApiResult<*>?
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -126,8 +127,8 @@ class GlobalExceptionHandler {
     /**
      * 从请求中读取数据失败异常
      *
-     * @param ex HttpMessageNotReadableException
-     * @return R<*>?
+     * @param ex [HttpMessageNotReadableException]
+     * @return ApiResult<*>?
      */
     @ExceptionHandler(HttpMessageNotReadableException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -153,7 +154,7 @@ class GlobalExceptionHandler {
     /**
      * 登录认证异常
      *
-     * @param ex NotLoginException
+     * @param ex [NotLoginException]
      * @return ApiResult<*>
      */
     @ExceptionHandler(NotLoginException::class)
@@ -175,7 +176,7 @@ class GlobalExceptionHandler {
     /**
      * 角色认证异常处理
      *
-     * @param ex SaTokenException
+     * @param ex [NotRoleException]
      * @return ApiResult<*>
      */
     @ExceptionHandler(NotRoleException::class)
@@ -188,7 +189,7 @@ class GlobalExceptionHandler {
     /**
      * 权限认证异常处理
      *
-     * @param ex SaTokenException
+     * @param ex [NotPermissionException]
      * @return ApiResult<*>
      */
     @ExceptionHandler(NotPermissionException::class)
@@ -201,7 +202,8 @@ class GlobalExceptionHandler {
 
     /**
      * 其它异常
-     * @param ex Exception
+     *
+     * @param ex [Exception]
      * @return ApiResult<*>
      */
     @ExceptionHandler(Exception::class)

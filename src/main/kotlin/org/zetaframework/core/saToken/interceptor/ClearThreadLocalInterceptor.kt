@@ -35,10 +35,10 @@ class ClearThreadLocalInterceptor : HandlerInterceptor {
     /**
      * 执行完Controller之后，要做的事
      *
-     * @param request HttpServletRequest
-     * @param response HttpServletResponse
-     * @param handler Any
-     * @param ex Exception?
+     * @param request [HttpServletRequest]
+     * @param response [HttpServletResponse]
+     * @param handler [Any]
+     * @param ex [Exception]?
      */
     override fun afterCompletion(request: HttpServletRequest, response: HttpServletResponse, handler: Any, ex: Exception?) {
         // 清空ThreadLocal的值，防止下次请求时获取到的值是旧数据，同时也能防止内存溢出

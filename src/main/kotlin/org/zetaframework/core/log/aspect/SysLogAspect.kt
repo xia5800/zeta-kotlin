@@ -77,6 +77,7 @@ class SysLogAspect(private val context: ApplicationContext) {
 
     /**
      * 发布日志存储事件
+     *
      * @param joinPoint JoinPoint
      * @param result Any?
      * @param exception Throwable?
@@ -124,6 +125,7 @@ class SysLogAspect(private val context: ApplicationContext) {
 
     /**
      * 构造系统日志
+     *
      * @param joinPoint JoinPoint
      * @param sysLog SysLog
      * @return SysLogDTO
@@ -163,6 +165,7 @@ class SysLogAspect(private val context: ApplicationContext) {
 
     /**
      * 获取请求参数
+     *
      * @param joinPoint JoinPoint
      * @param request HttpServletRequest
      * @return String?
@@ -235,6 +238,7 @@ class SysLogAspect(private val context: ApplicationContext) {
 
     /**
      * 获取返回值
+     *
      * @param result Any?
      * @param sysLog OperationLog
      * @return String
@@ -247,6 +251,7 @@ class SysLogAspect(private val context: ApplicationContext) {
 
     /**
      * 获取异常
+     *
      * @param exception Throwable?
      * @param block Function0<Unit>
      * @return String?

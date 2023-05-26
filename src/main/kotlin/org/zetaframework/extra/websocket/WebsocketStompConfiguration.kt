@@ -88,6 +88,8 @@ class WebsocketStompConfiguration(
 
     /**
      * 配置拦截器
+     *
+     * @param registration
      */
     override fun configureClientInboundChannel(registration: ChannelRegistration) {
         registration.interceptors(userInterceptor)

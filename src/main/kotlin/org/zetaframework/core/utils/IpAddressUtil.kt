@@ -36,6 +36,7 @@ object IpAddressUtil {
 
     /**
      * 查询ip地址所在地区
+     *
      * @param ip
      * @return String ip地址所在地区 eg: 美国|0|华盛顿|0|谷歌
      */
@@ -53,8 +54,9 @@ object IpAddressUtil {
 
     /**
      * 查询ip地址所在地区
+     *
      * @param ip
-     * @return IpInfo
+     * @return [IpInfo]
      */
     fun searchInfo(ip: String): IpInfo {
         val address = search(ip)

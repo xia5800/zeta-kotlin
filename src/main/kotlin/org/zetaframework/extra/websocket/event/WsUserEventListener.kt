@@ -23,6 +23,8 @@ open class WsUserEventListener(private val consumer: (user: WsUser?, userType: W
      *
      * 说明：
      * 该方法不实现，交给具体业务去实现
+     *
+     * @param event 用户上下线事件
      */
     @Async
     @EventListener(WsUserEvent::class)

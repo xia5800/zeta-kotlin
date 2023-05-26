@@ -28,6 +28,7 @@ class MybatisPlusConfiguration(private val databaseProperties: DatabasePropertie
 
     /**
      * mybatis插件配置
+     *
      * @return MybatisPlusInterceptor
      */
     @Bean
@@ -64,6 +65,7 @@ class MybatisPlusConfiguration(private val databaseProperties: DatabasePropertie
 
     /**
      * id生成策略
+     *
      * @return UidGenerator
      */
     @Bean

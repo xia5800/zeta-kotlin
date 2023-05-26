@@ -39,6 +39,7 @@ class XssConfiguration(private val xssProperties: XssProperties) {
 
     /**
      * 配置 XSS文本清理者
+     *
      * @return XssCleaner
      */
     @Bean

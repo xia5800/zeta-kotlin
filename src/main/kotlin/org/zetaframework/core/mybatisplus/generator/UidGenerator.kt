@@ -17,6 +17,7 @@ interface UidGenerator {
 
     /**
      * 解析uid
+     *
      * @param uid
      */
     fun parseUid(uid: Long): String

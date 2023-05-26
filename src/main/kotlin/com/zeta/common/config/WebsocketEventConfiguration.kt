@@ -16,6 +16,9 @@ class WebsocketEventConfiguration {
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
 
+    /**
+     * 配置WebSocket用户上下线事件监听
+     */
     @Bean
     fun wsUserEventListener(): WsUserEventListener = WsUserEventListener { user, userType ->
         when(userType) {

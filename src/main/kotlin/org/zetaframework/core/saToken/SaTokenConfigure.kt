@@ -65,7 +65,7 @@ class SaTokenConfigure(
     }
 
     /**
-     * SaToken过滤器[前置函数]：在每次[认证函数]之前执行
+     * SaToken过滤器【前置函数】：在每次【认证函数】之前执行
      *
      * 说明：
      * saToken拦截的接口的跨域配置
@@ -85,7 +85,7 @@ class SaTokenConfigure(
     }
 
     /**
-     * SaToken过滤器[认证函数]: 每次请求都会执行
+     * SaToken过滤器【认证函数】: 每次请求都会执行
      *
      * 说明：
      * saToken接口拦截并处理
@@ -123,6 +123,7 @@ class SaTokenConfigure(
 
     /**
      * 注册 [Sa-Token全局过滤器]
+     *
      * @return SaServletFilter
      */
     @Bean
@@ -140,6 +141,7 @@ class SaTokenConfigure(
 
     /**
      * Sa-Token token风格配置
+     *
      * @return StpLogic
      */
     @Bean

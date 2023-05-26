@@ -28,7 +28,8 @@ class RedisConfiguration {
 
     /**
      * 配置spring cache管理器
-     * @param connectionFactory RedisConnectionFactory
+     *
+     * @param connectionFactory
      * @return CacheManager
      */
     @Bean
@@ -53,7 +54,8 @@ class RedisConfiguration {
 
     /**
      * 配置 RedisTemplate
-     * @param connectionFactory RedisConnectionFactory
+     *
+     * @param connectionFactory
      * @return RedisTemplate<String, Any>
      */
     @Bean("redisTemplate")
@@ -74,7 +76,8 @@ class RedisConfiguration {
 
     /**
      * 配置 StringRedisTemplate
-     * @param connectionFactory RedisConnectionFactory
+     *
+     * @param connectionFactory
      * @return StringRedisTemplate
      */
     @Bean("stringRedisTemplate")
@@ -86,8 +89,9 @@ class RedisConfiguration {
 
     /**
      * 配置Redis帮助类
-     * @param redisTemplate RedisTemplate<String, Any>
-     * @return RedisOps
+     *
+     * @param redisTemplate
+     * @return RedisHelper
      */
     @Bean
     fun redisHelper(redisTemplate: RedisTemplate<String, Any>): RedisHelper {
@@ -97,7 +101,7 @@ class RedisConfiguration {
     /**
      * 获取配置好的 Jackson2JsonRedisSerializer对象
      *
-     * @return
+     * @return CustomJackson2JsonRedisSerializer<Any>
      */
     private fun getRedisSerializer(): CustomJackson2JsonRedisSerializer<Any> {
         return CustomJackson2JsonRedisSerializer(Any::class.java).also {

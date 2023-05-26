@@ -19,6 +19,8 @@ open class SysLoginLogListener(private val consumer: (loginLogDTO: SysLoginLogDT
      *
      * 说明：
      * 该方法不实现，交给具体业务去实现
+     *
+     * @param event 登录日志事件
      */
     @Async
     @EventListener(SysLoginEvent::class)

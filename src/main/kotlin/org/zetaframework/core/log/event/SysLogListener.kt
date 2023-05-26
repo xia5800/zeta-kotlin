@@ -19,6 +19,8 @@ open class SysLogListener(private val consumer: (sysLogDTO: SysLogDTO) -> Unit) 
      *
      * 说明：
      * 该方法不实现，交给具体业务去实现
+     *
+     * @param event 操作日志事件
      */
     @Async
     @EventListener(SysLogEvent::class)

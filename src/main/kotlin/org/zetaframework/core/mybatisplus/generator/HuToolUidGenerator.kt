@@ -20,6 +20,7 @@ class HuToolUidGenerator(workerId: Long, datacenterId: Long): UidGenerator {
 
     /**
      * 解析uid
+     *
      * @param uid
      */
     override fun parseUid(uid: Long): String {

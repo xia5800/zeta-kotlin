@@ -19,7 +19,7 @@ class XssFilter(
     private val xssCleaner: XssCleaner,
     private val xssProperties: XssProperties,
 ): OncePerRequestFilter() {
-    private val log: Logger = LoggerFactory.getLogger(this::class.java)
+    private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     /**
      * 执行过滤
@@ -32,7 +32,7 @@ class XssFilter(
         try {
             filterChain.doFilter(XssRequestWrapper(request, xssCleaner), response)
         }catch (e: Exception) {
-            log.error("执行XSS过滤失败", e)
+            logger.error("执行XSS过滤失败", e)
         }
     }
 
@@ -46,10 +46,6 @@ class XssFilter(
         }
 
         // 当前url是否是忽略xss防护的地址
-        if (xssProperties.isIgnoreUrl(request.requestURI)) {
-            return true
-        }
-
-        return false
+        return xssProperties.isIgnoreUrl(request.requestURI)
     }
 }

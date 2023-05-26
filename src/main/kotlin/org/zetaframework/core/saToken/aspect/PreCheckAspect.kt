@@ -78,6 +78,7 @@ class PreCheckAspect(private val ignoreProperties: IgnoreProperties) {
 
     /**
      * 检查方法上的注解
+     *
      * @param method
      */
     private fun checkMethodAnnotation(replace: String, method: Method) {
@@ -89,6 +90,7 @@ class PreCheckAspect(private val ignoreProperties: IgnoreProperties) {
 
     /**
      * 校验注解
+     *
      * @param replace String
      * @param element AnnotatedElement
      */
@@ -179,9 +181,7 @@ class PreCheckAspect(private val ignoreProperties: IgnoreProperties) {
             // 判断当前访问的路由，是否是saToken放行路由.
             // ps:这里对不熟悉kotlin的人来说可能有点难以理解。 看上面↑↑↑ let{ }块的最后一行代码即为当前块的返回值
             // 所以这里的stream().anyMatch()方法返回的true或者false值，就是let{}块的返回值，同时也是这个方法的返回值
-            ignoreProperties.getNotMatchUrl().any { url ->
-                ANT_PATH_MATCHER.match(url, path)
-            }
+            ignoreProperties.getNotMatchUrl().any { url -> ANT_PATH_MATCHER.match(url, path) }
         } ?: false
     }
 }

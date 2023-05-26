@@ -46,6 +46,9 @@ class XssRequestWrapper(
 
     /**
      * 重写getParameterValues方法，实现XSS防御
+     *
+     * @param name
+     * @return
      */
     override fun getParameterValues(name: String): Array<String>? {
         val values = super.getParameterValues(name)
@@ -55,6 +58,9 @@ class XssRequestWrapper(
 
     /**
      * 重写getParameter方法，实现XSS防御
+     *
+     * @param name
+     * @return
      */
     override fun getParameter(name: String): String? {
         val value = super.getParameter(name)
@@ -63,6 +69,9 @@ class XssRequestWrapper(
 
     /**
      * 重写getHeader方法，实现XSS防御
+     *
+     * @param name
+     * @return
      */
     override fun getHeader(name: String): String? {
         val value = super.getHeader(name)
