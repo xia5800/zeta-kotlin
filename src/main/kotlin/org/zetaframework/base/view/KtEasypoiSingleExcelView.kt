@@ -21,29 +21,32 @@ import org.springframework.stereotype.Controller
 @Controller(NormalExcelConstants.EASYPOI_EXCEL_VIEW)
 class KtEasypoiSingleExcelView: MiniAbstractExcelView() {
 
-    override fun renderMergedOutputModel(
-        model: MutableMap<String, Any>,
-        request: HttpServletRequest,
-        response: HttpServletResponse
-    ) {
-        var codedFileName: String? = "临时文件"
-        var workbook: Workbook? = null
+    /**
+     * 子类必须实现此方法才能实际呈现视图。
+     *
+     * @param model 构造视图所需要的参数
+     * @param request 请求
+     * @param response 响应
+     */
+    override fun renderMergedOutputModel(model: MutableMap<String, Any>, request: HttpServletRequest, response: HttpServletResponse) {
+        // 构建Excel工作簿对象
+        val workbook: Workbook
         if (model.containsKey(NormalExcelConstants.MAP_LIST)) {
             val list = model[NormalExcelConstants.MAP_LIST] as List<Map<String, Any>>?
-            if (list!!.size == 0) {
+            if (list.isNullOrEmpty()) {
                 throw RuntimeException("MAP_LIST IS NULL")
             }
             workbook = ExcelExportUtil.exportExcel(
-                list!![0][NormalExcelConstants.PARAMS] as ExportParams?,
-                list!![0][NormalExcelConstants.CLASS] as Class<*>?,
-                list!![0][NormalExcelConstants.DATA_LIST] as Collection<*>?
+                list[0][NormalExcelConstants.PARAMS] as ExportParams?,
+                list[0][NormalExcelConstants.CLASS] as Class<*>?,
+                list[0][NormalExcelConstants.DATA_LIST] as Collection<*>?
             )
-            for (i in 1 until list!!.size) {
+            for (i in 1 until list.size) {
                 ExcelExportService().createSheet(
                     workbook,
-                    list!![i][NormalExcelConstants.PARAMS] as ExportParams?,
+                    list[i][NormalExcelConstants.PARAMS] as ExportParams?,
                     list[i][NormalExcelConstants.CLASS] as Class<*>?,
-                    list!![i][NormalExcelConstants.DATA_LIST] as Collection<*>?
+                    list[i][NormalExcelConstants.DATA_LIST] as Collection<*>?
                 )
             }
         } else {
@@ -53,9 +56,14 @@ class KtEasypoiSingleExcelView: MiniAbstractExcelView() {
                 model[NormalExcelConstants.DATA_LIST] as Collection<*>?
             )
         }
+
+        // 默认文件名处理
+        var codedFileName = "临时文件"
         if (model.containsKey(NormalExcelConstants.FILE_NAME)) {
-            codedFileName = model[NormalExcelConstants.FILE_NAME] as String?
+            // 如果model里面没有获取到自定义的文件名，则使用默认文件名
+            codedFileName = model[NormalExcelConstants.FILE_NAME] as String? ?: codedFileName
         }
-        out(workbook, codedFileName!!, request, response)
+
+        out(workbook, codedFileName, request, response)
     }
 }

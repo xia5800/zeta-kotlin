@@ -19,23 +19,35 @@ import org.apache.poi.ss.usermodel.Workbook
 abstract class MiniAbstractExcelView(): PoiBaseView() {
 
     init {
+        // 设置此视图的contentType
         contentType = "text/html;application/vnd.ms-excel"
     }
 
     companion object {
-        val HSSF = ".xls"
-        val XSSF = ".xlsx"
+        /** excel97-2003版本，扩展名 */
+        const val HSSF = ".xls"
+        /** excel2007+版本，扩展名 */
+        const val XSSF = ".xlsx"
     }
 
+    /**
+     * 输出
+     *
+     * @param workbook Excel工作簿
+     * @param codedFileName 编码后的文件名
+     * @param request 请求
+     * @param response 响应
+     */
     fun out(workbook: Workbook, codedFileName: String, request: HttpServletRequest, response: HttpServletResponse) {
-        val newCodedFileName = if (workbook is HSSFWorkbook) {
+        // 处理文件名
+        val fileName = if (workbook is HSSFWorkbook) {
             codedFileName + HSSF
         } else {
             codedFileName + XSSF
         }
 
         // 用工具类生成符合RFC 5987标准的文件名header, 去掉UA判断
-        response.setHeader("content-disposition", WebFilenameUtils.disposition(newCodedFileName))
+        response.setHeader("content-disposition", WebFilenameUtils.disposition(fileName))
         val out: ServletOutputStream = response.outputStream
         workbook.write(out)
         out.flush()
