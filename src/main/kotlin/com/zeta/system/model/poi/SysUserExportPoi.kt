@@ -45,7 +45,7 @@ class SysUserExportPoi {
     var birthday: LocalDate? = null
 
     /** 状态 */
-    @Excel(name = "状态", replace = ["正常_0", "封禁_1", "_null"])
+    @Excel(name = "状态", replace = ["正常_1", "封禁_0", "_null"])
     var state: Int? = null
 
     /** 用户角色 */
