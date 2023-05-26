@@ -28,7 +28,7 @@ interface NoPageQueryController<Entity, Id: Serializable, QueryParam>: BaseContr
     /**
      * 批量查询
      *
-     * @param param PageQuery 批量查询参数
+     * @param param 批量查询参数
      * @return ApiResult<List<Entity>>
      */
     @PreCheckPermission(value = ["{}:view"])
@@ -43,7 +43,7 @@ interface NoPageQueryController<Entity, Id: Serializable, QueryParam>: BaseContr
     /**
      * 自定义批量查询
      *
-     * @param param QueryParam
+     * @param param 批量查询参数
      * @return MutableList<Entity>
      */
     fun handlerBatchQuery(param: QueryParam): MutableList<Entity> {
@@ -57,7 +57,7 @@ interface NoPageQueryController<Entity, Id: Serializable, QueryParam>: BaseContr
 
     /**
      * 处理批量查询数据
-     * @param list MutableList<Entity>
+     * @param list 实体列表
      */
     fun handlerBatchData(list: MutableList<Entity>) { }
 
@@ -80,7 +80,7 @@ interface NoPageQueryController<Entity, Id: Serializable, QueryParam>: BaseContr
 
     /**
      * 处理单体查询数据
-     * @param entity Entity
+     * @param entity 实体对象
      */
     fun handlerGetData(entity: Entity?) { }
 

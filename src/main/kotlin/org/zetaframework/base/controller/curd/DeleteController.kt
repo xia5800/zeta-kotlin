@@ -25,7 +25,7 @@ interface DeleteController<Entity, Id: Serializable>: BaseController<Entity> {
     /**
      * 单体删除
      *
-     * @param id
+     * @param id 主键
      * @return R<Boolean>
      */
     @PreCheckPermission(value = ["{}:delete", "{}:remove"], mode = PreMode.OR)
@@ -44,7 +44,7 @@ interface DeleteController<Entity, Id: Serializable>: BaseController<Entity> {
     /**
      * 自定义单体删除
      *
-     * @param id Id
+     * @param id 主键
      * @return R<Boolean>
      */
     fun handlerDelete(id: Id): ApiResult<Boolean> {
@@ -73,7 +73,7 @@ interface DeleteController<Entity, Id: Serializable>: BaseController<Entity> {
     /**
      * 自定义批量删除
      *
-     * @param ids Id
+     * @param ids 主键列表
      * @return R<Boolean>
      */
     fun handlerBatchDelete(ids: MutableList<Id>): ApiResult<Boolean> {

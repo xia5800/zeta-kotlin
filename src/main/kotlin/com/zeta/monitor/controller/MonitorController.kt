@@ -26,7 +26,7 @@ import java.util.*
 class MonitorController(
     private val oshiMonitor: OshiMonitor,
     private val redisTemplate: StringRedisTemplate
-): SuperBaseController {
+) : SuperBaseController {
 
     /**
      * 获取服务器信息

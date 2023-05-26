@@ -27,9 +27,7 @@ import org.zetaframework.core.saToken.annotation.PreAuth
 import org.zetaframework.core.saToken.annotation.PreCheckPermission
 
 /**
- * <p>
  * 字典项 前端控制器
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:12:10
@@ -47,7 +45,7 @@ class SysDictItemController(
     /**
      * 根据字典编码查询字典项
      *
-     * @param codes List<String>
+     * @param codes 字典编码
      */
     @PreCheckPermission(value = ["{}:view"])
     @Operation(summary = "根据字典编码查询字典项")
@@ -63,6 +61,8 @@ class SysDictItemController(
      * 说明：
      * 你可以在这里对ImportParams配置进行一些补充
      * 例如设置excel验证规则、校验组、校验处理接口等
+     *
+     * @param importParams 导入参数设置
      */
     override fun enhanceImportParams(importParams: ImportParams) {
         // 开启：校验上传的Excel数据
@@ -74,6 +74,8 @@ class SysDictItemController(
      *
      * 说明：
      * 你需要手动实现导入逻辑
+     *
+     * @param list 导入数据列表
      */
     override fun handlerImport(list: MutableList<SysDictItemImportPoi>): ApiResult<Boolean> {
         val batchList: List<SysDictItem> = list.map {
@@ -85,13 +87,13 @@ class SysDictItemController(
     /**
      * 获取待导出的数据
      *
-     * @param param QueryParam
+     * @param param 查询参数
      * @return MutableList<Entity>
      */
     override fun findExportList(param: SysDictItemQueryParam): MutableList<SysDictItemExportPoi> {
         // 条件查询Entity数据
         val list = super.handlerBatchQuery(param)
-        if (list.isNullOrEmpty()) return mutableListOf()
+        if (list.isEmpty()) return mutableListOf()
 
         // 字典数据缓存
         val dictCacheMap: MutableMap<Long, SysDict> = mutableMapOf()

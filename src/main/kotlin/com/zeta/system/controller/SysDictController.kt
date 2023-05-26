@@ -20,9 +20,7 @@ import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.saToken.annotation.PreAuth
 
 /**
- * <p>
  * 字典 前端控制器
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:12:09
@@ -40,7 +38,7 @@ class SysDictController(
     /**
      * 自定义新增
      *
-     * @param saveDTO SaveDTO 保存对象
+     * @param saveDTO 保存对象
      * @return ApiResult<Boolean>
      */
     override fun handlerSave(saveDTO: SysDictSaveDTO): ApiResult<Boolean> {
@@ -57,6 +55,8 @@ class SysDictController(
      * 说明：
      * 你可以在这里对ImportParams配置进行一些补充
      * 例如设置excel验证规则、校验组、校验处理接口等
+     *
+     * @param importParams 导入参数设置
      */
     override fun enhanceImportParams(importParams: ImportParams) {
         // 开启：校验上传的Excel数据
@@ -70,6 +70,8 @@ class SysDictController(
      *
      * 说明：
      * 你需要手动实现导入逻辑
+     *
+     * @param list 导入数据列表
      */
     override fun handlerImport(list: MutableList<SysDictImportPoi>): ApiResult<Boolean> {
         val batchList: List<SysDict> = list.map {
@@ -81,13 +83,13 @@ class SysDictController(
     /**
      * 获取待导出的数据
      *
-     * @param param QueryParam
+     * @param param 查询参数
      * @return MutableList<Entity>
      */
     override fun findExportList(param: SysDictQueryParam): MutableList<SysDictExportPoi> {
         // 条件查询Entity数据
         val list = super.handlerBatchQuery(param)
-        if (list.isNullOrEmpty()) return mutableListOf()
+        if (list.isEmpty()) return mutableListOf()
 
         // Entity -> ExportBean
         return list.map {

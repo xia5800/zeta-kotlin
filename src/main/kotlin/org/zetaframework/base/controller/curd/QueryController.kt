@@ -29,7 +29,7 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
     /**
      * 分页查询
      *
-     * @param param PageParam<PageQuery> 分页查询参数
+     * @param param 分页查询参数
      * @return ApiResult<IPage<Entity>>
      */
     @PreCheckPermission(value = ["{}:view"])
@@ -44,7 +44,7 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
     /**
      * 批量查询
      *
-     * @param param PageQuery 批量查询参数
+     * @param param 批量查询参数
      * @return ApiResult<List<Entity>>
      */
     @PreCheckPermission(value = ["{}:view"])
@@ -60,7 +60,7 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
     /**
      * 自定义批量查询
      *
-     * @param param QueryParam
+     * @param param 批量查询参数
      * @return MutableList<Entity>
      */
     fun handlerBatchQuery(param: QueryParam): MutableList<Entity> {
@@ -74,7 +74,7 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
 
     /**
      * 处理批量查询数据
-     * @param list MutableList<Entity>
+     * @param list 实体列表
      */
     fun handlerBatchData(list: MutableList<Entity>) { }
 
@@ -99,7 +99,7 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
 
     /**
      * 处理单体查询数据
-     * @param entity Entity
+     * @param entity 实体对象
      */
     fun handlerGetData(entity: Entity?) { }
 

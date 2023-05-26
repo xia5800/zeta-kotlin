@@ -27,6 +27,7 @@ abstract class SuperNoQueryController<S: IService<Entity>, Id: Serializable, Ent
 {
     /**
      * 获取实体类型
+     *
      * @return Class<Entity>
      */
     override fun getEntityClass(): Class<Entity> {

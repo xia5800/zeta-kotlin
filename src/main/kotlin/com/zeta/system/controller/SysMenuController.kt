@@ -53,8 +53,8 @@ class SysMenuController: SuperController<ISysMenuService, Long, SysMenu, SysMenu
     /**
      * 查询菜单树
      *
-     * @param param SysMenuQueryParam
-     * @return List<Menu>
+     * @param param 查询参数
+     * @return ApiResult<List<[SysMenu]?>>
      */
     @ApiOperationSupport(ignoreParameters = ["children"])
     @Operation(summary = "查询菜单树")

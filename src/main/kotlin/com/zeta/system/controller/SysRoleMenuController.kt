@@ -30,14 +30,17 @@ import org.zetaframework.core.utils.TreeUtil
 @PreAuth(replace = "sys:role")
 @RestController
 @RequestMapping("/api/system/roleMenu")
-class SysRoleMenuController(private val menuService: ISysMenuService) : SuperSimpleController<ISysRoleMenuService, SysRoleMenu>() {
+class SysRoleMenuController(
+    private val menuService: ISysMenuService
+) : SuperSimpleController<ISysRoleMenuService, SysRoleMenu>() {
 
     /**
      * 查询角色菜单树
      *
      * 说明：
      * 用于前端角色管理查询角色对应的菜单树。
-     * @param roleId Long   角色id
+     *
+     * @param roleId 角色id
      * @return ApiResult<List<SysMenu?>>
      */
     @ApiOperationSupport(order = 1)
@@ -58,7 +61,7 @@ class SysRoleMenuController(private val menuService: ISysMenuService) : SuperSim
     /**
      * 新增或修改
      *
-     * @param roleMenuHandleDto SysRoleMenuHandleDTO 批量新增、修改角色菜单关联关系参数
+     * @param roleMenuHandleDto 修改角色菜单关联关系参数
      * @return ApiResult<Boolean>
      */
     @PreCheckPermission(value = ["{}:edit", "{}:update"], mode = PreMode.OR)

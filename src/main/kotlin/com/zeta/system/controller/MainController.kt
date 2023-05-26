@@ -30,6 +30,7 @@ import org.zetaframework.extra.crypto.helper.AESHelper
 
 /**
  * 登录认证
+ *
  * @author gcc
  */
 @ApiSupport(order = 1)
@@ -40,7 +41,7 @@ class MainController(
     private val applicationContext: ApplicationContext,
     private val captchaCacheKey: CaptchaStringCacheKey,
     private val aseHelper: AESHelper
-): SuperSimpleController<ISysUserService, SysUser>() {
+) : SuperSimpleController<ISysUserService, SysUser>() {
 
     @Value("\${spring.profiles.active:prod}")
     private val env: String? = null
@@ -48,8 +49,9 @@ class MainController(
 
     /**
      * 用户登录
-     * @param param LoginParam
-     * @return ApiResult<LoginResult>
+     *
+     * @param param 登录参数
+     * @return ApiResult<[LoginResult]> 登录返回结果
      */
     @SecurityRequirements
     @Operation(summary = "登录")
@@ -107,6 +109,7 @@ class MainController(
 
     /**
      * 注销登录
+     *
      * @return ApiResult<Boolean>
      */
     @Operation(summary = "注销登录")

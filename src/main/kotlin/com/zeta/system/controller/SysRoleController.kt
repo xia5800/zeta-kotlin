@@ -29,7 +29,7 @@ class SysRoleController: SuperController<ISysRoleService, Long, SysRole, SysRole
     /**
      * 自定义新增
      *
-     * @param saveDTO SaveDTO 保存对象
+     * @param saveDTO 保存对象
      * @return ApiResult<Entity>
      */
     override fun handlerSave(saveDTO: SysRoleSaveDTO): ApiResult<Boolean> {
@@ -48,7 +48,7 @@ class SysRoleController: SuperController<ISysRoleService, Long, SysRole, SysRole
     /**
      * 自定义修改
      *
-     * @param updateDTO UpdateDTO 修改对象
+     * @param updateDTO 修改对象
      * @return ApiResult<Entity>
      */
     override fun handlerUpdate(updateDTO: SysRoleUpdateDTO): ApiResult<Boolean> {
@@ -66,7 +66,7 @@ class SysRoleController: SuperController<ISysRoleService, Long, SysRole, SysRole
     /**
      * 自定义单体删除
      *
-     * @param id Id
+     * @param id 主键
      * @return R<Boolean>
      */
     override fun handlerDelete(id: Long): ApiResult<Boolean> {
@@ -81,7 +81,7 @@ class SysRoleController: SuperController<ISysRoleService, Long, SysRole, SysRole
     /**
      * 自定义批量删除
      *
-     * @param ids Id
+     * @param ids 主键列表
      * @return R<Boolean>
      */
     override fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> {

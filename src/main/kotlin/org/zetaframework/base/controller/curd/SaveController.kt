@@ -24,7 +24,7 @@ interface SaveController<Entity, SaveDTO>: BaseController<Entity> {
     /**
      * 新增
      *
-     * @param saveDTO SaveDTO 保存对象
+     * @param saveDTO 保存对象
      * @return ApiResult<Boolean>
      */
     @PreCheckPermission(value = ["{}:add", "{}:save"], mode = PreMode.OR)
@@ -45,7 +45,7 @@ interface SaveController<Entity, SaveDTO>: BaseController<Entity> {
     /**
      * 自定义新增
      *
-     * @param saveDTO SaveDTO 保存对象
+     * @param saveDTO 保存对象
      * @return ApiResult<Boolean>
      */
     fun handlerSave(saveDTO: SaveDTO): ApiResult<Boolean> {

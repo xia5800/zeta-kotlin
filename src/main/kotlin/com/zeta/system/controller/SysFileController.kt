@@ -19,9 +19,7 @@ import org.zetaframework.core.saToken.annotation.PreCheckPermission
 import org.zetaframework.core.saToken.annotation.PreMode
 
 /**
- * <p>
  * 系统文件 前端控制器
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-11 11:18:44
@@ -74,7 +72,7 @@ class SysFileController: SuperSimpleController<ISysFileService, SysFile>(),
     /**
      * 自定义单体删除文件
      *
-     * @param id Id
+     * @param id 主键
      * @return R<Boolean>
      */
     override fun handlerDelete(id: Long): ApiResult<Boolean> {
@@ -84,7 +82,7 @@ class SysFileController: SuperSimpleController<ISysFileService, SysFile>(),
     /**
      * 自定义批量删除文件
      *
-     * @param ids Id
+     * @param ids 主键列表
      * @return R<Boolean>
      */
     override fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> {

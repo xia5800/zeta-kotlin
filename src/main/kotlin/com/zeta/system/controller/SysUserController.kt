@@ -76,7 +76,8 @@ class SysUserController(
 
     /**
      * 分页查询
-     * @param param PageParam<PageQuery> 分页查询参数
+     *
+     * @param param 分页查询参数
      * @return ApiResult<IPage<Entity>>
      */
     @PreCheckPermission(value = ["{}:view"])
@@ -90,7 +91,7 @@ class SysUserController(
 
     /**
      * 处理单体查询数据
-     * @param entity Entity
+     * @param entity 实体对象
      */
     override fun handlerGetData(entity: SysUser?) {
         entity?.id?.let { userId ->
@@ -100,10 +101,10 @@ class SysUserController(
 
     /**
      * 处理批量查询数据
-     * @param list MutableList<Entity>
+     * @param list 实体列表
      */
     override fun handlerBatchData(list: MutableList<SysUser>) {
-        if (list.isNullOrEmpty()) return
+        if (list.isEmpty()) return
         val userIds: List<Long> = list.map { it.id!! }
         // 批量获取用户角色 Map<用户id, 用户角色列表>
         val userRoleMap: Map<Long, List<SysRoleDTO>> = service.getUserRoles(userIds)
@@ -115,7 +116,7 @@ class SysUserController(
     /**
      * 自定义新增
      *
-     * @param saveDTO SaveDTO 保存对象
+     * @param saveDTO 保存对象
      * @return ApiResult<Entity>
      */
     override fun handlerSave(saveDTO: SysUserSaveDTO): ApiResult<Boolean> {
@@ -130,7 +131,7 @@ class SysUserController(
     /**
      * 自定义修改
      *
-     * @param updateDTO UpdateDTO 修改对象
+     * @param updateDTO 修改对象
      * @return ApiResult<Entity>
      */
     override fun handlerUpdate(updateDTO: SysUserUpdateDTO): ApiResult<Boolean> {
@@ -140,7 +141,7 @@ class SysUserController(
     /**
      * 自定义修改状态
      *
-     * @param param UpdateStateParam<Id, State> 修改对象
+     * @param param 修改状态参数
      * @return ApiResult<Boolean>
      */
     override fun handlerUpdateState(param: UpdateStateParam<Long, Int>): ApiResult<Boolean> {
@@ -166,7 +167,7 @@ class SysUserController(
     /**
      * 自定义单体删除
      *
-     * @param id Id
+     * @param id 主键
      * @return R<Boolean>
      */
     override fun handlerDelete(id: Long): ApiResult<Boolean> {
@@ -181,7 +182,7 @@ class SysUserController(
     /**
      * 自定义批量删除
      *
-     * @param ids Id
+     * @param ids 主键列表
      * @return R<Boolean>
      */
     override fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> {
@@ -202,6 +203,8 @@ class SysUserController(
      * 说明：
      * 你可以在这里对ImportParams配置进行一些补充
      * 例如设置excel验证规则、校验组、校验处理接口等
+     *
+     * @param importParams 导入参数设置
      */
     override fun enhanceImportParams(importParams: ImportParams) {
         // 为了保证[SysUserImportPoi]中的校验注解生效。将Excel校验开启
@@ -225,6 +228,8 @@ class SysUserController(
      * 说明：
      * 1.你需要手动实现导入逻辑
      * 2.enhanceImportParams方法里，配置了导入参数校验、用户名是否重复校验。所以这里的list里面的数据是不需要校验的
+     *
+     * @param list 导入数据列表
      */
     override fun handlerImport(list: MutableList<SysUserImportPoi>): ApiResult<Boolean> {
         val batchList: List<SysUser> = list.map { importPoi ->
@@ -247,7 +252,7 @@ class SysUserController(
     /**
      * 获取待导出的数据
      *
-     * @param param QueryParam
+     * @param param 查询参数
      * @return MutableList<Entity>
      */
     override fun findExportList(param: SysUserQueryParam): MutableList<SysUserExportPoi> {
@@ -258,7 +263,7 @@ class SysUserController(
 
         // 条件查询Entity数据
         val list = super.handlerBatchQuery(param)
-        if (list.isNullOrEmpty()) return mutableListOf()
+        if (list.isEmpty()) return mutableListOf()
 
         // Entity -> ExportBean
         return list.map { user ->
@@ -272,7 +277,7 @@ class SysUserController(
     /**
      * 修改自己的密码
      *
-     * @param param ChangePasswordParam 修改密码的参数
+     * @param param 修改密码参数
      * @return ApiResult<Boolean>
      */
     @Operation(summary = "修改自己的密码")
@@ -305,7 +310,7 @@ class SysUserController(
     /**
      * 重置密码
      *
-     * @param param ResetPasswordParam 重置密码参数
+     * @param param 重置密码参数
      * @return ApiResult<Boolean>
      */
     @PreCheckPermission(value = ["{}:update"])
@@ -338,6 +343,8 @@ class SysUserController(
 
     /**
      * 获取当前用户基本信息
+     *
+     * @return ApiResult<[UserInfoDTO]>
      */
     @ApiOperationSupport(order = 100)
     @Operation(summary = "获取当前用户基本信息")
@@ -356,6 +363,8 @@ class SysUserController(
 
     /**
      * 获取当前用户菜单
+     *
+     * @return ApiResult<List<[FrontRoute]>>
      */
     @ApiOperationSupport(order = 110)
     @Operation(summary = "获取当前用户菜单")

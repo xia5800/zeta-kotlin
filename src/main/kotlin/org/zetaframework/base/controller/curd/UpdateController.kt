@@ -25,7 +25,7 @@ interface UpdateController<Entity, UpdateDTO>: BaseController<Entity> {
     /**
      * 修改
      *
-     * @param updateDTO UpdateDTO 修改对象
+     * @param updateDTO 修改对象
      * @return ApiResult<Boolean>
      */
     @PreCheckPermission(value = ["{}:edit", "{}:update"], mode = PreMode.OR)
@@ -46,7 +46,7 @@ interface UpdateController<Entity, UpdateDTO>: BaseController<Entity> {
     /**
      * 自定义修改
      *
-     * @param updateDTO UpdateDTO 修改对象
+     * @param updateDTO 修改对象
      * @return ApiResult<Boolean>
      */
     fun handlerUpdate(updateDTO: UpdateDTO): ApiResult<Boolean> {

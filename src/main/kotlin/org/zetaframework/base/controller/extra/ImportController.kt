@@ -194,7 +194,7 @@ interface ImportController<ImportBean: ImportPoi, Entity>: BaseController<Entity
     /**
      * 构造导入参数
      *
-     * @param request
+     * @param request 请求
      * @return ImportParams
      */
     fun getImportParams(request: HttpServletRequest): ImportParams {
@@ -240,6 +240,8 @@ interface ImportController<ImportBean: ImportPoi, Entity>: BaseController<Entity
      * 说明：
      * 你可以在这里对ImportParams配置进行一些补充
      * 例如设置excel验证规则、校验组、校验处理接口等
+     *
+     * @param importParams 导入参数设置
      */
     fun enhanceImportParams(importParams: ImportParams) { }
 
@@ -248,6 +250,8 @@ interface ImportController<ImportBean: ImportPoi, Entity>: BaseController<Entity
      *
      * 说明：
      * 你需要手动实现导入逻辑
+     *
+     * @param list 导入数据列表
      */
     fun handlerImport(list: MutableList<ImportBean>): ApiResult<Boolean> {
         return fail("请在子类Controller重写导入方法，实现导入逻辑")

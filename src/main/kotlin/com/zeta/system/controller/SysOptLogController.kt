@@ -19,9 +19,7 @@ import org.zetaframework.core.saToken.annotation.PreAuth
 import org.zetaframework.core.saToken.annotation.PreCheckPermission
 
 /**
- * <p>
  * 操作日志 前端控制器
- * </p>
  *
  * @author gcc
  * @date 2022-03-18 15:27:15
@@ -34,7 +32,8 @@ class SysOptLogController(private val userService: ISysUserService): SuperSimple
 
     /**
      * 分页查询
-     * @param param PageParam<PageQuery> 分页查询参数
+     *
+     * @param param 分页查询参数
      * @return ApiResult<IPage<Entity>>
      */
     @PreCheckPermission(value = ["{}:view"])
@@ -48,6 +47,7 @@ class SysOptLogController(private val userService: ISysUserService): SuperSimple
 
     /**
      * 单体查询
+     *
      * @param id 主键
      * @return R<Entity?>
      */

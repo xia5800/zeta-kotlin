@@ -31,6 +31,7 @@ abstract class SuperController<S: IService<Entity>, Id: Serializable, Entity, Qu
 
     /**
      * 获取实体类型
+     *
      * @return Class<Entity>
      */
     override fun getEntityClass(): Class<Entity> {

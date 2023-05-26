@@ -26,7 +26,7 @@ interface UpdateStateController<Entity, Id: Serializable, State: Serializable>: 
     /**
      * 修改状态
      *
-     * @param param UpdateStateParam<Id, State> 修改对象
+     * @param param 修改状态参数
      * @return ApiResult<Boolean>
      */
     @PreCheckPermission(value = ["{}:edit", "{}:update"], mode = PreMode.OR)
@@ -47,7 +47,7 @@ interface UpdateStateController<Entity, Id: Serializable, State: Serializable>: 
     /**
      * 自定义修改状态
      *
-     * @param param UpdateStateParam<Id, State> 修改对象
+     * @param param 修改状态参数
      * @return ApiResult<Boolean>
      */
     fun handlerUpdateState(param: UpdateStateParam<Id, State>): ApiResult<Boolean> {

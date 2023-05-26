@@ -15,6 +15,7 @@ import org.zetaframework.base.result.ApiResult
 
 /**
  * websocket测试
+ *
  * @author gcc
  */
 @Tag(name = "websocket测试", description = "websocket测试")
@@ -30,43 +31,45 @@ class WebsocketController(
     /**
      * 群发消息
      *
-     * @param message
+     * @param message 群发消息内容
      */
     @ApiOperationSupport(order = 1)
     @Operation(summary = "群发消息")
     @GetMapping("/group")
     fun group(@RequestParam message: String): ApiResult<Boolean> {
-        try {
+        return try {
             simpMessagingTemplate.convertAndSend("/topic/group", message)
-        }catch (e: MessagingException) {
+            ApiResult.success()
+        } catch (e: MessagingException) {
             logger.error("群发消息发送失败", e)
-            return ApiResult.fail()
+            ApiResult.fail()
         }
-        return ApiResult.success()
     }
 
 
     /**
      * 私聊消息
      *
-     * @param message
+     * @param message 私聊消息参数
      */
     @ApiOperationSupport(order = 2)
     @Operation(summary = "私聊消息")
     @PostMapping("/group")
     fun privateChat(@RequestBody @Validated message: PrivateMessageParam): ApiResult<Boolean> {
-        try {
+        return try {
             simpMessagingTemplate.convertAndSendToUser(message.toUserId!!, "/queue/private", message.message!!)
+            ApiResult.success()
         }catch (e: MessagingException) {
             logger.error("私聊消息发送失败", e)
             return ApiResult.fail()
         }
-        return ApiResult.success()
     }
 
 
     /**
      * 获取当前在线人数
+     *
+     * @return ApiResult<Int>
      */
     @ApiOperationSupport(order = 3)
     @Operation(summary = "获取当前在线人数")

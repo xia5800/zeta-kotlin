@@ -106,13 +106,15 @@ interface ExportController<ExportBean, Entity, QueryParam>: BaseController<Entit
      * 说明：
      * 你可以在这里对ExportParams配置进行一些补充
      * 例如设置表格第二行的名称、冻结一些列、表头颜色等
+     *
+     * @param exportParams 导出参数
      */
     fun enhanceExportParams(exportParams: ExportParams) { }
 
     /**
      * 获取待导出的数据
      *
-     * @param param QueryParam
+     * @param param 查询参数
      * @return MutableList<Entity>
      */
     fun findExportList(param: QueryParam): MutableList<ExportBean> {

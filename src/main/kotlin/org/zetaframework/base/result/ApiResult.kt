@@ -75,8 +75,8 @@ class ApiResult<T> {
         /**
          * 返回结果
          *
-         * @param code Int
-         * @param message String
+         * @param code 状态码
+         * @param message 状态信息
          * @return ApiResult<E>
          */
         fun <E> result(code: Int?, message: String?, data: E? = null): ApiResult<E> {
@@ -85,9 +85,10 @@ class ApiResult<T> {
 
         /**
          * 请求成功
-         * @param code Int?
-         * @param message String?
-         * @param data E?
+         *
+         * @param code 状态码
+         * @param message 状态信息
+         * @param data 返回数据
          * @return ApiResult<E>
          */
         fun <E> success(code: Int? = ErrorCodeEnum.SUCCESS.code, message: String? = ErrorCodeEnum.SUCCESS.msg, data: E? = null): ApiResult<E> {
@@ -96,6 +97,7 @@ class ApiResult<T> {
 
         /**
          * 请求成功，需要执行默认操作
+         *
          * @return ApiResult<Entity>
          */
         fun <E> successDef(): ApiResult<E> {
@@ -104,9 +106,10 @@ class ApiResult<T> {
 
         /**
          * 请求失败
-         * @param code Int?
-         * @param message String?
-         * @param data E?
+         *
+         * @param code 状态码
+         * @param message 状态信息
+         * @param data 返回数据
          * @return ApiResult<E>
          */
         fun <E> fail(code: Int? = ErrorCodeEnum.FAIL.code, message: String? = ErrorCodeEnum.FAIL.msg, data: E? = null): ApiResult<E> {
