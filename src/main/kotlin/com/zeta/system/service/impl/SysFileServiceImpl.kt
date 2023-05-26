@@ -72,9 +72,9 @@ class SysFileServiceImpl(private val fileContext: FileContext): ISysFileService,
     override fun delete(id: Long): Boolean {
         val sysFile = this.getById(id) ?: throw BusinessException("文件不存在或已被删除")
         // 先删除文件
-        if(!fileContext.delete(FileDeleteParam(path = sysFile.path!!))) {
-            throw BusinessException("文件删除失败")
-        }
+        // fix: 删除文件失败不应该抛异常，因为会出现更换了文件存储策略（eg: 阿里云-> minio）导致文件无法删除的情况  --by gcc date: 2023-05-26
+        fileContext.delete(FileDeleteParam(path = sysFile.path!!))
+
         // 再删除数据
         return this.removeById(id)
     }
