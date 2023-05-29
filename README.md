@@ -5,6 +5,13 @@ zeta-kotlin是使用kotlin语言基于`spring boot`、`mybatis-plus`、`sa-token
 
 zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。不像其它开源项目那样大而全，zeta-kotlin项目相当精简。
 
+## 版本说明
+
+| 名称                 | 说明                    | 项目地址         |
+|--------------------|-----------------------|--------------|
+| zeta-kotlin 1.x    | 基于SpringBoot2.x和JDK11 | 当前分支         |
+| zeta-kotlin 2.x    | 基于SpringBoot3.x和JDK17 | [2.x](tree/2.x) |
+
 ## 项目结构
 
 | 包                         | 说明                                                                    |
@@ -78,4 +85,3 @@ zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。�
 - knife4j：[https://doc.xiaominfo.com/](https://doc.xiaominfo.com/)
 - Hutool：[https://hutool.cn/](https://hutool.cn/)
 - EasyPoi：[https://hutool.cn/](http://doc.wupaas.com/docs/easypoi)
-- Soybean Admin：[https://github.com/honghuangdc/soybean-admin](https://github.com/honghuangdc/soybean-admin)
