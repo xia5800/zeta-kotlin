@@ -85,4 +85,4 @@ zeta-kotlin目前只提供了一个最基础的RBAC用户角色权限功能。�
 - mybatis-plus：[https://baomidou.com/](https://baomidou.com/)
 - knife4j：[https://doc.xiaominfo.com/](https://doc.xiaominfo.com/)
 - Hutool：[https://hutool.cn/](https://hutool.cn/)
-- EasyPoi：[https://hutool.cn/](http://doc.wupaas.com/docs/easypoi)
+- EasyPoi：[http://www.wupaas.com/](http://doc.wupaas.com/docs/easypoi)
