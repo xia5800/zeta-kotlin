@@ -16,6 +16,12 @@ zeta:
       login-username: admin
       login-password: admin123
 
+spring:
+  datasource:
+    druid:
+      # removeAbandoned is true, not use in production
+      remove-abandoned: false
+
 # knife4j配置 生产环境禁止访问swagger文档
 knife4j:
   enable: true
