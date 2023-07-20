@@ -45,10 +45,10 @@ object TreeUtil {
             val children = list.filter { entity.getTreeId() == it.getTreeParentId() }
 
             // eg: { id: 1, pid: 0, name: "1", children: [{ id: 2, pid: 1, name: "1-1" }, { id: 3, pid: 1, name: "1-2" }] },
-            if(isShowNullChildren) {
+            if (isShowNullChildren) {
                 entity.setTreeChildren(children as MutableList<E>)
             } else {
-                if(children.isNotEmpty()) {
+                if (children.isNotEmpty()) {
                     entity.setTreeChildren(children as MutableList<E>)
                 }
             }

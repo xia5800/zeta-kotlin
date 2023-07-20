@@ -48,7 +48,7 @@ class PreCheckAspect(private val ignoreProperties: IgnoreProperties) {
 
         // 获取父类上的@PreAuth注解
         val declaringClass = method.declaringClass
-        if(declaringClass.isAnnotationPresent(PreAuth::class.java)) {
+        if (declaringClass.isAnnotationPresent(PreAuth::class.java)) {
             val declaringAnnotation: PreAuth = declaringClass.getAnnotation(PreAuth::class.java)
             enabled = declaringAnnotation.enabled
             replace = declaringAnnotation.replace
@@ -63,12 +63,12 @@ class PreCheckAspect(private val ignoreProperties: IgnoreProperties) {
         }
 
         // 判断路由是否放行路由
-        if(isIgnoreToken()) {
+        if (isIgnoreToken()) {
             enabled = false
         }
 
         // 鉴权
-        if(enabled) {
+        if (enabled) {
             checkMethodAnnotation(replace, method)
         }
 

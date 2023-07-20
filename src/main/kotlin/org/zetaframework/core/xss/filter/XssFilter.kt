@@ -46,10 +46,6 @@ class XssFilter(
         }
 
         // 当前url是否是忽略xss防护的地址
-        if (xssProperties.isIgnoreUrl(request.requestURI)) {
-            return true
-        }
-
-        return false
+        return xssProperties.isIgnoreUrl(request.requestURI)
     }
 }

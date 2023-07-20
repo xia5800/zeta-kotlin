@@ -25,8 +25,8 @@ interface DeleteController<Entity, Id: Serializable>: BaseController<Entity> {
     /**
      * 单体删除
      *
-     * @param id
-     * @return R<Boolean>
+     * @param id Id
+     * @return ApiResult<Boolean>
      */
     @PreCheckPermission(value = ["{}:delete", "{}:remove"], mode = PreMode.OR)
     @ApiOperationSupport(order = 60, author = "AutoGenerate")
@@ -35,7 +35,7 @@ interface DeleteController<Entity, Id: Serializable>: BaseController<Entity> {
     @DeleteMapping("/{id}")
     fun delete(@PathVariable @ApiParam("主键") id: Id): ApiResult<Boolean> {
         val result = handlerDelete(id)
-        if(result.defExec) {
+        if (result.defExec) {
             result.setData(getBaseService().removeById(id))
         }
         return result
@@ -45,7 +45,7 @@ interface DeleteController<Entity, Id: Serializable>: BaseController<Entity> {
      * 自定义单体删除
      *
      * @param id Id
-     * @return R<Boolean>
+     * @return ApiResult<Boolean>
      */
     fun handlerDelete(id: Id): ApiResult<Boolean> {
         return ApiResult.successDef()
@@ -54,8 +54,8 @@ interface DeleteController<Entity, Id: Serializable>: BaseController<Entity> {
     /**
      * 批量删除
      *
-     * @param ids List<Long>
-     * @return R<Boolean>
+     * @param ids List<Id>
+     * @return ApiResult<Boolean>
      */
     @PreCheckPermission(value = ["{}:delete", "{}:remove"], mode = PreMode.OR)
     @ApiOperationSupport(order = 70, author = "AutoGenerate")
@@ -64,7 +64,7 @@ interface DeleteController<Entity, Id: Serializable>: BaseController<Entity> {
     @DeleteMapping("/batch")
     fun batchDelete(@RequestBody ids: MutableList<Id>): ApiResult<Boolean> {
         val result = handlerBatchDelete(ids)
-        if(result.defExec) {
+        if (result.defExec) {
             result.setData(getBaseService().removeByIds(ids))
         }
         return result
@@ -73,8 +73,8 @@ interface DeleteController<Entity, Id: Serializable>: BaseController<Entity> {
     /**
      * 自定义批量删除
      *
-     * @param ids Id
-     * @return R<Boolean>
+     * @param ids List<Id>
+     * @return ApiResult<Boolean>
      */
     fun handlerBatchDelete(ids: MutableList<Id>): ApiResult<Boolean> {
         return ApiResult.successDef()

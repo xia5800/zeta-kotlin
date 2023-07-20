@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.zetaframework.base.controller.SuperController
 import org.zetaframework.base.result.ApiResult
+import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.saToken.annotation.PreAuth
 import org.zetaframework.core.utils.TreeUtil
 
@@ -58,11 +59,12 @@ class SysMenuController: SuperController<ISysMenuService, Long, SysMenu, SysMenu
      */
     @ApiOperationSupport(ignoreParameters = ["children"])
     @ApiOperation(value = "查询菜单树")
+    @SysLog(response = false)
     @PostMapping("/tree")
     fun tree(@RequestBody param: SysMenuQueryParam): ApiResult<List<SysMenu?>> {
         // 查询所有菜单
         val menuList = handlerBatchQuery(param)
-        if(menuList.isEmpty()) return fail("未查询到菜单")
+        if (menuList.isEmpty()) return success(emptyList())
 
         // 转换成树形结构
         return success(TreeUtil.buildTree(menuList, false))

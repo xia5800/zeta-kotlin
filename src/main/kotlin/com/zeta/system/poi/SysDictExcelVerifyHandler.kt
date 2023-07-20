@@ -31,7 +31,7 @@ class SysDictExcelVerifyHandler(private val service: ISysDictService): IExcelVer
             flag = false
         } else {
             // 判断是否存在
-            if(ExistParam<SysDict, Long>(SysDict::code, obj.code).isExist(service)) {
+            if (ExistParam<SysDict, Long>(SysDict::code, obj.code).isExist(service)) {
                 message = "编码已存在"
                 flag = false
             }

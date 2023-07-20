@@ -14,11 +14,11 @@ zeta-kotlin项目已经配置好了基于Stomp协议的websocket
 		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>WebSocket测试-用户1</title>
-	<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/jquery@2.1.4/dist/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.1/dist/sockjs.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
-	<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
 	<style>
         #response {
             background-color: #2b2b2b;
@@ -46,7 +46,7 @@ zeta-kotlin项目已经配置好了基于Stomp协议的websocket
 			<form action="" class="form-inline was-validated needs-validation" style="padding-bottom: 20px" novalidate>
 				<div class="form-group">
 					<label for="toUserId" class="mb-2 mt-2 mr-sm-2">私聊用户id:</label>
-					<input id="toUserId" name="toUserId" value="2" class="form-control mb-2 mt-2 mr-sm-2"
+					<input id="toUserId" name="toUserId" value="" class="form-control mb-2 mt-2 mr-sm-2"
 						   placeholder="请输入私聊用户id" type="text" autocomplete="off" required/>
 					<div class="valid-feedback">验证成功！</div>
 					<div class="invalid-feedback">请输入私聊用户id！</div>
@@ -151,7 +151,7 @@ zeta-kotlin项目已经配置好了基于Stomp协议的websocket
 		 * 断开连接
 		 */
 		function disconnect() {
-			if(!connectioned) {
+			if (!connectioned) {
 				alert("还未连接websocket")
 				return;
 			}
@@ -168,7 +168,7 @@ zeta-kotlin项目已经配置好了基于Stomp协议的websocket
 		function sendOneToMore(event) {
 			event.preventDefault();
 			event.stopPropagation();
-			if(!connectioned) {
+			if (!connectioned) {
 				alert("还未连接websocket");
 			}
 
@@ -182,7 +182,7 @@ zeta-kotlin项目已经配置好了基于Stomp协议的websocket
 		function sendOneToOne(event) {
 			event.preventDefault();
 			event.stopPropagation();
-			if(!connectioned) {
+			if (!connectioned) {
 				alert("还未连接websocket");
 				return;
 			}
@@ -197,7 +197,7 @@ zeta-kotlin项目已经配置好了基于Stomp协议的websocket
 		 * 获取个人信息
 		 */
 		function getUserInfo() {
-			if(!connectioned) {
+			if (!connectioned) {
 				alert("还未连接websocket");
 				return;
 			}
@@ -242,11 +242,11 @@ zeta-kotlin项目已经配置好了基于Stomp协议的websocket
 		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>WebSocket测试-用户2</title>
-	<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/jquery@2.1.4/dist/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.1/dist/sockjs.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
-	<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
 	<style>
         #response {
             background-color: #2b2b2b;
@@ -274,7 +274,7 @@ zeta-kotlin项目已经配置好了基于Stomp协议的websocket
 			<form action="" class="form-inline was-validated needs-validation" style="padding-bottom: 20px" novalidate>
 				<div class="form-group">
 					<label for="toUserId" class="mb-2 mt-2 mr-sm-2">私聊用户id:</label>
-					<input id="toUserId" name="toUserId" value="2" class="form-control mb-2 mt-2 mr-sm-2"
+					<input id="toUserId" name="toUserId" value="" class="form-control mb-2 mt-2 mr-sm-2"
 						   placeholder="请输入私聊用户id" type="text" autocomplete="off" required/>
 					<div class="valid-feedback">验证成功！</div>
 					<div class="invalid-feedback">请输入私聊用户id！</div>
@@ -379,7 +379,7 @@ zeta-kotlin项目已经配置好了基于Stomp协议的websocket
 		 * 断开连接
 		 */
 		function disconnect() {
-			if(!connectioned) {
+			if (!connectioned) {
 				alert("还未连接websocket")
 				return;
 			}
@@ -396,7 +396,7 @@ zeta-kotlin项目已经配置好了基于Stomp协议的websocket
 		function sendOneToMore(event) {
 			event.preventDefault();
 			event.stopPropagation();
-			if(!connectioned) {
+			if (!connectioned) {
 				alert("还未连接websocket");
 			}
 
@@ -410,7 +410,7 @@ zeta-kotlin项目已经配置好了基于Stomp协议的websocket
 		function sendOneToOne(event) {
 			event.preventDefault();
 			event.stopPropagation();
-			if(!connectioned) {
+			if (!connectioned) {
 				alert("还未连接websocket");
 				return;
 			}
@@ -425,7 +425,7 @@ zeta-kotlin项目已经配置好了基于Stomp协议的websocket
 		 * 获取个人信息
 		 */
 		function getUserInfo() {
-			if(!connectioned) {
+			if (!connectioned) {
 				alert("还未连接websocket");
 				return;
 			}

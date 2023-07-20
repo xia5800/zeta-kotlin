@@ -33,18 +33,18 @@ interface ISysUserRoleService: IService<SysUserRole> {
     /**
      * 关联用户角色
      *
-     * @param userId Long
-     * @param roIeds List<Long>
-     * @return
+     * @param userId 用户id
+     * @param roleIds 角色id列表
+     * @return 是否成功
      */
     fun saveUserRole(userId: Long, roleIds: List<Long>?): Boolean
 
     /**
      * 关联用户角色
      *
-     * @param userId Long
-     * @param roleId Long
-     * @return
+     * @param userId 用户id
+     * @param roleId 角色id
+     * @return 是否成功
      */
     fun saveUserRole(userId: Long, roleId: Long): Boolean
 }

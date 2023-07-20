@@ -9,6 +9,7 @@ import com.zeta.system.service.ISysFileService
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
 import org.zetaframework.core.exception.BusinessException
 import org.zetaframework.extra.file.model.FileDeleteParam
@@ -40,7 +41,7 @@ class SysFileServiceImpl(private val fileContext: FileContext): ISysFileService,
         val fileInfo: FileInfo = fileContext.upload(file, bizType)
 
         val model = BeanUtil.toBean(fileInfo, SysFile::class.java)
-        if(!this.save(model)) {
+        if (!this.save(model)) {
             throw BusinessException("文件保存失败")
         }
         return model
@@ -70,7 +71,7 @@ class SysFileServiceImpl(private val fileContext: FileContext): ISysFileService,
      * @param id
      */
     override fun delete(id: Long): Boolean {
-        val sysFile = this.getById(id) ?: throw BusinessException("文件不存在或已被删除")
+        val sysFile = this.getById(id) ?: return true
         // 先删除文件
         // fix: 删除文件失败不应该抛异常，因为会出现更换了文件存储策略（eg: 阿里云-> minio）导致文件无法删除的情况  --by gcc date: 2023-05-26
         fileContext.delete(FileDeleteParam(path = sysFile.path!!))
@@ -84,10 +85,11 @@ class SysFileServiceImpl(private val fileContext: FileContext): ISysFileService,
      *
      * @param ids
      */
+    @Transactional(rollbackFor = [Exception::class])
     override fun batchDelete(ids: MutableList<Long>): Boolean {
         // 批量查询文件
         val listFile = this.listByIds(ids)
-        if(listFile.isEmpty()) {
+        if (listFile.isEmpty()) {
             return true
         }
 

@@ -60,7 +60,7 @@ class SysFileController: SuperSimpleController<ISysFileService, SysFile>(),
     /**
      * 下载文件
      *
-     * @param request
+     * @param id
      * @param response
      */
     @SysLog(response = false)
@@ -75,7 +75,7 @@ class SysFileController: SuperSimpleController<ISysFileService, SysFile>(),
      * 自定义单体删除文件
      *
      * @param id Id
-     * @return R<Boolean>
+     * @return ApiResult<Boolean>
      */
     override fun handlerDelete(id: Long): ApiResult<Boolean> {
         return success(service.delete(id))
@@ -85,7 +85,7 @@ class SysFileController: SuperSimpleController<ISysFileService, SysFile>(),
      * 自定义批量删除文件
      *
      * @param ids Id
-     * @return R<Boolean>
+     * @return ApiResult<Boolean>
      */
     override fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> {
         return success(service.batchDelete(ids))

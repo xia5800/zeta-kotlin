@@ -1,6 +1,5 @@
 package com.zeta.system.controller
 
-import cn.hutool.core.util.ObjectUtil
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
 import com.zeta.system.model.dto.sysOptLog.SysOptLogTableDTO
 import com.zeta.system.model.entity.SysOptLog
@@ -34,8 +33,8 @@ class SysOptLogController(private val userService: ISysUserService): SuperSimple
 
     /**
      * 分页查询
-     * @param param PageParam<PageQuery> 分页查询参数
-     * @return ApiResult<IPage<Entity>>
+     * @param param PageParam<QueryParam> 分页查询参数
+     * @return ApiResult<PageResult<Entity>>
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 10)
@@ -49,19 +48,18 @@ class SysOptLogController(private val userService: ISysUserService): SuperSimple
     /**
      * 单体查询
      * @param id 主键
-     * @return R<Entity?>
+     * @return ApiResult<Entity?>
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 20)
     @ApiOperation(value = "单体查询", notes = "根据主键查询唯一数据，若查询不到则返回null")
     @GetMapping("/{id}")
-    fun get(@PathVariable("id") @ApiParam("主键") id: Long): ApiResult<SysOptLog> {
-        val entity = service.getById(id)
-        if(ObjectUtil.isNotEmpty(entity)) {
-            // 查询操作人
-            val user = userService.getById(entity.createdBy)
-            entity.userName = user?.username
-        }
+    fun get(@PathVariable("id") @ApiParam("主键") id: Long): ApiResult<SysOptLog?> {
+        val entity = service.getById(id) ?: return success(null)
+
+        // 查询操作人
+        val user = userService.getById(entity.createdBy)
+        entity.userName = user?.username
         return success(entity)
     }
 }

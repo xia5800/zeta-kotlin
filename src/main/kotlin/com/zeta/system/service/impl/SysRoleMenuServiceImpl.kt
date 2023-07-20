@@ -1,6 +1,5 @@
 package com.zeta.system.service.impl
 
-import cn.hutool.core.collection.CollUtil
 import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import com.zeta.common.cacheKey.SaPermissionStringCacheKey
@@ -58,12 +57,12 @@ class SysRoleMenuServiceImpl(
         // 查询角色对应的用户
         val userRoleList = userRoleService.list(KtQueryWrapper(SysUserRole())
             .eq(SysUserRole::roleId, roleId))
-        if(CollUtil.isNotEmpty(userRoleList)) {
-            val userIds = userRoleList!!.map { it.userId }
-            // 删除用户权限缓存
-            saPermissionStringCacheKey.delete(userIds)
-            // 删除用户角色缓存
-            saRoleStringCacheKey.delete(userIds)
-        }
+        if (userRoleList.isEmpty()) return
+
+        val userIds = userRoleList!!.map { it.userId }
+        // 删除用户权限缓存
+        saPermissionStringCacheKey.delete(userIds)
+        // 删除用户角色缓存
+        saRoleStringCacheKey.delete(userIds)
     }
 }

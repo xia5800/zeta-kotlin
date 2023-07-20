@@ -35,7 +35,7 @@ interface UpdateStateController<Entity, Id: Serializable, State: Serializable>: 
     @PutMapping("/state")
     fun updateState(@RequestBody param: UpdateStateParam<Id, State>): ApiResult<Boolean> {
         val result = handlerUpdateState(param)
-        if(result.defExec) {
+        if (result.defExec) {
             // updateDTO -> Entity
             val entity = BeanUtil.toBean(param, getEntityClass())
             result.setData(getBaseService().updateById(entity))
