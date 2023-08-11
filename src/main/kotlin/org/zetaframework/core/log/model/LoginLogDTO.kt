@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest
  *
  * @author gcc
  */
-data class SysLoginLogDTO (
+data class LoginLogDTO (
 
     /** 状态 see: [LoginStateEnum] */
     var state: String? = null,
@@ -51,11 +51,11 @@ data class SysLoginLogDTO (
          * @param state 状态
          * @param comments 备注
          * @param request HttpServletRequest
-         * @return SysLoginLogDTO
+         * @return LoginLogDTO
          */
-        fun build(account: String, state: String, comments: String? = "登录成功", request: HttpServletRequest): SysLoginLogDTO {
+        fun build(account: String, state: String, comments: String? = "登录成功", request: HttpServletRequest): LoginLogDTO {
             val ua = UserAgentUtil.parse(ServletUtil.getHeaderIgnoreCase(request, "User-Agent"))
-            return SysLoginLogDTO().apply {
+            return LoginLogDTO().apply {
                 this.userId = ContextUtil.getUserId()
                 this.account = account
                 this.state = state
@@ -76,9 +76,9 @@ data class SysLoginLogDTO (
          * @param account 账号
          * @param comments 备注
          * @param request HttpServletRequest
-         * @return SysLoginLogDTO
+         * @return LoginLogDTO
          */
-        fun loginSuccess(account: String, comments: String? = "登录成功", request: HttpServletRequest): SysLoginLogDTO =
+        fun loginSuccess(account: String, comments: String? = "登录成功", request: HttpServletRequest): LoginLogDTO =
             build(account, LoginStateEnum.SUCCESS.name, request = request)
 
 
@@ -88,9 +88,9 @@ data class SysLoginLogDTO (
          * @param account 账号
          * @param state [LoginStateEnum]
          * @param request HttpServletRequest
-         * @return SysLoginLogDTO
+         * @return LoginLogDTO
          */
-        fun loginFail(account: String, state: LoginStateEnum, request: HttpServletRequest): SysLoginLogDTO =
+        fun loginFail(account: String, state: LoginStateEnum, request: HttpServletRequest): LoginLogDTO =
             build(account, state.name, state.desc, request)
 
         /**
@@ -100,9 +100,9 @@ data class SysLoginLogDTO (
          * @param state 状态
          * @param comments 备注
          * @param request HttpServletRequest
-         * @return SysLoginLogDTO
+         * @return LoginLogDTO
          */
-        fun loginFail(account: String, state: LoginStateEnum, comments: String, request: HttpServletRequest): SysLoginLogDTO =
+        fun loginFail(account: String, state: LoginStateEnum, comments: String, request: HttpServletRequest): LoginLogDTO =
             build(account, state.name, comments, request)
     }
 

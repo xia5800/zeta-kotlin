@@ -17,8 +17,8 @@ import org.springframework.web.context.request.ServletRequestAttributes
 import org.springframework.web.multipart.MultipartFile
 import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.log.enums.LogTypeEnum
-import org.zetaframework.core.log.event.SysLogEvent
-import org.zetaframework.core.log.model.SysLogDTO
+import org.zetaframework.core.log.event.LogEvent
+import org.zetaframework.core.log.model.LogDTO
 import org.zetaframework.core.utils.IpAddressUtil
 import org.zetaframework.core.utils.JSONUtil
 import javax.servlet.http.HttpServletRequest
@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse
  */
 // @Component  // 为了可以控制开启、关闭全局日志记录。改为Bean配置的方式
 @Aspect
-class SysLogAspect(private val context: ApplicationContext) {
+class LogAspect(private val context: ApplicationContext) {
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(this::class.java)
         private val START_TIME: ThreadLocal<Long> = ThreadLocal()
@@ -39,7 +39,7 @@ class SysLogAspect(private val context: ApplicationContext) {
     }
 
     @Pointcut("@annotation(org.zetaframework.core.log.annotation.SysLog)")
-    fun SysLogAspect() {}
+    fun LogAspect() {}
 
 
     /**
@@ -47,7 +47,7 @@ class SysLogAspect(private val context: ApplicationContext) {
      *
      * @param joinPoint JoinPoint
      */
-    @Before(value = "SysLogAspect()")
+    @Before(value = "LogAspect()")
     fun doBefore(joinPoint: JoinPoint) {
         // 记录操作开始时间
         START_TIME.set(System.currentTimeMillis())
@@ -59,7 +59,7 @@ class SysLogAspect(private val context: ApplicationContext) {
      * @param joinPoint JoinPoint
      * @param result Any
      */
-    @AfterReturning(pointcut = "SysLogAspect()", returning = "result")
+    @AfterReturning(pointcut = "LogAspect()", returning = "result")
     fun doAfterReturning(joinPoint: JoinPoint, result: Any?) {
         publishEvent(joinPoint, result)
     }
@@ -70,7 +70,7 @@ class SysLogAspect(private val context: ApplicationContext) {
      * @param joinPoint JoinPoint
      * @param e Throwable
      */
-    @AfterThrowing(pointcut = "SysLogAspect()", throwing = "e")
+    @AfterThrowing(pointcut = "LogAspect()", throwing = "e")
     fun doAfterThrowing(joinPoint: JoinPoint, e: Throwable?) {
         publishEvent(joinPoint, exception = e)
     }
@@ -97,15 +97,15 @@ class SysLogAspect(private val context: ApplicationContext) {
         }
 
         // 构造系统日志
-        val sysLogDTO = buildSysLogDTO(joinPoint, sysLog)
-        sysLogDTO.type = LogTypeEnum.OPERATION.name
-        sysLogDTO.spendTime = spendTime
-        sysLogDTO.result = getResponse(result, sysLog)
-        sysLogDTO.exception = getException(exception) {
-            sysLogDTO.type = LogTypeEnum.EXCEPTION.name
+        val logDTO = buildLogDTO(joinPoint, sysLog)
+        logDTO.type = LogTypeEnum.OPERATION.name
+        logDTO.spendTime = spendTime
+        logDTO.result = getResponse(result, sysLog)
+        logDTO.exception = getException(exception) {
+            logDTO.type = LogTypeEnum.EXCEPTION.name
         }
         // 发布保存系统日志事件
-        context.publishEvent(SysLogEvent(sysLogDTO))
+        context.publishEvent(LogEvent(logDTO))
     }
 
     /**
@@ -126,38 +126,38 @@ class SysLogAspect(private val context: ApplicationContext) {
      * 构造系统日志
      * @param joinPoint JoinPoint
      * @param sysLog SysLog
-     * @return SysLogDTO
+     * @return LogDTO
      */
-    private fun buildSysLogDTO(joinPoint: JoinPoint, sysLog: SysLog): SysLogDTO {
-        val sysLogDTO = SysLogDTO()
+    private fun buildLogDTO(joinPoint: JoinPoint, sysLog: SysLog): LogDTO {
+        val logDTO = LogDTO()
 
         // 类路径
-        sysLogDTO.classPath = "${joinPoint.signature.declaringTypeName}.${joinPoint.signature.name}"
+        logDTO.classPath = "${joinPoint.signature.declaringTypeName}.${joinPoint.signature.name}"
 
         // 操作描述
-        sysLogDTO.description = getDescription(joinPoint, sysLog)
+        logDTO.description = getDescription(joinPoint, sysLog)
 
         // 记录请求地址、请求方式、ip
         val attributes = RequestContextHolder.getRequestAttributes() as ServletRequestAttributes?
         val request = attributes?.request
         if (request != null) {
             val ua = UserAgentUtil.parse(ServletUtil.getHeaderIgnoreCase(request, "User-Agent"))
-            sysLogDTO.url = request.requestURI
-            sysLogDTO.httpMethod = request.method
-            sysLogDTO.os = ua.platform.name
-            sysLogDTO.device = ua.os.name
-            sysLogDTO.browser = ua.browser.name
-            sysLogDTO.ip = ServletUtil.getClientIP(request)
-            sysLogDTO.ip?.let { ip ->
-                sysLogDTO.ipRegion = IpAddressUtil.search(ip)
+            logDTO.url = request.requestURI
+            logDTO.httpMethod = request.method
+            logDTO.os = ua.platform.name
+            logDTO.device = ua.os.name
+            logDTO.browser = ua.browser.name
+            logDTO.ip = ServletUtil.getClientIP(request)
+            logDTO.ip?.let { ip ->
+                logDTO.ipRegion = IpAddressUtil.search(ip)
             }
             // 获取请求参数
             if (sysLog.request) {
-                sysLogDTO.params = getRequestParam(joinPoint, request)
+                logDTO.params = getRequestParam(joinPoint, request)
             }
         }
 
-        return sysLogDTO
+        return logDTO
     }
 
 
