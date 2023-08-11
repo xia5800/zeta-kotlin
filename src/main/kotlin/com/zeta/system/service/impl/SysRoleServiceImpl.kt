@@ -36,6 +36,8 @@ class SysRoleServiceImpl: ISysRoleService, ServiceImpl<SysRoleMapper, SysRole>()
      * @return 角色名对应的角色
      */
     override fun getRolesByNames(names: List<String>): List<SysRole> {
+        if (names.isEmpty()) return emptyList();
+
         return this.list(KtQueryWrapper(SysRole()).`in`(SysRole::name, names))
     }
 

@@ -114,7 +114,7 @@ class GlobalExceptionHandler {
      * 方法参数类型不匹配异常
      *
      * @param ex MethodArgumentTypeMismatchException
-     * @return R<*>?
+     * @return ApiResult<*>?
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -128,7 +128,7 @@ class GlobalExceptionHandler {
      * 从请求中读取数据失败异常
      *
      * @param ex HttpMessageNotReadableException
-     * @return R<*>?
+     * @return ApiResult<*>?
      */
     @ExceptionHandler(HttpMessageNotReadableException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

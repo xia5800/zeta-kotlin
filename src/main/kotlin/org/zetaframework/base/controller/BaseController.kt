@@ -12,6 +12,7 @@ interface BaseController<Entity>: SuperBaseController {
 
     /**
      * 获取实体类型
+     *
      * @return Class<Entity>
      */
     fun getEntityClass(): Class<Entity>

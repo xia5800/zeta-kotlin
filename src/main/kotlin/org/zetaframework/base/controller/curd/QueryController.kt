@@ -29,8 +29,8 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
     /**
      * 分页查询
      *
-     * @param param PageParam<PageQuery> 分页查询参数
-     * @return ApiResult<IPage<Entity>>
+     * @param param PageParam<QueryParam> 分页查询参数
+     * @return ApiResult<PageResult<Entity>>
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 10, author = "AutoGenerate")
@@ -81,8 +81,8 @@ interface QueryController<Entity, Id: Serializable, QueryParam> : PageController
 
     /**
      * 单体查询
-     * @param id 主键
-     * @return R<Entity?>
+     * @param id Id 主键
+     * @return ApiResult<Entity?>
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 30, author = "AutoGenerate")

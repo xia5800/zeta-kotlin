@@ -86,7 +86,7 @@ class SysDictItemController(
      * 获取待导出的数据
      *
      * @param param QueryParam
-     * @return MutableList<Entity>
+     * @return MutableList<ExportBean>
      */
     override fun findExportList(param: SysDictItemQueryParam): MutableList<SysDictItemExportPoi> {
         // 条件查询Entity数据
@@ -99,13 +99,13 @@ class SysDictItemController(
         // Entity -> ExportBean
         return list.map {
             val exportPoi = BeanUtil.toBean(it, SysDictItemExportPoi::class.java)
-            // 通过id查询字典数据，并缓存。 说明：保证每个字典只查一次数据库
+            // 通过id查询字典数据并缓存。 说明：保证每个字典只查一次数据库
             var dict = dictCacheMap[it.dictId]
             if (dict == null) {
                 dict = dictService.getById(it.dictId)
                 dictCacheMap[it.dictId!!] = dict
             }
-            // 处理字典名
+            // 设置字典名
             exportPoi.dictName = dict?.name
             exportPoi
         }.toMutableList().also {

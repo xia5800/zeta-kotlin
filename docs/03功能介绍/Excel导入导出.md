@@ -170,7 +170,7 @@ class SysUserController:
     override fun findExportList(param: SysUserQueryParam): MutableList<SysUserExportPoi> {
         // 条件查询SysUser数据
         val entity = BeanUtil.toBean(param, SysUser::class.java)
-        val list = getBaseService().list(QueryWrapper<Entity>(entity))
+        val list = getBaseService().list(QueryWrapper<SysUser>(entity))
         if (list.isNullOrEmpty()) return mutableListOf()
 
         // 批量获取用户角色 Map<用户id, 用户角色列表>
@@ -350,7 +350,7 @@ class SysUserController:
         importParams.verifyHandler = object: IExcelVerifyHandler<SysUserImportPoi> {
             override fun verifyHandler(obj: SysUserImportPoi): ExcelVerifyHandlerResult {
                 // 判断是否存在
-                return if(ExistParam<SysUser, Long>(SysUser::account, obj.account).isExist(service)) {
+                return if (ExistParam<SysUser, Long>(SysUser::account, obj.account).isExist(service)) {
                     ExcelVerifyHandlerResult(false, "账号已存在")
                 } else ExcelVerifyHandlerResult(true, "")
             }
@@ -398,7 +398,7 @@ class SysUserExcelVerifyHandler(private val service: ISysUserService): IExcelVer
             flag = false
         } else {
             // 判断是否存在
-            if(ExistParam<SysUser, Long>(SysUser::account, obj.account).isExist(service)) {
+            if (ExistParam<SysUser, Long>(SysUser::account, obj.account).isExist(service)) {
                 message = "账号已存在"
                 flag = false
             }

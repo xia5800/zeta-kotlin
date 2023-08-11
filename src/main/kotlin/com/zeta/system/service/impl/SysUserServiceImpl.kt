@@ -87,7 +87,7 @@ class SysUserServiceImpl(
         user.password = encodePassword(saveDTO.password!!)
         user.readonly = false
         user.state = UserStateEnum.NORMAL.code
-        if(!this.save(user)) {
+        if (!this.save(user)) {
             throw BusinessException("新增用户失败")
         }
 
@@ -104,7 +104,7 @@ class SysUserServiceImpl(
     @Transactional(rollbackFor = [Exception::class])
     override fun updateUser(updateDTO: SysUserUpdateDTO): Boolean {
         val user = BeanUtil.toBean(updateDTO, SysUser::class.java)
-        if(!this.updateById(user)) {
+        if (!this.updateById(user)) {
             throw BusinessException("修改用户失败")
         }
 
@@ -119,16 +119,12 @@ class SysUserServiceImpl(
      * @return List<SysRole?>
      */
     override fun getUserRoles(userId: Long): List<SysRoleDTO> {
-        val result: MutableList<SysRoleDTO> = mutableListOf()
-
         // 根据用户id查询角色
-        val roleList = userRoleService.listByUserId(userId)
-        if(CollUtil.isNotEmpty(roleList)) {
-            roleList.forEach {
-                result.add(BeanUtil.toBean(it, SysRoleDTO::class.java))
-            }
-        }
-        return result
+        val roleList: List<SysRole> = userRoleService.listByUserId(userId)
+        if (roleList.isEmpty()) return emptyList()
+
+        // List<Entity> -> List<EntityDTO>
+        return roleList.map { BeanUtil.toBean(it, SysRoleDTO::class.java) }
     }
 
     /**
@@ -139,14 +135,10 @@ class SysUserServiceImpl(
     override fun getUserRoles(userIds: List<Long>): Map<Long, List<SysRoleDTO>> {
         // 批量根据用户id查询角色
         val roleList = userRoleService.listByUserIds(userIds)
+        if (roleList.isEmpty()) return emptyMap()
 
-        // 处理返回值
-        var result: Map<Long, List<SysRoleDTO>> = mutableMapOf()
-        if(CollUtil.isNotEmpty(roleList)) {
-            // 处理得到 Map<用户id, 用户角色列表>
-            result = roleList.filter { it.userId != null }.groupBy { it.userId!! }
-        }
-        return result
+        // 处理返回值, 得到 Map<用户id, 用户角色列表>
+        return roleList.filter { it.userId != null }.groupBy { it.userId!! }
     }
 
     /**
@@ -190,7 +182,7 @@ class SysUserServiceImpl(
     @Transactional(rollbackFor = [Exception::class])
     override fun batchImportUser(userList: List<SysUser>): Boolean {
         // 保存用户
-        if(!this.saveBatch(userList)) {
+        if (!this.saveBatch(userList)) {
             throw BusinessException("新增用户失败")
         }
 
@@ -219,7 +211,7 @@ class SysUserServiceImpl(
     override fun getPermissionList(loginId: Any?, loginType: String?): List<String> {
         loginId ?: let { return listOf() }
         val authorities: List<SysMenu> = roleMenuService.listMenuByUserId(loginId.toString().toLong())
-        if(CollUtil.isEmpty(authorities)) {
+        if (CollUtil.isEmpty(authorities)) {
             return listOf()
         }
         return authorities.mapNotNull { it.authority }.filterNot { it == "" }

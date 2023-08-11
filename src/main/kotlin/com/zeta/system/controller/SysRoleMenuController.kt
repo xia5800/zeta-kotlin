@@ -68,10 +68,11 @@ class SysRoleMenuController(private val menuService: ISysMenuService) : SuperSim
     fun update(@RequestBody @Validated roleMenuHandleDto: SysRoleMenuHandleDTO): ApiResult<Boolean> {
         // 修改前先删除角色所有权限
         service.remove(KtQueryWrapper(SysRoleMenu()).eq(SysRoleMenu::roleId, roleMenuHandleDto.roleId))
+
+        // 重新关联角色权限
         if (CollUtil.isNotEmpty(roleMenuHandleDto.menuIds)) {
-            val batchList = mutableListOf<SysRoleMenu>()
-            roleMenuHandleDto.menuIds!!.forEach {
-                batchList.add(SysRoleMenu(roleMenuHandleDto.roleId, it))
+            val batchList: List<SysRoleMenu> = roleMenuHandleDto.menuIds!!.map {
+                SysRoleMenu(roleMenuHandleDto.roleId, it)
             }
             if (!service.saveBatch(batchList)) return fail("操作失败")
         }

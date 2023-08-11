@@ -42,7 +42,6 @@ data class SysOptLogQueryParam(
     @ApiModelProperty(value = "类路径")
     var classPath: String? = null,
 
-
     /** 操作系统 */
     @ApiModelProperty(value = "操作系统")
     var os: String? = null,

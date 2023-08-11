@@ -63,8 +63,8 @@ interface NoPageQueryController<Entity, Id: Serializable, QueryParam>: BaseContr
 
     /**
      * 单体查询
-     * @param id 主键
-     * @return R<Entity?>
+     * @param id Id 主键
+     * @return ApiResult<Entity?>
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 30, author = "AutoGenerate")

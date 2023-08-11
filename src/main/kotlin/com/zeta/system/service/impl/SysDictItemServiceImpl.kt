@@ -27,7 +27,7 @@ class SysDictItemServiceImpl: ISysDictItemService, ServiceImpl<SysDictItemMapper
      * @param codes
      */
     override fun listByCodes(codes: List<String>): Map<String, List<SysDictItemDTO>> {
-        if(codes.isEmpty()) { return emptyMap() }
+        if (codes.isEmpty()) { return emptyMap() }
 
         // 根据字典编码查询字典项
         val dictItemList = baseMapper.selectByDictCodes(codes)
@@ -43,7 +43,7 @@ class SysDictItemServiceImpl: ISysDictItemService, ServiceImpl<SysDictItemMapper
      * @param dictIds 字典id
      */
     override fun listByDictIds(dictIds: List<Long>): Map<Long, List<SysDictItem>> {
-        if(dictIds.isEmpty()) { return emptyMap() }
+        if (dictIds.isEmpty()) { return emptyMap() }
 
         // 通过字典id查询字典项
         val dictItemList = this.list(

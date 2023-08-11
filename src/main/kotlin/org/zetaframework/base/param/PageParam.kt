@@ -55,7 +55,7 @@ class PageParam<T> private constructor(){
         val page: Page<E> = Page<E>(this.page, this.limit)
 
         // 判断是否有排序
-        if(StrUtil.isBlank(this.sort)) {
+        if (StrUtil.isBlank(this.sort)) {
             return page
         }
 

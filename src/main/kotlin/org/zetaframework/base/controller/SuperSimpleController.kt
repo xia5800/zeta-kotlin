@@ -23,6 +23,7 @@ abstract class SuperSimpleController<S: IService<Entity>, Entity> : BaseControll
 
     /**
      * 获取实体类型
+     *
      * @return Class<Entity>
      */
     override fun getEntityClass(): Class<Entity> {
