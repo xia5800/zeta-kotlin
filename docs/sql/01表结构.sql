@@ -165,8 +165,8 @@ CREATE TABLE `sys_role_menu`  (
   `role_id` bigint(20) NOT NULL COMMENT '角色id',
   `menu_id` bigint(20) NOT NULL COMMENT '菜单id',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `fk_role_menu_roleId`(`role_id`) USING BTREE,
-  INDEX `fk_role_menu_menuId`(`menu_id`) USING BTREE,
+  INDEX `idx_role_menu_roleId`(`role_id`) USING BTREE,
+  INDEX `idx_role_menu_menuId`(`menu_id`) USING BTREE,
   CONSTRAINT `fk_role_menu_roleId` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `fk_role_menu_menuId` FOREIGN KEY (`menu_id`) REFERENCES `sys_menu` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色菜单关联表' ROW_FORMAT = DYNAMIC;
@@ -206,8 +206,8 @@ CREATE TABLE `sys_user_role`  (
   `user_id` bigint(20) NOT NULL COMMENT '用户id',
   `role_id` bigint(20) NOT NULL COMMENT '角色id',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `fk_user_role_roleId`(`role_id`) USING BTREE,
-  INDEX `fk_user_role_userId`(`user_id`) USING BTREE,
+  INDEX `idx_user_role_roleId`(`role_id`) USING BTREE,
+  INDEX `idx_user_role_userId`(`user_id`) USING BTREE,
   CONSTRAINT `fk_user_role_roleId` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `fk_user_role_userId` FOREIGN KEY (`user_id`) REFERENCES `sys_user` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户角色表' ROW_FORMAT = DYNAMIC;
