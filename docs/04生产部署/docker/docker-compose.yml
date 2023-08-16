@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  zeta_kotlin_server:
+    build:
+      context: ""
+      dockerfile: Dockerfile
+      args:
+        - JAR_FILE_NAME=zeta-kotlin.jar
+        - SPRING_ENV=docker
+    image: zeta_kotlin_server:latest
+    container_name: zeta_kotlin_server
+    restart: always
+    volumes:
+      - ./logs/:/root/product/data
+    ports:
+      - "8080:8080" # 格式 "服务器端口:容器端口"

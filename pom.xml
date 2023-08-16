@@ -34,8 +34,14 @@
         <easypoi.version>4.4.0</easypoi.version>
         <ip2region.version>2.7.0</ip2region.version>
         <aizuda-monitor.version>1.0.0</aizuda-monitor.version>
+
+        <!-- OSS相关 -->
         <aliyun-oss.version>3.17.0</aliyun-oss.version>
         <minio.version>8.5.4</minio.version>
+
+        <!-- 漏洞修复 -->
+        <snakeyaml.version>2.0</snakeyaml.version>
+        <undertow.verssion>3.1.2</undertow.verssion>
     </properties>
 
     <dependencyManagement>
@@ -73,6 +79,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
+            <version>${undertow.verssion}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -327,6 +334,13 @@
             <id>test</id>
             <properties>
                 <profile.active>test</profile.active>
+            </properties>
+        </profile>
+        <!-- docker环境-->
+        <profile>
+            <id>docker</id>
+            <properties>
+                <profile.active>docker</profile.active>
             </properties>
         </profile>
     </profiles>
