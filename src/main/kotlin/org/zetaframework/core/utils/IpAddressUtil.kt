@@ -26,7 +26,7 @@ object IpAddressUtil {
     init {
         // fix: 解决打成jar包无法读取文件ip2region.xdb问题 --by gcc date:2023-08-14
         val tmpDir = System.getProperty("user.dir") + File.separator + "temp"
-        val dbPath = tmpDir + File.separator + "ip2region.db"
+        val dbPath = tmpDir + File.separator + "ip2region.xdb"
 
         val file = File(dbPath)
         if (!file.exists()) {
