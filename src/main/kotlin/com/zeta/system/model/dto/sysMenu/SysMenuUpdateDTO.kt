@@ -4,7 +4,6 @@ import com.zeta.system.model.enums.MenuTypeEnum
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
@@ -41,7 +40,6 @@ data class SysMenuUpdateDTO(
 
     /** 路由名称 */
     @ApiModelProperty(value = "路由名称", required = true)
-    @get:NotBlank(message = "路由名称不能为空")
     var name: String? = null,
 
     /** 路由地址 */

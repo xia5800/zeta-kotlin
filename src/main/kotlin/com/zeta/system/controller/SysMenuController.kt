@@ -1,11 +1,13 @@
 package com.zeta.system.controller
 
 import cn.hutool.core.bean.BeanUtil
+import cn.hutool.core.lang.Assert
 import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
 import com.zeta.system.model.dto.sysMenu.SysMenuSaveDTO
 import com.zeta.system.model.dto.sysMenu.SysMenuUpdateDTO
 import com.zeta.system.model.entity.SysMenu
+import com.zeta.system.model.enums.MenuTypeEnum
 import com.zeta.system.model.param.SysMenuQueryParam
 import com.zeta.system.service.ISysMenuService
 import io.swagger.annotations.Api
@@ -49,6 +51,36 @@ class SysMenuController: SuperController<ISysMenuService, Long, SysMenu, SysMenu
         // 处理批量查询数据
         super.handlerBatchData(list)
         return list
+    }
+
+    /**
+     * 自定义新增
+     *
+     * @param saveDTO SaveDTO 保存对象
+     * @return ApiResult<Boolean>
+     */
+    override fun handlerSave(saveDTO: SysMenuSaveDTO): ApiResult<Boolean> {
+        // 如果新增的是菜单
+        if (MenuTypeEnum.MENU == saveDTO.type) {
+            Assert.notBlank(saveDTO.name, "路由名称不能为空")
+            Assert.notBlank(saveDTO.path, "路由地址不能为空")
+        }
+        return super.handlerSave(saveDTO)
+    }
+
+    /**
+     * 自定义修改
+     *
+     * @param updateDTO UpdateDTO 修改对象
+     * @return ApiResult<Boolean>
+     */
+    override fun handlerUpdate(updateDTO: SysMenuUpdateDTO): ApiResult<Boolean> {
+        // 如果修改的是菜单
+        if (MenuTypeEnum.MENU == updateDTO.type) {
+            Assert.notBlank(updateDTO.name, "路由名称不能为空")
+            Assert.notBlank(updateDTO.path, "路由地址不能为空")
+        }
+        return super.handlerUpdate(updateDTO)
     }
 
     /**
