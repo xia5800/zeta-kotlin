@@ -59,10 +59,11 @@ class SysRoleMenuServiceImpl(
             .eq(SysUserRole::roleId, roleId))
         if (userRoleList.isEmpty()) return
 
-        val userIds = userRoleList!!.map { it.userId }
-        // 删除用户权限缓存
-        saPermissionStringCacheKey.delete(userIds)
-        // 删除用户角色缓存
-        saRoleStringCacheKey.delete(userIds)
+        userRoleList!!.map { it.userId }.forEach { userId ->
+            // 删除用户权限缓存
+            saPermissionStringCacheKey.delete(userId)
+            // 删除用户角色缓存
+            saRoleStringCacheKey.delete(userId)
+        }
     }
 }
