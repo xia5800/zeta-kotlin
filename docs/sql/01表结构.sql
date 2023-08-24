@@ -36,7 +36,7 @@ CREATE TABLE `sys_dict_item`  (
   `sort_value` int(11) NULL DEFAULT NULL COMMENT '排序',
   `deleted` bit(1) NOT NULL DEFAULT b'0' COMMENT '逻辑删除字段',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `fk_dict_item_dictId`(`dict_id`) USING BTREE,
+  INDEX `idx_dict_item_dictId`(`dict_id`) USING BTREE,
   CONSTRAINT `fk_dict_item_dictId` FOREIGN KEY (`dict_id`) REFERENCES `sys_dict` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典项表' ROW_FORMAT = DYNAMIC;
 
