@@ -5,9 +5,7 @@ import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDateTime
 
 /**
- * <p>
  * 字典 详情
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:38:20

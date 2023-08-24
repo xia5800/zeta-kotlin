@@ -115,7 +115,7 @@ class SysUserServiceImpl(
     /**
      * 获取用户角色
      *
-     * @param id Long
+     * @param userId Long
      * @return List<SysRole?>
      */
     override fun getUserRoles(userId: Long): List<SysRoleDTO> {
@@ -129,7 +129,7 @@ class SysUserServiceImpl(
 
     /**
      * 批量获取用户角色
-     * @param ids List<Long>
+     * @param userIds List<Long>
      * @return Map<Long, List<SysRole?>>
      */
     override fun getUserRoles(userIds: List<Long>): Map<Long, List<SysRoleDTO>> {

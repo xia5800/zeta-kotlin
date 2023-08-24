@@ -54,7 +54,7 @@ class SysUserRoleServiceImpl: ISysUserRoleService, ServiceImpl<SysUserRoleMapper
         // 删除用户角色关联
         this.remove(KtQueryWrapper(SysUserRole()).eq(SysUserRole::userId, userId))
 
-        if (roleIds == null || roleIds.isEmpty()) {
+        if (roleIds.isNullOrEmpty()) {
             return true;
         }
 

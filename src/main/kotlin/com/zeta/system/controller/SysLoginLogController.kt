@@ -11,9 +11,7 @@ import org.zetaframework.base.controller.curd.QueryController
 import org.zetaframework.core.saToken.annotation.PreAuth
 
 /**
- * <p>
  * 登录日志 前端控制器
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-03-21 16:33:13

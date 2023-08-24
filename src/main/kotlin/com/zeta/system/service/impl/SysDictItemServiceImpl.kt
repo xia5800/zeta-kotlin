@@ -10,9 +10,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
 /**
- * <p>
  * 字典项 服务实现类
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:12:10
@@ -24,7 +22,7 @@ class SysDictItemServiceImpl: ISysDictItemService, ServiceImpl<SysDictItemMapper
     /**
      * 根据字典编码查询字典项
      *
-     * @param codes
+     * @param codes 字典编码列表
      */
     override fun listByCodes(codes: List<String>): Map<String, List<SysDictItemDTO>> {
         if (codes.isEmpty()) { return emptyMap() }
@@ -40,7 +38,7 @@ class SysDictItemServiceImpl: ISysDictItemService, ServiceImpl<SysDictItemMapper
     /**
      * 根据字典id查询字典项
      *
-     * @param dictIds 字典id
+     * @param dictIds 字典id列表
      */
     override fun listByDictIds(dictIds: List<Long>): Map<Long, List<SysDictItem>> {
         if (dictIds.isEmpty()) { return emptyMap() }

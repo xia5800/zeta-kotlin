@@ -5,9 +5,7 @@ import com.zeta.system.model.dto.sysDictItem.SysDictItemDTO
 import com.zeta.system.model.entity.SysDictItem
 
 /**
- * <p>
  * 字典项 服务类
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:12:10
@@ -17,7 +15,7 @@ interface ISysDictItemService: IService<SysDictItem> {
     /**
      * 根据字典编码查询字典项
      *
-     * @param codes 字典编码
+     * @param codes 字典编码列表
      */
     fun listByCodes(codes: List<String>): Map<String, List<SysDictItemDTO>>
 

@@ -6,9 +6,7 @@ import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.Size
 
 /**
- * <p>
  * 新增 字典
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:38:20

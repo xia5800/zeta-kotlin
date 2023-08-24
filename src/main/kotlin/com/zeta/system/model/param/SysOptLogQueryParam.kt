@@ -4,9 +4,7 @@ import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 
 /**
- * <p>
  * 操作日志 查询参数
- * </p>
  *
  * @author gcc
  * @date 2022-03-18 15:27:15

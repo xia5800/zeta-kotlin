@@ -3,6 +3,7 @@ package com.zeta.system.model.entity
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableLogic
 import com.baomidou.mybatisplus.annotation.TableName
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.zeta.system.model.enums.MenuTypeEnum
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
@@ -10,9 +11,7 @@ import org.zetaframework.base.entity.TreeEntity
 import javax.validation.constraints.NotNull
 
 /**
- * <p>
  * 菜单
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-24 17:45:03
@@ -58,6 +57,7 @@ class SysMenu: TreeEntity<SysMenu, Long>() {
     var type: MenuTypeEnum? = null
 
     /** 逻辑删除字段 */
+    @JsonIgnore
     @ApiModelProperty(value = "逻辑删除字段", hidden = true, required = true)
     @TableLogic
     var deleted: Boolean? = null

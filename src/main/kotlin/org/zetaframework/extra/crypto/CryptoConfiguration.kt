@@ -4,8 +4,8 @@ import cn.hutool.crypto.symmetric.AES
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.zetaframework.extra.crypto.properties.AesCryptoProperties
 import org.zetaframework.extra.crypto.helper.AESHelper
+import org.zetaframework.extra.crypto.properties.AesCryptoProperties
 
 /**
  * 加密解密配置

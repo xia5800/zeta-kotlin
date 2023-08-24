@@ -20,9 +20,7 @@ import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.saToken.annotation.PreAuth
 
 /**
- * <p>
  * 字典 前端控制器
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:12:09

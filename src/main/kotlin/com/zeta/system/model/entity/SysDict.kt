@@ -11,9 +11,7 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
 
 /**
- * <p>
  * 字典
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:38:20

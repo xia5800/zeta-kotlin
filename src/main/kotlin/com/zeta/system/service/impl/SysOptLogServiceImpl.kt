@@ -14,9 +14,7 @@ import org.zetaframework.base.result.PageResult
 import org.zetaframework.core.log.model.LogDTO
 
 /**
- * <p>
  * 操作日志 服务实现类
- * </p>
  *
  * @author gcc
  * @date 2022-03-18 15:27:15

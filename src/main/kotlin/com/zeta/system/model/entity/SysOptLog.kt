@@ -8,9 +8,7 @@ import org.zetaframework.base.entity.SuperEntity
 import javax.validation.constraints.NotBlank
 
 /**
- * <p>
  * 操作日志
- * </p>
  *
  * @author gcc
  * @date 2022-03-18 15:27:15

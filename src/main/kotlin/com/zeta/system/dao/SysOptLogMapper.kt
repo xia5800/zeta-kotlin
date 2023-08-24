@@ -9,9 +9,7 @@ import org.apache.ibatis.annotations.Param
 import org.springframework.stereotype.Repository
 
 /**
- * <p>
  * 操作日志 Mapper 接口
- * </p>
  *
  * @author gcc
  * @date 2022-03-18 15:27:15

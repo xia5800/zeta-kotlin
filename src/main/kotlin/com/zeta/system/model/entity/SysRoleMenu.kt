@@ -18,13 +18,13 @@ import javax.validation.constraints.NotNull
 class SysRoleMenu(): SuperEntity<Long>() {
 
     /** 角色id */
-    @ApiModelProperty(value = "角色id")
+    @ApiModelProperty(value = "角色id", required = true)
     @get:NotNull(message = "角色id不能为空")
     @TableField(value = "role_id")
     var roleId: Long? = null
 
     /** 菜单id */
-    @ApiModelProperty(value = "菜单id")
+    @ApiModelProperty(value = "菜单id", required = true)
     @get:NotNull(message = "菜单id不能为空")
     @TableField(value = "menu_id")
     var menuId: Long? = null

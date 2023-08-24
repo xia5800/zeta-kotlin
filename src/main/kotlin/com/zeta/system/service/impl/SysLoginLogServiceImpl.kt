@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service
 import org.zetaframework.core.log.model.LoginLogDTO
 
 /**
- * <p>
  * 登录日志 服务实现类
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-03-21 16:33:13

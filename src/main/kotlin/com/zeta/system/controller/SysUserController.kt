@@ -309,6 +309,7 @@ class SysUserController(
      * @return ApiResult<Boolean>
      */
     @PreCheckPermission(value = ["{}:update"])
+    @SysLog(request = false)
     @ApiOperation(value = "重置密码")
     @PutMapping("/restPwd")
     fun updatePwd(@RequestBody @Validated param: ResetPasswordParam, request: HttpServletRequest): ApiResult<Boolean> {

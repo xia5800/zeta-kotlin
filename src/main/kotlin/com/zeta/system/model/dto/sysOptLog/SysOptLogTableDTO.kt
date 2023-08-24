@@ -5,9 +5,7 @@ import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDateTime
 
 /**
- * <p>
  * 操作日志详情,数据表格用
- * </p>
  *
  * 说明：
  * 少了请求参数、返回值、异常信息字段。

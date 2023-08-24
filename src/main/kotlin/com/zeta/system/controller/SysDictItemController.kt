@@ -27,9 +27,7 @@ import org.zetaframework.core.saToken.annotation.PreAuth
 import org.zetaframework.core.saToken.annotation.PreCheckPermission
 
 /**
- * <p>
  * 字典项 前端控制器
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:12:10
@@ -47,7 +45,7 @@ class SysDictItemController(
     /**
      * 根据字典编码查询字典项
      *
-     * @param codes List<String>
+     * @param codes 字典code
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperation(value = "根据字典编码查询字典项")
@@ -91,7 +89,7 @@ class SysDictItemController(
     override fun findExportList(param: SysDictItemQueryParam): MutableList<SysDictItemExportPoi> {
         // 条件查询Entity数据
         val list = super.handlerBatchQuery(param)
-        if (list.isNullOrEmpty()) return mutableListOf()
+        if (list.isEmpty()) return mutableListOf()
 
         // 字典数据缓存
         val dictCacheMap: MutableMap<Long, SysDict> = mutableMapOf()

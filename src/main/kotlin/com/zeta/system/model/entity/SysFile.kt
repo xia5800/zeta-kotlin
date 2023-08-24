@@ -9,9 +9,7 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
 
 /**
- * <p>
  * 系统文件
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-12 16:47:45

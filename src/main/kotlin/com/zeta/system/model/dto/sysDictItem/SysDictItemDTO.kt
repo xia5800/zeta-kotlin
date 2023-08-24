@@ -4,9 +4,7 @@ import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 
 /**
- * <p>
  * 字典项 详情
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-15 10:38:20

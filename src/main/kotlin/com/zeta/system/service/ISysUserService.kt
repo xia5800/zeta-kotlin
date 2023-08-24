@@ -43,14 +43,14 @@ interface ISysUserService : IService<SysUser> {
     /**
      * 获取用户角色
      *
-     * @param userId Long
+     * @param userId 用户id
      * @return List<SysRole?>
      */
     fun getUserRoles(userId: Long): List<SysRoleDTO>
 
     /**
      * 批量获取用户角色
-     * @param userIds List<Long>
+     * @param userIds 用户id列表
      * @return Map<Long, List<SysRole?>>
      */
     fun getUserRoles(userIds: List<Long>): Map<Long, List<SysRoleDTO>>

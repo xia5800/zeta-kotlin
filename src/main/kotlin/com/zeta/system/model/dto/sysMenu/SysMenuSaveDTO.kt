@@ -8,9 +8,7 @@ import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
 /**
- * <p>
  * 新增 菜单
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-24 17:45:03

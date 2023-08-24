@@ -19,9 +19,7 @@ import org.zetaframework.core.saToken.annotation.PreMode
 import javax.servlet.http.HttpServletResponse
 
 /**
- * <p>
  * 系统文件 前端控制器
- * </p>
  *
  * @author AutoGenerator
  * @date 2022-04-11 11:18:44
@@ -60,7 +58,7 @@ class SysFileController: SuperSimpleController<ISysFileService, SysFile>(),
     /**
      * 下载文件
      *
-     * @param id
+     * @param id 文件id
      * @param response
      */
     @SysLog(response = false)
