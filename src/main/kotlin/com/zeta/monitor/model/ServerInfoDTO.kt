@@ -18,7 +18,7 @@ class ServerInfoDTO {
 
     /** cpu信息 */
     @ApiModelProperty(value = "cpu信息")
-    var cupInfo: CpuInfo? = null
+    var cpuInfo: CpuInfo? = null
 
     /** 内存信息 */
     @ApiModelProperty(value = "内存信息")
