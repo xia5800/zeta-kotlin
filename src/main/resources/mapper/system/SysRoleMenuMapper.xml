@@ -20,6 +20,7 @@
     <select id="listMenuByUserId" resultType="com.zeta.system.model.entity.SysMenu">
         SELECT <include refid="com.zeta.system.dao.SysMenuMapper.Base_Column_List"/> FROM sys_menu
         <where>
+            AND deleted = 0
             AND id IN (
             SELECT t1.menu_id FROM sys_role_menu t1 WHERE t1.role_id IN (
                 SELECT t2.role_id FROM sys_user_role t2 LEFT JOIN sys_role t3 ON t2.role_id = t3.id
@@ -37,6 +38,7 @@
     <select id="listMenuByRoleIds" resultType="com.zeta.system.model.entity.SysMenu">
         SELECT <include refid="com.zeta.system.dao.SysMenuMapper.Base_Column_List"/> FROM sys_menu
         <where>
+            AND deleted = 0
             AND id IN (
                 SELECT menu_id from sys_role_menu  where role_id in (
                     <foreach collection="roleIds" item="roleId" separator=",">
