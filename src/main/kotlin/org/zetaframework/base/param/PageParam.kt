@@ -3,9 +3,11 @@ package org.zetaframework.base.param
 import cn.hutool.core.util.StrUtil
 import com.baomidou.mybatisplus.core.metadata.IPage
 import com.baomidou.mybatisplus.core.metadata.OrderItem
+import com.baomidou.mybatisplus.core.toolkit.sql.SqlInjectionUtils
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
+import org.zetaframework.core.exception.ArgumentException
 import javax.validation.Valid
 
 /**
@@ -66,6 +68,8 @@ class PageParam<T> private constructor(){
         for (i in sortArr.indices) {
             // bug fix: 驼峰转下划线  说明：忘记处理了orz --by gcc
             val sortField = StrUtil.toUnderlineCase(sortArr[i])
+            // 检查参数是否存在 SQL 注入
+            if (SqlInjectionUtils.check(sortField)) { throw ArgumentException("非法请求参数") }
             orders.add(
                 if (StrUtil.equalsAny(orderArr[i], "asc", "ascending")) OrderItem.asc(sortField) else OrderItem.desc(sortField)
             )
@@ -103,6 +107,9 @@ class PageParam<T> private constructor(){
      * @param alias 别名 eg: "t1.","a.","order."
      */
     fun setSortAlias(alias: String) {
+        // 检查参数是否存在 SQL 注入
+        if (SqlInjectionUtils.check(alias)) { throw ArgumentException("非法请求参数") }
+
         val sortArr = StrUtil.splitToArray(this.sort, StrUtil.COMMA)
         if (sortArr.isNotEmpty()) {
             this.sort = sortArr.joinToString(StrUtil.COMMA) {
