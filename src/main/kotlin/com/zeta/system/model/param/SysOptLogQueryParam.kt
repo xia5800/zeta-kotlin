@@ -39,7 +39,6 @@ data class SysOptLogQueryParam(
     @Schema(description = "类路径")
     var classPath: String? = null,
 
-
     /** 操作系统 */
     @Schema(description = "操作系统")
     var os: String? = null,

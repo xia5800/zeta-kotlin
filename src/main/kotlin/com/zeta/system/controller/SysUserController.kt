@@ -76,9 +76,8 @@ class SysUserController(
 
     /**
      * 分页查询
-     *
-     * @param param 分页查询参数
-     * @return ApiResult<IPage<Entity>>
+     * @param param PageParam<QueryParam> 分页查询参数
+     * @return ApiResult<PageResult<Entity>>
      */
     @PreCheckPermission(value = ["{}:view"])
     @ApiOperationSupport(order = 10)
@@ -121,7 +120,7 @@ class SysUserController(
      */
     override fun handlerSave(saveDTO: SysUserSaveDTO): ApiResult<Boolean> {
         // 判断是否存在
-        if(ExistParam<SysUser, Long>("account", saveDTO.account).isExist(service)) {
+        if (ExistParam<SysUser, Long>("account", saveDTO.account).isExist(service)) {
             return fail("账号已存在")
         }
         return success(service.saveUser(saveDTO))
@@ -150,13 +149,13 @@ class SysUserController(
         Assert.notNull(param.state, "状态不能为空")
 
         // 判断状态参数是否在定义的用户状态中
-        if(!UserStateEnum.getAllCode().contains(param.state)) {
+        if (!UserStateEnum.getAllCode().contains(param.state)) {
             return fail("参数异常")
         }
 
         // 判断用户是否允许修改
         val user = service.getById(param.id) ?: return fail("用户不存在")
-        if(user.readonly != null && user.readonly == true) {
+        if (user.readonly != null && user.readonly == true) {
             throw BusinessException("用户[${user.username}]禁止修改状态")
         }
 
@@ -168,12 +167,12 @@ class SysUserController(
      * 自定义单体删除
      *
      * @param id 主键
-     * @return R<Boolean>
+     * @return ApiResult<Boolean>
      */
     override fun handlerDelete(id: Long): ApiResult<Boolean> {
         val user = service.getById(id) ?: return success(true)
         // 判断用户是否允许删除
-        if(user.readonly != null && user.readonly == true) {
+        if (user.readonly != null && user.readonly == true) {
             throw BusinessException("用户[${user.username}]禁止删除")
         }
         return super.handlerDelete(id)
@@ -183,13 +182,13 @@ class SysUserController(
      * 自定义批量删除
      *
      * @param ids 主键列表
-     * @return R<Boolean>
+     * @return ApiResult<Boolean>
      */
     override fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> {
         val userList = service.listByIds(ids) ?: return success(true)
         // 判断是否存在不允许删除的用户
         userList.forEach { user ->
-            if(user.readonly != null && user.readonly == true) {
+            if (user.readonly != null && user.readonly == true) {
                 throw BusinessException("用户[${user.username}]禁止删除")
             }
         }
@@ -215,7 +214,7 @@ class SysUserController(
         // importParams.verifyHandler = object: IExcelVerifyHandler<SysUserImportPoi> {
         //     override fun verifyHandler(obj: SysUserImportPoi): ExcelVerifyHandlerResult {
         //         // 判断是否存在
-        //         return if(ExistParam<SysUser, Long>(SysUser::account, obj.account).isExist(service)) {
+        //         return if (ExistParam<SysUser, Long>(SysUser::account, obj.account).isExist(service)) {
         //             ExcelVerifyHandlerResult(false, "账号已存在")
         //         } else ExcelVerifyHandlerResult(true, "")
         //     }
@@ -253,11 +252,11 @@ class SysUserController(
      * 获取待导出的数据
      *
      * @param param 查询参数
-     * @return MutableList<Entity>
+     * @return MutableList<ExportBean>
      */
     override fun findExportList(param: SysUserQueryParam): MutableList<SysUserExportPoi> {
         // 判断状态参数是否在定义的用户状态中
-        if(param.state != null && !UserStateEnum.getAllCode().contains(param.state!!)) {
+        if (param.state != null && !UserStateEnum.getAllCode().contains(param.state!!)) {
             throw ArgumentException("状态参数异常")
         }
 
@@ -319,26 +318,26 @@ class SysUserController(
     fun updatePwd(@RequestBody @Validated param: ResetPasswordParam, request: HttpServletRequest): ApiResult<Boolean> {
         val user = service.getById(param.id) ?: return success(true)
         // 判断用户是否允许重置密码
-        if(user.readonly != null && user.readonly == true) {
+        if (user.readonly != null && user.readonly == true) {
             throw BusinessException("用户[${user.username}]禁止重置密码")
         }
 
         // 密码加密， 因为密码已经判空过了所以这里直接param.password!!
-        param.password = service.encodePassword(param.password!!)
-        val entity = BeanUtil.toBean(param, getEntityClass())
+        user.password = service.encodePassword(param.password!!)
 
         // 修改密码
-        val result = service.updateById(entity)
-        if(result) {
-            // 登出日志
-            applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginFail(
-                user.account ?: "", LoginStateEnum.LOGOUT, "重置密码", request
-            )))
-
-            // 让被修改密码的人下线
-            StpUtil.logout(entity.id)
+        if (!service.updateById(user)) {
+            return fail("重置密码失败")
         }
-        return success(result)
+
+        // 登出日志
+        applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginFail(
+                user.account ?: "", LoginStateEnum.LOGOUT, "重置密码", request
+        )))
+
+        // 让被修改密码的人下线
+        StpUtil.logout(user.id)
+        return success(true)
     }
 
     /**
@@ -373,10 +372,8 @@ class SysUserController(
         // 查询用户对应的菜单
         val menuList = roleMenuService.listMenuByUserId(ContextUtil.getUserId(), MenuTypeEnum.MENU.name)
 
-        val frontRouteList = mutableListOf<FrontRoute>()
-        menuList.forEach {
-            frontRouteList.add(FrontRoute.convert(it))
-        }
+        // List<SysMenu> -> List<FrontRoute>
+        val frontRouteList = menuList.map(FrontRoute::convert).toMutableList()
         return success(TreeUtil.buildTree(frontRouteList, false))
     }
 }

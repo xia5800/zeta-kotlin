@@ -33,7 +33,7 @@ interface ExistenceController<Entity, Id>: BaseController<Entity> {
     """)
     @GetMapping("/existence")
     fun existence(param: ExistParam<Entity, Id>): ApiResult<Boolean> {
-        if(param.isExist(getBaseService())) {
+        if (param.isExist(getBaseService())) {
             return success("${param.value}已存在", true)
         }
         return success("${param.value}不存在", false)

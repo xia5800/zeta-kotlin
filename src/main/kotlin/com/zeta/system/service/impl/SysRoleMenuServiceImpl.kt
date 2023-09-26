@@ -57,12 +57,12 @@ class SysRoleMenuServiceImpl(
         // 查询角色对应的用户
         val userRoleList = userRoleService.list(KtQueryWrapper(SysUserRole())
             .eq(SysUserRole::roleId, roleId))
-        if(userRoleList.isNotEmpty()) {
-            val userIds = userRoleList!!.map { it.userId }
-            // 删除用户权限缓存
-            saPermissionStringCacheKey.delete(userIds)
-            // 删除用户角色缓存
-            saRoleStringCacheKey.delete(userIds)
-        }
+        if (userRoleList.isEmpty()) return
+
+        val userIds = userRoleList!!.map { it.userId }
+        // 删除用户权限缓存
+        saPermissionStringCacheKey.delete(userIds)
+        // 删除用户角色缓存
+        saRoleStringCacheKey.delete(userIds)
     }
 }

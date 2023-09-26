@@ -154,7 +154,7 @@ class SysLogAspect(private val context: ApplicationContext) {
                 sysLogDTO.ipRegion = IpAddressUtil.search(ip)
             }
             // 获取请求参数
-            if(sysLog.request) {
+            if (sysLog.request) {
                 sysLogDTO.params = getRequestParam(joinPoint, request)
             }
         }
@@ -208,7 +208,7 @@ class SysLogAspect(private val context: ApplicationContext) {
         // 获取@Tag的value值
         val api = joinPoint.target.javaClass.getAnnotation(Tag::class.java)
         if (api != null) {
-            if(api.name.isNotBlank()) {
+            if (api.name.isNotBlank()) {
                 sb.append(api.name).append("-")
             }
         }
@@ -243,7 +243,7 @@ class SysLogAspect(private val context: ApplicationContext) {
      * @param sysLog OperationLog
      * @return String
      */
-    private fun getResponse(result: Any?, sysLog: SysLog): String? = if(sysLog.response) {
+    private fun getResponse(result: Any?, sysLog: SysLog): String? = if (sysLog.response) {
         JSONUtil.toJsonStr(result)
     } else {
         ""
@@ -256,7 +256,7 @@ class SysLogAspect(private val context: ApplicationContext) {
      * @param block Function0<Unit>
      * @return String?
      */
-    private fun getException(exception: Throwable?, block: () -> Unit): String? = if(exception != null) {
+    private fun getException(exception: Throwable?, block: () -> Unit): String? = if (exception != null) {
         block.invoke()
         ExceptionUtil.stacktraceToString(exception, MAX_LENGTH)
     } else {

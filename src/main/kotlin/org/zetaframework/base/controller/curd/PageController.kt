@@ -20,7 +20,7 @@ interface PageController<Entity, QueryParam>: BaseController<Entity> {
      * 分页查询
      *
      * @param param 分页查询参数
-     * @return IPage<Entity>
+     * @return PageResult<Entity>
      */
     fun query(param: PageParam<QueryParam>): PageResult<Entity> {
         // 处理查询参数
@@ -47,7 +47,7 @@ interface PageController<Entity, QueryParam>: BaseController<Entity> {
      * 构造查询条件
      *
      * @param model 实体
-     * @param param 分页查询参数
+     * @param param PageParam<PageQuery>
      * @return QueryWrapper<Entity>
      */
     fun handlerWrapper(model: Entity?, param: PageParam<QueryParam>): QueryWrapper<Entity> {

@@ -67,15 +67,15 @@ class ExistParam<Entity, Id> private constructor() {
      *
      *     // 新增用户的时候，判断账号是否已存在
      *     val param = ExistParam<SysUser, Long>("account", "admin")
-     *     if(param.isExist(userService)) { return fail("账号已存在") }
+     *     if (param.isExist(userService)) { return fail("账号已存在") }
      *
      *     // 修改用户的时候，判断账号是否已存在
      *     val param = ExistParam<SysUser, Long>("account", "admin", 1L)
-     *     if(param.isExist(userService, "id")) { return fail("账号已存在") }
+     *     if (param.isExist(userService, "id")) { return fail("账号已存在") }
      *     等价于
-     *     if(param.isExist(userService, SysUser::id)) { return fail("账号已存在") }
+     *     if (param.isExist(userService, SysUser::id)) { return fail("账号已存在") }
      *     若主键字段名是id，还可以省略掉idField参数
-     *     if(param.isExist(userService)) { return fail("账号已存在") }
+     *     if (param.isExist(userService)) { return fail("账号已存在") }
      * ```
      *
      * @param service IService<Entity>   service
@@ -90,17 +90,17 @@ class ExistParam<Entity, Id> private constructor() {
     }
 
     fun isExist(service: IService<Entity>, idField: String? = "id", isToUnderlineCase: Boolean = true): Boolean {
-        if(StrUtil.hasBlank(this.field, this.value)) {
+        if (StrUtil.hasBlank(this.field, this.value)) {
             return false
         }
 
         // 处理字段名，是否驼峰转下划线
-        val fieldName: String = if(isToUnderlineCase) { StrUtil.toUnderlineCase(field) } else { field!! }
+        val fieldName: String = if (isToUnderlineCase) { StrUtil.toUnderlineCase(field) } else { field!! }
 
         // 构造查询条件
         val queryWrapper: QueryWrapper<Entity> = QueryWrapper<Entity>()
         queryWrapper.eq(fieldName, value)
-        if(id != null) {
+        if (id != null) {
             // 如果是修改
             queryWrapper.ne(idField, id)
         }

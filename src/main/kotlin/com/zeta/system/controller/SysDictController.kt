@@ -43,7 +43,7 @@ class SysDictController(
      */
     override fun handlerSave(saveDTO: SysDictSaveDTO): ApiResult<Boolean> {
         // 判断是否存在
-        if(ExistParam<SysDict, Long>(SysDict::code, saveDTO.code).isExist(service)) {
+        if (ExistParam<SysDict, Long>(SysDict::code, saveDTO.code).isExist(service)) {
             return fail("编码已存在")
         }
         return super.handlerSave(saveDTO)
@@ -84,7 +84,7 @@ class SysDictController(
      * 获取待导出的数据
      *
      * @param param 查询参数
-     * @return MutableList<Entity>
+     * @return MutableList<ExportBean>
      */
     override fun findExportList(param: SysDictQueryParam): MutableList<SysDictExportPoi> {
         // 条件查询Entity数据

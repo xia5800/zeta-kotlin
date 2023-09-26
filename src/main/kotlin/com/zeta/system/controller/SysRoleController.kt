@@ -34,10 +34,10 @@ class SysRoleController: SuperController<ISysRoleService, Long, SysRole, SysRole
      */
     override fun handlerSave(saveDTO: SysRoleSaveDTO): ApiResult<Boolean> {
         // 判断是否存在
-        if(ExistParam<SysRole, Long>("name", saveDTO.name).isExist(service)) {
+        if (ExistParam<SysRole, Long>("name", saveDTO.name).isExist(service)) {
             return fail("角色名已存在")
         }
-        if(ExistParam<SysRole, Long>("code", saveDTO.code).isExist(service)) {
+        if (ExistParam<SysRole, Long>("code", saveDTO.code).isExist(service)) {
             return fail("角色编码已存在")
         }
 
@@ -53,10 +53,10 @@ class SysRoleController: SuperController<ISysRoleService, Long, SysRole, SysRole
      */
     override fun handlerUpdate(updateDTO: SysRoleUpdateDTO): ApiResult<Boolean> {
         // 判断是否存在
-        if(ExistParam<SysRole, Long>("name", updateDTO.name, updateDTO.id).isExist(service)) {
+        if (ExistParam<SysRole, Long>("name", updateDTO.name, updateDTO.id).isExist(service)) {
             return fail("角色名已存在")
         }
-        if(ExistParam<SysRole, Long>("code", updateDTO.code, updateDTO.id).isExist(service)) {
+        if (ExistParam<SysRole, Long>("code", updateDTO.code, updateDTO.id).isExist(service)) {
             return fail("角色编码已存在")
         }
 
@@ -67,12 +67,12 @@ class SysRoleController: SuperController<ISysRoleService, Long, SysRole, SysRole
      * 自定义单体删除
      *
      * @param id 主键
-     * @return R<Boolean>
+     * @return ApiResult<Boolean>
      */
     override fun handlerDelete(id: Long): ApiResult<Boolean> {
         val role = service.getById(id) ?: return success(true)
         // 判断角色是否允许删除
-        if(role.readonly != null && role.readonly == true) {
+        if (role.readonly != null && role.readonly == true) {
             throw BusinessException("角色[${role.name}]禁止删除")
         }
         return super.handlerDelete(id)
@@ -82,13 +82,13 @@ class SysRoleController: SuperController<ISysRoleService, Long, SysRole, SysRole
      * 自定义批量删除
      *
      * @param ids 主键列表
-     * @return R<Boolean>
+     * @return ApiResult<Boolean>
      */
     override fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> {
         val roleList = service.listByIds(ids) ?: return success(true)
         // 判断是否存在不允许删除的角色
         roleList.forEach { role ->
-            if(role.readonly != null && role.readonly == true) {
+            if (role.readonly != null && role.readonly == true) {
                 throw BusinessException("角色[${role.name}]禁止删除")
             }
         }

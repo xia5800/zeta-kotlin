@@ -68,11 +68,11 @@ object JSONUtil{
      * @return String           json字符串
      */
     fun toJsonStr(value: Any?, pretty: Boolean? = false): String? {
-        if(value == null) {
+        if (value == null) {
             return null
         }
         // 如果对象是字符串，直接返回
-        if(value is String) {
+        if (value is String) {
             return value
         }
 
@@ -98,7 +98,7 @@ object JSONUtil{
      * @return T?
      */
     fun <T> parseObject(json: String?, clazz: Class<T>): T? {
-        if(StrUtil.isBlank(json)) {
+        if (StrUtil.isBlank(json)) {
             return null
         }
 
@@ -129,7 +129,7 @@ object JSONUtil{
      * @return T?
      */
     fun <T> parseObject(json: String?, valueTypeRef: TypeReference<T>): T? {
-        if(StrUtil.isBlank(json)) {
+        if (StrUtil.isBlank(json)) {
             return null
         }
 

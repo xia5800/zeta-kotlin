@@ -115,7 +115,7 @@ interface ExportController<ExportBean, Entity, QueryParam>: BaseController<Entit
      * 获取待导出的数据
      *
      * @param param 查询参数
-     * @return MutableList<Entity>
+     * @return MutableList<ExportBean>
      */
     fun findExportList(param: QueryParam): MutableList<ExportBean> {
         // 构造查询条件

@@ -18,21 +18,25 @@ interface SysRoleMenuMapper: BaseMapper<SysRoleMenu> {
     /**
      * 查询用户对应的菜单
      *
-     * @param userId 用户id
-     * @param menuType 菜单类型
-     * @return List<[SysMenu]> 菜单列表
+     * @param userId Long
+     * @param menuType String?
+     * @return List<Menu?>
      */
-    fun listMenuByUserId(@Param("userId")userId: Long,
-                         @Param("menuType")menuType: String?): MutableList<SysMenu>
+    fun listMenuByUserId(
+            @Param("userId") userId: Long,
+            @Param("menuType") menuType: String?
+    ): MutableList<SysMenu>
 
     /**
      * 根据角色id查询菜单
      *
      * @param roleIds   角色id
      * @param menuType  菜单类型
-     * @return List<[SysMenu]> 菜单列表
+     * @return List<Menu>
      */
-    fun listMenuByRoleIds(@Param("roleIds")roleIds: List<Long>,
-                          @Param("menuType")menuType: String?): MutableList<SysMenu>
+    fun listMenuByRoleIds(
+            @Param("roleIds") roleIds: List<Long>,
+            @Param("menuType") menuType: String?
+    ): MutableList<SysMenu>
 
 }

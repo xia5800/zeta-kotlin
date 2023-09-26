@@ -35,7 +35,7 @@ interface UpdateController<Entity, UpdateDTO>: BaseController<Entity> {
     @PutMapping
     fun update(@RequestBody @Validated(Update::class) updateDTO: UpdateDTO): ApiResult<Boolean> {
         val result = handlerUpdate(updateDTO)
-        if(result.defExec) {
+        if (result.defExec) {
             // updateDTO -> Entity
             val entity = BeanUtil.toBean(updateDTO, getEntityClass())
             result.setData(getBaseService().updateById(entity))

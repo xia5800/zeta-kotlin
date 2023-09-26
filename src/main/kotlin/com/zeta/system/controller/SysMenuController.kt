@@ -58,11 +58,12 @@ class SysMenuController: SuperController<ISysMenuService, Long, SysMenu, SysMenu
      */
     @ApiOperationSupport(ignoreParameters = ["children"])
     @Operation(summary = "查询菜单树")
+    @SysLog(response = false)
     @PostMapping("/tree")
     fun tree(@RequestBody param: SysMenuQueryParam): ApiResult<List<SysMenu?>> {
         // 查询所有菜单
         val menuList = handlerBatchQuery(param)
-        if(menuList.isEmpty()) return fail("未查询到菜单")
+        if (menuList.isEmpty()) return fail("未查询到菜单")
 
         // 转换成树形结构
         return success(TreeUtil.buildTree(menuList, false))

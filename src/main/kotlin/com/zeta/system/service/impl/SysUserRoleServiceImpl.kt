@@ -47,14 +47,14 @@ class SysUserRoleServiceImpl: ISysUserRoleService, ServiceImpl<SysUserRoleMapper
      *
      * @param userId 用户id
      * @param roleIds 角色id列表
-     * @return
+     * @return 是否成功
      */
     @Transactional(rollbackFor = [Exception::class])
     override fun saveUserRole(userId: Long, roleIds: List<Long>?): Boolean {
         // 删除用户角色关联
         this.remove(KtQueryWrapper(SysUserRole()).eq(SysUserRole::userId, userId))
 
-        if(roleIds.isNullOrEmpty()) {
+        if (roleIds.isNullOrEmpty()) {
             return true;
         }
 
@@ -68,7 +68,7 @@ class SysUserRoleServiceImpl: ISysUserRoleService, ServiceImpl<SysUserRoleMapper
      *
      * @param userId 用户id
      * @param roleId 角色id
-     * @return
+     * @return 是否成功
      */
     @Transactional(rollbackFor = [Exception::class])
     override fun saveUserRole(userId: Long, roleId: Long): Boolean {

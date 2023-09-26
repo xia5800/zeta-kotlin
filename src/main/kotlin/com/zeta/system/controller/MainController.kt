@@ -51,6 +51,7 @@ class MainController(
      * 用户登录
      *
      * @param param 登录参数
+     * @param request HttpServletRequest
      * @return ApiResult<[LoginResult]> 登录返回结果
      */
     @SecurityRequirements
@@ -79,8 +80,8 @@ class MainController(
             ""
         }
 
-        // 判断密码
-        if(!service.comparePassword(password, user.password!!)) {
+        // 比较密码
+        if (!service.comparePassword(password, user.password!!)) {
             applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginFail(
                 param.account!!, LoginStateEnum.ERROR_PWD, request
             )))
@@ -88,7 +89,7 @@ class MainController(
             return fail(LoginStateEnum.ERROR_PWD.desc)
         }
         // 判断用户状态
-        if(user.state == UserStateEnum.FORBIDDEN.code) {
+        if (user.state == UserStateEnum.FORBIDDEN.code) {
             applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginFail(
                 param.account!!, LoginStateEnum.FAIL, "用户被禁用，无法登录", request
             )))
@@ -110,6 +111,7 @@ class MainController(
     /**
      * 注销登录
      *
+     * @param request HttpServletRequest
      * @return ApiResult<Boolean>
      */
     @Operation(summary = "注销登录")

@@ -34,7 +34,7 @@ interface SaveController<Entity, SaveDTO>: BaseController<Entity> {
     @PostMapping
     fun save(@RequestBody @Validated saveDTO: SaveDTO): ApiResult<Boolean> {
         val result = handlerSave(saveDTO)
-        if(result.defExec) {
+        if (result.defExec) {
             // SaveDTO -> Entity
             val entity = BeanUtil.toBean(saveDTO, getEntityClass())
             result.setData(getBaseService().save(entity))

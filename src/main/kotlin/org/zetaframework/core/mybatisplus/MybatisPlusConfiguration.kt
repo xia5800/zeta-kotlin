@@ -50,13 +50,13 @@ class MybatisPlusConfiguration(private val databaseProperties: DatabasePropertie
         }
 
         // 防止全表更新与删除
-        if(databaseProperties.isBlockAttack) {
+        if (databaseProperties.isBlockAttack) {
             logger.info("mybatis-plus防止全表更新与删除插件：启用")
             interceptor.addInnerInterceptor(BlockAttackInnerInterceptor())
         }
 
         // sql性能规范
-        if(databaseProperties.isIllegalSql) {
+        if (databaseProperties.isIllegalSql) {
             logger.info("mybatis-plus sql性能规范插件：启用")
             interceptor.addInnerInterceptor(IllegalSQLInnerInterceptor())
         }

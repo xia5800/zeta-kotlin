@@ -31,7 +31,7 @@ class SysUserExcelVerifyHandler(private val service: ISysUserService): IExcelVer
             flag = false
         } else {
             // 判断是否存在
-            if(ExistParam<SysUser, Long>(SysUser::account, obj.account).isExist(service)) {
+            if (ExistParam<SysUser, Long>(SysUser::account, obj.account).isExist(service)) {
                 message = "账号已存在"
                 flag = false
             }

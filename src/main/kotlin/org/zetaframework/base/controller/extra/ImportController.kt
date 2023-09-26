@@ -195,7 +195,7 @@ interface ImportController<ImportBean: ImportPoi, Entity>: BaseController<Entity
      * 构造导入参数
      *
      * @param request 请求
-     * @return ImportParams
+     * @return ImportParams 导入参数
      */
     fun getImportParams(request: HttpServletRequest): ImportParams {
         val importParams = ImportParams()
