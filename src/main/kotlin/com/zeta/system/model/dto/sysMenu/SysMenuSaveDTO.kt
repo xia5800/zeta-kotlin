@@ -31,12 +31,11 @@ data class SysMenuSaveDTO(
     var sortValue: Int? = null,
 
     /** 路由名称 */
-    @Schema(description = "路由名称", required = true)
-    @get:NotBlank(message = "路由名称不能为空")
+    @Schema(description = "路由名称 type=MENU时不能为空", required = false)
     var name: String? = null,
 
     /** 路由地址 */
-    @Schema(description = "路由地址", required = false)
+    @Schema(description = "路由地址 type=MENU时不能为空", required = false)
     var path: String? = null,
 
     /** 组件地址 */

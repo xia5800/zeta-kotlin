@@ -37,7 +37,6 @@ data class SysMenuUpdateDTO(
 
     /** 路由名称 */
     @Schema(description = "路由名称", required = true)
-    @get:NotBlank(message = "路由名称不能为空")
     var name: String? = null,
 
     /** 路由地址 */
