@@ -50,6 +50,20 @@ class SysDictController(
     }
 
     /**
+     * 自定义修改
+     *
+     * @param updateDTO UpdateDTO 修改对象
+     * @return ApiResult<Boolean>
+     */
+    override fun handlerUpdate(updateDTO: SysDictUpdateDTO): ApiResult<Boolean> {
+        // 判断是否存在
+        if (ExistParam<SysDict, Long>(SysDict::code, updateDTO.code, updateDTO.id).isExist(service)) {
+            return fail("编码已存在")
+        }
+        return super.handlerUpdate(updateDTO)
+    }
+
+    /**
      * 导入参数增强
      *
      * 说明：
