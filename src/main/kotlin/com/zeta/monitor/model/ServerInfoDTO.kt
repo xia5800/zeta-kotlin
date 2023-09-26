@@ -17,7 +17,7 @@ class ServerInfoDTO {
 
     /** cpu信息 */
     @Schema(description = "cpu信息")
-    var cupInfo: CpuInfo? = null
+    var cpuInfo: CpuInfo? = null
 
     /** 内存信息 */
     @Schema(description = "内存信息")

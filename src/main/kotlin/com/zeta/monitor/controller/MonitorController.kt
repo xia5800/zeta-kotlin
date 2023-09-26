@@ -42,7 +42,7 @@ class MonitorController(
             // 系统信息
             this.sysInfo = ServerInfoDTO.SysInfo.build(oshiMonitor.sysInfo)
             // CPU使用率信息
-            this.cupInfo = ServerInfoDTO.CpuInfo.build(oshiMonitor.cpuInfo)
+            this.cpuInfo = ServerInfoDTO.CpuInfo.build(oshiMonitor.cpuInfo)
             // 内存信息
             this.memoryInfo = ServerInfoDTO.MemoryInfo.build(oshiMonitor.memoryInfo)
             // Jvm 虚拟机信息
