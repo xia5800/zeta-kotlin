@@ -68,13 +68,15 @@ class AliFileStrategyImpl(
      */
     override fun getObject(path: String): InputStream? {
         val ali = fileProperties.ali
+
+        val ossClient = OSSClientBuilder().build(ali.endpoint, ali.accessKeyId, ali.accessKeySecret)
         return try {
             // 获取文件
-            val ossClient = OSSClientBuilder().build(ali.endpoint, ali.accessKeyId, ali.accessKeySecret)
             val ossObject = ossClient.getObject(ali.bucket, path)
-            ossClient.shutdown()
+
             ossObject.objectContent
         } catch (e: Exception) {
+            ossClient.shutdown()
             logger.error("阿里云oss获取文件异常：", e)
             null
         }
