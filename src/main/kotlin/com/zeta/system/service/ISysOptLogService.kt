@@ -6,7 +6,7 @@ import com.zeta.system.model.entity.SysOptLog
 import com.zeta.system.model.param.SysOptLogQueryParam
 import org.zetaframework.base.param.PageParam
 import org.zetaframework.base.result.PageResult
-import org.zetaframework.core.log.model.SysLogDTO
+import org.zetaframework.core.log.model.LogDTO
 
 /**
  * 操作日志 服务类
@@ -22,9 +22,9 @@ interface ISysOptLogService: IService<SysOptLog> {
      * 说明：
      * [@SysLog]注解的业务实现
      *
-     * @param sysLogDTO 新增系统日志参数
+     * @param logDTO 新增系统日志参数
      */
-    fun save(sysLogDTO: SysLogDTO)
+    fun save(logDTO: LogDTO)
 
     /**
      * 分页查询 （前端数据表格用）

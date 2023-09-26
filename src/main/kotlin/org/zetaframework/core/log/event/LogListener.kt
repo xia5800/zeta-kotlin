@@ -2,7 +2,7 @@ package org.zetaframework.core.log.event
 
 import org.springframework.context.event.EventListener
 import org.springframework.scheduling.annotation.Async
-import org.zetaframework.core.log.model.SysLogDTO
+import org.zetaframework.core.log.model.LogDTO
 
 /**
  * 系统日志事件监听
@@ -12,7 +12,7 @@ import org.zetaframework.core.log.model.SysLogDTO
  * 2. 保存系统日志的方式交给具体的业务去实现
  * @author gcc
  */
-open class SysLogListener(private val consumer: (sysLogDTO: SysLogDTO) -> Unit) {
+open class LogListener(private val consumer: (logDTO: LogDTO) -> Unit) {
 
     /**
      * 保存系统日志
@@ -23,9 +23,9 @@ open class SysLogListener(private val consumer: (sysLogDTO: SysLogDTO) -> Unit) 
      * @param event 操作日志事件
      */
     @Async
-    @EventListener(SysLogEvent::class)
-    open fun saveSysLog(event: SysLogEvent) {
-        val sysLogDTO = event.source as SysLogDTO
-        consumer.invoke(sysLogDTO)
+    @EventListener(LogEvent::class)
+    open fun saveSysLog(event: LogEvent) {
+        val logDTO = event.source as LogDTO
+        consumer.invoke(logDTO)
     }
 }

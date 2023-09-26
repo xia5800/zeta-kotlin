@@ -7,7 +7,7 @@ import org.zetaframework.core.log.enums.LogTypeEnum
  *
  * @author gcc
  */
-data class SysLogDTO(
+data class LogDTO(
 
     /**  日志类型 see: [LogTypeEnum] */
     var type: String? = null,

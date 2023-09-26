@@ -7,7 +7,7 @@ import com.zeta.system.model.entity.SysLoginLog
 import com.zeta.system.service.ISysLoginLogService
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-import org.zetaframework.core.log.model.SysLoginLogDTO
+import org.zetaframework.core.log.model.LoginLogDTO
 
 /**
  * 登录日志 服务实现类
@@ -24,7 +24,7 @@ class SysLoginLogServiceImpl: ISysLoginLogService, ServiceImpl<SysLoginLogMapper
      *
      * @param loginLogDTO 新增登录日志参数
      */
-    override fun save(loginLogDTO: SysLoginLogDTO) {
+    override fun save(loginLogDTO: LoginLogDTO) {
         val loginLog = BeanUtil.toBean(loginLogDTO, SysLoginLog::class.java)
         loginLog.createdBy = loginLogDTO.userId
         this.save(loginLog)

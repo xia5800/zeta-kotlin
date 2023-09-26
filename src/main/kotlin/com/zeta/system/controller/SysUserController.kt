@@ -45,8 +45,8 @@ import org.zetaframework.core.exception.ArgumentException
 import org.zetaframework.core.exception.BusinessException
 import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.log.enums.LoginStateEnum
-import org.zetaframework.core.log.event.SysLoginEvent
-import org.zetaframework.core.log.model.SysLoginLogDTO
+import org.zetaframework.core.log.event.LoginEvent
+import org.zetaframework.core.log.model.LoginLogDTO
 import org.zetaframework.core.saToken.annotation.PreAuth
 import org.zetaframework.core.saToken.annotation.PreCheckPermission
 import org.zetaframework.core.utils.ContextUtil
@@ -297,7 +297,7 @@ class SysUserController(
         }
 
         // 登出日志
-        applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginFail(
+        applicationContext.publishEvent(LoginEvent(LoginLogDTO.loginFail(
             user.account ?: "", LoginStateEnum.LOGOUT, "修改密码", request
         )))
 
@@ -331,7 +331,7 @@ class SysUserController(
         }
 
         // 登出日志
-        applicationContext.publishEvent(SysLoginEvent(SysLoginLogDTO.loginFail(
+        applicationContext.publishEvent(LoginEvent(LoginLogDTO.loginFail(
                 user.account ?: "", LoginStateEnum.LOGOUT, "重置密码", request
         )))
 
