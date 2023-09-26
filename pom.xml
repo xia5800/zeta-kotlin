@@ -34,10 +34,12 @@
         <easypoi.version>4.4.0</easypoi.version>
         <ip2region.version>2.6.6</ip2region.version>
         <aizuda-monitor.version>1.0.0</aizuda-monitor.version>
+
+        <!-- OSS相关 -->
         <aliyun-oss.version>3.16.3</aliyun-oss.version>
         <minio.version>8.5.3</minio.version>
 
-        <!-- 解决spring-boot-starter-web黄色波浪线 -->
+        <!-- 漏洞修复 -->
         <snakeyaml.version>2.0</snakeyaml.version>
     </properties>
 
@@ -340,6 +342,13 @@
             <id>test</id>
             <properties>
                 <profile.active>test</profile.active>
+            </properties>
+        </profile>
+        <!-- docker环境-->
+        <profile>
+            <id>docker</id>
+            <properties>
+                <profile.active>docker</profile.active>
             </properties>
         </profile>
     </profiles>
