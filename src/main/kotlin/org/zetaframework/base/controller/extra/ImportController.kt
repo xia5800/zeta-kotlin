@@ -9,6 +9,10 @@ import cn.hutool.core.convert.Convert
 import cn.hutool.core.io.FileTypeUtil
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.Parameters
+import io.swagger.v3.oas.annotations.enums.ParameterIn
+import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.transaction.annotation.Transactional
@@ -89,6 +93,15 @@ interface ImportController<ImportBean: ImportPoi, Entity>: BaseController<Entity
     "title": "",            // 【非必传】第一页sheet表格的表头
     "type": "XSSF"          // 【必传】可选值：HSSF（excel97-2003版本，扩展名.xls）、XSSF（excel2007+版本，扩展名.xlsx）
     """)
+    @Parameters(value = [
+        Parameter(name = "param", description = "参数", hidden = true),  // 隐藏掉param字段
+        Parameter(name = "fileName", description = "excel模板文件名,不带后缀", required = true, `in` = ParameterIn.QUERY),
+        Parameter(name = "type", description = "excel模板类型", required = true, `in` = ParameterIn.QUERY,
+                schema = Schema(name = "excel模板类型", allowableValues = ["HSSF", "XSSF"], example = "XSSF")
+        ),
+        Parameter(name = "title", description = "表格标题", required = false, `in` = ParameterIn.QUERY),
+        Parameter(name = "sheetName", description = "sheet名称", required = false, `in` = ParameterIn.QUERY),
+    ])
     @SysLog(response = false)
     @GetMapping(value = ["/template"], produces = ["application/octet-stream"])
     fun getImportTemplate(param: ImportExcelTemplateParam, request: HttpServletRequest, response: HttpServletResponse) {

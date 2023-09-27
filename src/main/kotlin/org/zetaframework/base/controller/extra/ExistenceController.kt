@@ -1,6 +1,9 @@
 package org.zetaframework.base.controller.extra
 
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.Parameters
+import io.swagger.v3.oas.annotations.enums.ParameterIn
 import org.springframework.web.bind.annotation.GetMapping
 import org.zetaframework.base.controller.BaseController
 import org.zetaframework.base.param.ExistParam
@@ -31,6 +34,12 @@ interface ExistenceController<Entity, Id>: BaseController<Entity> {
     修改用户的时候，验证用户名(username)的值(李四)是否被除了当前用户id(2011214167781)的人使用了
     {"field": "username",  "value": "李四",  "id": "2011214167781"}
     """)
+    @Parameters(value = [
+        Parameter(name = "param", description = "参数", hidden = true),  // 隐藏掉param字段
+        Parameter(name = "field", description = "检查的字段名", required = true, `in` = ParameterIn.QUERY),
+        Parameter(name = "value", description = "检查的字段值", required = true, `in` = ParameterIn.QUERY),
+        Parameter(name = "id", description = "主键字段的值 修改时用到", required = false, `in` = ParameterIn.QUERY),
+    ])
     @GetMapping("/existence")
     fun existence(param: ExistParam<Entity, Id>): ApiResult<Boolean> {
         if (param.isExist(getBaseService())) {
