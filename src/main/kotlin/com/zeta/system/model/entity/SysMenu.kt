@@ -3,6 +3,7 @@ package com.zeta.system.model.entity
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableLogic
 import com.baomidou.mybatisplus.annotation.TableName
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.zeta.system.model.enums.MenuTypeEnum
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotNull
@@ -55,6 +56,7 @@ class SysMenu: TreeEntity<SysMenu, Long>() {
     var type: MenuTypeEnum? = null
 
     /** 逻辑删除字段 */
+    @JsonIgnore
     @Schema(description = "逻辑删除字段", hidden = true, required = true)
     @TableLogic
     var deleted: Boolean? = null

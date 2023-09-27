@@ -58,7 +58,7 @@ class SysFileController: SuperSimpleController<ISysFileService, SysFile>(),
     /**
      * 下载文件
      *
-     * @param id
+     * @param id 文件id
      * @param response
      */
     @SysLog(response = false)

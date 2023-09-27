@@ -1,6 +1,5 @@
 package com.zeta.system.controller
 
-import cn.hutool.core.util.ObjectUtil
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport
 import com.zeta.system.model.dto.sysOptLog.SysOptLogTableDTO
 import com.zeta.system.model.entity.SysOptLog

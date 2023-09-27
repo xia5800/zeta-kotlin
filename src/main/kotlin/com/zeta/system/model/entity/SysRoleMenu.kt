@@ -17,13 +17,13 @@ import org.zetaframework.base.entity.SuperEntity
 class SysRoleMenu(): SuperEntity<Long>() {
 
     /** 角色id */
-    @Schema(description = "角色id")
+    @Schema(description = "角色id", required = true)
     @get:NotNull(message = "角色id不能为空")
     @TableField(value = "role_id")
     var roleId: Long? = null
 
     /** 菜单id */
-    @Schema(description = "菜单id")
+    @Schema(description = "菜单id", required = true)
     @get:NotNull(message = "菜单id不能为空")
     @TableField(value = "menu_id")
     var menuId: Long? = null

@@ -17,13 +17,13 @@ import org.zetaframework.base.entity.SuperEntity
 class SysUserRole(): SuperEntity<Long>() {
 
     /** 用户id */
-    @Schema(description = "用户id")
+    @Schema(description = "用户id", required = true)
     @get:NotNull(message = "用户id不能为空")
     @TableField(value = "user_id")
     var userId: Long? = null
 
     /** 角色id */
-    @Schema(description = "角色id")
+    @Schema(description = "角色id", required = true)
     @get:NotNull(message = "角色id不能为空")
     @TableField(value = "role_id")
     var roleId: Long? = null
