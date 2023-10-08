@@ -77,8 +77,14 @@ zeta:
     # 忽略xss防护的地址
     excludeUrl:
       - /**/noxss/**
-      - /**/page
-      - /**/query
+      # ↓↓ 忘记为啥要忽略了 ↓↓
+      #- /**/page
+      #- /**/query
+      # 忽略指定接口的xss防护
+      - /api/test/test1
+      # 忽略新增、修改接口的xss防护
+      - POST:/api/demo
+      - PUT:/api/demo
   # 加密解密配置
   crypto:
     aes:

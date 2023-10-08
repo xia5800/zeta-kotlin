@@ -1,5 +1,6 @@
 package org.zetaframework.core.xss
 
+import cn.hutool.core.util.StrUtil
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
@@ -9,7 +10,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.DependsOn
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping
+import org.zetaframework.core.xss.annotation.NoXss
 import org.zetaframework.core.xss.cleaner.HutoolXssCleaner
 import org.zetaframework.core.xss.cleaner.XssCleaner
 import org.zetaframework.core.xss.filter.XssFilter
@@ -26,15 +30,37 @@ import org.zetaframework.core.xss.serializer.XssStringJsonDeserializer
  *
  * @author gcc
  */
+@DependsOn("requestMappingHandlerMapping")
 @Configuration
 @EnableConfigurationProperties(XssProperties::class)
 @ConditionalOnWebApplication
 @ConditionalOnProperty(prefix = XssProperties.PREFIX, name = ["enabled"], havingValue = "true", matchIfMissing = false)
-class XssConfiguration(private val xssProperties: XssProperties) {
+class XssConfiguration(
+    private val xssProperties: XssProperties,
+    requestMappingHandlerMapping: RequestMappingHandlerMapping
+) {
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     init {
         logger.info("XSS跨站脚本攻击防护功能：启动")
+
+        requestMappingHandlerMapping.handlerMethods.forEach { (mapping, handlerMethod) ->
+            // 如果方法上面没有@NoXss注解
+            if (!handlerMethod.method.isAnnotationPresent(NoXss::class.java)) return@forEach
+
+            // 将url添加到xss添加到排除的url中去
+            mapping.patternsCondition
+                ?.patterns
+                ?.filter(StrUtil::isNotBlank)
+                ?.forEach { urlPattern ->
+                    // GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS, TRACE
+                    val name = mapping.methodsCondition.methods.first().name
+
+                    // 构造：“GET:/api/demo”、“POST:/api/sysUser”这样的地址
+                    xssProperties.excludeUrl.add("$name:$urlPattern")
+                }
+        }
+        logger.debug("不需要XSS处理的路由：{}", xssProperties.getNotMatchUrl())
     }
 
     /**
