@@ -1,7 +1,7 @@
 package org.zetaframework.core.saToken.context
 
-import cn.dev33.satoken.spring.SaPatternsRequestConditionHolder
 import cn.dev33.satoken.spring.SaTokenContextForSpringInJakartaServlet
+import cn.dev33.satoken.spring.pathmatch.SaPatternsRequestConditionHolder
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Component
 

@@ -24,7 +24,9 @@ class IgnoreProperties {
         "/**/webjars/**",
         "/druid/**",
         "/error",
+        // websocket相关
         "/ws/**",
+        // 登录相关
         "/api/login",
         "/api/captcha"
     )
