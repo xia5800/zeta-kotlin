@@ -74,7 +74,7 @@ class PageParam<T> private constructor(){
                 if (StrUtil.equalsAny(orderArr[i], "asc", "ascending")) OrderItem.asc(sortField) else OrderItem.desc(sortField)
             )
         }
-        page.orders = orders
+        page.setOrders(orders)
         return page
     }
 
