@@ -41,6 +41,13 @@ interface ISysUserService : IService<SysUser> {
     fun updateUser(updateDTO: SysUserUpdateDTO): Boolean
 
     /**
+     * 修改用户基本信息
+     * @param changeUser SysUser 待修改的用户信息
+     * @return Boolean
+     */
+    fun updateUserBaseInfo(changeUser: SysUser): Boolean
+
+    /**
      * 获取用户角色
      *
      * @param userId 用户id

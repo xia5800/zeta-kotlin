@@ -113,6 +113,21 @@ class SysUserServiceImpl(
     }
 
     /**
+     * 修改用户基本信息
+     * @param changeUser SysUser 待修改的用户信息
+     * @return Boolean
+     */
+    @CacheEvict(value = [USER_PERMISSION_KEY, USER_ROLE_KEY], key = "#changeUser.id")
+    @Transactional(rollbackFor = [Exception::class])
+    override fun updateUserBaseInfo(changeUser: SysUser): Boolean {
+        if (!this.updateById(changeUser)) {
+            throw BusinessException("修改用户失败")
+        }
+
+        return true;
+    }
+
+    /**
      * 获取用户角色
      *
      * @param userId Long

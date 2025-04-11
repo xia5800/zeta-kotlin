@@ -17,6 +17,7 @@ import com.zeta.system.model.entity.SysUser
 import com.zeta.system.model.enums.MenuTypeEnum
 import com.zeta.system.model.enums.UserStateEnum
 import com.zeta.system.model.param.ChangePasswordParam
+import com.zeta.system.model.param.ChangeUserBaseInfoParam
 import com.zeta.system.model.param.ResetPasswordParam
 import com.zeta.system.model.param.SysUserQueryParam
 import com.zeta.system.model.poi.SysUserExportPoi
@@ -353,6 +354,31 @@ class SysUserController(
         // 获取用户权限列表
         userInfoDto.permissions = StpUtil.getPermissionList()
         return success(userInfoDto)
+    }
+
+    /**
+     * 修改用户基础信息（右上角用户信息页面-保存修改时调用）
+     *
+     * @param param 修改用户基本信息参数
+     * @return
+     */
+    @ApiOperationSupport(order = 101)
+    @ApiOperation(value = "修改用户基础信息")
+    @PutMapping("/changeUserBaseInfo")
+    fun changeUserBaseInfo(@RequestBody @Validated param: ChangeUserBaseInfoParam): ApiResult<Boolean> {
+        val user = service.getById(ContextUtil.getUserId()) ?: return fail("用户不存在")
+
+        // 判断用户是否允许修改
+        if (user.readonly != null && user.readonly == true) {
+            throw BusinessException("用户[${user.username}]禁止修改")
+        }
+
+        // param -> entity
+        BeanUtil.copyProperties(param, user)
+
+        // 修改用户信息
+        val result = service.updateUserBaseInfo(user)
+        return if (result) success("修改成功",true) else fail("修改失败", false)
     }
 
     /**
