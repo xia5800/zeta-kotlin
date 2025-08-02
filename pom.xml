@@ -186,6 +186,11 @@
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-jwt</artifactId>
         </dependency>
+        <!-- 加密 ps：主要是用BCrypt来加密账号密码 -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
 
         <!--
          json 相关
