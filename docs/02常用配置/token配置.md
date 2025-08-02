@@ -16,7 +16,7 @@ zeta:
     # token过期时间 单位：秒, -1代表永不过期
     expireTime: 7200
 
-# Sa-Token配置 https://sa-token.dev33.cn/doc/index.html#/use/config
+# Sa-Token配置 https://sa-token.cc/doc.html#/use/config
 sa-token:
   # token名称 (同时也是cookie名称)
   token-name: ${zeta.token.tokenName}
@@ -65,7 +65,7 @@ User-Agent: xxxx
 
 当zeta.token.type的值为DEFAULT时， 我们可以修改sa-token.token-style的值来改变token值的样式
 
-sa-token样式的说明见文档[token-style](https://sa-token.dev33.cn/doc/index.html#/up/token-style)
+sa-token样式的说明见文档[token-style](https://sa-token.cc/doc.html#/up/token-style)
 
 zeta.token.type的选项说明见`org.zetaframework.core.saToken.enums.TokenTypeEnum.kt`有详细注释说明
 
@@ -76,7 +76,7 @@ zeta.token.type的选项说明见`org.zetaframework.core.saToken.enums.TokenType
 1. zeta.token.type的值不为DEFAULT时生效
 2. jwt签名前缀 例如填写 Bearer 实际传参 token: Bearer xxxxxx
 
-sa-token前缀见说明文档[token-prefix](https://sa-token.dev33.cn/doc/index.html#/up/token-prefix)
+sa-token前缀见说明文档[token-prefix](https://sa-token.cc/doc.html#/up/token-prefix)
 
 
 

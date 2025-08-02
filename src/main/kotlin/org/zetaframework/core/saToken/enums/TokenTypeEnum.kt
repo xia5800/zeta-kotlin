@@ -2,7 +2,7 @@ package org.zetaframework.core.saToken.enums
 
 /**
  * token类型枚举
- * 详见：<a href="https://sa-token.dev33.cn/doc/index.html#/plugin/jwt-extend?id=%e5%92%8c-jwt-%e9%9b%86%e6%88%90">sa-token doc</a>
+ * 详见：<a href="https://sa-token.cc/doc.html#/plugin/jwt-extend?id=%e5%92%8c-jwt-%e9%9b%86%e6%88%90">sa-token doc</a>
  * @author gcc
  */
 enum class TokenTypeEnum {
