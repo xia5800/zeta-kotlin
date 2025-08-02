@@ -33,9 +33,7 @@ class DesensitizationJsonSerializer(): JsonSerializer<String>(), ContextualSeria
      * @param jsonGenerator json内容生成器
      * @param serializers 可用于获取用于序列化对象的值包含的序列化器的提供程序 (如果有)。
      */
-    override fun serialize(value: String?, jsonGenerator: JsonGenerator, serializers: SerializerProvider?) {
-        if (value.isNullOrBlank()) return
-
+    override fun serialize(value: String, jsonGenerator: JsonGenerator, serializers: SerializerProvider?) {
         try {
             jsonGenerator.writeString(DesensitizationUtil.deserialization(value, rule, symbol))
         }catch (e: Exception) {
