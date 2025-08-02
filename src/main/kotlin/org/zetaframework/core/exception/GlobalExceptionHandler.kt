@@ -166,6 +166,8 @@ class GlobalExceptionHandler {
             NotLoginException.TOKEN_TIMEOUT -> NotLoginException.TOKEN_TIMEOUT_MESSAGE
             NotLoginException.BE_REPLACED -> NotLoginException.BE_REPLACED_MESSAGE
             NotLoginException.KICK_OUT -> NotLoginException.KICK_OUT_MESSAGE
+            NotLoginException.TOKEN_FREEZE -> NotLoginException.TOKEN_FREEZE_MESSAGE
+            NotLoginException.NO_PREFIX -> NotLoginException.NO_PREFIX_MESSAGE
             else -> NotLoginException.DEFAULT_MESSAGE
         }
         return ApiResult.result(ErrorCodeEnum.UNAUTHORIZED.code, message, null).setError(ex.message)

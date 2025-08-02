@@ -69,6 +69,7 @@ class SaTokenConfigure(
      *
      * 说明：
      * saToken拦截的接口的跨域配置
+     * BeforeAuth 不受 includeList 与 excludeList 的限制，所有请求都会进入
      */
     private val beforeAuth: SaFilterAuthStrategy = SaFilterAuthStrategy {
         // saToken跨域配置
@@ -89,16 +90,19 @@ class SaTokenConfigure(
      *
      * 说明：
      * saToken接口拦截并处理
+     * 主要是校验token是否有效，对token进行续期，设置用户id和token到ThreadLocal中
      */
     private val auth: SaFilterAuthStrategy = SaFilterAuthStrategy {
         // 需要登录认证的路由:所有, 排除登录认证的路由:/api/login、swagger等
         SaRouter.match("/**").check(SaFunction {
             StpUtil.checkLogin()
+
             // token续期
-            if (tokenProperties.renew) {
+            if (tokenProperties.autoRenew) {
                 StpUtil.renewTimeout(tokenProperties.expireTime)
             }
-            // 获取用户id，并设置到ThreadLocal中。（mybatisplus自动填充用到）
+
+            // 获取用户id，并设置到ThreadLocal中。（mybatis-plus自动填充用到）
             when (dataBaseProperties.userIdType) {
                 UserIdType.Long -> ContextUtil.setUserId(StpUtil.getLoginIdAsLong())
                 UserIdType.Int -> ContextUtil.setUserId(StpUtil.getLoginIdAsInt())
@@ -187,6 +191,8 @@ class SaTokenConfigure(
                     NotLoginException.TOKEN_TIMEOUT -> NotLoginException.TOKEN_TIMEOUT_MESSAGE
                     NotLoginException.BE_REPLACED -> NotLoginException.BE_REPLACED_MESSAGE
                     NotLoginException.KICK_OUT -> NotLoginException.KICK_OUT_MESSAGE
+                    NotLoginException.TOKEN_FREEZE -> NotLoginException.TOKEN_FREEZE_MESSAGE
+                    NotLoginException.NO_PREFIX -> NotLoginException.NO_PREFIX_MESSAGE
                     else -> NotLoginException.DEFAULT_MESSAGE
                 }
                 code = ErrorCodeEnum.UNAUTHORIZED.code

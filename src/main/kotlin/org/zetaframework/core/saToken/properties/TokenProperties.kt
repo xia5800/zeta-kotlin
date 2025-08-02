@@ -22,6 +22,6 @@ class TokenProperties(
     var expireTime: Long = 7200,
 
     /** token自动续期，每次操作为token续期指定时间 */
-    var renew: Boolean = false
+    var autoRenew: Boolean = false
 )
 
