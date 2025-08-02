@@ -14,8 +14,8 @@ import org.zetaframework.base.controller.SuperSimpleController
 import org.zetaframework.base.param.PageParam
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.base.result.PageResult
-import org.zetaframework.core.saToken.annotation.PreAuth
-import org.zetaframework.core.saToken.annotation.PreCheckPermission
+import org.zetaframework.core.satoken.annotation.PreAuth
+import org.zetaframework.core.satoken.annotation.PreCheckPermission
 
 /**
  * 操作日志 前端控制器

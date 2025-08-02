@@ -1,4 +1,4 @@
-package org.zetaframework.core.saToken.annotation
+package org.zetaframework.core.satoken.annotation
 
 /**
  * 用户权限{}占位符替换

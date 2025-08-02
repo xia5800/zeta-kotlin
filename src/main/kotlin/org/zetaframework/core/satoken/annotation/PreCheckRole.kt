@@ -1,4 +1,4 @@
-package org.zetaframework.core.saToken.annotation
+package org.zetaframework.core.satoken.annotation
 
 /**
  * 权限认证

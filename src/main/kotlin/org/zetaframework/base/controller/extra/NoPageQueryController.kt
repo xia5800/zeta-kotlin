@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.zetaframework.base.controller.BaseController
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.log.annotation.SysLog
-import org.zetaframework.core.saToken.annotation.PreCheckPermission
+import org.zetaframework.core.satoken.annotation.PreCheckPermission
 import java.io.Serializable
 
 /**

@@ -13,7 +13,7 @@ import org.zetaframework.base.param.PageParam
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.base.result.PageResult
 import org.zetaframework.core.log.annotation.SysLog
-import org.zetaframework.core.saToken.annotation.PreCheckPermission
+import org.zetaframework.core.satoken.annotation.PreCheckPermission
 import java.io.Serializable
 
 /**

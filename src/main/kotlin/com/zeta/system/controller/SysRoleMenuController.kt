@@ -15,9 +15,9 @@ import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import org.zetaframework.base.controller.SuperSimpleController
 import org.zetaframework.base.result.ApiResult
-import org.zetaframework.core.saToken.annotation.PreAuth
-import org.zetaframework.core.saToken.annotation.PreCheckPermission
-import org.zetaframework.core.saToken.annotation.PreMode
+import org.zetaframework.core.satoken.annotation.PreAuth
+import org.zetaframework.core.satoken.annotation.PreCheckPermission
+import org.zetaframework.core.satoken.annotation.PreMode
 import org.zetaframework.core.utils.TreeUtil
 
 /**

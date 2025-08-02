@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.zetaframework.base.controller.BaseController
 import org.zetaframework.base.param.ExistParam
 import org.zetaframework.base.result.ApiResult
-import org.zetaframework.core.saToken.annotation.PreCheckPermission
+import org.zetaframework.core.satoken.annotation.PreCheckPermission
 
 /**
  * 验证存在 Controller

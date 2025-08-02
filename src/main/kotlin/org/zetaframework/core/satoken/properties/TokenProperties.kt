@@ -1,7 +1,7 @@
-package org.zetaframework.core.saToken.properties
+package org.zetaframework.core.satoken.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-import org.zetaframework.core.saToken.enums.TokenTypeEnum
+import org.zetaframework.core.satoken.enums.TokenTypeEnum
 
 /**
  * token配置参数

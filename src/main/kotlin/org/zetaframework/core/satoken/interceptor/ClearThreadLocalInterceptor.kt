@@ -1,4 +1,4 @@
-package org.zetaframework.core.saToken.interceptor
+package org.zetaframework.core.satoken.interceptor
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

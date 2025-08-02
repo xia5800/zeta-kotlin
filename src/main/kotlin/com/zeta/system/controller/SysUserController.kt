@@ -47,8 +47,8 @@ import org.zetaframework.core.log.annotation.SysLog
 import org.zetaframework.core.log.enums.LoginStateEnum
 import org.zetaframework.core.log.event.LoginEvent
 import org.zetaframework.core.log.model.LoginLogDTO
-import org.zetaframework.core.saToken.annotation.PreAuth
-import org.zetaframework.core.saToken.annotation.PreCheckPermission
+import org.zetaframework.core.satoken.annotation.PreAuth
+import org.zetaframework.core.satoken.annotation.PreCheckPermission
 import org.zetaframework.core.utils.ContextUtil
 import org.zetaframework.core.utils.TreeUtil
 import javax.servlet.http.HttpServletRequest

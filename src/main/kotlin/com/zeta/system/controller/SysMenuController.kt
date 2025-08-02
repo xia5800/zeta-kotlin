@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController
 import org.zetaframework.base.controller.SuperController
 import org.zetaframework.base.result.ApiResult
 import org.zetaframework.core.log.annotation.SysLog
-import org.zetaframework.core.saToken.annotation.PreAuth
+import org.zetaframework.core.satoken.annotation.PreAuth
 import org.zetaframework.core.utils.TreeUtil
 
 /**

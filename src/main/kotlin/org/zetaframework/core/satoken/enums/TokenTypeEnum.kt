@@ -1,4 +1,4 @@
-package org.zetaframework.core.saToken.enums
+package org.zetaframework.core.satoken.enums
 
 /**
  * token类型枚举

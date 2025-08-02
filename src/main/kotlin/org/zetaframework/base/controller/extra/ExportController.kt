@@ -15,8 +15,8 @@ import org.zetaframework.base.controller.BaseController
 import org.zetaframework.base.param.ExportExcelParam
 import org.zetaframework.core.exception.ArgumentException
 import org.zetaframework.core.log.annotation.SysLog
-import org.zetaframework.core.saToken.annotation.PreCheckPermission
-import org.zetaframework.core.saToken.annotation.PreMode
+import org.zetaframework.core.satoken.annotation.PreCheckPermission
+import org.zetaframework.core.satoken.annotation.PreMode
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import javax.servlet.http.HttpServletRequest

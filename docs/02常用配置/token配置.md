@@ -67,7 +67,7 @@ User-Agent: xxxx
 
 sa-token样式的说明见文档[token-style](https://sa-token.cc/doc.html#/up/token-style)
 
-zeta.token.type的选项说明见`org.zetaframework.core.saToken.enums.TokenTypeEnum.kt`有详细注释说明
+zeta.token.type的选项说明见`org.zetaframework.core.satoken.enums.TokenTypeEnum.kt`有详细注释说明
 
 
 
